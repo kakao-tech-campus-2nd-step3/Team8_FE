@@ -28,6 +28,23 @@ const GlobalTheme = extendTheme({
         fontWeight: '400, 700, 900',
         fontStyle: 'normal',
       },
+      body: {
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
+        overflowY: 'auto',
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+
+        // 모바일 너비 적용
+        '@media(min-width: 768px)': {
+          width: '480px',
+        },
+      },
+      '*': {
+        boxSizing: 'border-box', // 모든 요소에 box-sizing 적용
+      },
     },
   },
 });
