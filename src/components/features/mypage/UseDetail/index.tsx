@@ -28,7 +28,7 @@ const UseDetailBox = () => {
   };
 
   return (
-    <UseDetailBoxContainer>
+    <UseDetailBoxLayout>
       <TextBox>포인트 이용내역</TextBox>
       <DetailBox>
         {data.slice(0, visibleCount).map((item, index) => (
@@ -50,13 +50,13 @@ const UseDetailBox = () => {
       <ViewMoreButton onClick={handleToggleView}>
         {isExpanded ? '숨기기' : '더보기'}
       </ViewMoreButton>
-    </UseDetailBoxContainer>
+    </UseDetailBoxLayout>
   );
 };
 
 export default UseDetailBox;
 
-const UseDetailBoxContainer = styled(Box)`
+const UseDetailBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,6 +66,7 @@ const UseDetailBoxContainer = styled(Box)`
   background-color: #2e2e2e;
   border: 1px solid #2e2e2e;
   border-radius: 10px;
+  margin-top: 0.5rem;
 `;
 
 const TextBox = styled(Box)`

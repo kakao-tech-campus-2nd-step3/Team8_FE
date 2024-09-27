@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const ProfileBox = () => {
   return (
-    <ProfileBoxContainer>
+    <ProfileBoxLayout>
       <TopContainer>
         <Text mt={3} fontSize='18px' fontWeight={700}>
           홍길동씨 환영합니다.
@@ -17,13 +17,13 @@ const ProfileBox = () => {
         <DivideLine></DivideLine>
         <ButtonBox>서비스 이용 현황</ButtonBox>
       </BottomContainer>
-    </ProfileBoxContainer>
+    </ProfileBoxLayout>
   );
 };
 
 export default ProfileBox;
 
-const ProfileBoxContainer = styled(Box)`
+const ProfileBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
@@ -32,6 +32,7 @@ const ProfileBoxContainer = styled(Box)`
   height: 190px;
   border: 1px solid #909090;
   border-radius: 5px;
+  margin-top: 0.5rem;
 `;
 
 const ServiceManualBox = styled(Box)`

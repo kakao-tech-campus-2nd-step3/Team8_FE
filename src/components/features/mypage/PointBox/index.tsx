@@ -31,6 +31,7 @@ const PointBoxLayout = styled(Box)`
   background-color : #F6E4E4;
   border: 1px solid #F6E4E4;
   border-radius: 10px;
+  margin-top : 0.5rem;
 `;
 
 const ButtonContainer = styled(Box)`
