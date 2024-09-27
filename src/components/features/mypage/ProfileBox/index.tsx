@@ -47,6 +47,7 @@ const ServiceManualBox = styled(Box)`
   border: 1px solid #2e2e2e;
   border-radius: 5px;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 const TopContainer = styled(Box)`

@@ -54,7 +54,7 @@ const ButtonBox = styled(Box)`
   height: 100%;
   max-height: 30px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   background-color: #fff;
   border: 1px solid #fff;
   border-radius: 5px;
