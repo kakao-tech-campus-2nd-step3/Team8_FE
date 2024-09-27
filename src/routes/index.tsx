@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterPath } from './path';
 import MainPage from '@/pages/common/main';
 import RegisterPage from '@/pages/common/register';
+import MyPage from '@/pages/siniddo/mypage';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: RouterPath.register,
     element: <RegisterPage />,
+  },
+  {
+    path: RouterPath.mypage,
+    element: <MyPage />,
   },
 ]);
 
