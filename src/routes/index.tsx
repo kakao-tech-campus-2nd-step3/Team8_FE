@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { RouterPath } from './path';
-import RegisterPage from '@/pages/common/register';
 import MainPage from '@/pages/common/main';
+import RegisterPage from '@/pages/common/register';
 
 const router = createBrowserRouter([
   {
