@@ -33,9 +33,11 @@
       "typescript": {
         "alwaysTryTypes": true
       }
+    },
+    "react": {
+      "version": "detect"
     }
   },
-  "include": ["vite.config.ts"],
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
     "@typescript-eslint/no-non-null-assertion": "off",

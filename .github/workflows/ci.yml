@@ -1,0 +1,27 @@
+name: ESLint test
+
+on:
+  pull_request:
+    branches:
+      - Master
+      - Develop
+      - Weekly
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Pnpm package manager
+        run: |
+          npm install -g pnpm
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Lint Code
+        run: pnpm lint
