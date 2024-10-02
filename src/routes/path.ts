@@ -3,4 +3,5 @@ export const RouterPath = {
   login: '/login',
   register: '/register',
   mypage: `/mypage`,
+  servicehistory: `/servicehistory`,
 };
