@@ -8,7 +8,7 @@ import { Precaution } from '@/shared/components/features/precaution';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-type CallBackDetailParams = {
+export type CallBackDetailParams = {
   callBackId: string;
 };
 
