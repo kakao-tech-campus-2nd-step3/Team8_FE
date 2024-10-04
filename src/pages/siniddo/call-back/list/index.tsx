@@ -8,7 +8,12 @@ const CallBackListPage = () => {
   return (
     <Wrapper>
       {MOCK_DATA.map((data) => (
-        <RequestRow name={data.name} time={data.time} id={data.id} />
+        <RequestRow
+          key={data.id}
+          name={data.name}
+          time={data.time}
+          id={data.id}
+        />
       ))}
     </Wrapper>
   );

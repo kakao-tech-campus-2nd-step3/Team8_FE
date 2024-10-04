@@ -20,8 +20,8 @@ const SiniddoGuideLinePage = () => {
   return (
     <Wrapper>
       <Title>{guideLineInfo}</Title>
-      {MOCK_DATA.map((data) => (
-        <Container title={data.title} content={data.content} />
+      {MOCK_DATA.map((data, index) => (
+        <Container key={index} title={data.title} content={data.content} />
       ))}
     </Wrapper>
   );
