@@ -1,6 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { CallBackDetailParams } from '../..';
 import ArrowImg from '../../assets/arrow-outline.png';
 import styled from '@emotion/styled';
 
@@ -11,12 +10,11 @@ type Props = {
 };
 
 export const GuideLineButton = ({ title, backgroundColor, id }: Props) => {
-  const { callBackId = '' } = useParams<CallBackDetailParams>();
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = () => {
-    navigate(`/call-back/${callBackId}/${id}`);
+    navigate(`${location.pathname}/${id}`);
   };
 
   return (
