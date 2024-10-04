@@ -4,6 +4,7 @@ import { RouterPath } from './path';
 import MainPage from '@/pages/common/main';
 import RegisterPage from '@/pages/common/register';
 import ServiceHistoryPage from '@/pages/guard/service-history';
+import HelloCallPage from '@/pages/siniddo/hello-call';
 import MyPage from '@/pages/siniddo/mypage';
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: RouterPath.serviceHistory,
     element: <ServiceHistoryPage />,
+  },
+  {
+    path: RouterPath.helloCall,
+    element: <HelloCallPage />,
   },
 ]);
 
