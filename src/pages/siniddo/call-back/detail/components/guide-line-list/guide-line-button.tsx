@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import ArrowImg from '../../assets/arrow-outline.png';
+import { Button, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -27,21 +28,19 @@ export const GuideLineButton = ({ title, backgroundColor, id }: Props) => {
   );
 };
 
-type WrapperProps = {
-  backgroundColor?: string;
-};
-
-const Wrapper = styled.button<WrapperProps>`
+const Wrapper = styled(Button)`
   width: 100%;
   height: 70px;
   border-radius: 10px;
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : '#81b6ff'};
   outline: 0;
+  padding: 0;
   margin-bottom: 10px;
 `;
 
 const Content = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +53,6 @@ const Title = styled.h2`
   color: #fff;
 `;
 
-const ArrowIcon = styled.img`
+const ArrowIcon = styled(Image)`
   margin-left: auto;
 `;
