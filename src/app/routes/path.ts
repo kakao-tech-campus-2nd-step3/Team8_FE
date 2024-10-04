@@ -4,4 +4,5 @@ export const RouterPath = {
   register: '/register',
   mypage: `/mypage`,
   serviceHistory: `/service-history`,
+  seniorRegister: `/senior-register`,
 };
