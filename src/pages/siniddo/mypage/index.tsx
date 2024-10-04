@@ -1,6 +1,6 @@
-import PointBox from '@/components/features/mypage/PointBox';
-import ProfileBox from '@/components/features/mypage/ProfileBox';
-import UseDetailBox from '@/components/features/mypage/UseDetail';
+import PointBox from './components/PointBox';
+import ProfileBox from './components/ProfileBox';
+import UseDetailBox from './components/UseDetail';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

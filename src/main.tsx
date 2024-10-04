@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 
 import App from './App.tsx';
-import '@/styles/reset.css';
+import '@/shared/styles/reset.css';
 
 const root = createRoot(document.getElementById('root')!);
 

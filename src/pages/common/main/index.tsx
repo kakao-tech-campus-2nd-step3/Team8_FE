@@ -1,5 +1,5 @@
-import LoginButton from '@/components/features/login-button';
-import ReviewBox from '@/components/features/review-box';
+import LoginButton from './components/login-button';
+import ReviewBox from './components/review-box';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
