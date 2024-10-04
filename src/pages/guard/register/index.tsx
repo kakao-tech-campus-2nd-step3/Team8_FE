@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import SeniorInfo from './components/seniorInfo/seniorInfoBox';
-import dummySeniorData from './data';
+import SeniorInfo from './components/senior-info/senior-info-box';
+import SENIOR_DATA from './data';
 import Button from '@/shared/components/common/button';
 import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -12,15 +12,6 @@ const SeniorRegisterPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleRegister = () => {
-    const seniorData = {
-      name,
-      seniorName,
-      phoneNumber,
-    };
-
-    // API 호출 -> seniorData를 서버에 전송
-    console.log('등록된 시니어 :', seniorData);
-
     setName('');
     setSeniorName('');
     setPhoneNumber('');
@@ -35,7 +26,7 @@ const SeniorRegisterPage = () => {
         flexGrow={1}
         overflowY='auto'
       >
-        {dummySeniorData.map((senior) => (
+        {SENIOR_DATA.map((senior) => (
           <SeniorInfo key={senior.id} senior={senior} />
         ))}
       </Flex>
@@ -85,8 +76,8 @@ const RegisterBox = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f2f2f2;
-  border: 1px solid #f2f2f2;
+  background-color: var(--color-white-gray);
+  border: 1px solid var(--color-white-gray);
   border-radius: 15px;
 `;
 
@@ -105,7 +96,7 @@ const InputText = styled(Text)`
 `;
 
 const RegisterInput = styled(Input)`
-  background-color: #fff;
+  background-color: var(--color-white);
   border: none;
   font-size: 1rem;
 `;

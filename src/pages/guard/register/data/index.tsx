@@ -1,4 +1,4 @@
-const dummySeniorData = [
+const SENIOR_DATA = [
   {
     id: 1,
     title: '외할머니',
@@ -31,4 +31,4 @@ const dummySeniorData = [
   },
 ];
 
-export default dummySeniorData;
+export default SENIOR_DATA;

@@ -1,6 +1,11 @@
-import { SeniorInfoType } from '../../../types';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
+type SeniorInfoType = {
+  title: string;
+  name: string;
+  phoneNumber: string;
+};
 
 const SeniorInfo = ({ senior }: { senior: SeniorInfoType }) => {
   return (
@@ -31,8 +36,8 @@ const SeniorInfoContainer = styled(Flex)`
   max-width: 330px;
   height: 6rem;
   min-height: 6rem;
-  background-color: #f6e4e4;
-  border: 1px solid #f6e4e4;
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0.5rem 0;
