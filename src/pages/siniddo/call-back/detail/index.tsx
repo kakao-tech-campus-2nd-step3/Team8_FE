@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { GuideLineList } from './components/guide-line-list';
+import { PostAcceptMenu } from './components/menu/post-accept';
 import { PreAcceptMenu } from './components/menu/pre-accept';
 import { Precaution } from '@/shared/components/features/precaution';
 import { Divider } from '@chakra-ui/react';
@@ -12,7 +14,22 @@ type CallBackDetailParams = {
 
 const CallBackDetailPage = () => {
   const { callBackId = '' } = useParams<CallBackDetailParams>();
+  const [accept, setAccept] = useState(false);
+
   console.log(callBackId);
+
+  const handleRequestAccept = () => {
+    // 도움 수락
+    setAccept(true);
+  };
+
+  const handleComplete = () => {
+    // 도움 완료
+  };
+
+  const handleCancle = () => {
+    // 도움 포기
+  };
 
   return (
     <Wrapper>
@@ -23,7 +40,15 @@ const CallBackDetailPage = () => {
       />
       <GuideLineList />
       <Divider />
-      <PreAcceptMenu />
+      {accept ? (
+        <PostAcceptMenu
+          handleComplete={handleComplete}
+          handleCancle={handleCancle}
+          phoneNumber='010-1234-5678'
+        />
+      ) : (
+        <PreAcceptMenu handleClcik={handleRequestAccept} />
+      )}
     </Wrapper>
   );
 };
@@ -31,9 +56,9 @@ const CallBackDetailPage = () => {
 export default CallBackDetailPage;
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 45px;
 `;

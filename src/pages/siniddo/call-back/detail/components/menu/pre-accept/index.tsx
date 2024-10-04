@@ -1,10 +1,14 @@
 import { BasicButton } from '@/shared/components/common/button';
 import styled from '@emotion/styled';
 
-export const PreAcceptMenu = () => {
+type Props = {
+  handleClcik: () => void;
+};
+
+export const PreAcceptMenu = ({ handleClcik }: Props) => {
   return (
     <Wrapper>
-      <BasicButton>전화걸기 및 수락하기</BasicButton>
+      <BasicButton onClick={handleClcik}>전화걸기 및 수락하기</BasicButton>
     </Wrapper>
   );
 };
