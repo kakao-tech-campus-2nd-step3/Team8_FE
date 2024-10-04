@@ -28,19 +28,19 @@ const CategoryTag = styled.div`
   padding: 5px 10px;
   border-radius: 5px;
   background-color: #f6e4e4;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
   color: #c69090;
 `;
 
 const Title = styled.h2`
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   font-weight: 700;
   margin-top: 10px;
 `;
 
 const Description = styled.p`
-  font-size: 16px;
+  font-size: var(--font-size-md);
   fot-weight: 500;
   color: #909090;
   margin-top: 5px;

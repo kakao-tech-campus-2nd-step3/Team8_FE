@@ -31,7 +31,7 @@ const Wrapper = styled.button`
   width: 100%;
   height: 60px;
   border-radius: 10px;
-  background-color: #f2f2f2;
+  background-color: var(--color-white-gray);
   outline: 0;
   margin-bottom: 10px;
 `;
@@ -44,15 +44,15 @@ const Content = styled.div`
 `;
 
 const Title = styled.h3`
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   font-weight: 400;
   margin-top: 2px;
 `;
 
 const Time = styled.p`
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 350;
-  color: #909090;
+  color: var(--color-gray);
   margin-left: auto;
 `;
 

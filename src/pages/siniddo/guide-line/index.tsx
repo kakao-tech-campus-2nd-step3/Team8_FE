@@ -41,7 +41,7 @@ const Title = styled.h2`
   width: 100%;
   text-align: left;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: var(--font-size-xxl);
   font-weight: 700;
   color: #c69090;
 `;

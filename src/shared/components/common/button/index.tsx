@@ -11,13 +11,25 @@ export const BasicButton = styled.button<Props>`
   border-radius: 10px;
   outline: 0;
 
-  // 테마에 따라 배경색과 테두리 색상 변경
   background-color: ${(props) =>
-    props.themeType === 'outline' ? '#ffffff' : '#c69090'};
-  color: ${(props) => (props.themeType === 'outline' ? '#909090' : '#ffffff')};
-  border: ${(props) =>
-    props.themeType === 'outline' ? '2px solid #909090' : 'none'};
+    props.themeType === 'outline'
+      ? 'var(--color-white)'
+      : 'var(--color-primary)'};
+  color: ${(props) =>
+    props.themeType === 'outline'
+      ? 'var(--color-primary)'
+      : 'var(--color-white)'};
+  border: 2px solid var(--color-primary);
 
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 300;
+
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
+
+  &:hover {
+    background-color: #e3e8ef;
+    color: var(--color-white);
+    border: 2px solid #e3e8ef;
+  }
 `;

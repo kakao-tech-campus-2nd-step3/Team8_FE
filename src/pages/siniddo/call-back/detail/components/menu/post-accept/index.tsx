@@ -50,14 +50,14 @@ const Title = styled.div`
   padding: 5px;
   border-radius: 5px;
   background-color: #f6e4e4;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   color: #c69090;
   text-align: center;
 `;
 
 const Content = styled.p`
-  font-size: 30px;
+  font-size: var(--font-size-xxl);
   font-weight: 700;
   margin-top: 10px;
 `;

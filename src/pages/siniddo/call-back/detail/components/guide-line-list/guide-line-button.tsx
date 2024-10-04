@@ -48,9 +48,9 @@ const Content = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: 500;
-  color: #fff;
+  color: var(--color-white);
 `;
 
 const ArrowIcon = styled(Image)`

@@ -31,13 +31,13 @@ export const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
 `;
 
 const Content = styled.p`
   margin-top: 10px;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   white-space: pre-wrap;
   font-weight: 350;
 `;
