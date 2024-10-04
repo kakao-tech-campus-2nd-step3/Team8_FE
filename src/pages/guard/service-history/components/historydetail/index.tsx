@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { HistoryItem } from '@/types';
+import { HistoryItem } from '../../types';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -23,10 +23,10 @@ const HistoryDetail: React.FC<HistoryItem> = ({ date, name, status }) => {
       alignItems='center'
       mb={2}
     >
-      <Text fontSize='18px' fontWeight={600} mr={1}>
+      <Text fontSize='0.8rem' fontWeight={600} mr={1}>
         {date}
       </Text>
-      <Text fontSize='18px' fontWeight={600}>
+      <Text fontSize='0.8rem' fontWeight={600}>
         {name}
       </Text>
       <StatusButton onClick={handleButtonClick} status={currentStatus}>
@@ -37,9 +37,9 @@ const HistoryDetail: React.FC<HistoryItem> = ({ date, name, status }) => {
 };
 
 const StatusButton = styled.button<{ status: string }>`
-  width: 80px;
-  height: 40px;
-  font-size: 16px;
+  width: 3rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
   font-weight: 600;
   background-color: ${({ status }) =>
     status === '완료' ? '#B4D6CD' : '#ffda76'};
