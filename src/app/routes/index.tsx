@@ -28,15 +28,22 @@ const router = createBrowserRouter([
   },
   {
     path: RouterPath.callBackList,
-    element: <CallBackListPage />,
-  },
-  {
-    path: RouterPath.callBackDetail,
-    element: <CallBackDetailPage />,
-  },
-  {
-    path: RouterPath.callBackGuidLine,
-    element: <SiniddoGuideLinePage />,
+    children: [
+      {
+        index: true,
+        element: <CallBackListPage />,
+      },
+      {
+        path: RouterPath.callBackDetail,
+        element: <CallBackDetailPage />,
+        children: [
+          {
+            path: RouterPath.callBackGuidLine,
+            element: <SiniddoGuideLinePage />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

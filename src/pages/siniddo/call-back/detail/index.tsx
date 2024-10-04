@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 
 import { GuideLineList } from './components/guide-line-list';
 import { PostAcceptMenu } from './components/menu/post-accept';
@@ -32,24 +32,27 @@ const CallBackDetailPage = () => {
   };
 
   return (
-    <Wrapper>
-      <Precaution
-        category='요청 거부'
-        title='가이드라인을 잘 확인하고 수락해주세요!'
-        description='시니어의 요청이 가이드라인에서 벗어난 요청일 경우 요청을 거부할 수 있습니다!'
-      />
-      <GuideLineList />
-      <Divider />
-      {accept ? (
-        <PostAcceptMenu
-          handleComplete={handleComplete}
-          handleCancle={handleCancle}
-          phoneNumber='010-1234-5678'
+    <>
+      <Wrapper>
+        <Precaution
+          category='요청 거부'
+          title='가이드라인을 잘 확인하고 수락해주세요!'
+          description='시니어의 요청이 가이드라인에서 벗어난 요청일 경우 요청을 거부할 수 있습니다!'
         />
-      ) : (
-        <PreAcceptMenu handleClcik={handleRequestAccept} />
-      )}
-    </Wrapper>
+        <GuideLineList />
+        <Divider />
+        {accept ? (
+          <PostAcceptMenu
+            handleComplete={handleComplete}
+            handleCancle={handleCancle}
+            phoneNumber='010-1234-5678'
+          />
+        ) : (
+          <PreAcceptMenu handleClcik={handleRequestAccept} />
+        )}
+      </Wrapper>
+      <Outlet />
+    </>
   );
 };
 
