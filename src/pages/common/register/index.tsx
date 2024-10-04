@@ -1,6 +1,6 @@
-import { RegisterFields } from '@/components/features/register/register-fields';
-import { RegisterType } from '@/components/features/register/register-type';
-import { Tos } from '@/components/features/register/tos';
+import { RegisterFields } from './components/register-fields';
+import { RegisterType } from './components/register-type';
+import { Tos } from './components/tos';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

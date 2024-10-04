@@ -1,6 +1,6 @@
-import { queryClient } from './api/instance';
-import { Routes } from './routes';
-import GlobalTheme from './styles/global';
+import { Routes } from './app/routes';
+import { queryClient } from './shared/api/instance';
+import GlobalTheme from './shared/theme/global';
 import { ChakraProvider, GlobalStyle } from '@chakra-ui/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 
