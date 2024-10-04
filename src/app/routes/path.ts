@@ -4,4 +4,7 @@ export const RouterPath = {
   register: '/register',
   mypage: `/mypage`,
   serviceHistory: `/service-history`,
+  callBackList: '/call-back',
+  callBackDetail: ':callBackId',
+  callBackGuidLine: ':guideLineId',
 };
