@@ -56,6 +56,7 @@ const HelloCallServicePage = () => {
         <Notice
           title={SERVICE_NOTICE.service_title}
           contents={SERVICE_NOTICE.service_contents}
+          noticeType='안부전화'
         />
         {accepted && (
           <>
