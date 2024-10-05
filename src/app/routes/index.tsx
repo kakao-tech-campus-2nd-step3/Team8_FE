@@ -7,6 +7,9 @@ import ServiceHistoryPage from '@/pages/guard/service-history';
 import HelloCallListPage from '@/pages/siniddo/hello-call/hello-call-list';
 import HelloCallReportPage from '@/pages/siniddo/hello-call/hello-call-report';
 import HelloCallServicePage from '@/pages/siniddo/hello-call/hello-call-service';
+import CallBackDetailPage from '@/pages/siniddo/call-back/detail';
+import CallBackListPage from '@/pages/siniddo/call-back/list';
+import SiniddoGuideLinePage from '@/pages/siniddo/guide-line';
 import MyPage from '@/pages/siniddo/mypage';
 
 const router = createBrowserRouter([
@@ -40,6 +43,28 @@ const router = createBrowserRouter([
       {
         path: RouterPath.helloCallReport,
         element: <HelloCallReportPage />,
+      },
+    ],
+  },
+  {    
+    path: RouterPath.callBackList,
+    children: [
+      {
+        index: true,
+        element: <CallBackListPage />,
+      },
+      {
+        path: RouterPath.callBackDetail,
+        children: [
+          {
+            index: true,
+            element: <CallBackDetailPage />,
+          },
+          {
+            path: RouterPath.callBackGuidLine,
+            element: <SiniddoGuideLinePage />,
+          },
+        ],
       },
     ],
   },
