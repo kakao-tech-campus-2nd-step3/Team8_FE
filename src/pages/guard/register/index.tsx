@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import SeniorInfo from './components/senior-info/senior-info-box';
 import SENIOR_DATA from './data';
-import Button from '@/shared/components/common/button';
 import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -52,7 +51,7 @@ const SeniorRegisterPage = () => {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </InputBox>
-        <Button onClick={handleRegister}>시니어 등록</Button>
+        <StyledButton onClick={handleRegister}>시니어 등록</StyledButton>
       </RegisterBox>
     </Container>
   );
@@ -99,4 +98,24 @@ const RegisterInput = styled(Input)`
   background-color: var(--color-white);
   border: none;
   font-size: 1rem;
+`;
+
+const StyledButton = styled.button`
+  width: 300px;
+  height: 40px;
+  background-color: #c69090;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #a67070;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;

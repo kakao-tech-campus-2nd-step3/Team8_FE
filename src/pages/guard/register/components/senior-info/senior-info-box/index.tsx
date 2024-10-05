@@ -45,7 +45,7 @@ const SeniorInfoContainer = styled(Flex)`
 
 const InfoText = styled(Text)`
   font-size: 0.8rem;
-  color: #2e2e2e;
+  color: var(--color-black);
 `;
 
 const InfoBox = styled(Box)`
