@@ -9,4 +9,5 @@ export const RouterPath = {
   callBackDetail: ':callBackId',
   callBackGuidLine: ':guideLineId',
   seniorRegister: `/senior-register`,
+  siniddoReview: `/siniddo-review`,
 };
