@@ -4,7 +4,7 @@ import { useParams, Outlet } from 'react-router-dom';
 import { GuideLineList } from './components/guide-line-list';
 import { PostAcceptMenu } from './components/menu/post-accept';
 import { PreAcceptMenu } from './components/menu/pre-accept';
-import { Precaution } from '@/shared/components/features/precaution';
+import Notice from '@/shared/components/features/notice';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -34,10 +34,10 @@ const CallBackDetailPage = () => {
   return (
     <>
       <Wrapper>
-        <Precaution
-          category='요청 거부'
+        <Notice
+          noticeType='요청 거부'
           title='가이드라인을 잘 확인하고 수락해주세요!'
-          description='시니어의 요청이 가이드라인에서 벗어난 요청일 경우 요청을 거부할 수 있습니다!'
+          contents='시니어의 요청이 가이드라인에서 벗어난 요청일 경우 요청을 거부할 수 있습니다!'
         />
         <GuideLineList />
         <Divider />
