@@ -1,11 +1,9 @@
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 
-import App from '@/App';
-import '@/styles';
+import App from './App.tsx';
+import '@/shared/styles/reset.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = createRoot(document.getElementById('root')!);
 
 // async function deferRender() {
 //   const RUN_MSW = 'true';
