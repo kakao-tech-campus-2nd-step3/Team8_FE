@@ -4,6 +4,7 @@ export const RouterPath = {
   register: '/register',
   mypage: `/mypage`,
   serviceHistory: `/service-history`,
-  helloCall: '/hello-call',
+  helloCallList: '/hello-call',
   helloCallService: 'service',
+  helloCallReport: 'report',
 };
