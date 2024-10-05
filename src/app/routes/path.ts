@@ -4,10 +4,11 @@ export const RouterPath = {
   register: '/register',
   mypage: `/mypage`,
   serviceHistory: `/service-history`,
-  helloCallList: '/hello-call',
   helloCallService: 'service',
   helloCallReport: 'report',
+  helloCall: `/hello-call`,
   callBackList: '/call-back',
   callBackDetail: ':callBackId',
   callBackGuidLine: ':guideLineId',
+  seniorRegister: `/senior-register`,
 };

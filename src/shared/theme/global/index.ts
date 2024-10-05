@@ -26,7 +26,7 @@ export const globalStyle = css`
     --font-size-sm: ${fontSizeSm};
     --font-size-xs: ${fontSizeXs};
 
-    --color-basic: ${colorBlack};
+    --color-black: ${colorBlack};
     --color-white: ${colorWhite};
     --color-gray: ${colorGray};
     --color-primary: ${colorPrimary};
