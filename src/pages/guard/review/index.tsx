@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import starIcon from './asset/star-icon.svg';
 import { BasicButton } from '@/shared/components/common/button';
+import Notice from '@/shared/components/features/notice';
 import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -16,6 +17,13 @@ const SiniddoReviewPage = () => {
 
   return (
     <Flex w='100%' flexDir='column' alignItems='center'>
+      <Box display='flex' flexDir='column' w='100%' maxW='16rem' mt={4}>
+        <Notice
+          title='시니또에게 평가를 남겨주세요!'
+          contents='서비스에 만족하셨다면 시니또에게 긍적적인 평가를 남겨주세요!'
+          noticeType='리뷰하기'
+        ></Notice>
+      </Box>
       <Box display='flex' flexDir='column' w='100%' maxW='16rem' mb={4} mt={4}>
         <TitleText>시니또 정보</TitleText>
         <Text fontSize='18px'>김춘식 / 22세 / 대학생</Text>
