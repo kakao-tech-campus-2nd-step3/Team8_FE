@@ -5,4 +5,7 @@ export const RouterPath = {
   mypage: `/mypage`,
   serviceHistory: `/service-history`,
   helloCall: `/hello-call`,
+  callBackList: '/call-back',
+  callBackDetail: ':callBackId',
+  callBackGuidLine: ':guideLineId',
 };
