@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TitleImg from '../hello-call-service/assets/title-icon.png';
+import TitleImg from './asserts/title-icon.png';
 import ServiceDetail from './components/service-detail';
 import { SERVICE_NOTICE } from './data/notice';
 import { RouterPath } from '@/app/routes/path';

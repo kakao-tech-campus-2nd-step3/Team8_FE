@@ -4,6 +4,7 @@ import CalendarIcon from '../../assets/calendar-icon.svg';
 import ClockIcon from '../../assets/clock-icon.svg';
 import FileIcon from '../../assets/file-icon.svg';
 import { REPORT_DATA } from '../../test/mock';
+import { ServiceTime } from '../../types';
 import { Box, Button, Divider, Image, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -56,7 +57,7 @@ const ReportDetail = () => {
               서비스 수행 시간대
             </Text>
           </TitleBox>
-          {REPORT_DATA.serviceTimes.map((time, index) => (
+          {REPORT_DATA.serviceTimes.map((time: ServiceTime, index: number) => (
             <Box
               key={index}
               display='flex'

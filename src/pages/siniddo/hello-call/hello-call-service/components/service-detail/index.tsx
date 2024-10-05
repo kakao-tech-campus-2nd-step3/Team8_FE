@@ -1,6 +1,6 @@
-import CalendarIcon from '../../assets/calendar-icon.svg';
-import ClockIcon from '../../assets/clock-icon.svg';
-import SpeakerIcon from '../../assets/speaker-icon.svg';
+import CalendarIcon from '../../asserts/calendar-icon.svg';
+import ClockIcon from '../../asserts/clock-icon.svg';
+import SpeakerIcon from '../../asserts/speaker-icon.svg';
 import { SERVICE_DATA } from '../../test/mock';
 import { Box, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
