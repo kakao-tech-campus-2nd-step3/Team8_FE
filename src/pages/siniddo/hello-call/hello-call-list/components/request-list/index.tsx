@@ -2,7 +2,11 @@ import arrowIcon from '../../assets/arrow-icon.svg';
 import { Box, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const RequestList = () => {
+type Props = {
+  onClick?: () => void;
+};
+
+const RequestList = ({ onClick }: Props) => {
   return (
     <Box
       display='flex'
@@ -16,6 +20,7 @@ const RequestList = () => {
       width='100%'
       borderRadius='0.5rem'
       h='3.5rem'
+      onClick={onClick}
     >
       <Box>
         <Text>김숙자님의 요청</Text>
