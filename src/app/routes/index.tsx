@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterPath } from './path';
 import MainPage from '@/pages/common/main';
 import RegisterPage from '@/pages/common/register';
+import SeniorRegisterPage from '@/pages/guard/register';
 import ServiceHistoryPage from '@/pages/guard/service-history';
 import CallBackDetailPage from '@/pages/siniddo/call-back/detail';
 import CallBackListPage from '@/pages/siniddo/call-back/list';
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: RouterPath.serviceHistory,
     element: <ServiceHistoryPage />,
+  },
+  {
+    path: RouterPath.seniorRegister,
+    element: <SeniorRegisterPage />,
   },
   {
     path: RouterPath.callBackList,

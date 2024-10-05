@@ -8,4 +8,5 @@ export const RouterPath = {
   callBackList: '/call-back',
   callBackDetail: ':callBackId',
   callBackGuidLine: ':guideLineId',
+  seniorRegister: `/senior-register`,
 };
