@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import TitleImg from '../hello-call-service/assets/title-icon.png';
-import Notice from './components/notice';
 import ServiceDetail from './components/service-detail';
 import { SERVICE_NOTICE } from './data/notice';
 import { RouterPath } from '@/app/routes/path';
+import Notice from '@/shared/components/features/notice';
 import { Box, Button, Divider, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -19,7 +19,7 @@ const HelloCallServicePage = () => {
   const navigate = useNavigate();
 
   const handlerNavigate = () => {
-    navigate(`${RouterPath.helloCallList}/${RouterPath.helloCallReport}`);
+    navigate(`${RouterPath.helloCall}/${RouterPath.helloCallReport}`);
   };
 
   return (
@@ -62,6 +62,7 @@ const HelloCallServicePage = () => {
             <Notice
               title={SERVICE_NOTICE.finish_title}
               contents={SERVICE_NOTICE.finish_contents}
+              noticeType='안부전화'
             />
             <Divider />
           </>
