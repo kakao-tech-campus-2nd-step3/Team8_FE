@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <ServiceHistoryPage />,
   },
   {
-    path: RouterPath.helloCallList,
+    path: RouterPath.helloCall,
     children: [
       {
         index: true,
@@ -46,6 +46,7 @@ const router = createBrowserRouter([
         element: <HelloCallReportPage />,
       },
     ],
+  },
   {
     path: RouterPath.seniorRegister,
     element: <SeniorRegisterPage />,
