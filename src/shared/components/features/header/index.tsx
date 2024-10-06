@@ -2,9 +2,9 @@ import backIcon from './asset/ic_arrow_back.svg';
 import { Text, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-interface HeaderProps {
+type HeaderProps = {
   title: string;
-}
+};
 
 const Header = ({ title }: HeaderProps) => {
   return (
