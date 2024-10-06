@@ -1,18 +1,45 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { RegisterFields } from './components/register-fields';
 import { RegisterType } from './components/register-type';
 import { Tos } from './components/tos';
+import { FormValues } from './types';
+import { BasicButton } from '@/shared/components/common/button';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const RegisterPage = () => {
+  const [userType, setUserType] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const handleUserType = (id: string) => {
+    setUserType(id);
+  };
+
+  const onSubmit = (data: FormValues) => {
+    // 회원가입 api
+    console.log(userType, data);
+  };
+
   return (
-    <Wrapper>
-      <RegisterType />
-      <Divider gap={5} />
-      <RegisterFields />
-      <Tos />
-      <SubmitBtn>가입하기</SubmitBtn>
-    </Wrapper>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Wrapper>
+        <RegisterType userType={userType} handleClick={handleUserType} />
+        <Divider gap={5} />
+        {userType != '' && (
+          <>
+            <RegisterFields register={register} errors={errors} />
+            <Tos userType={userType} register={register} errors={errors} />
+            <BasicButton type='submit'>가입하기</BasicButton>
+          </>
+        )}
+      </Wrapper>
+    </form>
   );
 };
 
@@ -24,16 +51,4 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 45px;
-`;
-
-const SubmitBtn = styled.button`
-  width: 100%;
-  height: 60px;
-  border-radius: 10px;
-  background-color: #c69090;
-  margin-top: 50px;
-
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: 300;
 `;
