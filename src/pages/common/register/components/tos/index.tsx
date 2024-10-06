@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import { GUARD_DATA } from '../../data/guard';
-import { SINIDDO_DATA } from '../../data/siniddo';
+import { SINITTO_DATA } from '../../data/sinitto';
 import type { FormValues } from '../../types';
 import { TosContent } from './content';
 import { Checkbox, FormControl, FormErrorMessage } from '@chakra-ui/react';
@@ -18,8 +18,8 @@ export const Tos = ({ userType, register, errors }: Props) => {
     <Wrapper>
       <Title>서약서</Title>
       <TosContainer>
-        {userType == 'siniddo' ? (
-          <TosContent data={SINIDDO_DATA} />
+        {userType == 'sinitto' ? (
+          <TosContent data={SINITTO_DATA} />
         ) : (
           <TosContent data={GUARD_DATA} />
         )}

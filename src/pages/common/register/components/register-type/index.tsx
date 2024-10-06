@@ -12,9 +12,9 @@ export const RegisterType = ({ userType, handleClick }: Props) => {
       <Title>가입 유형</Title>
       <TypeWrapper>
         <TypeButton
-          id='siniddo'
+          id='sinitto'
           content='시니또'
-          isSelected={userType == 'siniddo'}
+          isSelected={userType == 'sinitto'}
           handleClick={handleClick}
         />
         <TypeButton
