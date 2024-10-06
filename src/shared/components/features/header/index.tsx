@@ -8,12 +8,15 @@ interface HeaderProps {
 
 const Header = ({ title }: HeaderProps) => {
   return (
-    <HeaderBox>
-      <Icon src={backIcon} />
-      <Text fontSize='1.5rem' fontWeight={700}>
-        {title}
-      </Text>
-    </HeaderBox>
+    <>
+      <HeaderBox>
+        <Icon src={backIcon} />
+        <Text fontSize='1.5rem' fontWeight={700}>
+          {title}
+        </Text>
+      </HeaderBox>
+      <MarginSpacer />
+    </>
   );
 };
 
@@ -28,6 +31,7 @@ const HeaderBox = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--color-white);
 `;
 
 const Icon = styled(Image)`
@@ -37,4 +41,8 @@ const Icon = styled(Image)`
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
+`;
+
+const MarginSpacer = styled.div`
+  height: 30px;
 `;
