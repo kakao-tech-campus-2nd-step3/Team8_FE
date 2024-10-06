@@ -3,16 +3,21 @@ import { useState } from 'react';
 import starIcon from './asset/star-icon.svg';
 import { BasicButton } from '@/shared/components/common/button';
 import Notice from '@/shared/components/features/notice';
-import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
+import { Text, Flex, Box, Textarea, Image, Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SiniddoReviewPage = () => {
   const [ratings, setRatings] = useState<number[]>([0, 0, 0]); // 각 질문에 대한 별점
+  const [isGood, setIsGood] = useState<boolean | null>(null);
 
   const handleStarClick = (questionIndex: number, starIndex: number) => {
     const newRatings = [...ratings];
     newRatings[questionIndex] = starIndex + 1; // 별점 설정
     setRatings(newRatings);
+  };
+
+  const handleEvalButtonClick = (value: boolean) => {
+    setIsGood(value);
   };
 
   return (
@@ -22,7 +27,7 @@ const SiniddoReviewPage = () => {
           title='시니또에게 평가를 남겨주세요!'
           contents='서비스에 만족하셨다면 시니또에게 긍적적인 평가를 남겨주세요!'
           noticeType='리뷰하기'
-        ></Notice>
+        />
       </Box>
       <Box display='flex' flexDir='column' w='100%' maxW='16rem' mb={4} mt={4}>
         <TitleText>시니또 정보</TitleText>
@@ -53,7 +58,21 @@ const SiniddoReviewPage = () => {
               </Box>
             </Box>
           ))}
-          <Box></Box>
+          <TitleText>봉사자가 마음에 드나요?</TitleText>
+          <Box display='flex' justifyContent='space-between' gap={1} mt={1}>
+            <EvalButton
+              isGood={isGood === true}
+              onClick={() => handleEvalButtonClick(true)}
+            >
+              최고에요
+            </EvalButton>
+            <EvalButton
+              isGood={isGood === false}
+              onClick={() => handleEvalButtonClick(false)}
+            >
+              별로에요
+            </EvalButton>
+          </Box>
         </ReviewBox>
       </Box>
       <Box display='flex' flexDir='column' w='100%' maxW='16rem' mt={4} mb={4}>
@@ -102,4 +121,18 @@ const Star = styled(Image)`
   cursor: pointer;
   margin-right: 4px;
   transition: opacity 0.2s;
+`;
+
+const EvalButton = styled(Button)<{ isGood: boolean }>`
+  background-color: ${({ isGood }) =>
+    isGood ? 'var(--color-primary)' : '#cfcfcf'};
+  color: ${({ isGood }) => (isGood ? 'var(--color-white)' : 'black')};
+  width: 50px;
+  height: 35px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
 `;
