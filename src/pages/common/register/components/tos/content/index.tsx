@@ -1,12 +1,15 @@
-import { GUARD_DATA } from '../../../data/guard';
+import type { TosData } from '../../../types';
 import styled from '@emotion/styled';
 
-// 보호자 서약서 내용
-export const TosGuard = () => {
+type Props = {
+  data: TosData;
+};
+
+export const TosContent = ({ data }: Props) => {
   return (
     <Wrapper>
-      <Intro>{GUARD_DATA.intro}</Intro>
-      {GUARD_DATA.sections.map((section, index) => (
+      <Intro>{data.intro}</Intro>
+      {data.sections.map((section, index) => (
         <Paragraph key={index}>
           <Title>{section.title}</Title>
           {section.contents.map((content, i) => (

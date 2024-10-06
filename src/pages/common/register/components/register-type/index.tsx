@@ -1,12 +1,28 @@
+import { TypeButton } from './type-button.tsx';
 import styled from '@emotion/styled';
 
-export const RegisterType = () => {
+type Props = {
+  userType: string;
+  handleClick: (id: string) => void;
+};
+
+export const RegisterType = ({ userType, handleClick }: Props) => {
   return (
     <Wrapper>
       <Title>가입 유형</Title>
       <TypeWrapper>
-        <DefaultBtn>시니또</DefaultBtn>
-        <GrayBtn>보호자</GrayBtn>
+        <TypeButton
+          id='siniddo'
+          content='시니또'
+          isSelected={userType == 'siniddo'}
+          handleClick={handleClick}
+        />
+        <TypeButton
+          id='guard'
+          content='보호자'
+          isSelected={userType == 'guard'}
+          handleClick={handleClick}
+        />
       </TypeWrapper>
     </Wrapper>
   );
@@ -28,26 +44,4 @@ const TypeWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 13px;
-`;
-
-const DefaultBtn = styled.button`
-  width: 45%;
-  height: 70px;
-  border-radius: 10px;
-  background-color: #c69090;
-
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 700;
-`;
-
-const GrayBtn = styled.button`
-  width: 45%;
-  height: 70px;
-  border-radius: 10px;
-  background-color: #f2f2f2;
-
-  color: #909090;
-  font-size: 22px;
-  font-weight: 400;
 `;

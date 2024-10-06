@@ -1,4 +1,4 @@
-export const SINITTO_DATA = {
+export const SINIDDO_DATA = {
   intro:
     '본인은 [나만의 작은 시니또]의 시니어 지원자 매칭 서비스를 이용함에 있어, 다음과 같은 사항을 충분히 이해하고 동의합니다.',
   sections: [
