@@ -15,7 +15,6 @@ const Header = ({ title }: HeaderProps) => {
           {title}
         </Text>
       </HeaderBox>
-      <MarginSpacer />
     </>
   );
 };
@@ -41,8 +40,4 @@ const Icon = styled(Image)`
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
-`;
-
-const MarginSpacer = styled.div`
-  height: 30px;
 `;
