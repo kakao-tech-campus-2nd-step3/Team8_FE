@@ -22,7 +22,7 @@ const Header = ({ title }: HeaderProps) => {
 export default Header;
 
 const HeaderBox = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
