@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DUMMY_DATA } from '../../data/detail';
+import { DUMMY_DATA } from '@/pages/sinitto/mypage/data/detail';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -95,6 +95,7 @@ const DetailBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height : 
   max-width: 338px;
 `;
 
@@ -103,7 +104,7 @@ const DetailFactor = styled(Box)`
   flex-direction: row;
   width: 100%;
   max-width: 310px;
-  height: 2.5rem;
+  min-height: 55px;
   background-color: #fff;
   margin: 0.3rem 0;
   border: 1px solid #fff;

@@ -22,18 +22,18 @@ const SinittoReviewPage = () => {
 
   return (
     <Flex w='100%' flexDir='column' alignItems='center'>
-      <Box display='flex' flexDir='column' w='100%' maxW='16rem' mt={4}>
+      <Box display='flex' flexDir='column' w='100%' maxW='18rem' mt={4}>
         <Notice
           title='시니또에게 평가를 남겨주세요!'
           contents='서비스에 만족하셨다면 시니또에게 긍적적인 평가를 남겨주세요!'
           noticeType='리뷰하기'
         />
       </Box>
-      <Box display='flex' flexDir='column' w='100%' maxW='16rem' mb={4} mt={4}>
+      <Box display='flex' flexDir='column' w='100%' maxW='18rem' mb={4} mt={4}>
         <TitleText>시니또 정보</TitleText>
         <Text fontSize='18px'>김춘식 / 22세 / 대학생</Text>
       </Box>
-      <Box display='flex' flexDir='column' w='100%' maxW='16rem'>
+      <Box display='flex' flexDir='column' w='100%' maxW='18rem'>
         <TitleText>평가하기</TitleText>
         <ReviewBox>
           {[
@@ -75,11 +75,11 @@ const SinittoReviewPage = () => {
           </Box>
         </ReviewBox>
       </Box>
-      <Box display='flex' flexDir='column' w='100%' maxW='16rem' mt={4} mb={4}>
+      <Box display='flex' flexDir='column' w='100%' maxW='18rem' mt={4} mb={4}>
         <TitleText>전체 평가 내용 (선택)</TitleText>
         <ReviewTextBox />
       </Box>
-      <BasicButton width='16rem' themeType='default'>
+      <BasicButton width='18rem' themeType='default'>
         제출하기
       </BasicButton>
     </Flex>
@@ -98,7 +98,7 @@ const ReviewBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 16rem;
+  max-width: 18rem;
   border: 1px solid var(--color-white-gray);
   border-radius: 10px;
   background-color: var(--color-white-gray);
@@ -108,7 +108,7 @@ const ReviewBox = styled(Box)`
 
 const ReviewTextBox = styled(Textarea)`
   width: 100%;
-  max-width: 16rem;
+  max-width: 18rem;
   height: 110px;
   border: 1px solid var(--color-white-gray);
   border-radius: 10px;
