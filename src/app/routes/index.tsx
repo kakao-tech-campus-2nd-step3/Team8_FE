@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterPath } from './path';
 import MainPage from '@/pages/common/main';
 import RegisterPage from '@/pages/common/register';
+import GuideLinePage from '@/pages/guard/guide-line';
 import GuardMyPage from '@/pages/guard/mypage';
 import SeniorRegisterPage from '@/pages/guard/register';
 import SiniddoReviewPage from '@/pages/guard/review';
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: RouterPath.GUARD_MYPAGE,
     element: <GuardMyPage />,
+  },
+  {
+    path: RouterPath.GUARD_GUIDELINE,
+    element: <GuideLinePage />,
   },
   {
     path: RouterPath.SERVICE_HISTORY,
