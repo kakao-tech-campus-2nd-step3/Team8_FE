@@ -1,25 +1,51 @@
-// import { TosGuard } from './tos-guard';
-import { TosSinitto } from './sinitto';
-import { Checkbox } from '@chakra-ui/react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+
+import { GUARD_DATA } from '../../data/guard';
+import { SINITTO_DATA } from '../../data/sinitto';
+import type { FormValues } from '../../types';
+import { TosContent } from './content';
+import { Checkbox, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const Tos = () => {
+type Props = {
+  userType: string;
+  register: UseFormRegister<FormValues>;
+  errors: FieldErrors<FormValues>;
+};
+
+export const Tos = ({ userType, register, errors }: Props) => {
   return (
     <Wrapper>
       <Title>서약서</Title>
       <TosContainer>
-        {/* <TosGuard /> */}
-        <TosSinitto />
+        {userType == 'sinitto' ? (
+          <TosContent data={SINITTO_DATA} />
+        ) : (
+          <TosContent data={GUARD_DATA} />
+        )}
       </TosContainer>
-      <Checkbox colorScheme='gray' size='lg'>
-        서약서의 내용에 동의합니다.
-      </Checkbox>
+
+      <FormControl isInvalid={!!errors.agreeToTerms}>
+        <Checkbox
+          colorScheme='gray'
+          size='lg'
+          {...register('agreeToTerms', {
+            required: '서약서에 동의해야 합니다.',
+          })}
+        >
+          서약서의 내용에 동의합니다.
+        </Checkbox>
+        <FormErrorMessage>
+          {errors.agreeToTerms && errors.agreeToTerms.message}
+        </FormErrorMessage>
+      </FormControl>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 const Title = styled.h1`
