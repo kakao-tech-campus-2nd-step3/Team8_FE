@@ -26,8 +26,7 @@ export default GuideLineInfo;
 const GuideLineInfoContainer = styled(Flex)`
   width: 100%;
   max-width: 330px;
-  height: auto;
-  min-height: 6rem;
+  min-height: 8rem;
   background-color: var(--color-white);
   border: 1px solid var(--color-white);
   border-radius: 10px;
