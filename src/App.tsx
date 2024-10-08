@@ -1,19 +1,18 @@
-import { queryClient } from './api/instance';
-import { Routes } from './routes';
-import GlobalTheme from './styles/global';
-import { ChakraProvider, GlobalStyle } from '@chakra-ui/react';
+import { Routes } from './app/routes';
+import { queryClient } from './shared/api/instance';
+import { globalStyle } from './shared/theme/global';
+import { ChakraProvider } from '@chakra-ui/react';
+import { Global } from '@emotion/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 
 const App = () => {
   return (
-    <>
-      <ChakraProvider theme={GlobalTheme}>
-        <QueryClientProvider client={queryClient}>
-          <GlobalStyle />
-          <Routes />
-        </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <Global styles={globalStyle} />
+        <Routes />
       </ChakraProvider>
-    </>
+    </QueryClientProvider>
   );
 };
 
