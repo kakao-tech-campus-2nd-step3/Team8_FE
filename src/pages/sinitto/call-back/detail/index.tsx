@@ -48,7 +48,7 @@ const CallBackDetailPage = () => {
             phoneNumber='010-1234-5678'
           />
         ) : (
-          <PreAcceptMenu handleClcik={handleRequestAccept} />
+          <PreAcceptMenu handleClick={handleRequestAccept} />
         )}
       </Wrapper>
       <Outlet />
