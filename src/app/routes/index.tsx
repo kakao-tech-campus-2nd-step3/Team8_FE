@@ -6,15 +6,15 @@ import RegisterPage from '@/pages/common/register';
 import GuideLinePage from '@/pages/guard/guide-line';
 import GuardMyPage from '@/pages/guard/mypage';
 import SeniorRegisterPage from '@/pages/guard/register';
-import SiniddoReviewPage from '@/pages/guard/review';
+import SinittoReviewPage from '@/pages/guard/review';
 import ServiceHistoryPage from '@/pages/guard/service-history';
-import CallBackDetailPage from '@/pages/siniddo/call-back/detail';
-import CallBackListPage from '@/pages/siniddo/call-back/list';
-import SiniddoGuideLinePage from '@/pages/siniddo/guide-line';
-import HelloCallListPage from '@/pages/siniddo/hello-call/hello-call-list';
-import HelloCallReportPage from '@/pages/siniddo/hello-call/hello-call-report';
-import HelloCallServicePage from '@/pages/siniddo/hello-call/hello-call-service';
-import SinittoMypage from '@/pages/siniddo/mypage';
+import CallBackDetailPage from '@/pages/sinitto/call-back/detail';
+import CallBackListPage from '@/pages/sinitto/call-back/list';
+import SinittoGuideLinePage from '@/pages/sinitto/guide-line';
+import HelloCallListPage from '@/pages/sinitto/hello-call/hello-call-list';
+import HelloCallReportPage from '@/pages/sinitto/hello-call/hello-call-report';
+import HelloCallServicePage from '@/pages/sinitto/hello-call/hello-call-service';
+import SinittoMypage from '@/pages/sinitto/mypage';
 import Layout from '@/shared/components/common/layout';
 
 const router = createBrowserRouter([
@@ -56,13 +56,16 @@ const router = createBrowserRouter([
               { index: true, element: <CallBackDetailPage /> },
               {
                 path: RouterPath.CALL_BACK_GUID_LINE,
-                element: <SiniddoGuideLinePage />,
+                element: <SinittoGuideLinePage />,
               },
             ],
           },
         ],
       },
-      { path: RouterPath.SINIDDO_REVIEW, element: <SiniddoReviewPage /> },
+      {
+        path: RouterPath.SINITTO_REVIEW,
+        element: <SinittoReviewPage />,
+      },
     ],
   },
 ]);

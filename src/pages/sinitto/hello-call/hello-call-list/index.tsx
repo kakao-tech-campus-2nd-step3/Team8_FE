@@ -8,7 +8,7 @@ const HelloCallListPage = () => {
   const navigate = useNavigate();
 
   const handlerNavigate = () => {
-    navigate(RouterPath.helloCallService);
+    navigate(RouterPath.HELLO_CALL_SERVICE);
   };
 
   return (

@@ -6,7 +6,7 @@ import Notice from '@/shared/components/features/notice';
 import { Text, Flex, Box, Textarea, Image, Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const SiniddoReviewPage = () => {
+const SinittoReviewPage = () => {
   const [ratings, setRatings] = useState<number[]>([0, 0, 0]); // 각 질문에 대한 별점
   const [isGood, setIsGood] = useState<boolean | null>(null);
 
@@ -86,7 +86,7 @@ const SiniddoReviewPage = () => {
   );
 };
 
-export default SiniddoReviewPage;
+export default SinittoReviewPage;
 
 const TitleText = styled(Text)`
   font-size: 20px;

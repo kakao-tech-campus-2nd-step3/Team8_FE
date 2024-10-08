@@ -11,7 +11,7 @@ type GuideLineParams = {
   guideLineId: string;
 };
 
-const SiniddoGuideLinePage = () => {
+const SinittoGuideLinePage = () => {
   const { callBackId = '', guideLineId = '' } = useParams<GuideLineParams>();
   console.log(callBackId, guideLineId);
 
@@ -28,7 +28,7 @@ const SiniddoGuideLinePage = () => {
   );
 };
 
-export default SiniddoGuideLinePage;
+export default SinittoGuideLinePage;
 
 const Wrapper = styled.div`
   min-height: 100vh;
