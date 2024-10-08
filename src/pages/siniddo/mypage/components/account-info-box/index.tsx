@@ -1,23 +1,20 @@
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const ProfileBox = () => {
+const AccountInfoBox = () => {
   return (
-    <ProfileBoxLayout mb={2}>
-      <Text ml='1rem' mt={3} fontSize='18px' fontWeight={700}>
-        시니또님 환영합니다.
-      </Text>
-      <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
+    <AccountBoxLayout mb={2}>
+      <Box display='flex' w='100%' justifyContent='space-between'>
         <Text
           ml='1rem'
           fontSize='16px'
           fontWeight={600}
           color='var(--color-gray)'
         >
-          이름
+          계좌번호
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          시니또
+          카카오뱅크 3333-3333-33333
         </Text>
       </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
@@ -27,25 +24,26 @@ const ProfileBox = () => {
           fontWeight={600}
           color='var(--color-gray)'
         >
-          전화번호
+          계좌 인증 여부
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          010-1111-1111
+          인증 완료
         </Text>
       </Box>
-    </ProfileBoxLayout>
+    </AccountBoxLayout>
   );
 };
 
-export default ProfileBox;
+export default AccountInfoBox;
 
-const ProfileBoxLayout = styled(Box)`
+const AccountBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: #f2f2f2;
   width: 100%;
   max-width: 338px;
-  height: 130px;
+  height: 100px;
   border: 1px solid #909090;
   border-radius: 5px;
   margin-top: 0.5rem;

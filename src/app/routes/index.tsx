@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterPath } from './path';
 import MainPage from '@/pages/common/main';
 import RegisterPage from '@/pages/common/register';
+import GuardMyPage from '@/pages/guard/mypage';
 import SeniorRegisterPage from '@/pages/guard/register';
 import SiniddoReviewPage from '@/pages/guard/review';
 import ServiceHistoryPage from '@/pages/guard/service-history';
@@ -12,7 +13,7 @@ import SiniddoGuideLinePage from '@/pages/siniddo/guide-line';
 import HelloCallListPage from '@/pages/siniddo/hello-call/hello-call-list';
 import HelloCallReportPage from '@/pages/siniddo/hello-call/hello-call-report';
 import HelloCallServicePage from '@/pages/siniddo/hello-call/hello-call-service';
-import MyPage from '@/pages/siniddo/mypage';
+import SinittoMypage from '@/pages/siniddo/mypage';
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: RouterPath.MYPAGE,
-    element: <MyPage />,
+    path: RouterPath.SINITTO_MYPAGE,
+    element: <SinittoMypage />,
+  },
+  {
+    path: RouterPath.GUARD_MYPAGE,
+    element: <GuardMyPage />,
   },
   {
     path: RouterPath.SERVICE_HISTORY,

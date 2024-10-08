@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DUMMY_DATA } from '../../data/detail';
+import { DUMMY_DATA } from '@/pages/siniddo/mypage/data/detail';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
