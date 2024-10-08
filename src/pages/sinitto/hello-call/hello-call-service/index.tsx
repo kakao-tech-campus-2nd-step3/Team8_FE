@@ -19,7 +19,7 @@ const HelloCallServicePage = () => {
   const navigate = useNavigate();
 
   const handlerNavigate = () => {
-    navigate(`${RouterPath.helloCall}/${RouterPath.helloCallReport}`);
+    navigate(`${RouterPath.HELLO_CALL}/${RouterPath.HELLO_CALL_REPORT}`);
   };
 
   return (
