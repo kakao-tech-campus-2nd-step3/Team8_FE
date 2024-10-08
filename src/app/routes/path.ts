@@ -11,5 +11,5 @@ export const RouterPath = {
   CALL_BACK_DETAIL: ':callBackId',
   CALL_BACK_GUID_LINE: ':guideLineId',
   SENIOR_REGISTER: `/senior-register`,
-  SINIDDO_REVIEW: `/siniddo-review`,
+  SINITTO_REVIEW: `/sinitto-review`,
 };
