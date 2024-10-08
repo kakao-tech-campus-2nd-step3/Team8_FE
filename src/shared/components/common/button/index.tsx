@@ -23,9 +23,8 @@ export const BasicButton = styled.button<Props>`
 
   font-size: var(--font-size-md);
   font-weight: 300;
-
-  transition: background-color 0.3s ease;
-  transition: color 0.3s ease;
+  transition: 0.3s ease;
+  transition-property: background-color, color;
 
   &:hover {
     background-color: #e3e8ef;
