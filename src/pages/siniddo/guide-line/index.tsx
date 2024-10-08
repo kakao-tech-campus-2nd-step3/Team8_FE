@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 
 import { Container } from './components/container';
-import { CATEGORIES } from './data/categories.ts';
+import { CATEGORIES } from './data/categories';
 import { MOCK_DATA } from './data/mock';
+import { Category, MockData } from './types';
 import styled from '@emotion/styled';
 
 type GuideLineParams = {
@@ -15,12 +16,12 @@ const SiniddoGuideLinePage = () => {
   console.log(callBackId, guideLineId);
 
   const guideLineInfo =
-    CATEGORIES.find((item) => item.id === guideLineId)?.name || null;
+    CATEGORIES.find((item: Category) => item.id === guideLineId)?.name || null;
 
   return (
     <Wrapper>
       <Title>{guideLineInfo}</Title>
-      {MOCK_DATA.map((data, index) => (
+      {MOCK_DATA.map((data: MockData, index: number) => (
         <Container key={index} title={data.title} content={data.content} />
       ))}
     </Wrapper>
