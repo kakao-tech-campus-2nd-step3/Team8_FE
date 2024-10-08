@@ -2,13 +2,13 @@ import { BasicButton } from '@/shared/components/common/button';
 import styled from '@emotion/styled';
 
 type Props = {
-  handleClcik: () => void;
+  handleClick: () => void;
 };
 
-export const PreAcceptMenu = ({ handleClcik }: Props) => {
+export const PreAcceptMenu = ({ handleClick }: Props) => {
   return (
     <Wrapper>
-      <BasicButton onClick={handleClcik}>전화걸기 및 수락하기</BasicButton>
+      <BasicButton onClick={handleClick}>전화걸기 및 수락하기</BasicButton>
     </Wrapper>
   );
 };

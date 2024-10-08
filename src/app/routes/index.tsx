@@ -16,58 +16,58 @@ import MyPage from '@/pages/siniddo/mypage';
 
 const router = createBrowserRouter([
   {
-    path: RouterPath.root,
+    path: RouterPath.ROOT,
     element: <MainPage />,
   },
   {
-    path: RouterPath.register,
+    path: RouterPath.REGISTER,
     element: <RegisterPage />,
   },
   {
-    path: RouterPath.mypage,
+    path: RouterPath.MYPAGE,
     element: <MyPage />,
   },
   {
-    path: RouterPath.serviceHistory,
+    path: RouterPath.SERVICE_HISTORY,
     element: <ServiceHistoryPage />,
   },
   {
-    path: RouterPath.helloCall,
+    path: RouterPath.HELLO_CALL,
     children: [
       {
         index: true,
         element: <HelloCallListPage />,
       },
       {
-        path: RouterPath.helloCallService,
+        path: RouterPath.HELLO_CALL_SERVICE,
         element: <HelloCallServicePage />,
       },
       {
-        path: RouterPath.helloCallReport,
+        path: RouterPath.HELLO_CALL_REPORT,
         element: <HelloCallReportPage />,
       },
     ],
   },
   {
-    path: RouterPath.seniorRegister,
+    path: RouterPath.SENIOR_REGISTER,
     element: <SeniorRegisterPage />,
   },
   {
-    path: RouterPath.callBackList,
+    path: RouterPath.CALL_BACK_LIST,
     children: [
       {
         index: true,
         element: <CallBackListPage />,
       },
       {
-        path: RouterPath.callBackDetail,
+        path: RouterPath.CALL_BACK_DETAIL,
         children: [
           {
             index: true,
             element: <CallBackDetailPage />,
           },
           {
-            path: RouterPath.callBackGuidLine,
+            path: RouterPath.CALL_BACK_GUID_LINE,
             element: <SiniddoGuideLinePage />,
           },
         ],
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: RouterPath.siniddoReview,
+    path: RouterPath.SINIDDO_REVIEW,
     element: <SiniddoReviewPage />,
   },
 ]);
