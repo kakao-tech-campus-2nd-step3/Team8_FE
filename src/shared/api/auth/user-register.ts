@@ -21,7 +21,10 @@ export const registerUser = async ({
   isSinitto,
 }: SignupReguestParams): Promise<SignupResponse> => {
   try {
-    const response = await fetchInstance.post('/api/members/sinitto', {
+    // 시니또 보호자에 따라 API 엔드포인트 구분
+    const endpoint = isSinitto ? 'sinitto' : 'guard';
+
+    const response = await fetchInstance.post(`/api/members/${endpoint}`, {
       name,
       phoneNumber,
       email,
