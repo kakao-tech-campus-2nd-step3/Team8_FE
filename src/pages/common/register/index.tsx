@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { AxiosError } from 'axios';
+
 import { RegisterFields } from './components/register-fields';
 import { RegisterType } from './components/register-type';
 import { Tos } from './components/tos';
 import { FormValues } from './types';
-import { SignupResponse, registerUser } from '@/shared/api/auth/user-register';
+import {
+  SignupApiResponse,
+  registerUser,
+} from '@/shared/api/auth/user-register';
 import { BasicButton } from '@/shared/components/common/button';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -22,9 +27,22 @@ const RegisterPage = () => {
   // 회원가입 처리
   const mutation = useMutation({
     mutationFn: registerUser,
-    onSuccess: (data: SignupResponse) => {
-      //성공
-      console.log('회원가입 성공', data);
+    onSuccess: (data: SignupApiResponse) => {
+      // 207 (이미 이메일이 존재하면)
+      if ('status' in data && data.status === 207) {
+        alert(data.detail);
+      } else {
+        // 200 (성공) -> 토큰 저장
+        console.log(data);
+        alert('회원가입이 완료되었습니다.');
+      }
+    },
+    onError: (error: AxiosError) => {
+      if (error.response && error.response.data) {
+        alert('회원가입 중 오류가 발생했습니다.');
+      } else {
+        alert('회원가입 중 네트워크 오류가 발생했습니다.');
+      }
     },
   });
 
