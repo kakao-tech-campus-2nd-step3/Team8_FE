@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
@@ -7,11 +8,13 @@ import { RegisterFields } from './components/register-fields';
 import { RegisterType } from './components/register-type';
 import { Tos } from './components/tos';
 import { FormValues } from './types';
+import { RouterPath } from '@/app/routes/path';
 import {
   SignupApiResponse,
   registerUser,
 } from '@/shared/api/auth/user-register';
 import { BasicButton } from '@/shared/components/common/button';
+import { authLocalStorage } from '@/shared/utils/storage';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
@@ -24,17 +27,31 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
+  const navigate = useNavigate();
+
   // 회원가입 처리
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data: SignupApiResponse) => {
-      // 207 (이미 이메일이 존재하면)
+      // 207 (이미 이메일이 존재하면 Multi-Status)
       if ('status' in data && data.status === 207) {
         alert(data.detail);
       } else {
         // 200 (성공) -> 토큰 저장
         console.log(data);
-        alert('회원가입이 완료되었습니다.');
+        // 타입가드
+        if ('accessToken' in data) {
+          authLocalStorage.set(data.accessToken);
+          alert('회원가입이 완료되었습니다.');
+          // 유저 타입에 따라 네비게이션
+          if (data.isSinitto === 'true') {
+            navigate(RouterPath.ROOT);
+            // navigate(RouterPath.SINITTO_HOME);
+          } else {
+            navigate(RouterPath.ROOT);
+            // navigate(RouterPath.GUARD_HOME);
+          }
+        }
       }
     },
     onError: (error: AxiosError) => {
@@ -57,7 +74,7 @@ const RegisterPage = () => {
     const requestData = {
       name: data.name,
       phoneNumber: data.phoneNumber,
-      email: 'aaa@example.com', // 임시 (카카오 로그인 후 넘겨받기)
+      email: 'test1@example.com', // 임시 (카카오 로그인 후 넘겨받기)
       isSinitto,
     };
     console.log(requestData);
