@@ -42,6 +42,7 @@ const RegisterPage = () => {
         // 타입가드
         if ('accessToken' in data) {
           authLocalStorage.set(data.accessToken);
+          authLocalStorage.set(data.refreshToken);
           alert('회원가입이 완료되었습니다.');
           // 유저 타입에 따라 네비게이션
           if (data.isSinitto === 'true') {
