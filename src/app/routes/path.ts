@@ -1,6 +1,7 @@
 export const RouterPath = {
   ROOT: '/',
   LOGIN: '/login',
+  REDIRECT: '/redirection',
   REGISTER: '/register',
   GUARD_MYPAGE: `/guard/mypage`,
   GUARD_GUIDELINE: `/guard/guideline`,
