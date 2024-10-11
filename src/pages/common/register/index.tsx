@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import useRegister from './api/hooks/useRegister';
 import { RegisterFields } from './components/register-fields';
 import { RegisterType } from './components/register-type';
 import { Tos } from './components/tos';
 import { FormValues } from './types';
 import { BasicButton } from '@/shared/components/common/button';
-import useRegister from '@/shared/hooks/useRegister';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
