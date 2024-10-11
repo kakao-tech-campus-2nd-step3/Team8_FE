@@ -2,7 +2,7 @@ name: S3 deploy
 
 on:
   push:
-    branches: ['Master']
+    branches: ['Weekly']
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: sinitto
