@@ -1,13 +1,18 @@
+import { Link } from 'react-router-dom';
+
 import Logo from '../../assets/kakao.svg';
+import { KAKAO_AUTH_URL } from '@/shared/constants/URI';
 import { Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const LoginButton = () => {
   return (
-    <KakaoLoginButton>
-      <Image src={Logo} alt='kakao-icon' />
-      <Text fontWeight='500'>카카오톡 로그인</Text>
-    </KakaoLoginButton>
+    <Link to={KAKAO_AUTH_URL}>
+      <KakaoLoginButton>
+        <Image src={Logo} alt='kakao-icon' />
+        <Text fontWeight='500'>카카오톡 로그인</Text>
+      </KakaoLoginButton>
+    </Link>
   );
 };
 
