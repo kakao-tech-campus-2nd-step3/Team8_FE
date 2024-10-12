@@ -33,7 +33,7 @@ const Layout = () => {
     case RouterPath.CALL_BACK_LIST:
       title = '콜백 요청';
       break;
-    case RouterPath.SINIDDO_REVIEW:
+    case RouterPath.SINITTO_REVIEW:
       title = '시니또 평가';
       break;
     default:
