@@ -16,7 +16,7 @@ import HelloCallListPage from '@/pages/sinitto/hello-call/hello-call-list';
 import HelloCallReportPage from '@/pages/sinitto/hello-call/hello-call-report';
 import HelloCallServicePage from '@/pages/sinitto/hello-call/hello-call-service';
 import SinittoMypage from '@/pages/sinitto/mypage';
-import Layout from '@/shared/components/common/layout';
+import { Layout } from '@/shared/components';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: RouterPath.REGISTER, element: <RegisterPage /> },
-      { path: RouterPath.REDIRECT, element: <RedirectPage /> },
+      { path: RouterPath.SIGNUP, element: <RedirectPage /> },
       { path: RouterPath.SINITTO_MYPAGE, element: <SinittoMypage /> },
       { path: RouterPath.GUARD_MYPAGE, element: <GuardMyPage /> },
       { path: RouterPath.GUARD_GUIDELINE, element: <GuideLinePage /> },

@@ -1,39 +1,7 @@
-import { useState } from 'react';
-
-import { DUMMY_DATA } from '@/pages/sinitto/mypage/data/detail';
+import { useToggleDetailBox } from '../hooks/useToggleDetailBox';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-// 컴포넌트는 data를 어떻게 처리하는지에 대한 관심이 없다.
-// output만 있으면 되는..
-// output을 만들어내는 과정을 분리하면 어떨까?
-
-// 관심사를 분리하기
-const useToggleDetailBox = () => {
-  // 처음에 5개 보여주고, 더보기를 눌렀을 때 나머지 전부를 보여주기
-  const [visibleCount, setVisibleCount] = useState(5); // 기본적으로 5개 보여줌
-  const [enabled, setEnabled] = useState(false); // 더보기, 숨기기 상태
-
-  // 더보기, 숨기기 버튼을 눌렀을 때 동작
-  // toggleView 라는 이벤트가 발생했을 때 처리하는 이벤트 핸들러가 handleToggleView 인데
-  // 이건 toggleView라는 이벤트가 발생했을 때 처리하는게 아니라, toggleView라는 행위를 하는 함수임.
-  const toggle = () => {
-    if (enabled) {
-      // 숨기기 동작
-      setVisibleCount(5);
-    } else {
-      // 더보기 동작
-      setVisibleCount(DUMMY_DATA.length);
-    }
-    setEnabled(!enabled);
-  };
-
-  const data = DUMMY_DATA.slice(0, visibleCount);
-
-  return { data, enabled, toggle };
-};
-
-// 컴포넌트는 데이터 처리에 대해 관심있는게 아니라, "어떤 데이터"를 가지고 그리는지에 관심 있음
 const UseDetailBox = () => {
   const { data, enabled, toggle } = useToggleDetailBox();
 
@@ -95,7 +63,8 @@ const DetailBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height : 
+  // TODO: 높이 지정해주세요.
+  /* height :  */
   max-width: 338px;
 `;
 

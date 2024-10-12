@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/kakao.svg';
-import { KAKAO_AUTH_URL } from '@/shared/constants/URI';
+import { KAKAO_AUTH_URL } from '@/shared/constants';
 import { Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

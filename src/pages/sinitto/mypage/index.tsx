@@ -1,8 +1,6 @@
 import AccountInfoBox from './components/account-info-box';
 import ProfileBox from './components/profile-box';
-import { BasicButton } from '@/shared/components/common/button';
-import PointBox from '@/shared/components/features/mypage/point-box';
-import UseDetailBox from '@/shared/components/features/mypage/use-detail';
+import { BasicButton, PointBox, UseDetailBox } from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

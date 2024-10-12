@@ -1,4 +1,4 @@
-import { TypeButton } from './type-button.tsx';
+import { TypeButton } from './type-button';
 import styled from '@emotion/styled';
 
 type Props = {
