@@ -1,1 +1,1 @@
-export { default as RedirectPage } from './ui/RedirectPage';
+export { default as RedirectPage } from './RedirectPage';
