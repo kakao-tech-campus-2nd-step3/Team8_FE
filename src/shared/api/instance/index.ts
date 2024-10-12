@@ -1,6 +1,11 @@
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import type {
+  AxiosInstance,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import axios from 'axios';
 
+import { BASE_URI } from '@/shared/constants/URI';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -10,6 +15,8 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Cross-Control-Allow-Origin': '*',
+
       ...config.headers,
     },
   });
@@ -17,10 +24,8 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-export const BASE_URL = 'http://43.201.254.198:8080';
-
 export const fetchInstance = initInstance({
-  baseURL: 'http://43.201.254.198:8080',
+  baseURL: BASE_URI,
 });
 
 export const queryClient = new QueryClient({
@@ -33,3 +38,17 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+fetchInstance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken !== undefined) {
+      config.headers['Content-Type'] = 'application/json';
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
