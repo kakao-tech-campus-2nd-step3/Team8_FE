@@ -1,4 +1,4 @@
-import { BasicButton } from '@/shared/components/common/button';
+import { BasicButton } from '@/shared/components';
 import styled from '@emotion/styled';
 
 type Props = {

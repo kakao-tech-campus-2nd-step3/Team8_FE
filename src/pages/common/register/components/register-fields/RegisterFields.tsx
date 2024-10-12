@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import type { FormValues } from '../../types';
-import { FormField } from './form-fileds';
+import { FormField } from './form-fields';
 import styled from '@emotion/styled';
 
 type Props = {

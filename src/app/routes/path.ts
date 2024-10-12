@@ -1,8 +1,12 @@
 export const RouterPath = {
   ROOT: '/',
   LOGIN: '/login',
+  SIGNUP: '/signup',
   REGISTER: '/register',
-  MYPAGE: `/mypage`,
+  REDIRECT: '/redirection',
+  GUARD_MYPAGE: `/guard/mypage`,
+  GUARD_GUIDELINE: `/guard/guideline`,
+  SINITTO_MYPAGE: `/sinitto/mypage`,
   SERVICE_HISTORY: `/service-history`,
   HELLO_CALL_SERVICE: 'service',
   HELLO_CALL_REPORT: 'report',
