@@ -3,6 +3,7 @@ export const RouterPath = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   REGISTER: '/register',
+  REDIRECT: '/redirection',
   GUARD_MYPAGE: `/guard/mypage`,
   GUARD_GUIDELINE: `/guard/guideline`,
   SINITTO_MYPAGE: `/sinitto/mypage`,
