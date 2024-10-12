@@ -6,7 +6,7 @@ const ProfileBox = () => {
     <ProfileBoxLayout>
       <TopContainer>
         <Text mt={3} fontSize='18px' fontWeight={700}>
-          홍길동씨 환영합니다.
+          홍길동님 환영합니다.
         </Text>
         <ServiceManualBox mt={2} fontWeight={600}>
           서비스 이용 방법 한번에 이해하기!

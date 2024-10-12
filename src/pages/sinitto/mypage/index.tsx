@@ -1,20 +1,27 @@
-import PointBox from './components/PointBox';
-import ProfileBox from './components/ProfileBox';
-import UseDetailBox from './components/UseDetail';
+import AccountInfoBox from './components/account-info-box';
+import ProfileBox from './components/profile-box';
+import { BasicButton, PointBox, UseDetailBox } from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const MyPage = () => {
+const SinittoMypage = () => {
   return (
     <MyPageLayout>
       <ProfileBox />
+      <BasicButton themeType='default' width='338px'>
+        내 정보 수정하기
+      </BasicButton>
+      <AccountInfoBox />
+      <BasicButton themeType='default' width='338px'>
+        계좌번호 수정하기
+      </BasicButton>
       <PointBox />
       <UseDetailBox />
     </MyPageLayout>
   );
 };
 
-export default MyPage;
+export default SinittoMypage;
 
 const MyPageLayout = styled(Box)`
   display: flex;

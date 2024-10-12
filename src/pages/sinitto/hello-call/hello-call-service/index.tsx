@@ -5,7 +5,7 @@ import TitleImg from './asserts/title-icon.png';
 import ServiceDetail from './components/service-detail';
 import { SERVICE_NOTICE } from './data/notice';
 import { RouterPath } from '@/app/routes/path';
-import Notice from '@/shared/components/features/notice';
+import { Notice } from '@/shared/components';
 import { Box, Button, Divider, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
