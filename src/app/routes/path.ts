@@ -1,8 +1,9 @@
 export const RouterPath = {
   ROOT: '/',
   LOGIN: '/login',
-  REDIRECT: '/redirection',
+  SIGNUP: '/signup',
   REGISTER: '/register',
+  REDIRECT: '/redirection',
   GUARD_MYPAGE: `/guard/mypage`,
   GUARD_GUIDELINE: `/guard/guideline`,
   SINITTO_MYPAGE: `/sinitto/mypage`,

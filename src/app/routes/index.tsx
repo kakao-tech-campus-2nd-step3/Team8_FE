@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RouterPath } from './path';
 import MainPage from '@/pages/common/main/MainPage';
 import { RedirectPage } from '@/pages/common/redirect';
-import RegisterPage from '@/pages/common/register';
+import RegisterPage from '@/pages/common/register/RegisterPage';
 import GuideLinePage from '@/pages/guard/guide-line';
 import GuardMyPage from '@/pages/guard/mypage';
 import SeniorRegisterPage from '@/pages/guard/register';
@@ -16,7 +16,7 @@ import HelloCallListPage from '@/pages/sinitto/hello-call/hello-call-list';
 import HelloCallReportPage from '@/pages/sinitto/hello-call/hello-call-report';
 import HelloCallServicePage from '@/pages/sinitto/hello-call/hello-call-service';
 import SinittoMypage from '@/pages/sinitto/mypage';
-import Layout from '@/shared/components/common/layout';
+import { Layout } from '@/shared/components';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     path: RouterPath.ROOT,
     element: <Layout />,
     children: [
-      { path: RouterPath.REGISTER, element: <RegisterPage /> },
+      { path: RouterPath.SIGNUP, element: <RegisterPage /> },
       { path: RouterPath.REDIRECT, element: <RedirectPage /> },
       { path: RouterPath.SINITTO_MYPAGE, element: <SinittoMypage /> },
       { path: RouterPath.GUARD_MYPAGE, element: <GuardMyPage /> },

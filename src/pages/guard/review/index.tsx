@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import starIcon from './asset/star-icon.svg';
-import { BasicButton } from '@/shared/components/common/button';
-import Notice from '@/shared/components/features/notice';
+import { BasicButton, Notice } from '@/shared/components';
 import { Text, Flex, Box, Textarea, Image, Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

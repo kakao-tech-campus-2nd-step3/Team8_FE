@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import RedirectSection from '../components/redirect-section/RedirectSection';
+import { RedirectSection } from './components';
 
 const RedirectPage = () => {
   const location = useLocation();

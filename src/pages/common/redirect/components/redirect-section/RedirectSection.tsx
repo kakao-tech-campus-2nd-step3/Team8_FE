@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetKakaoCallback } from '../../store/hooks/useGetKakaoCallback';
+import { useGetKakaoCallback } from '../../store/hooks';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 type Props = {

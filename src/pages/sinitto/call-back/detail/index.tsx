@@ -4,7 +4,7 @@ import { useParams, Outlet } from 'react-router-dom';
 import { GuideLineList } from './components/guide-line-list';
 import { PostAcceptMenu } from './components/menu/post-accept';
 import { PreAcceptMenu } from './components/menu/pre-accept';
-import Notice from '@/shared/components/features/notice';
+import { Notice } from '@/shared/components';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
