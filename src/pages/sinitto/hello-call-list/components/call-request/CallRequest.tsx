@@ -6,7 +6,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const RequestList = ({ onClick }: Props) => {
+const CallRequest = ({ onClick }: Props) => {
   return (
     <Box
       display='flex'
@@ -39,7 +39,7 @@ const RequestList = ({ onClick }: Props) => {
   );
 };
 
-export default RequestList;
+export default CallRequest;
 
 const DayBox = styled(Text)`
   padding: 0.125rem 0.3rem;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RequestList } from './components';
+import { CallRequest } from './components';
 import { RouterPath } from '@/app/routes/path';
 import styled from '@emotion/styled';
 
@@ -13,10 +13,10 @@ const HelloCallListPage = () => {
 
   return (
     <HelloCallListLayout>
-      <RequestList onClick={handlerNavigate} />
-      <RequestList onClick={handlerNavigate} />
-      <RequestList onClick={handlerNavigate} />
-      <RequestList onClick={handlerNavigate} />
+      <CallRequest onClick={handlerNavigate} />
+      <CallRequest onClick={handlerNavigate} />
+      <CallRequest onClick={handlerNavigate} />
+      <CallRequest onClick={handlerNavigate} />
     </HelloCallListLayout>
   );
 };
