@@ -11,7 +11,6 @@ export const usePutHelloCall = (
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [HelloCallQueryKey, callId] });
       alert('안부전화 서비스가 수정되었습니다.');
-      window.location.reload();
     },
     onError: (error) => {
       console.error('안부전화 서비스 수정에 실패했습니다.', error);
