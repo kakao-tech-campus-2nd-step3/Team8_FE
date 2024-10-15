@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
+import { RouterPath } from '@/app/routes/path';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const ProfileBox = () => {
+  const navigate = useNavigate();
+
   return (
     <ProfileBoxLayout>
       <TopContainer>
@@ -13,9 +18,21 @@ const ProfileBox = () => {
         </ServiceManualBox>
       </TopContainer>
       <BottomContainer>
-        <ButtonBox>시니어 등록하기</ButtonBox>
+        <ButtonBox
+          onClick={() => {
+            navigate(`${RouterPath.SENIOR_REGISTER}`);
+          }}
+        >
+          시니어 등록하기
+        </ButtonBox>
         <DivideLine></DivideLine>
-        <ButtonBox>서비스 이용 현황</ButtonBox>
+        <ButtonBox
+          onClick={() => {
+            navigate(`${RouterPath.SERVICE_HISTORY}`);
+          }}
+        >
+          서비스 이용 현황
+        </ButtonBox>
       </BottomContainer>
     </ProfileBoxLayout>
   );
