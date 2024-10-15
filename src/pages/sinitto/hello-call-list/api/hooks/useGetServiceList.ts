@@ -5,7 +5,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 export const useGetServiceList = () => {
   return useInfiniteQuery<ServiceListResponse, Error>({
     queryKey: ServiceListQueryKey,
-    queryFn: ({ pageParam = 0 }) => getServiceList(pageParam as number),
+    queryFn: ({ pageParam = 0 }) => getServiceList(Number(pageParam)),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.content.length > 0 ? allPages.length : undefined,
     initialPageParam: 0,
