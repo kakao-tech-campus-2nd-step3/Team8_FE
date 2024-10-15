@@ -1,7 +1,7 @@
 import { fetchInstance } from '../instance';
 
 export type PointData = {
-  point: number;
+  price: number;
 };
 
 export type ChargePointResponse = {
@@ -18,6 +18,7 @@ export const chargePointQueryKey = ['chargePoint'];
 // 포인트 조회 API
 export const getPointInfo = async () => {
   const response = await fetchInstance.get(pointApiPath);
+  console.log(response.data);
   return response.data as PointData;
 };
 

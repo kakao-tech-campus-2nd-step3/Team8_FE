@@ -1,14 +1,37 @@
-import { Box, Text } from '@chakra-ui/react';
+import { useGetPointInfo } from '@/shared/hooks/usePoint';
+import { Box, Text, Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
+// 경로를 맞게 수정
+
 const PointBox = () => {
+  const { data: pointData, isLoading, error } = useGetPointInfo();
+
+  if (isLoading) {
+    return (
+      <PointBoxLayout>
+        <Spinner size='sm' />
+      </PointBoxLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <PointBoxLayout>
+        <Text color='red.300' fontWeight={700}>
+          포인트 조회 중 오류가 발생했습니다.
+        </Text>
+      </PointBoxLayout>
+    );
+  }
+
   return (
     <PointBoxLayout>
       <Text ml={2} mt={2} fontSize='18px' fontWeight={700}>
         홍길동 님의 포인트
       </Text>
       <Text ml={2} mt={1} fontSize='18px' fontWeight={700}>
-        15,000 Point
+        {pointData?.price} 포인트
       </Text>
       <ButtonContainer mt={2}>
         <ButtonBox>출금하기</ButtonBox>
@@ -26,6 +49,7 @@ const PointBoxLayout = styled(Box)`
   height: 130px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #f6e4e4;
   border: 1px solid #f6e4e4;
