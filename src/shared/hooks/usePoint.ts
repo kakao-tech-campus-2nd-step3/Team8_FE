@@ -11,9 +11,7 @@ import {
   UseMutationResult,
 } from '@tanstack/react-query';
 
-// 경로에 맞게 수정
-
-// 포인트 정보 훅
+// 포인트 조회
 export const useGetPointInfo = () => {
   return useQuery<PointData, Error>({
     queryKey: getPointInfoQueryKey,
@@ -21,13 +19,14 @@ export const useGetPointInfo = () => {
   });
 };
 
+// 포인트 충전
 export const useChargePoint = (): UseMutationResult<
   ChargePointResponse,
   Error,
-  PointData
+  number
 > => {
   return useMutation({
-    mutationFn: chargePoint,
+    mutationFn: (amount: number) => chargePoint({ price: amount }),
     onSuccess: (data: ChargePointResponse) => {
       alert(data.depositMessage);
     },

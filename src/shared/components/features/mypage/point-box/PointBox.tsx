@@ -1,11 +1,25 @@
-import { useGetPointInfo } from '@/shared/hooks/usePoint';
-import { Box, Text, Spinner } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { useState } from 'react';
 
-// 경로를 맞게 수정
+import { useGetPointInfo, useChargePoint } from '@/shared/hooks/usePoint';
+import { Box, Text, Spinner, Button, Input } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
 const PointBox = () => {
   const { data: pointData, isLoading, error } = useGetPointInfo();
+  const chargePointMutation = useChargePoint();
+
+  const [isCharging, setIsCharging] = useState(false);
+  const [amount, setAmount] = useState('');
+
+  const handleChargeButtonClick = () => {
+    const parsedAmount = Number(amount);
+    if (parsedAmount > 0) {
+      console.log(parsedAmount);
+      chargePointMutation.mutate(parsedAmount);
+      setAmount('');
+      setIsCharging(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -33,10 +47,45 @@ const PointBox = () => {
       <Text ml={2} mt={1} fontSize='18px' fontWeight={700}>
         {pointData?.price} 포인트
       </Text>
-      <ButtonContainer mt={2}>
-        <ButtonBox>출금하기</ButtonBox>
-        <ButtonBox>충전하기</ButtonBox>
-      </ButtonContainer>
+      {isCharging ? (
+        <Box display='flex' flexDir='column' alignItems='center'>
+          <Input
+            m={1}
+            w='100%'
+            h='40px'
+            placeholder='충전할 포인트 입력'
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            type='number'
+            min='1'
+          />
+          <ButtonContainer>
+            <Button
+              w='100px'
+              h='40px'
+              fontSize='16px'
+              onClick={handleChargeButtonClick}
+              colorScheme='teal'
+            >
+              충전
+            </Button>
+            <Button
+              w='100px'
+              h='40px'
+              fontSize='16px'
+              onClick={() => setIsCharging(false)}
+              colorScheme='red'
+            >
+              취소
+            </Button>
+          </ButtonContainer>
+        </Box>
+      ) : (
+        <ButtonContainer mt={2}>
+          <ButtonBox onClick={() => setIsCharging(true)}>충전하기</ButtonBox>
+          <ButtonBox>출금하기</ButtonBox>
+        </ButtonContainer>
+      )}
     </PointBoxLayout>
   );
 };
@@ -46,7 +95,7 @@ export default PointBox;
 const PointBoxLayout = styled(Box)`
   width: 100%;
   max-width: 338px;
-  height: 130px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,6 +115,7 @@ const ButtonContainer = styled(Box)`
   max-width: 338px;
   height: 30%;
   max-height: 40px;
+  margin-bottom: 10px;
 `;
 
 const ButtonBox = styled(Box)`
