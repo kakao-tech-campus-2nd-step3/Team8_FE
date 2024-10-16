@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DAY_DATA, TIME_SLOTS } from '../../data';
+import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -78,7 +78,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
         </ActionButton>
       </ButtonBox>
       <ButtonBox>
-        {[3, 5, 10, 15].map((time) => (
+        {USE_TIME_DATA.map((time) => (
           <TimeButton
             key={time}
             onClick={() => handleTimeSelect(time)}
