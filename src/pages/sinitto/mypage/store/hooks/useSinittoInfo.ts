@@ -2,6 +2,8 @@ import { getSinittoInformation } from '../api';
 import {
   getSinittoInformationQueryKey,
   modifySinittoBankInfomation,
+  modifySinittoInfomation,
+  ModifySinittoInformationRequest,
   SinittoBankInfo,
   SinittoInformation,
 } from '../api/sinitto-information.api';
@@ -25,6 +27,22 @@ export const useModifySinittoBankInfomation = (): UseMutationResult<
 > => {
   return useMutation({
     mutationFn: (bankInfo) => modifySinittoBankInfomation(bankInfo),
+    onSuccess: (data: string) => {
+      alert(data);
+    },
+    onError: (error: Error) => {
+      console.error(error);
+    },
+  });
+};
+
+export const useModifySinittoInformation = (): UseMutationResult<
+  string,
+  Error,
+  ModifySinittoInformationRequest
+> => {
+  return useMutation({
+    mutationFn: (sinittoInfo) => modifySinittoInfomation(sinittoInfo),
     onSuccess: (data: string) => {
       alert(data);
     },

@@ -1,9 +1,42 @@
-import { useGetSinittoInformation } from '../../store/hooks';
-import { Box, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+
+import {
+  useGetSinittoInformation,
+  useModifySinittoInformation,
+} from '../../store/hooks';
+import { Box, Text, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const SinittoProfileBox = () => {
-  const { data, isLoading, isError } = useGetSinittoInformation();
+type Props = {
+  isEditing: boolean;
+  setIsEditing: (value: boolean) => void;
+};
+
+const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
+  const { data, isLoading, isError, refetch } = useGetSinittoInformation();
+  const modifySinittoInfoMutation = useModifySinittoInformation();
+
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  useEffect(() => {
+    if (isEditing) {
+      setName(data?.name || '');
+      setPhoneNumber(data?.phoneNumber || '');
+    }
+  }, [isEditing, data]);
+
+  const handleSaveClick = () => {
+    modifySinittoInfoMutation.mutate(
+      { ...data, name, phoneNumber },
+      {
+        onSuccess: () => {
+          setIsEditing(false);
+          refetch();
+        },
+      }
+    );
+  };
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
@@ -22,9 +55,20 @@ const SinittoProfileBox = () => {
         >
           이름
         </Text>
-        <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          {data?.name}
-        </Text>
+        {isEditing ? (
+          <Input
+            ml='1rem'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='이름 입력'
+            size='sm'
+            width='40%'
+          />
+        ) : (
+          <Text mr='1rem' fontSize='16px' fontWeight={600}>
+            {data?.name}
+          </Text>
+        )}
       </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
         <Text
@@ -35,9 +79,45 @@ const SinittoProfileBox = () => {
         >
           전화번호
         </Text>
-        <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          {data?.phoneNumber}
-        </Text>
+        {isEditing ? (
+          <Input
+            ml='1rem'
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder='전화번호 입력'
+            size='sm'
+            width='40%'
+          />
+        ) : (
+          <Text mr='1rem' fontSize='16px' fontWeight={600}>
+            {data?.phoneNumber}
+          </Text>
+        )}
+      </Box>
+      <Box display='flex' justifyContent='flex-end' mt={2}>
+        {isEditing ? (
+          <>
+            <Button
+              w='100px'
+              h='40px'
+              fontSize='16px'
+              colorScheme='teal'
+              onClick={handleSaveClick}
+              mr={2}
+            >
+              수정 완료
+            </Button>
+            <Button
+              w='100px'
+              h='40px'
+              fontSize='16px'
+              colorScheme='red'
+              onClick={() => setIsEditing(false)}
+            >
+              취소
+            </Button>
+          </>
+        ) : null}
       </Box>
     </SinittoProfileBoxLayout>
   );
@@ -51,8 +131,9 @@ const SinittoProfileBoxLayout = styled(Box)`
   background-color: #f2f2f2;
   width: 100%;
   max-width: 338px;
-  height: 130px;
+  height: auto;
   border: 1px solid #909090;
   border-radius: 5px;
   margin-top: 0.5rem;
+  padding: 1rem;
 `;

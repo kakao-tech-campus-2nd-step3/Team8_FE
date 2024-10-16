@@ -6,12 +6,20 @@ import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoMypage = () => {
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAccount, setIsEditingAccount] = useState(false);
 
   return (
     <MyPageLayout>
-      <SinittoProfileBox />
-      <BasicButton themeType='default' width='338px'>
+      <SinittoProfileBox
+        isEditing={isEditingProfile}
+        setIsEditing={setIsEditingProfile}
+      />
+      <BasicButton
+        themeType='default'
+        width='338px'
+        onClick={() => setIsEditingProfile(true)}
+      >
         내 정보 수정하기
       </BasicButton>
       <AccountInfoBox

@@ -35,3 +35,15 @@ export const modifySinittoBankInfomation = async (
   console.log(response.data);
   return response.data;
 };
+
+// 본인 정보 수정
+export const modifySinittoInfomation = async (
+  sinittoInfo: SinittoInformation
+) => {
+  const response = await fetchInstance.put(
+    sinittoInformationPath(),
+    sinittoInfo
+  );
+  console.log(response.data);
+  return response.data;
+};
