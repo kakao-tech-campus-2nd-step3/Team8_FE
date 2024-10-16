@@ -4,9 +4,11 @@ import styled from '@emotion/styled';
 
 type Props = {
   onClick?: () => void;
+  seniorName?: string;
+  days?: string[];
 };
 
-const RequestList = ({ onClick }: Props) => {
+const CallRequest = ({ onClick, seniorName, days }: Props) => {
   return (
     <Box
       display='flex'
@@ -23,13 +25,11 @@ const RequestList = ({ onClick }: Props) => {
       onClick={onClick}
     >
       <Box>
-        <Text>김숙자님의 요청</Text>
+        <Text>{seniorName}님의 요청</Text>
       </Box>
       <Box display='flex' gap={5} alignItems='center'>
         <Box display='flex' flexDir='row' gap={1} alignItems='center'>
-          <DayBox>월</DayBox>
-          <DayBox>화</DayBox>
-          <DayBox>수</DayBox>
+          {days?.map((day, index) => <DayBox key={index}>{day}</DayBox>)}
         </Box>
         <Box>
           <Image src={ArrowIcon} alt='arrow-icon' />
@@ -39,7 +39,7 @@ const RequestList = ({ onClick }: Props) => {
   );
 };
 
-export default RequestList;
+export default CallRequest;
 
 const DayBox = styled(Text)`
   padding: 0.125rem 0.3rem;
