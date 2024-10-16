@@ -3,7 +3,6 @@ import {
   getSinittoInformationQueryKey,
   modifySinittoBankInfomation,
   modifySinittoInfomation,
-  ModifySinittoInformationRequest,
   SinittoBankInfo,
   SinittoInformation,
 } from '../api/sinitto-information.api';
@@ -39,7 +38,7 @@ export const useModifySinittoBankInfomation = (): UseMutationResult<
 export const useModifySinittoInformation = (): UseMutationResult<
   string,
   Error,
-  ModifySinittoInformationRequest
+  SinittoInformation
 > => {
   return useMutation({
     mutationFn: (sinittoInfo) => modifySinittoInfomation(sinittoInfo),
