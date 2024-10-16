@@ -4,7 +4,7 @@ import {
   getPointInfoQueryKey,
   PointData, // withdrawPoint,
   ChargePointResponse,
-} from '../api/point/point.api';
+} from '../../api/point/point.api';
 import {
   useQuery,
   useMutation,

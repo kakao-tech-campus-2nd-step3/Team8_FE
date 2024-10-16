@@ -1,16 +1,25 @@
+import { useState } from 'react';
+
 import PointLogImg from '../../../../assets/point-log-icon.png';
-import { useToggleDetailBox } from '../hooks/useToggleDetailBox';
+import { getPointStatusLabel } from '@/shared/hooks/point/pointStatusMapping';
+import { useGetPointLogs } from '@/shared/hooks/point/useGetPointLogs';
 import { Box, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {
-  const { data, enabled, toggle } = useToggleDetailBox();
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageSize = 5;
+  const { data, isLoading, isError } = useGetPointLogs(currentPage, pageSize);
+  const totalPages = data?.totalPages || 1;
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
 
   return (
     <UseDetailBoxLayout>
       <TextBox>포인트 내역</TextBox>
       <DetailBox>
-        {data.map((item, index) => (
+        {data?.content.map((item, index) => (
           <DetailFactor key={index}>
             <Image
               ml='5px'
@@ -22,24 +31,40 @@ const PointLogBox = () => {
             />
             <DetailTextBox>
               <TextLayout>
-                <DetailText>{item.date}</DetailText>
+                <DetailText>
+                  {new Date(item.postTime).toLocaleDateString()}
+                </DetailText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  적립
+                  {getPointStatusLabel(item.status)}
                 </DetailText>
               </TextLayout>
               <TextLayout>
-                <DetailText>{item.description}</DetailText>
+                <DetailText>{item.content}</DetailText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  {item.points}
+                  {item.price}
                 </DetailText>
               </TextLayout>
             </DetailTextBox>
           </DetailFactor>
         ))}
       </DetailBox>
-      <ViewMoreButton onClick={toggle}>
-        {enabled ? '숨기기' : '더보기'}
-      </ViewMoreButton>
+      <Pagination>
+        <PaginationButton
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+          disabled={currentPage === 0}
+        >
+          이전
+        </PaginationButton>
+        <span>
+          페이지 {currentPage + 1} / {data?.totalPages}
+        </span>
+        <PaginationButton
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={currentPage >= totalPages - 1}
+        >
+          다음
+        </PaginationButton>
+      </Pagination>
     </UseDetailBoxLayout>
   );
 };
@@ -107,17 +132,19 @@ const TextLayout = styled(Box)`
   justify-content: space-between;
 `;
 
-const ViewMoreButton = styled.button`
-  width: 20%;
-  max-width: 60px;
-  max-height: 30px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
+const Pagination = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 310px;
   margin: 0.5rem 0;
+  color: var(--color-white);
+  font-size: 16px;
+`;
+
+const PaginationButton = styled.button`
   cursor: pointer;
-  border: none;
-  border-radius: 5px;
+  font-weight: bold;
 `;
 
 const DetailText = styled(Box)`

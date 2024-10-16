@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useGetPointInfo, useChargePoint } from '@/shared/hooks/usePoint';
+import { useGetPointInfo, useChargePoint } from '@/shared/hooks/point/usePoint';
 import { Box, Text, Spinner, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
