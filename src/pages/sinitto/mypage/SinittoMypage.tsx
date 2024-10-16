@@ -1,17 +1,28 @@
+import { useState } from 'react';
+
 import { SinittoProfileBox, AccountInfoBox } from './components';
 import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoMypage = () => {
+  const [isEditingAccount, setIsEditingAccount] = useState(false);
+
   return (
     <MyPageLayout>
       <SinittoProfileBox />
       <BasicButton themeType='default' width='338px'>
         내 정보 수정하기
       </BasicButton>
-      <AccountInfoBox />
-      <BasicButton themeType='default' width='338px'>
+      <AccountInfoBox
+        isEditing={isEditingAccount}
+        setIsEditing={setIsEditingAccount}
+      />
+      <BasicButton
+        themeType='default'
+        width='338px'
+        onClick={() => setIsEditingAccount(true)}
+      >
         계좌번호 수정하기
       </BasicButton>
       <PointBox />

@@ -1,1 +1,4 @@
-export { useGetSinittoInformation } from './useSinittoInfo';
+export {
+  useGetSinittoInformation,
+  useModifySinittoBankInfomation,
+} from './useSinittoInfo';

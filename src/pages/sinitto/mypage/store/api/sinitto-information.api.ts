@@ -8,12 +8,30 @@ export type SinittoInformation = {
   bankName: string;
 };
 
-const getSinittoInformationPath = () => '/api/sinittos';
+export type SinittoBankInfo = {
+  accountNumber: string;
+  bankName: string;
+};
+
+const sinittoInformationPath = () => '/api/sinittos';
 
 export const getSinittoInformationQueryKey = ['sinittoInformation'];
 
+// 본인 정보 조회
 export const getSinittoInformation = async (): Promise<SinittoInformation> => {
-  const response = await fetchInstance.get(getSinittoInformationPath());
+  const response = await fetchInstance.get(sinittoInformationPath());
+  console.log(response.data);
+  return response.data;
+};
+
+// 계좌 정보 수정
+export const modifySinittoBankInfomation = async (
+  bankInfo: SinittoBankInfo
+) => {
+  const response = await fetchInstance.put(
+    `${sinittoInformationPath()}/bank`,
+    bankInfo
+  );
   console.log(response.data);
   return response.data;
 };
