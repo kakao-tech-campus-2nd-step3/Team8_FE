@@ -1,26 +1,38 @@
+import PointLogImg from '../../../../assets/point-log-icon.png';
 import { useToggleDetailBox } from '../hooks/useToggleDetailBox';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const UseDetailBox = () => {
+const PointLogBox = () => {
   const { data, enabled, toggle } = useToggleDetailBox();
 
   return (
     <UseDetailBoxLayout>
-      <TextBox>포인트 이용내역</TextBox>
+      <TextBox>포인트 내역</TextBox>
       <DetailBox>
         {data.map((item, index) => (
           <DetailFactor key={index}>
+            <Image
+              ml='5px'
+              mr='5px'
+              w='50px'
+              h='50px'
+              borderRadius='50%'
+              src={PointLogImg}
+            />
             <DetailTextBox>
-              <DetailDate>{item.date}</DetailDate>
-              <DetailTextBoxBottom>
-                <Text fontSize='18px' fontWeight={700}>
-                  {item.description}
-                </Text>
-                <Text fontSize='18px' fontWeight={700} ml={20}>
+              <TextLayout>
+                <DetailText>{item.date}</DetailText>
+                <DetailText display='flex' justifyContent='flex-end' mr={2}>
+                  적립
+                </DetailText>
+              </TextLayout>
+              <TextLayout>
+                <DetailText>{item.description}</DetailText>
+                <DetailText display='flex' justifyContent='flex-end' mr={2}>
                   {item.points}
-                </Text>
-              </DetailTextBoxBottom>
+                </DetailText>
+              </TextLayout>
             </DetailTextBox>
           </DetailFactor>
         ))}
@@ -32,7 +44,7 @@ const UseDetailBox = () => {
   );
 };
 
-export default UseDetailBox;
+export default PointLogBox;
 
 const UseDetailBoxLayout = styled(Box)`
   display: flex;
@@ -63,25 +75,24 @@ const DetailBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  // TODO: 높이 지정해주세요.
-  /* height :  */
+  height: auto;
   max-width: 338px;
 `;
 
 const DetailFactor = styled(Box)`
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
   max-width: 310px;
   min-height: 55px;
-  background-color: #fff;
+  background-color: var(--color-white);
   margin: 0.3rem 0;
-  border: 1px solid #fff;
   border-radius: 10px;
 `;
 
 const DetailTextBox = styled(Box)`
-  margin-left: 2rem;
+  margin-left: 0.3rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -89,19 +100,11 @@ const DetailTextBox = styled(Box)`
   align-items: flex-start;
 `;
 
-const DetailDate = styled(Box)`
+const TextLayout = styled(Box)`
   width: 100%;
   display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-`;
-
-const DetailTextBoxBottom = styled(Box)`
-  display: flex;
   flex-direction: row;
-  justify-content: center;
-  font-size: 18px;
+  justify-content: space-between;
 `;
 
 const ViewMoreButton = styled.button`
@@ -115,4 +118,12 @@ const ViewMoreButton = styled.button`
   cursor: pointer;
   border: none;
   border-radius: 5px;
+`;
+
+const DetailText = styled(Box)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
 `;

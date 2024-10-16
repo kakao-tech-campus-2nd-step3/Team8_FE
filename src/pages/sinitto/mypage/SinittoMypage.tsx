@@ -1,5 +1,5 @@
 import { SinittoProfileBox, AccountInfoBox } from './components';
-import { BasicButton, PointBox, UseDetailBox } from '@/shared/components';
+import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -15,7 +15,7 @@ const SinittoMypage = () => {
         계좌번호 수정하기
       </BasicButton>
       <PointBox />
-      <UseDetailBox />
+      <PointLogBox />
     </MyPageLayout>
   );
 };
