@@ -21,6 +21,7 @@ export const ServicePeriod = () => {
           selectDate={startDate}
           onSelectedDateChange={(date) => setStartDate(date)}
           dayType='start'
+          minDate={new Date()}
         />
       </Flex>
       <Flex dir='row' w='100%' gap={3} alignItems='center'>
