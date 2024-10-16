@@ -41,12 +41,28 @@ const PointBox = () => {
 
   return (
     <PointBoxLayout>
-      <Text ml={2} mt={2} fontSize='18px' fontWeight={700}>
+      <Box
+        w='100%'
+        display='flex'
+        justifyContent='flex-start'
+        pl={3}
+        mt={2}
+        fontSize='20px'
+        fontWeight={700}
+      >
         내 포인트
-      </Text>
-      <Text ml={2} mt={1} fontSize='18px' fontWeight={700}>
+      </Box>
+      <Box
+        w='100%'
+        display='flex'
+        justifyContent='flex-start'
+        pl={3}
+        mt={1}
+        fontSize='18px'
+        fontWeight={700}
+      >
         {pointData?.price} 포인트
-      </Text>
+      </Box>
       {isCharging ? (
         <Box display='flex' flexDir='column' alignItems='center'>
           <Input

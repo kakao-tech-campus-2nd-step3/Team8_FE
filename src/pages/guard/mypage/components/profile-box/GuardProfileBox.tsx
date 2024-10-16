@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useGetGuardInformation } from '../../store/hooks';
 import { RouterPath } from '@/app/routes/path';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
@@ -15,9 +15,16 @@ const GuardProfileBox = () => {
   return (
     <GuardProfileBoxLayout>
       <TopContainer>
-        <Text mt={3} fontSize='18px' fontWeight={700}>
-          {data?.name}님 환영합니다.
-        </Text>
+        <Box
+          display='flex'
+          w='100%'
+          pl={4}
+          mt={3}
+          fontSize='18px'
+          fontWeight={700}
+        >
+          {data?.name} 님 환영합니다.
+        </Box>
         <ServiceManualBox mt={2} fontWeight={600}>
           서비스 이용 방법 한번에 이해하기!
         </ServiceManualBox>
