@@ -1,23 +1,36 @@
 import { useState } from 'react';
 
-import { useGetPointInfo, useChargePoint } from '@/shared/hooks/point/usePoint';
+import {
+  useGetPointInfo,
+  useChargePoint,
+  useWithdrawPoint,
+} from '@/shared/hooks/point/usePoint';
 import { Box, Text, Spinner, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointBox = () => {
   const { data: pointData, isLoading, error } = useGetPointInfo();
   const chargePointMutation = useChargePoint();
-
+  const withdrawPointMutation = useWithdrawPoint();
   const [isCharging, setIsCharging] = useState(false);
+  const [isWithdrawing, setIsWithdrawing] = useState(false);
   const [amount, setAmount] = useState('');
 
   const handleChargeButtonClick = () => {
     const parsedAmount = Number(amount);
     if (parsedAmount > 0) {
-      console.log(parsedAmount);
       chargePointMutation.mutate(parsedAmount);
       setAmount('');
       setIsCharging(false);
+    }
+  };
+
+  const handleWithdrawButtonClick = () => {
+    const parsedAmount = Number(amount);
+    if (parsedAmount > 0) {
+      withdrawPointMutation.mutate(parsedAmount);
+      setAmount('');
+      setIsWithdrawing(false);
     }
   };
 
@@ -63,13 +76,13 @@ const PointBox = () => {
       >
         {pointData?.price} 포인트
       </Box>
-      {isCharging ? (
+      {isCharging || isWithdrawing ? (
         <Box display='flex' flexDir='column' alignItems='center'>
           <Input
             m={1}
             w='100%'
             h='40px'
-            placeholder='충전할 포인트 입력'
+            placeholder={isCharging ? '충전할 포인트' : '출금할 포인트'}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             type='number'
@@ -80,16 +93,21 @@ const PointBox = () => {
               w='100px'
               h='40px'
               fontSize='16px'
-              onClick={handleChargeButtonClick}
+              onClick={
+                isCharging ? handleChargeButtonClick : handleWithdrawButtonClick
+              }
               colorScheme='teal'
             >
-              충전
+              {isCharging ? '충전' : '출금'}
             </Button>
             <Button
               w='100px'
               h='40px'
               fontSize='16px'
-              onClick={() => setIsCharging(false)}
+              onClick={() => {
+                setIsCharging(false);
+                setIsWithdrawing(false);
+              }}
               colorScheme='red'
             >
               취소
@@ -99,7 +117,7 @@ const PointBox = () => {
       ) : (
         <ButtonContainer mt={2}>
           <ButtonBox onClick={() => setIsCharging(true)}>충전하기</ButtonBox>
-          <ButtonBox>출금하기</ButtonBox>
+          <ButtonBox onClick={() => setIsWithdrawing(true)}>출금하기</ButtonBox>
         </ButtonContainer>
       )}
     </PointBoxLayout>

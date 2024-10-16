@@ -23,15 +23,18 @@ export const getPointInfo = async () => {
 };
 
 // 포인트 인출 API
-export const withdrawPoint = async (price: PointData) => {
+export const withdrawPoint = async (price: number) => {
   const response = await fetchInstance.post(`${pointApiPath}/withdraw`, {
-    price,
+    price: price,
   });
+  alert(`${price} 포인트 출금 신청 완료되었습니다.`);
   return response.data;
 };
 
 // 포인트 충전 API
-export const chargePoint = async (price: PointData) => {
-  const response = await fetchInstance.put(`${pointApiPath}/charge`, { price });
+export const chargePoint = async (price: number) => {
+  const response = await fetchInstance.put(`${pointApiPath}/charge`, {
+    price: price,
+  });
   return response.data as ChargePointResponse;
 };
