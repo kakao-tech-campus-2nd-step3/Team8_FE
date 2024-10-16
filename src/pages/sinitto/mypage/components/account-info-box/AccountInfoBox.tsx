@@ -1,7 +1,13 @@
+import { useGetSinittoInformation } from '../../store/hooks';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const AccountInfoBox = () => {
+  const { data, isLoading, isError } = useGetSinittoInformation();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+
   return (
     <AccountBoxLayout mb={2}>
       <Box display='flex' w='100%' justifyContent='space-between'>
@@ -14,7 +20,7 @@ const AccountInfoBox = () => {
           계좌번호
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          카카오뱅크 3333-3333-33333
+          {data?.bankName} {data?.accountNumber}
         </Text>
       </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>

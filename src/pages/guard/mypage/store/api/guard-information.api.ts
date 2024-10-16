@@ -8,7 +8,7 @@ export type GuardInformation = {
 
 const getGuardInformationPath = () => '/api/guards';
 
-export const getGuardInformationQueryKey = [getGuardInformationPath()];
+export const getGuardInformationQueryKey = ['guardInformation'];
 
 export const getGuardInformation = async (): Promise<GuardInformation> => {
   const response = await fetchInstance.get(getGuardInformationPath());

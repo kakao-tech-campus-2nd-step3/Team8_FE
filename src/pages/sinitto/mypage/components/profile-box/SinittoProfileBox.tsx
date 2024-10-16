@@ -1,11 +1,17 @@
+import { useGetSinittoInformation } from '../../store/hooks';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoProfileBox = () => {
+  const { data, isLoading, isError } = useGetSinittoInformation();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+
   return (
     <SinittoProfileBoxLayout mb={2}>
       <Text ml='1rem' mt={3} fontSize='18px' fontWeight={700}>
-        시니또님 환영합니다.
+        {data?.name} 님 환영합니다.
       </Text>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
         <Text
@@ -17,7 +23,7 @@ const SinittoProfileBox = () => {
           이름
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          시니또
+          {data?.name}
         </Text>
       </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
@@ -30,7 +36,7 @@ const SinittoProfileBox = () => {
           전화번호
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          010-1111-1111
+          {data?.phoneNumber}
         </Text>
       </Box>
     </SinittoProfileBoxLayout>
