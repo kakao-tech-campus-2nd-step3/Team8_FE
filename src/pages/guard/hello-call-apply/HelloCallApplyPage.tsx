@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { ServicePeriod, ServiceTime, ServiceTotal } from './components';
 import { NOTICE_DATA } from './data';
 import { Notice } from '@/shared';
@@ -5,6 +7,9 @@ import { Box, Button, Flex, Select, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const HelloCallApplyPage = () => {
+  const [serviceTime, setServiceTime] = useState(0);
+  const [serviceCount, setServiceCount] = useState(1);
+
   return (
     <HelloCallApplyPageLayout>
       <NoticeBox>
@@ -28,9 +33,9 @@ export const HelloCallApplyPage = () => {
           <option value='senior-2'>이지호</option>
         </Select>
       </ContentsBox>
-      <ServiceTime />
+      <ServiceTime setTime={setServiceTime} setCount={setServiceCount} />
       <ServicePeriod />
-      <ServiceTotal />
+      <ServiceTotal time={serviceTime} count={serviceCount} />
       <Box
         display='flex'
         flexDir='column'
@@ -52,6 +57,7 @@ export const HelloCallApplyPage = () => {
 
 const HelloCallApplyPageLayout = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
