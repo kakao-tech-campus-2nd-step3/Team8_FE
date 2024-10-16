@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { DAY_DATA, TIME_SLOTS } from '../../data';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -30,7 +31,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
 
   const handleTimeSelect = (time: number) => {
     setSelectedTime(time);
-    setTime(time); // Update the selected time
+    setTime(time);
   };
   const isAddDisabled = addSlots.length >= 7;
   const isRemoveDisabled = addSlots.length <= 1;
@@ -41,28 +42,18 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
       {addSlots.map((_, index) => (
         <Flex w='100%' flexDir='row' gap={5} key={index}>
           <DaySelect>
-            <option value='monday'>월</option>
-            <option value='tuesday'>화</option>
-            <option value='wednesday'>수</option>
-            <option value='thursday'>목</option>
-            <option value='friday'>금</option>
-            <option value='saturday'>토</option>
-            <option value='sunday'>일</option>
+            {DAY_DATA.map((day) => (
+              <option key={day.value} value={day.value}>
+                {day.label}
+              </option>
+            ))}
           </DaySelect>
           <Select placeholder='시간대를 선택해주세요.'>
-            <option value='1'>09:00 ~ 11:00</option>
-            <option value='2'>10:00 ~ 12:00</option>
-            <option value='3'>11:00 ~ 13:00</option>
-            <option value='4'>12:00 ~ 14:00</option>
-            <option value='5'>13:00 ~ 15:00</option>
-            <option value='6'>14:00 ~ 16:00</option>
-            <option value='7'>15:00 ~ 17:00</option>
-            <option value='8'>16:00 ~ 18:00</option>
-            <option value='9'>17:00 ~ 19:00</option>
-            <option value='10'>18:00 ~ 20:00</option>
-            <option value='11'>19:00 ~ 21:00</option>
-            <option value='12'>20:00 ~ 22:00</option>
-            <option value='13'>21:00 ~ 23:00</option>
+            {TIME_SLOTS.map((slot) => (
+              <option key={slot.value} value={slot.value}>
+                {slot.label}
+              </option>
+            ))}
           </Select>
         </Flex>
       ))}
