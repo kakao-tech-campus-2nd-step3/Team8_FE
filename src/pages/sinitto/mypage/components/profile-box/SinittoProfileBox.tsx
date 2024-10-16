@@ -63,6 +63,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
             placeholder='이름 입력'
             size='sm'
             width='40%'
+            bg='var(--color-white)'
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
@@ -86,7 +87,8 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder='전화번호 입력'
             size='sm'
-            width='40%'
+            width='60%'
+            bg='var(--color-white)'
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>

@@ -64,7 +64,8 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             onChange={(e) => setAccountNumber(e.target.value)}
             placeholder='계좌번호 입력'
             size='sm'
-            width='40%'
+            width='60%'
+            bg='var(--color-white)'
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
@@ -95,6 +96,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             placeholder='해당 은행 기입'
             size='sm'
             width='40%'
+            bg='var(--color-white)'
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
