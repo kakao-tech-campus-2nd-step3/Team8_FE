@@ -1,17 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useGetGuardInformation } from '../../store/hooks';
 import { RouterPath } from '@/app/routes/path';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
   const navigate = useNavigate();
+  const { data, isLoading, isError } = useGetGuardInformation();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
 
   return (
     <GuardProfileBoxLayout>
       <TopContainer>
         <Text mt={3} fontSize='18px' fontWeight={700}>
-          홍길동님 환영합니다.
+          {data?.name}님 환영합니다.
         </Text>
         <ServiceManualBox mt={2} fontWeight={600}>
           서비스 이용 방법 한번에 이해하기!

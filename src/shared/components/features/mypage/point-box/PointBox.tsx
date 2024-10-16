@@ -42,7 +42,7 @@ const PointBox = () => {
   return (
     <PointBoxLayout>
       <Text ml={2} mt={2} fontSize='18px' fontWeight={700}>
-        홍길동 님의 포인트
+        내 포인트
       </Text>
       <Text ml={2} mt={1} fontSize='18px' fontWeight={700}>
         {pointData?.price} 포인트
