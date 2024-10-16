@@ -17,6 +17,7 @@ import {
   CallBackDetailPage,
   SinittoGuideLinePage,
   SinittoReviewPage,
+  HelloCallApplyPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           {
             path: RouterPath.HELLO_CALL_REPORT,
             element: <HelloCallReportPage />,
+          },
+          {
+            path: RouterPath.HELLO_CALL_GUARD_APPLY,
+            element: <HelloCallApplyPage />,
           },
         ],
       },
