@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
 import {
-  useGetPointInfo,
   useChargePoint,
+  useGetPointInfo,
   useWithdrawPoint,
-} from '@/shared/hooks/point/usePoint';
+} from '@/shared/hooks';
 import { Box, Text, Spinner, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointBox = () => {
-  const { data: pointData, isLoading, error } = useGetPointInfo();
+  const { data: pointData, isLoading, error, refetch } = useGetPointInfo();
   const chargePointMutation = useChargePoint();
   const withdrawPointMutation = useWithdrawPoint();
   const [isCharging, setIsCharging] = useState(false);
@@ -31,6 +31,7 @@ const PointBox = () => {
       withdrawPointMutation.mutate(parsedAmount);
       setAmount('');
       setIsWithdrawing(false);
+      refetch();
     }
   };
 
