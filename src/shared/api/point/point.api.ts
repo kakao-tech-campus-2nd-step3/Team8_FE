@@ -8,7 +8,7 @@ export type ChargePointResponse = {
   depositMessage: string;
 };
 
-const pointApiPath = 'api/points';
+const pointApiPath = '/api/points';
 
 // 쿼리 키
 export const getPointInfoQueryKey = ['points'];
@@ -18,7 +18,6 @@ export const chargePointQueryKey = ['chargePoint'];
 // 포인트 조회 API
 export const getPointInfo = async () => {
   const response = await fetchInstance.get(pointApiPath);
-  console.log(response.data);
   return response.data as PointData;
 };
 
@@ -27,7 +26,6 @@ export const withdrawPoint = async (price: number) => {
   const response = await fetchInstance.post(`${pointApiPath}/withdraw`, {
     price: price,
   });
-  alert(`${price} 포인트 출금 신청 완료되었습니다.`);
   return response.data;
 };
 

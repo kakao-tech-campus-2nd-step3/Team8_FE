@@ -20,7 +20,6 @@ export const getSinittoInformationQueryKey = ['sinittoInformation'];
 // 본인 정보 조회
 export const getSinittoInformation = async (): Promise<SinittoInformation> => {
   const response = await fetchInstance.get(sinittoInformationPath());
-  console.log(response.data);
   return response.data;
 };
 
@@ -32,7 +31,6 @@ export const modifySinittoBankInfomation = async (
     `${sinittoInformationPath()}/bank`,
     bankInfo
   );
-  console.log(response.data);
   return response.data;
 };
 
@@ -44,6 +42,5 @@ export const modifySinittoInfomation = async (
     sinittoInformationPath(),
     sinittoInfo
   );
-  console.log(response.data);
   return response.data;
 };

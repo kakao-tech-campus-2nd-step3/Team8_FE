@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useGetGuardInformation } from '../../store/hooks';
 import { RouterPath } from '@/app/routes/path';
@@ -6,7 +6,6 @@ import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
-  const navigate = useNavigate();
   const { data, isLoading, isError } = useGetGuardInformation();
 
   if (isLoading) return <div>로딩 중...</div>;
@@ -30,21 +29,13 @@ const GuardProfileBox = () => {
         </ServiceManualBox>
       </TopContainer>
       <BottomContainer>
-        <ButtonBox
-          onClick={() => {
-            navigate(`${RouterPath.SENIOR_REGISTER}`);
-          }}
-        >
-          시니어 등록하기
-        </ButtonBox>
-        <DivideLine></DivideLine>
-        <ButtonBox
-          onClick={() => {
-            navigate(`${RouterPath.SERVICE_HISTORY}`);
-          }}
-        >
-          서비스 이용 현황
-        </ButtonBox>
+        <Link to={RouterPath.SENIOR_REGISTER}>
+          <ButtonBox>시니어 등록하기</ButtonBox>
+        </Link>
+        <DivideLine />
+        <Link to={RouterPath.SERVICE_HISTORY}>
+          <ButtonBox>서비스 이용 현황</ButtonBox>
+        </Link>
       </BottomContainer>
     </GuardProfileBoxLayout>
   );

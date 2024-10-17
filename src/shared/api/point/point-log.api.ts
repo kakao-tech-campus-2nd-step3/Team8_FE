@@ -30,10 +30,11 @@ const getPointLogPath = () => 'api/points/logs';
 export const getPointLogQueryKey = (page: number) => ['pointLogs', page];
 
 // 포인트 로그 조회 API
-export const getPointLogs = async (params: PointLogRequestParams) => {
+export const getPointLogs = async (
+  params: PointLogRequestParams
+): Promise<PointLogResponse> => {
   const response = await fetchInstance.get(getPointLogPath(), {
     params,
   });
-  console.log(response.data);
-  return response.data as PointLogResponse;
+  return response.data;
 };

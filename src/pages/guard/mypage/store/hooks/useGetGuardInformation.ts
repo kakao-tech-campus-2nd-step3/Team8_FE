@@ -1,12 +1,12 @@
 import {
   getGuardInformation,
   getGuardInformationQueryKey,
-  GuardInformation,
+  GuardInformationResponse,
 } from '../api/guard-information.api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetGuardInformation = () => {
-  return useQuery<GuardInformation, Error>({
+  return useQuery<GuardInformationResponse, Error>({
     queryKey: getGuardInformationQueryKey,
     queryFn: () => getGuardInformation(),
   });
