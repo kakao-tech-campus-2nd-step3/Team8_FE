@@ -40,7 +40,7 @@ const PointLogBox = () => {
               <TextLayout>
                 <DetailText>{item.content}</DetailText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  {item.price}
+                  {item.price.toLocaleString()}
                 </DetailText>
               </TextLayout>
             </DetailTextBox>

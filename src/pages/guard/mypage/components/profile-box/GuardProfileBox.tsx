@@ -98,8 +98,8 @@ const ButtonBox = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 49%;
-  max-width: 169px;
+  width: 165px;
+  max-width: 165px;
   height: 70px;
   font-size: 18px;
   font-weight: 600;

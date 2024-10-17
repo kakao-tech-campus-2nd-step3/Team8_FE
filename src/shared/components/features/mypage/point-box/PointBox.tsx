@@ -74,7 +74,7 @@ const PointBox = () => {
         fontSize='18px'
         fontWeight={700}
       >
-        {pointData?.price} 포인트
+        {pointData?.price.toLocaleString()} 포인트
       </Box>
       {actionType ? (
         <Box display='flex' flexDir='column' alignItems='center'>
