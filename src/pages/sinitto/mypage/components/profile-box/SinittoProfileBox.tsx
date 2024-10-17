@@ -27,15 +27,19 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
   }, [isEditing, data]);
 
   const handleSaveClick = () => {
-    modifySinittoInfoMutation.mutate(
-      { ...data, name, phoneNumber },
-      {
-        onSuccess: () => {
-          setIsEditing(false);
-          refetch();
-        },
-      }
-    );
+    const modifiedSinittoInfo = {
+      name: name,
+      phoneNumber: phoneNumber,
+      email: String(data?.email),
+      accountNumber: String(data?.accountNumber),
+      bankName: String(data?.bankName),
+    };
+    modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
+      onSuccess: () => {
+        setIsEditing(false);
+        refetch();
+      },
+    });
   };
 
   if (isLoading) return <div>로딩 중...</div>;
