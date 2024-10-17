@@ -1,4 +1,4 @@
-import type { CallbackResponse } from '../types';
+import type { CallbackResponse } from '../../types';
 import { fetchInstance } from '@/shared/api/instance';
 import { BASE_URI } from '@/shared/constants';
 import { useQuery } from '@tanstack/react-query';

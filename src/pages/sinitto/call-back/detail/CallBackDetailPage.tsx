@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { useParams, Outlet, useNavigate } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 
-import { AxiosError } from 'axios';
-
-import { useGetCallback } from './api/hooks';
 import { GuideLineList } from './components/guide-line-list';
 import { PostAcceptMenu } from './components/menu/post-accept';
 import { PreAcceptMenu } from './components/menu/pre-accept';
+import { useGetCallback } from '@/shared/api/hooks';
 import { Notice } from '@/shared/components';
+import { handleCallbackError } from '@/shared/utils';
 import { Divider } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -20,7 +19,8 @@ export const CallBackDetailPage = () => {
   const { callBackId = '' } = useParams<CallBackDetailParams>();
   const [accept, setAccept] = useState(false);
   const { data, isLoading, isError, error } = useGetCallback(callBackId);
-  const navigate = useNavigate();
+
+  handleCallbackError(isError, error);
 
   const handleRequestAccept = () => {
     // 도움 수락
@@ -34,24 +34,6 @@ export const CallBackDetailPage = () => {
   const handleCancle = () => {
     // 도움 포기
   };
-
-  if (isError) {
-    let errorMessage = '';
-    if (error instanceof AxiosError) {
-      switch (error.response?.status) {
-        case 409:
-          errorMessage = '이미 진행 중인 콜백 요청이 있습니다.';
-          break;
-        default:
-          errorMessage = '콜백 요청을 불러오는 중 오류가 발생했습니다.';
-      }
-    } else {
-      errorMessage = '콜백 요청을 불러오는 중 오류가 발생했습니다.';
-    }
-
-    alert(errorMessage);
-    navigate('/call-back');
-  }
 
   return (
     <>
