@@ -1,14 +1,14 @@
 import { useRef, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { useCallbacks } from './api/hooks';
+import { useGetCallbacks } from './api/hooks';
 import { RequestRow } from './components';
 import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const CallBackListPage = () => {
   const { data, isLoading, isError, fetchNextPage, hasNextPage } =
-    useCallbacks(10);
+    useGetCallbacks(10);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = useCallback(

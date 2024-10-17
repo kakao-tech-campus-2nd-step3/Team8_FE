@@ -18,7 +18,7 @@ const getCallbacks = async (page: number, size: number) => {
   return response.data;
 };
 
-export const useCallbacks = (size: number) => {
+export const useGetCallbacks = (size: number) => {
   return useInfiniteQuery({
     queryKey: ['callbacks', size],
     queryFn: ({ pageParam = 0 }) => getCallbacks(pageParam, size),

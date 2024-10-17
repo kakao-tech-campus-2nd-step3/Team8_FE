@@ -1,1 +1,1 @@
-export { useCallbacks } from './useGetCallbacks.ts';
+export { useGetCallbacks } from './useGetCallbacks.ts';

@@ -10,7 +10,7 @@ export type CallbacksResponse = {
   empty: boolean;
 };
 
-export type Callback = {
+type Callback = {
   callbackId: number;
   seniorName: string;
   postTime: string;
