@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ArrowImg from '../../assets/arrow.png';
@@ -5,27 +6,46 @@ import styled from '@emotion/styled';
 
 type Props = {
   name: string;
-  time: number;
+  time: string;
   id: string;
 };
 
-export const RequestRow = ({ name, time, id }: Props) => {
-  const navigate = useNavigate();
+export const RequestRow = forwardRef<HTMLButtonElement, Props>(
+  ({ name, time, id }, ref) => {
+    const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/call-back/${id}`);
-  };
+    const handleClick = () => {
+      navigate(`/call-back/${id}`);
+    };
 
-  return (
-    <Wrapper onClick={handleClick}>
-      <Content>
-        <Title>{name}님의 요청</Title>
-        <Time>{time}분 전</Time>
-        <ArrowIcon src={ArrowImg} />
-      </Content>
-    </Wrapper>
-  );
-};
+    const getTimeAgo = (postTime: string) => {
+      const postDate = new Date(postTime);
+      const now = new Date();
+      const differenceInMinutes = Math.floor(
+        (now.getTime() - postDate.getTime()) / 60000
+      );
+
+      if (differenceInMinutes < 60) {
+        return differenceInMinutes > 0
+          ? differenceInMinutes + '분 전'
+          : '방금 전';
+      } else {
+        const differenceInHours = Math.floor(differenceInMinutes / 60);
+        return differenceInHours + '시간 전';
+      }
+    };
+
+    return (
+      <Wrapper ref={ref} onClick={handleClick}>
+        <Content>
+          <Title>{name}님의 요청</Title>
+          <Time>{getTimeAgo(time)}</Time>
+          <ArrowIcon src={ArrowImg} />
+        </Content>
+      </Wrapper>
+    );
+  }
+);
 
 const Wrapper = styled.button`
   width: 100%;
