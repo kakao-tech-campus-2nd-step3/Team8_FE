@@ -1,21 +1,41 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+
+import { useGetGuardInformation } from '../../store/hooks';
+import { RouterPath } from '@/app/routes/path';
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
+  const { data, isLoading, isError } = useGetGuardInformation();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+
   return (
     <GuardProfileBoxLayout>
       <TopContainer>
-        <Text mt={3} fontSize='18px' fontWeight={700}>
-          홍길동님 환영합니다.
-        </Text>
+        <Box
+          display='flex'
+          w='100%'
+          pl={4}
+          mt={3}
+          fontSize='18px'
+          fontWeight={700}
+        >
+          {data?.name} 님 환영합니다.
+        </Box>
         <ServiceManualBox mt={2} fontWeight={600}>
           서비스 이용 방법 한번에 이해하기!
         </ServiceManualBox>
       </TopContainer>
       <BottomContainer>
-        <ButtonBox>시니어 등록하기</ButtonBox>
-        <DivideLine></DivideLine>
-        <ButtonBox>서비스 이용 현황</ButtonBox>
+        <Link to={RouterPath.SENIOR_REGISTER}>
+          <ButtonBox>시니어 등록하기</ButtonBox>
+        </Link>
+        <DivideLine />
+        <Link to={RouterPath.SERVICE_HISTORY}>
+          <ButtonBox>서비스 이용 현황</ButtonBox>
+        </Link>
       </BottomContainer>
     </GuardProfileBoxLayout>
   );
@@ -78,8 +98,8 @@ const ButtonBox = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 49%;
-  max-width: 169px;
+  width: 165px;
+  max-width: 165px;
   height: 70px;
   font-size: 18px;
   font-weight: 600;

@@ -1,2 +1,2 @@
 export * from './categories';
-export * from './mock';
+export { MOCK_DATA as GUIDE_LINE_MOCK_DATA } from './mock';
