@@ -7,7 +7,7 @@ export const GuideLineList = () => {
     <Wrapper>
       {GUIDE_LINE_CATEGORIES.map((data) => (
         <GuideLineButton
-          key={data.id}
+          key={data.title}
           title={data.title}
           id={data.id}
           backgroundColor={data.backgroundColor}
