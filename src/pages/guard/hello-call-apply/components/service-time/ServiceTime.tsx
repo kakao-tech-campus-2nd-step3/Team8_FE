@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DAY_DATA, TIME_SLOTS } from '../../data';
+import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -12,7 +12,8 @@ type Props = {
 export const ServiceTime = ({ setTime, setCount }: Props) => {
   const [addSlots, setAddSlots] = useState([{ day: '', time: '' }]);
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
-
+  const [startTime, setStartTime] = useState<string>('');
+  const [endTime, setEndTime] = useState<string>('');
   const handleAddSlot = () => {
     if (addSlots.length < 7) {
       const newSlots = [...addSlots, { day: '', time: '' }];
@@ -29,6 +30,23 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
     }
   };
 
+  const handleDaySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const getTimeSlotLabel = (value: string) => {
+      const selectedSlot = TIME_SLOTS.find((slot) => slot.value === value);
+      return selectedSlot ? selectedSlot.label : '시간대 없음';
+    };
+
+    const label = getTimeSlotLabel(e.target.value);
+
+    if (label) {
+      const [startTimeSlot, endTimeSlot] = label.split(' ~ ');
+      setStartTime(startTimeSlot);
+      setEndTime(endTimeSlot);
+    }
+  };
+  console.log('Start Time:', startTime);
+  console.log('End Time:', endTime);
+  
   const handleTimeSelect = (time: number) => {
     setSelectedTime(time);
     setTime(time);
@@ -48,7 +66,10 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
               </option>
             ))}
           </DaySelect>
-          <Select placeholder='시간대를 선택해주세요.'>
+          <Select
+            placeholder='시간대를 선택해주세요.'
+            onChange={(e) => handleDaySelect(e)}
+          >
             {TIME_SLOTS.map((slot) => (
               <option key={slot.value} value={slot.value}>
                 {slot.label}
@@ -78,7 +99,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
         </ActionButton>
       </ButtonBox>
       <ButtonBox>
-        {[3, 5, 10, 15].map((time) => (
+        {USE_TIME_DATA.map((time) => (
           <TimeButton
             key={time}
             onClick={() => handleTimeSelect(time)}

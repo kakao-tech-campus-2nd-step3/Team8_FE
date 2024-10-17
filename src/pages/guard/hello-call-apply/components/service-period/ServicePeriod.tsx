@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 export const ServicePeriod = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-
+  console.log(startDate);
   return (
     <ContentsBox>
       <Flex dir='row' alignItems='center' gap={3}>

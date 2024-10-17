@@ -1,10 +1,7 @@
-import { CostHelloCallRequest } from './types/cost-hello-call.request';
-import { CostHelloCallResponse } from './types/cost-hello-call.response';
+import { CostHelloCallRequest, CostHelloCallResponse } from './types';
 import { fetchInstance } from '@/shared/api/instance';
 
-const costHelloCallPath = () => `/api/hellocalls/guards/cost`;
-
-export const CostHelloCallQueryKey = [costHelloCallPath()];
+export const costHelloCallPath = () => `/api/hellocalls/guards/cost`;
 
 export const postCostHelloCall = async (
   data: CostHelloCallRequest

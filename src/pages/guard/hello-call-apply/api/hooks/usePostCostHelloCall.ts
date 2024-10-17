@@ -1,7 +1,9 @@
-import { postCostHelloCall } from '../cost-hello-call.api';
+import { costHelloCallPath, postCostHelloCall } from '../cost-hello-call.api';
 import { CostHelloCallRequest } from '../types/cost-hello-call.request';
 import { CostHelloCallResponse } from '../types/cost-hello-call.response';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
+
+export const CostHelloCallQueryKey = [costHelloCallPath()];
 
 export const usePostCostHelloCall = (): UseMutationResult<
   CostHelloCallResponse,
