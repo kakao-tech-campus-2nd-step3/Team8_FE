@@ -16,9 +16,9 @@ export const withdrawPointQueryKey = ['withdrawPoint'];
 export const chargePointQueryKey = ['chargePoint'];
 
 // 포인트 조회 API
-export const getPointInfo = async () => {
+export const getPointInfo = async (): Promise<PointData> => {
   const response = await fetchInstance.get(pointApiPath);
-  return response.data as PointData;
+  return response.data;
 };
 
 // 포인트 인출 API
@@ -30,9 +30,11 @@ export const withdrawPoint = async (price: number) => {
 };
 
 // 포인트 충전 API
-export const chargePoint = async (price: number) => {
+export const chargePoint = async (
+  price: number
+): Promise<ChargePointResponse> => {
   const response = await fetchInstance.put(`${pointApiPath}/charge`, {
     price: price,
   });
-  return response.data as ChargePointResponse;
+  return response.data;
 };

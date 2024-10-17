@@ -38,7 +38,11 @@ export const useChargePoint = (): UseMutationResult<
 };
 
 // 포인트 출금
-export const useWithdrawPoint = (): UseMutationResult<any, Error, number> => {
+export const useWithdrawPoint = (): UseMutationResult<
+  number,
+  Error,
+  number
+> => {
   return useMutation({
     mutationFn: (price) => withdrawPoint(price),
     onSuccess: (price: number) => {
