@@ -30,9 +30,9 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
     const modifiedSinittoInfo = {
       name: name,
       phoneNumber: phoneNumber,
-      email: data?.email as string,
-      accountNumber: data?.accountNumber as string,
-      bankName: data?.bankName as string,
+      email: String(data?.email),
+      accountNumber: String(data?.accountNumber),
+      bankName: String(data?.bankName),
     };
     modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
       onSuccess: () => {
