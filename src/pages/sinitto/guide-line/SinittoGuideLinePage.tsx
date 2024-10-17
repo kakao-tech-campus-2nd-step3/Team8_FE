@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useGetGuideline } from './api/hooks';
 import { GuidelineResponse } from './api/types';
@@ -6,8 +7,7 @@ import { CATEGORIES } from './data';
 import { Category } from './types';
 import { useGetCallback } from '@/shared/api/hooks';
 import { handleCallbackError } from '@/shared/utils';
-import { Container } from '@chakra-ui/react';
-import { Spinner } from '@chakra-ui/react';
+import { Container, Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type GuideLineParams = {
@@ -17,6 +17,7 @@ type GuideLineParams = {
 
 export const SinittoGuideLinePage = () => {
   const { callBackId = '', guideLineId = '' } = useParams<GuideLineParams>();
+  const navigate = useNavigate();
   const guideLineInfo =
     CATEGORIES.find((item: Category) => item.id === guideLineId)?.name || null;
 
@@ -35,7 +36,13 @@ export const SinittoGuideLinePage = () => {
     isError: isGuideLineError,
   } = useGetGuideline(Number(seniorId), guideLineId);
 
-  handleCallbackError(isCallBackError, callBackError);
+  useEffect(() => {
+    if (isCallBackError) {
+      const errorMessage = handleCallbackError(callBackError);
+      alert(errorMessage);
+      navigate('/call-back');
+    }
+  }, [isCallBackError, callBackError, navigate]);
 
   return (
     <Wrapper>

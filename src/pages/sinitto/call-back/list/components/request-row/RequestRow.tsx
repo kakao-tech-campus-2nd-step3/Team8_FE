@@ -47,6 +47,8 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
   }
 );
 
+RequestRow.displayName = 'RequestRow';
+
 const Wrapper = styled.button`
   width: 100%;
   height: 60px;

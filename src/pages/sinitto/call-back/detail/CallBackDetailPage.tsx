@@ -1,4 +1,5 @@
-import { useParams, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, Outlet, useNavigate } from 'react-router-dom';
 
 import { useGetAccepted } from './api/hooks';
 import { CallbackMenu } from './components';
@@ -15,6 +16,7 @@ export type CallBackDetailParams = {
 
 export const CallBackDetailPage = () => {
   const { callBackId = '' } = useParams<CallBackDetailParams>();
+  const navigate = useNavigate();
 
   const {
     data: callbackData,
@@ -22,7 +24,14 @@ export const CallBackDetailPage = () => {
     isError: isCallBackError,
     error: callBackError,
   } = useGetCallback(callBackId);
-  handleCallbackError(isCallBackError, callBackError);
+
+  useEffect(() => {
+    if (isCallBackError) {
+      const errorMessage = handleCallbackError(callBackError);
+      alert(errorMessage);
+      navigate('/call-back');
+    }
+  }, [isCallBackError, callBackError, navigate]);
 
   const {
     data: currentReq,
