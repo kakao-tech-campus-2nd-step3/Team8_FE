@@ -1,13 +1,5 @@
-import { fetchInstance } from '@/shared/api/instance';
+import { CompleteCallback } from '../complete-call-back.api';
 import { useMutation } from '@tanstack/react-query';
-
-const getCompleteCallbackPath = (callbackId: number) =>
-  `/api/callbacks/complete/${callbackId}`;
-
-const CompleteCallback = async (callbackId: number) => {
-  const response = await fetchInstance.put(getCompleteCallbackPath(callbackId));
-  return response.data;
-};
 
 export const useCompleteCallback = () => {
   return useMutation({

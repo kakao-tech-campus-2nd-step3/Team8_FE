@@ -1,21 +1,5 @@
-import type { CallbacksResponse } from '../types/callbacks.response';
-import { fetchInstance } from '@/shared/api/instance';
+import { getCallbacks } from '../get-call-backs.api';
 import { useInfiniteQuery } from '@tanstack/react-query';
-
-const getCallbacksPath = () => `/api/callbacks`;
-
-const getCallbacks = async (page: number, size: number) => {
-  const response = await fetchInstance.get<CallbacksResponse>(
-    getCallbacksPath(),
-    {
-      params: {
-        page,
-        size,
-      },
-    }
-  );
-  return response.data;
-};
 
 export const useGetCallbacks = (size: number) => {
   return useInfiniteQuery({

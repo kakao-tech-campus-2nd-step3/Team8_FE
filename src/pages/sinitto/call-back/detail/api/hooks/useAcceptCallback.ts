@@ -1,13 +1,5 @@
-import { fetchInstance } from '@/shared/api/instance';
+import { acceptCallback } from '../accept-call-back.api';
 import { useMutation } from '@tanstack/react-query';
-
-const getacceptCallbackPath = (callbackId: number) =>
-  `/api/callbacks/accept/${callbackId}`;
-
-const acceptCallback = async (callbackId: number) => {
-  const response = await fetchInstance.put(getacceptCallbackPath(callbackId));
-  return response.data;
-};
 
 export const useAcceptCallback = () => {
   return useMutation({
