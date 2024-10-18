@@ -4,6 +4,7 @@ import { useParams, Outlet, useNavigate } from 'react-router-dom';
 import { useGetAccepted } from './api/hooks';
 import { CallbackMenu } from './components';
 import { GuideLineList } from './components/guide-line-list';
+import { RouterPath } from '@/app/routes/path';
 import { useGetCallback } from '@/shared/api/hooks';
 import { Notice } from '@/shared/components';
 import { handleCallbackError } from '@/shared/utils';
@@ -29,7 +30,7 @@ export const CallBackDetailPage = () => {
     if (isCallBackError) {
       const errorMessage = handleCallbackError(callBackError);
       alert(errorMessage);
-      navigate('/call-back');
+      navigate(RouterPath.CALL_BACK_LIST);
     }
   }, [isCallBackError, callBackError, navigate]);
 

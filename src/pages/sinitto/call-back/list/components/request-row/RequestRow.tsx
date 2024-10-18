@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ArrowImg from '../../assets/arrow.png';
+import { RouterPath } from '@/app/routes/path';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -15,7 +16,7 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
     const navigate = useNavigate();
 
     const handleClick = () => {
-      navigate(`/call-back/${id}`);
+      navigate(`${RouterPath.CALL_BACK_LIST}/${id}`);
     };
 
     const getTimeAgo = (postTime: string) => {

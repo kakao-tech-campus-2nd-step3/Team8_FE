@@ -5,6 +5,7 @@ import { useGetGuideline } from './api/hooks';
 import { GuidelineResponse } from './api/types';
 import { CATEGORIES } from './data';
 import { Category } from './types';
+import { RouterPath } from '@/app/routes/path';
 import { useGetCallback } from '@/shared/api/hooks';
 import { handleCallbackError } from '@/shared/utils';
 import { Container, Spinner } from '@chakra-ui/react';
@@ -40,7 +41,7 @@ export const SinittoGuideLinePage = () => {
     if (isCallBackError) {
       const errorMessage = handleCallbackError(callBackError);
       alert(errorMessage);
-      navigate('/call-back');
+      navigate(RouterPath.CALL_BACK_LIST);
     }
   }, [isCallBackError, callBackError, navigate]);
 
