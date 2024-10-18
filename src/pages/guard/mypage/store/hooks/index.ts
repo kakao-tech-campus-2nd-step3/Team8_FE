@@ -1,0 +1,1 @@
+export { useGetGuardInformation } from './useGetGuardInformation';
