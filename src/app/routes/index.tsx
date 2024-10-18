@@ -1,21 +1,24 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { RouterPath } from './path';
-import MainPage from '@/pages/common/main/MainPage';
-import { RedirectPage } from '@/pages/common/redirect';
-import RegisterPage from '@/pages/common/register/RegisterPage';
-import GuideLinePage from '@/pages/guard/guide-line';
-import GuardMyPage from '@/pages/guard/mypage';
-import SeniorRegisterPage from '@/pages/guard/register';
-import SinittoReviewPage from '@/pages/guard/review';
-import ServiceHistoryPage from '@/pages/guard/service-history';
-import CallBackDetailPage from '@/pages/sinitto/call-back/detail';
-import CallBackListPage from '@/pages/sinitto/call-back/list';
-import SinittoGuideLinePage from '@/pages/sinitto/guide-line';
-import HelloCallListPage from '@/pages/sinitto/hello-call/hello-call-list';
-import HelloCallReportPage from '@/pages/sinitto/hello-call/hello-call-report';
-import HelloCallServicePage from '@/pages/sinitto/hello-call/hello-call-service';
-import SinittoMypage from '@/pages/sinitto/mypage';
+import {
+  MainPage,
+  RegisterPage,
+  RedirectPage,
+  SinittoMypage,
+  GuardMyPage,
+  GuideLinePage,
+  ServiceHistoryPage,
+  HelloCallListPage,
+  HelloCallServicePage,
+  HelloCallReportPage,
+  SeniorRegisterPage,
+  CallBackListPage,
+  CallBackDetailPage,
+  SinittoGuideLinePage,
+  SinittoReviewPage,
+  HelloCallApplyPage,
+} from '@/pages';
 import { Layout } from '@/shared/components';
 
 const router = createBrowserRouter([
@@ -44,6 +47,10 @@ const router = createBrowserRouter([
           {
             path: RouterPath.HELLO_CALL_REPORT,
             element: <HelloCallReportPage />,
+          },
+          {
+            path: RouterPath.HELLO_CALL_GUARD_APPLY,
+            element: <HelloCallApplyPage />,
           },
         ],
       },
