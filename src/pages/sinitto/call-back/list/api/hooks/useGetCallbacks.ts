@@ -1,9 +1,8 @@
 import type { CallbacksResponse } from '../types/callbacks.response';
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-const getCallbacksPath = () => `${BASE_URI}/api/callbacks`;
+const getCallbacksPath = () => `/api/callbacks`;
 
 const getCallbacks = async (page: number, size: number) => {
   const response = await fetchInstance.get<CallbacksResponse>(

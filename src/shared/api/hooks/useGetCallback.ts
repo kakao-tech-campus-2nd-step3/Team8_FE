@@ -1,10 +1,8 @@
 import type { CallbackResponse } from '../../types';
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useQuery } from '@tanstack/react-query';
 
-const getCallbackPath = (callbackId: string) =>
-  `${BASE_URI}/api/callbacks/${callbackId}`;
+const getCallbackPath = (callbackId: string) => `/api/callbacks/${callbackId}`;
 
 const getCallback = async (callbackId: string) => {
   const response = await fetchInstance.get<CallbackResponse>(

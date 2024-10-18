@@ -1,9 +1,8 @@
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useMutation } from '@tanstack/react-query';
 
 const getCancelCallbackPath = (callbackId: number) =>
-  `${BASE_URI}/api/callbacks/cancel/${callbackId}`;
+  `/api/callbacks/cancel/${callbackId}`;
 
 const CancelCallback = async (callbackId: number) => {
   const response = await fetchInstance.put(getCancelCallbackPath(callbackId));

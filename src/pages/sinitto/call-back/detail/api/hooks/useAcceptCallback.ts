@@ -1,9 +1,8 @@
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useMutation } from '@tanstack/react-query';
 
 const getacceptCallbackPath = (callbackId: number) =>
-  `${BASE_URI}/api/callbacks/accept/${callbackId}`;
+  `/api/callbacks/accept/${callbackId}`;
 
 const acceptCallback = async (callbackId: number) => {
   const response = await fetchInstance.put(getacceptCallbackPath(callbackId));

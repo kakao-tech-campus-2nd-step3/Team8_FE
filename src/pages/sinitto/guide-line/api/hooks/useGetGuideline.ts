@@ -1,10 +1,9 @@
 import type { GuidelineResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useQuery } from '@tanstack/react-query';
 
 const getGuidelinesPath = (seniorId: number, type: string) =>
-  `${BASE_URI}/api/guardguidelines/${seniorId}/${type}`;
+  `/api/guardguidelines/${seniorId}/${type}`;
 
 const getGuidelines = async (seniorId: number, type: string) => {
   const response = await fetchInstance.get<GuidelineResponse[]>(

@@ -1,9 +1,8 @@
 import { fetchInstance } from '@/shared/api/instance';
-import { BASE_URI } from '@/shared/constants';
 import { useMutation } from '@tanstack/react-query';
 
 const getCompleteCallbackPath = (callbackId: number) =>
-  `${BASE_URI}/api/callbacks/complete/${callbackId}`;
+  `/api/callbacks/complete/${callbackId}`;
 
 const CompleteCallback = async (callbackId: number) => {
   const response = await fetchInstance.put(getCompleteCallbackPath(callbackId));
