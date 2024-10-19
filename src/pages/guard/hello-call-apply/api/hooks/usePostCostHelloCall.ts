@@ -12,12 +12,12 @@ export const usePostCostHelloCall = (): UseMutationResult<
 > => {
   return useMutation<CostHelloCallResponse, Error, CostHelloCallRequest>({
     mutationFn: (request: CostHelloCallRequest) => postCostHelloCall(request),
-    onSuccess: () => {
-      alert('안부전화 서비스가 신청되었습니다.');
+    onSuccess: (data) => {
+      alert(`총 ${data.price} 포인트가 필요합니다.`);
     },
     onError: (error) => {
-      console.error('안부전화 서비스 신청에 실패했습니다.', error);
-      alert('안부전화 서비스 신청에 실패했습니다.');
+      console.log('서비스 이용 시간을 잘 못 입력하셨습니다.');
+      console.error('포인트 계산에 실패했습니다.', error);
     },
   });
 };
