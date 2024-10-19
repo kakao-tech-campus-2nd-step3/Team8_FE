@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
-import { TimeSlots, useSlots, useSortDays } from '@/pages';
+import { TimeSlots, useSlots } from '@/pages';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -58,8 +58,6 @@ export const ServiceUsingTime = ({
     });
   };
 
-  const sortedDays = useSortDays(days);
-
   const handleTimeSelect = (time: number) => {
     setSelectedTime(time);
     setServiceTime(time);
@@ -74,7 +72,7 @@ export const ServiceUsingTime = ({
       {addSlots.map((_, index) => (
         <Flex w='100%' flexDir='row' gap={5} key={index}>
           <DaySelect
-            value={sortedDays[index] || ''}
+            value={days[index] || ''}
             onChange={(e) => handleDayChange(e, index)}
           >
             {DAY_DATA.map((day) => (
@@ -121,6 +119,7 @@ export const ServiceUsingTime = ({
             key={time}
             onClick={() => handleTimeSelect(time)}
             variant={selectedTime === time ? 'solid' : 'outline'}
+            isSelected={selectedTime === time}
           >
             {time}분
           </TimeButton>
@@ -180,18 +179,28 @@ const ActionButton = styled.button<{ disabled: boolean; isAddButton: boolean }>`
   }
 `;
 
-const TimeButton = styled(Button)`
-  background-color: var(--color-white);
-  color: var(--color-gray);
-  border: 1px solid #e2e8e0;
+const TimeButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'isSelected',
+})<{ isSelected: boolean }>`
+  background-color: ${({ isSelected }) =>
+    isSelected ? 'var(--color-primary)' : 'var(--color-white)'};
+  color: ${({ isSelected }) =>
+    isSelected ? 'var(--color-white)' : 'var(--color-gray)'};
+  border: ${({ isSelected }) =>
+    isSelected ? '1px solid var(--color-primary)' : '1px solid #e2e8e0'};
   font-weight: 700;
   border-radius: 0.5rem;
   text-align: center;
   margin-bottom: 10px;
 
   &:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border: 1px solid var(--color-primary);
+    background-color: ${({ isSelected }) =>
+      isSelected ? 'var(--color-primary)' : 'var(--color-hover)'};
+    color: ${({ isSelected }) =>
+      isSelected ? 'var(--color-white)' : 'var(--color-hover)'};
+    border: ${({ isSelected }) =>
+      isSelected
+        ? '1px solid var(--color-primary)'
+        : '1px solid var(--color-hover)'};
   }
 `;
