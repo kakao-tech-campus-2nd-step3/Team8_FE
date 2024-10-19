@@ -1,21 +1,34 @@
+import { useNavigate } from 'react-router-dom';
+
 import backIcon from './asset/ic_arrow_back.svg';
+import { RouterPath } from '@/app/routes/path';
 import { Text, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type HeaderProps = {
   title: string;
+  defaultBackPath?: string;
 };
 
-const Header = ({ title }: HeaderProps) => {
+// TODO : RouterPath.ROOT -> 시니또이면 시니또 홈으로, 보호자이면 보호자 홈으로 이동 isSinitto 로 구분하기.
+const Header = ({ title, defaultBackPath = RouterPath.ROOT }: HeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate(defaultBackPath);
+    }
+  };
+
   return (
-    <>
-      <HeaderBox>
-        <Icon src={backIcon} />
-        <Text fontSize='1.5rem' fontWeight={700}>
-          {title}
-        </Text>
-      </HeaderBox>
-    </>
+    <HeaderBox>
+      <Icon src={backIcon} onClick={handleBackClick} />
+      <Text fontSize='1.5rem' fontWeight={700}>
+        {title}
+      </Text>
+    </HeaderBox>
   );
 };
 
@@ -40,4 +53,5 @@ const Icon = styled(Image)`
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 `;
