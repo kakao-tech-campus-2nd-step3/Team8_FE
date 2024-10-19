@@ -1,4 +1,4 @@
-import { fetchInstance } from '../instance';
+import { fetchInstance } from '../../../../../shared/api/instance';
 
 // request(요청) 타입
 export type SignupReguestParams = {
@@ -30,24 +30,20 @@ export const registerUser = async ({
   email,
   isSinitto,
 }: SignupReguestParams): Promise<SignupApiResponse> => {
-  try {
-    // 시니또 보호자에 따라 API 엔드포인트 구분
-    const endpoint = isSinitto ? 'sinitto' : 'guard';
+  // 시니또 보호자에 따라 API 엔드포인트 구분
+  const endpoint = isSinitto ? 'sinitto' : 'guard';
 
-    const response = await fetchInstance.post(`/api/members/${endpoint}`, {
-      name,
-      phoneNumber,
-      email,
-      isSinitto,
-    });
-    if (response.status === 207) {
-      return {
-        status: response.status,
-        detail: response.data.detail,
-      } as SignupErrorResponse; // 207 (예외 - 중복 이메일)
-    }
-    return response.data; // 200
-  } catch (err) {
-    throw new Error('회원가입 실패');
+  const response = await fetchInstance.post(`/api/members/${endpoint}`, {
+    name,
+    phoneNumber,
+    email,
+    isSinitto,
+  });
+  if (response.status === 207) {
+    return {
+      status: response.status,
+      detail: response.data.detail,
+    } as SignupErrorResponse; // 207 (예외 - 중복 이메일)
   }
+  return response.data; // 200
 };

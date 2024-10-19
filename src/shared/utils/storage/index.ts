@@ -2,7 +2,10 @@ type StorageKey = {
   accessToken?: string;
 };
 
-const initStorage = <T extends keyof StorageKey>(key: T, storage: Storage) => {
+const initStorage = <T extends keyof StorageKey>(
+  key: T,
+  storage = window.localStorage
+) => {
   const storageKey = `${key}`;
 
   const get = (): StorageKey[T] => {
@@ -11,7 +14,7 @@ const initStorage = <T extends keyof StorageKey>(key: T, storage: Storage) => {
   };
 
   const set = (value: StorageKey[T]) => {
-    if (value == undefined || value == null) {
+    if (value === undefined || value === null) {
       return storage.removeItem(storageKey);
     }
     const stringifiedValue = JSON.stringify(value);
