@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { usePostCostHelloCall } from '../../api/hooks';
 import { CostHelloCallRequest } from '../../api/types';
-import { TimeSlots } from '@/pages';
+import { TimeSlots, useSortDays } from '@/pages';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -24,6 +24,9 @@ export const ServiceTotal = ({
   const [totalServiceCount, setTotalServiceCount] = useState<number | null>(0);
 
   const { mutate: postCostHelloCall } = usePostCostHelloCall();
+
+  const sortedTimeSlotsArray = useSortDays(timeSlotsArray);
+
   const isButtonDisabled = serviceTime === 0;
 
   const handleButtonClick = () => {
@@ -31,7 +34,7 @@ export const ServiceTotal = ({
       serviceTime,
       startDate: startDate?.toISOString() || '',
       endDate: endDate?.toISOString() || '',
-      timeSlots: timeSlotsArray,
+      timeSlots: sortedTimeSlotsArray,
     };
 
     postCostHelloCall(requestPayload, {
