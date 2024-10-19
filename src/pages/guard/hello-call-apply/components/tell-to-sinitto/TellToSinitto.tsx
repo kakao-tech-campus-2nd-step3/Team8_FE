@@ -1,22 +1,20 @@
-import { Box, Flex, Text, Textarea } from '@chakra-ui/react';
+import { Flex, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const TellToSinitto = () => {
   return (
-    <Box
-      display='flex'
-      flexDir='column'
-      w='100%'
-      textAlign='start'
-      justifyContent='start'
-    >
+    <Wrapper flexDir='column'>
       <TitleText>시니또에게 전할 내용</TitleText>
-      <Flex w='100%' my={3}>
-        <Textarea placeholder='어르신에 대한 내용을 입력해주세요' />
-      </Flex>
-    </Box>
+      <Wrapper my={3}>
+        <Textarea h='10rem' placeholder='어르신에 대한 내용을 입력해주세요' />
+      </Wrapper>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled(Flex)`
+  width: 100%;
+`;
 
 const TitleText = styled(Text)`
   font-size: var(--font-size-xl);
