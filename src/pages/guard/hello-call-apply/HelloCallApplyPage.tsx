@@ -5,8 +5,8 @@ import {
   NoticeArea,
   SelectSenior,
   ServicePeriod,
-  ServiceTime,
   ServiceTotal,
+  ServiceUsingTime,
   TellToSinitto,
 } from './components';
 import { Button, Text } from '@chakra-ui/react';
@@ -28,7 +28,7 @@ export const HelloCallApplyPage = () => {
     <HelloCallApplyPageLayout>
       <NoticeArea />
       <SelectSenior />
-      <ServiceTime
+      <ServiceUsingTime
         setTimeSlotsArray={setTimeSlotsArray}
         setServiceTime={setServiceTime}
       />

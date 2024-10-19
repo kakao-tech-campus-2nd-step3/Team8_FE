@@ -10,7 +10,10 @@ type Props = {
   setTimeSlotsArray: (slot: TimeSlots[]) => void;
 };
 
-export const ServiceTime = ({ setServiceTime, setTimeSlotsArray }: Props) => {
+export const ServiceUsingTime = ({
+  setServiceTime,
+  setTimeSlotsArray,
+}: Props) => {
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [startTime, setStartTime] = useState<string>('');
   const [endTime, setEndTime] = useState<string>('');
