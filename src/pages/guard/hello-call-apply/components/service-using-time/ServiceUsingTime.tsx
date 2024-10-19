@@ -23,11 +23,12 @@ export const ServiceUsingTime = ({
 
   useEffect(() => {
     const updatedSlots: TimeSlots[] = addSlots.map((_, index) => ({
-      dayName: days[index] || '',
+      dayName: days[index] || '월',
       startTime,
       endTime,
       selectedTime,
     }));
+
     setTimeSlotsArray(updatedSlots);
   }, [addSlots, selectedTime, startTime, endTime, setTimeSlotsArray, days]);
 
