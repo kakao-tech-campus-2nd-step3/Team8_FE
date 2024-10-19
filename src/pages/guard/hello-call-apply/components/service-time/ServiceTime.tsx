@@ -1,56 +1,67 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
+import { TimeSlots, useSlots, useSortDays } from '@/pages';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  setTime: (time: number) => void;
-  setCount: (count: number) => void;
+  setServiceTime: (time: number) => void;
+  setTimeSlotsArray: (slot: TimeSlots[]) => void;
 };
 
-export const ServiceTime = ({ setTime, setCount }: Props) => {
-  const [addSlots, setAddSlots] = useState([{ day: '', time: '' }]);
+export const ServiceTime = ({ setServiceTime, setTimeSlotsArray }: Props) => {
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [startTime, setStartTime] = useState<string>('');
   const [endTime, setEndTime] = useState<string>('');
-  const handleAddSlot = () => {
-    if (addSlots.length < 7) {
-      const newSlots = [...addSlots, { day: '', time: '' }];
-      setAddSlots(newSlots);
-      setCount(newSlots.length);
-    }
-  };
+  const [days, setDays] = useState<string[]>([]);
 
-  const handleRemoveSlot = () => {
-    if (addSlots.length > 1) {
-      const newSlots = addSlots.slice(0, -1);
-      setAddSlots(newSlots);
-      setCount(newSlots.length);
-    }
-  };
+  const { slots: addSlots, addSlot, removeSlot } = useSlots();
+
+  useEffect(() => {
+    const updatedSlots: TimeSlots[] = addSlots.map((_, index) => ({
+      dayName: days[index] || '',
+      startTime,
+      endTime,
+      selectedTime,
+    }));
+    setTimeSlotsArray(updatedSlots);
+  }, [addSlots, selectedTime, startTime, endTime, setTimeSlotsArray, days]);
 
   const handleDaySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const getTimeSlotLabel = (value: string) => {
-      const selectedSlot = TIME_SLOTS.find((slot) => slot.value === value);
-      return selectedSlot ? selectedSlot.label : '시간대 없음';
-    };
+    const selectedValue = e.target.value;
 
-    const label = getTimeSlotLabel(e.target.value);
+    const selectedSlot = TIME_SLOTS.find(
+      (slot) => slot.value === selectedValue
+    );
 
-    if (label) {
-      const [startTimeSlot, endTimeSlot] = label.split(' ~ ');
-      setStartTime(startTimeSlot);
-      setEndTime(endTimeSlot);
+    if (selectedSlot) {
+      const [start, end] = selectedSlot.label.split(' ~ ');
+
+      setStartTime(start);
+      setEndTime(end);
     }
   };
-  console.log('Start Time:', startTime);
-  console.log('End Time:', endTime);
-  
+
+  const handleDayChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
+    const selectedDay = e.target.value;
+    setDays((prevDays) => {
+      const newDays = [...prevDays];
+      newDays[index] = selectedDay;
+      return newDays;
+    });
+  };
+
+  const sortedDays = useSortDays(days);
+
   const handleTimeSelect = (time: number) => {
     setSelectedTime(time);
-    setTime(time);
+    setServiceTime(time);
   };
+
   const isAddDisabled = addSlots.length >= 7;
   const isRemoveDisabled = addSlots.length <= 1;
 
@@ -59,7 +70,10 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
       <TitleText>서비스 이용 시간</TitleText>
       {addSlots.map((_, index) => (
         <Flex w='100%' flexDir='row' gap={5} key={index}>
-          <DaySelect>
+          <DaySelect
+            value={sortedDays[index] || ''}
+            onChange={(e) => handleDayChange(e, index)}
+          >
             {DAY_DATA.map((day) => (
               <option key={day.value} value={day.value}>
                 {day.label}
@@ -80,7 +94,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
       ))}
       <ButtonBox>
         <ActionButton
-          onClick={handleAddSlot}
+          onClick={addSlot}
           disabled={isAddDisabled}
           isAddButton={true}
         >
@@ -89,7 +103,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
           </Text>
         </ActionButton>
         <ActionButton
-          onClick={handleRemoveSlot}
+          onClick={removeSlot}
           disabled={isRemoveDisabled}
           isAddButton={false}
         >
