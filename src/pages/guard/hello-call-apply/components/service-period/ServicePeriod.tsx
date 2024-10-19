@@ -1,22 +1,29 @@
-import { useState } from 'react';
-
 import IconCalendar from '../../assets/calendar.svg';
 import { CustomDatePicker } from './CustomDatePicker';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const ServicePeriod = () => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  console.log(startDate);
+export type Props = {
+  startDate: Date | null;
+  endDate: Date | null;
+  setStartDate: (date: Date | null) => void;
+  setEndDate: (date: Date | null) => void;
+};
+
+export const ServicePeriod = ({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+}: Props) => {
   return (
     <ContentsBox>
       <Flex dir='row' alignItems='center' gap={3}>
         <TitleText>서비스 이용 기간</TitleText>
-        <Image w={7} src={IconCalendar} alt='calendar' />
       </Flex>
-      <Flex dir='row' w='100%' gap={3} alignItems='center'>
-        <Text>서비스 시작일</Text>
+      <Flex dir='row' w='100%' gap={2} alignItems='center'>
+        <Text w={20}>시작 날짜</Text>
+        <Image w={6} src={IconCalendar} alt='calendar' />
         <CustomDatePicker
           selectDate={startDate}
           onSelectedDateChange={(date) => setStartDate(date)}
@@ -24,8 +31,9 @@ export const ServicePeriod = () => {
           minDate={new Date()}
         />
       </Flex>
-      <Flex dir='row' w='100%' gap={3} alignItems='center'>
-        <Text>서비스 종료일</Text>
+      <Flex dir='row' w='100%' gap={2} textAlign='center' alignItems='center'>
+        <Text w={20}>종료 날짜</Text>
+        <Image w={6} src={IconCalendar} alt='calendar' />
         <CustomDatePicker
           selectDate={endDate}
           onSelectedDateChange={(date) => setEndDate(date)}
