@@ -23,7 +23,6 @@ export const HelloCallApplyPage = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [price, setPrice] = useState<number | null>(null);
 
-  console.log(timeSlotsArray);
   return (
     <HelloCallApplyPageLayout>
       <NoticeArea />
