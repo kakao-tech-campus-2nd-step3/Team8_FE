@@ -49,7 +49,7 @@ export const globalStyle = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Pretendard-Regular', sans-serif;
+    font-family: 'Pretendard-Regular', 'Apple SD Gothic Neo', sans-serif;
     overflow-y: auto;
     width: 100%;
     height: 100%;
