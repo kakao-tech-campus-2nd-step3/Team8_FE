@@ -16,7 +16,7 @@ export const usePostCostHelloCall = (): UseMutationResult<
       alert(`총 ${data.price} 포인트가 필요합니다.`);
     },
     onError: (error) => {
-      console.log('서비스 이용 시간을 잘 못 입력하셨습니다.');
+      alert('서비스 이용 시간을 잘못 입력하셨습니다.');
       console.error('포인트 계산에 실패했습니다.', error);
     },
   });
