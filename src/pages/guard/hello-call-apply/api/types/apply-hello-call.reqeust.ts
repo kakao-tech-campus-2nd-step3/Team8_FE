@@ -1,14 +1,7 @@
-type Time = {
-  hour: number;
-  minute: number;
-  second: number;
-  nano: number;
-};
-
-type TimeSlot = {
+export type TimeSlot = {
   dayName: string;
-  startTime: Time;
-  endTime: Time;
+  startTime: string;
+  endTime: string;
 };
 
 export type ApplyHelloCallRequest = {
