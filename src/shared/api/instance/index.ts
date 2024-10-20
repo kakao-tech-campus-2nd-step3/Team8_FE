@@ -41,7 +41,7 @@ export const queryClient = new QueryClient({
 
 fetchInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = authLocalStorage.get();
     if (accessToken !== undefined) {
       config.headers['Content-Type'] = 'application/json';
       config.headers.Authorization = `Bearer ${accessToken}`;
