@@ -6,6 +6,7 @@ import type {
 import axios from 'axios';
 
 import { BASE_URI } from '@/shared/constants';
+import { authLocalStorage } from '@/shared/utils/storage';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -41,7 +42,7 @@ export const queryClient = new QueryClient({
 
 fetchInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = authLocalStorage.get();
     if (accessToken !== undefined) {
       config.headers['Content-Type'] = 'application/json';
       config.headers.Authorization = `Bearer ${accessToken}`;

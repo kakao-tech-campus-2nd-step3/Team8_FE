@@ -21,58 +21,125 @@ import {
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: RouterPath.ROOT,
     element: <MainPage />,
   },
   {
-    path: RouterPath.ROOT,
-    element: <Layout />,
+    path: RouterPath.SIGNUP,
+    element: <Layout title='회원가입' />,
     children: [
-      { path: RouterPath.SIGNUP, element: <RegisterPage /> },
-      { path: RouterPath.REDIRECT, element: <RedirectPage /> },
-      { path: RouterPath.SINITTO_MYPAGE, element: <SinittoMypage /> },
-      { path: RouterPath.GUARD_MYPAGE, element: <GuardMyPage /> },
-      { path: RouterPath.GUARD_GUIDELINE, element: <GuideLinePage /> },
-      { path: RouterPath.SERVICE_HISTORY, element: <ServiceHistoryPage /> },
       {
-        path: RouterPath.HELLO_CALL,
-        children: [
-          { index: true, element: <HelloCallListPage /> },
-          {
-            path: RouterPath.HELLO_CALL_SERVICE,
-            element: <HelloCallServicePage />,
-          },
-          {
-            path: RouterPath.HELLO_CALL_REPORT,
-            element: <HelloCallReportPage />,
-          },
-          {
-            path: RouterPath.HELLO_CALL_GUARD_APPLY,
-            element: <HelloCallApplyPage />,
-          },
-        ],
+        index: true,
+        element: <RegisterPage />,
       },
-      { path: RouterPath.SENIOR_REGISTER, element: <SeniorRegisterPage /> },
+    ],
+  },
+  {
+    path: RouterPath.REDIRECT,
+    element: <Layout title='안내' />,
+    children: [
       {
-        path: RouterPath.CALL_BACK_LIST,
-        children: [
-          { index: true, element: <CallBackListPage /> },
-          {
-            path: RouterPath.CALL_BACK_DETAIL,
-            children: [
-              { index: true, element: <CallBackDetailPage /> },
-              {
-                path: RouterPath.CALL_BACK_GUID_LINE,
-                element: <SinittoGuideLinePage />,
-              },
-            ],
-          },
-        ],
+        index: true,
+        element: <RedirectPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.SINITTO_MYPAGE,
+    element: <Layout title='마이페이지' />,
+    children: [
+      {
+        index: true,
+        element: <SinittoMypage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.GUARD_MYPAGE,
+    element: <Layout title='마이페이지' />,
+    children: [
+      {
+        index: true,
+        element: <GuardMyPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.GUARD_GUIDELINE,
+    element: <Layout title='가이드라인 목록' />,
+    children: [
+      {
+        index: true,
+        element: <GuideLinePage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.SERVICE_HISTORY,
+    element: <Layout title='서비스 이용내역' />,
+    children: [
+      {
+        index: true,
+        element: <ServiceHistoryPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.HELLO_CALL,
+    element: <Layout title='안부전화 서비스' />,
+    children: [
+      { index: true, element: <HelloCallListPage /> },
+      {
+        path: RouterPath.HELLO_CALL_SERVICE,
+        element: <HelloCallServicePage />,
       },
       {
-        path: RouterPath.SINITTO_REVIEW,
+        path: RouterPath.HELLO_CALL_REPORT,
+        element: <HelloCallReportPage />,
+      },
+      {
+        path: RouterPath.HELLO_CALL_GUARD_APPLY,
+        element: <HelloCallApplyPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.SENIOR_REGISTER,
+    element: <Layout title='시니어 등록하기' />,
+    children: [
+      {
+        index: true,
+        element: <SeniorRegisterPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.CALL_BACK_LIST,
+    element: <Layout title='콜백 요청리스트' />,
+    children: [{ index: true, element: <CallBackListPage /> }],
+  },
+  {
+    path: RouterPath.CALL_BACK_LIST,
+    element: <Layout title='요청 상세페이지' />,
+    children: [
+      {
+        path: RouterPath.CALL_BACK_DETAIL,
+        element: <CallBackDetailPage />,
+      },
+      {
+        path: RouterPath.CALL_BACK_GUID_LINE,
+        element: <SinittoGuideLinePage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.SINITTO_REVIEW,
+    element: <Layout title='시니또 평가하기' />,
+    children: [
+      {
+        index: true,
         element: <SinittoReviewPage />,
       },
     ],
