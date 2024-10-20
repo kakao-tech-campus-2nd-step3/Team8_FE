@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { TimeSlot } from './api/types';
 import {
   NoticeArea,
@@ -9,7 +7,8 @@ import {
   ServiceUsingTime,
   TellToSinitto,
 } from './components';
-import { Button, Text } from '@chakra-ui/react';
+import { ServiceApply } from './components/service-apply/ServiceApply';
+import { useHelloCallState } from './hooks';
 import styled from '@emotion/styled';
 
 export type TimeSlots = {
@@ -17,16 +16,27 @@ export type TimeSlots = {
 } & TimeSlot;
 
 export const HelloCallApplyPage = () => {
-  const [timeSlotsArray, setTimeSlotsArray] = useState<TimeSlots[]>([]);
-  const [serviceTime, setServiceTime] = useState(0);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [price, setPrice] = useState<number | null>(null);
+  const {
+    timeSlotsArray,
+    setTimeSlotsArray,
+    serviceTime,
+    setServiceTime,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    price,
+    setPrice,
+    selectedSeniorId,
+    setSelectedSeniorId,
+    message,
+    setMessage,
+  } = useHelloCallState();
 
   return (
     <HelloCallApplyPageLayout>
       <NoticeArea />
-      <SelectSenior />
+      <SelectSenior setSelectedSeniorId={setSelectedSeniorId} />
       <ServiceUsingTime
         setTimeSlotsArray={setTimeSlotsArray}
         setServiceTime={setServiceTime}
@@ -44,10 +54,15 @@ export const HelloCallApplyPage = () => {
         serviceTime={serviceTime}
         setPrice={setPrice}
       />
-      <TellToSinitto />
-      <Button w='90%' mt={5} backgroundColor='var(--color-primary)'>
-        <Text color='var(--color-white)'>{price} point로 신청하기</Text>
-      </Button>
+      <TellToSinitto message={message} setMessage={setMessage} />
+      <ServiceApply
+        startDate={startDate}
+        endDate={endDate}
+        timeSlotsArray={timeSlotsArray}
+        serviceTime={serviceTime}
+        price={price}
+        selectedSeniorId={selectedSeniorId}
+      />
     </HelloCallApplyPageLayout>
   );
 };

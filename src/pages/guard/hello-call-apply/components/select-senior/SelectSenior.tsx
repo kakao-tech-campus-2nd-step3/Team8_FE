@@ -1,13 +1,39 @@
+import { useAllSeniorInfo } from '@/shared';
 import { Select, Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const SelectSenior = () => {
+type Props = {
+  setSelectedSeniorId: (selectedSeniorId: string) => void;
+};
+
+export const SelectSenior = ({ setSelectedSeniorId }: Props) => {
+  const { data: seniors, isLoading, error } = useAllSeniorInfo();
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSeniorId(event.target.value);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <ContentsBox>
       <TitleText>대상자 선택</TitleText>
-      <Select variant='filled' placeholder='시니어를 선택해주세요'>
-        <option value='senior-1'>이도훈</option>
-        <option value='senior-2'>이지호</option>
+      <Select
+        variant='filled'
+        placeholder='시니어를 선택해주세요'
+        onChange={handleSelectChange}
+      >
+        {seniors?.map((senior) => (
+          <option key={senior.seniorId} value={senior.seniorId}>
+            {senior.seniorName}
+          </option>
+        ))}
       </Select>
     </ContentsBox>
   );
