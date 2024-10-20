@@ -6,6 +6,7 @@ import type {
 import axios from 'axios';
 
 import { BASE_URI } from '@/shared';
+import { authLocalStorage } from '@/shared/utils/storage';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
