@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useGetGuardInformation } from '../../store/hooks';
+import { useGetGuardInformation } from '../../api';
 import { RouterPath } from '@/app/routes/path';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
