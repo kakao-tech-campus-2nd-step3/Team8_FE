@@ -1,4 +1,5 @@
 import { Routes } from './app/routes';
+import { AllSeniorInfoProvider } from './shared';
 import { queryClient } from './shared/api/instance';
 import { globalStyle } from './shared/theme/global';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -7,12 +8,14 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <Global styles={globalStyle} />
-        <Routes />
-      </ChakraProvider>
-    </QueryClientProvider>
+    <ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <AllSeniorInfoProvider>
+          <Global styles={globalStyle} />
+          <Routes />
+        </AllSeniorInfoProvider>
+      </QueryClientProvider>
+    </ChakraProvider>
   );
 };
 
