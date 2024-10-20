@@ -21,7 +21,7 @@ export const ServicePeriod = ({
       <Flex dir='row' alignItems='center' gap={3}>
         <TitleText>서비스 이용 기간</TitleText>
       </Flex>
-      <Flex dir='row' w='100%' gap={2} alignItems='center'>
+      <Flex dir='row' w='100%' gap={2} textAlign='center' alignItems='center'>
         <Text w={20}>시작 날짜</Text>
         <Image w={6} src={IconCalendar} alt='calendar' />
         <CustomDatePicker
