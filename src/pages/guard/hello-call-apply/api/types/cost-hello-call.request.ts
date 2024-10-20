@@ -1,4 +1,4 @@
-type TimeSlot = {
+export type TimeSlot = {
   dayName: string;
   startTime: string;
   endTime: string;

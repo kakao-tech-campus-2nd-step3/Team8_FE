@@ -1,38 +1,69 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { DAY_DATA, TIME_SLOTS } from '../../data';
+import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
+import { TimeSlots, useSlots } from '@/pages';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  setTime: (time: number) => void;
-  setCount: (count: number) => void;
+  setServiceTime: (time: number) => void;
+  setTimeSlotsArray: (slot: TimeSlots[]) => void;
 };
 
-export const ServiceTime = ({ setTime, setCount }: Props) => {
-  const [addSlots, setAddSlots] = useState([{ day: '', time: '' }]);
+export const ServiceUsingTime = ({
+  setServiceTime,
+  setTimeSlotsArray,
+}: Props) => {
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
+  const [startTime, setStartTime] = useState<string>('');
+  const [endTime, setEndTime] = useState<string>('');
+  const [days, setDays] = useState<string[]>([]);
 
-  const handleAddSlot = () => {
-    if (addSlots.length < 7) {
-      const newSlots = [...addSlots, { day: '', time: '' }];
-      setAddSlots(newSlots);
-      setCount(newSlots.length);
+  const { slots: addSlots, addSlot, removeSlot } = useSlots();
+
+  useEffect(() => {
+    const updatedSlots: TimeSlots[] = addSlots.map((_, index) => ({
+      dayName: days[index] || '월',
+      startTime,
+      endTime,
+      selectedTime,
+    }));
+
+    setTimeSlotsArray(updatedSlots);
+  }, [addSlots, selectedTime, startTime, endTime, setTimeSlotsArray, days]);
+
+  const handleDaySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = e.target.value;
+
+    const selectedSlot = TIME_SLOTS.find(
+      (slot) => slot.value === selectedValue
+    );
+
+    if (selectedSlot) {
+      const [start, end] = selectedSlot.label.split(' ~ ');
+
+      setStartTime(start);
+      setEndTime(end);
     }
   };
 
-  const handleRemoveSlot = () => {
-    if (addSlots.length > 1) {
-      const newSlots = addSlots.slice(0, -1);
-      setAddSlots(newSlots);
-      setCount(newSlots.length);
-    }
+  const handleDayChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
+    const selectedDay = e.target.value;
+    setDays((prevDays) => {
+      const newDays = [...prevDays];
+      newDays[index] = selectedDay;
+      return newDays;
+    });
   };
 
   const handleTimeSelect = (time: number) => {
     setSelectedTime(time);
-    setTime(time);
+    setServiceTime(time);
   };
+
   const isAddDisabled = addSlots.length >= 7;
   const isRemoveDisabled = addSlots.length <= 1;
 
@@ -41,14 +72,20 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
       <TitleText>서비스 이용 시간</TitleText>
       {addSlots.map((_, index) => (
         <Flex w='100%' flexDir='row' gap={5} key={index}>
-          <DaySelect>
+          <DaySelect
+            value={days[index] || ''}
+            onChange={(e) => handleDayChange(e, index)}
+          >
             {DAY_DATA.map((day) => (
               <option key={day.value} value={day.value}>
                 {day.label}
               </option>
             ))}
           </DaySelect>
-          <Select placeholder='시간대를 선택해주세요.'>
+          <Select
+            placeholder='시간대를 선택해주세요.'
+            onChange={(e) => handleDaySelect(e)}
+          >
             {TIME_SLOTS.map((slot) => (
               <option key={slot.value} value={slot.value}>
                 {slot.label}
@@ -59,7 +96,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
       ))}
       <ButtonBox>
         <ActionButton
-          onClick={handleAddSlot}
+          onClick={addSlot}
           disabled={isAddDisabled}
           isAddButton={true}
         >
@@ -68,7 +105,7 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
           </Text>
         </ActionButton>
         <ActionButton
-          onClick={handleRemoveSlot}
+          onClick={removeSlot}
           disabled={isRemoveDisabled}
           isAddButton={false}
         >
@@ -78,11 +115,12 @@ export const ServiceTime = ({ setTime, setCount }: Props) => {
         </ActionButton>
       </ButtonBox>
       <ButtonBox>
-        {[3, 5, 10, 15].map((time) => (
+        {USE_TIME_DATA.map((time) => (
           <TimeButton
             key={time}
             onClick={() => handleTimeSelect(time)}
             variant={selectedTime === time ? 'solid' : 'outline'}
+            isSelected={selectedTime === time}
           >
             {time}분
           </TimeButton>
@@ -142,18 +180,28 @@ const ActionButton = styled.button<{ disabled: boolean; isAddButton: boolean }>`
   }
 `;
 
-const TimeButton = styled(Button)`
-  background-color: var(--color-white);
-  color: var(--color-gray);
-  border: 1px solid #e2e8e0;
+const TimeButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'isSelected',
+})<{ isSelected: boolean }>`
+  background-color: ${({ isSelected }) =>
+    isSelected ? 'var(--color-primary)' : 'var(--color-white)'};
+  color: ${({ isSelected }) =>
+    isSelected ? 'var(--color-white)' : 'var(--color-gray)'};
+  border: ${({ isSelected }) =>
+    isSelected ? '1px solid var(--color-primary)' : '1px solid #e2e8e0'};
   font-weight: 700;
   border-radius: 0.5rem;
   text-align: center;
   margin-bottom: 10px;
 
   &:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border: 1px solid var(--color-primary);
+    background-color: ${({ isSelected }) =>
+      isSelected ? 'var(--color-primary)' : 'var(--color-hover)'};
+    color: ${({ isSelected }) =>
+      isSelected ? 'var(--color-white)' : 'var(--color-hover)'};
+    border: ${({ isSelected }) =>
+      isSelected
+        ? '1px solid var(--color-primary)'
+        : '1px solid var(--color-hover)'};
   }
 `;

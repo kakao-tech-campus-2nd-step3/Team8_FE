@@ -21,6 +21,5 @@ export const getKakaoCallback = async (
       code,
     },
   });
-  console.log(response.data);
   return response.data;
 };
