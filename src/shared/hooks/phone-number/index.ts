@@ -1,1 +1,1 @@
-export { formatPhoneNumber } from './formatPhoneNumber';
+export { formatPhoneNumber, parsePhoneNumber } from './formatPhoneNumber';

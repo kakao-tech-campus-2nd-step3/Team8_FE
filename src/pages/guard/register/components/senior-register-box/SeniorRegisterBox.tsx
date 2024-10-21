@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 
-import { SeniorRegisterValues } from '../../types';
+import { SeniorRegisterValues, useAddSeniorInfo } from '../../api';
 import SeniorFormField from './SeniorFormField';
+import { parsePhoneNumber } from '@/shared';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -11,9 +12,15 @@ const SeniorRegisterBox = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SeniorRegisterValues>();
+  const { mutate: postSeniorInfo } = useAddSeniorInfo();
 
   const onSubmit = (data: SeniorRegisterValues) => {
-    console.log(data);
+    const requestSeniorData = {
+      seniorName: data.seniorName,
+      seniorPhoneNumber: parsePhoneNumber(data.seniorPhoneNumber),
+    };
+    console.log(requestSeniorData);
+    postSeniorInfo(requestSeniorData);
   };
 
   return (
