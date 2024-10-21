@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { RegisterFields, RegisterType, Tos } from './components';
 import { useRegister } from './store/hooks';
 import { FormValues } from './types';
+import { parsePhoneNumber } from '@/shared';
 import { BasicButton } from '@/shared/components';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -29,12 +30,11 @@ const RegisterPage = () => {
 
     const requestData = {
       name: data.name,
-      phoneNumber: data.phoneNumber,
+      phoneNumber: parsePhoneNumber(data.phoneNumber),
       email: 'test1@example.com', // 임시 (카카오 로그인 후 넘겨받기)
       isSinitto,
     };
     console.log(requestData);
-    // 회원가입 API 호출
     mutation.mutate(requestData);
   };
 
