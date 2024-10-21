@@ -6,28 +6,22 @@ import styled from '@emotion/styled';
 
 export const SeniorRegisterPage = () => {
   const { data: seniors, isLoading, isError, refetch } = useGetAllSeniorInfo();
-  console.log(seniors);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <div>Error: {isError}</div>;
+    return <div>Error</div>;
   }
 
   return (
     <Container>
-      <Flex
-        h='100%'
-        flexDir='column'
-        alignItems='center'
-        flexGrow={1}
-        overflowY='auto'
-      >
+      <SeniorInfoContainer>
         {seniors?.map((senior) => (
           <SeniorInfo key={senior.seniorId} senior={senior} refetch={refetch} />
         ))}
-      </Flex>
+      </SeniorInfoContainer>
       <SeniorRegisterBox refetch={refetch} />
     </Container>
   );
@@ -36,4 +30,16 @@ export const SeniorRegisterPage = () => {
 const Container = styled(Box)`
   position: relative;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
+
+const SeniorInfoContainer = styled(Flex)`
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 70vh;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export default SeniorRegisterPage;
