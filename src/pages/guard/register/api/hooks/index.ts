@@ -1,0 +1,1 @@
+export { useAddSeniorInfo } from './useAddSeniorInfo';

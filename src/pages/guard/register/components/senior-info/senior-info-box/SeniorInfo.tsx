@@ -30,8 +30,8 @@ const SeniorInfo = ({ senior }: { senior: SeniorInfoType }) => {
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;
   max-width: 330px;
-  height: 6rem;
-  min-height: 6rem;
+  height: 5rem;
+  min-height: 5rem;
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
   border-radius: 10px;
