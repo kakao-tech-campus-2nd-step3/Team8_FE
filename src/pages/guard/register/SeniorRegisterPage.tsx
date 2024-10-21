@@ -1,10 +1,20 @@
+import { useGetAllSeniorInfo } from '../mypage';
 import { SeniorInfo } from './components';
 import SeniorRegisterBox from './components/senior-register-box/SeniorRegisterBox';
-import { SENIOR_DATA } from './data';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SeniorRegisterPage = () => {
+  const { data: seniors, isLoading, isError } = useGetAllSeniorInfo();
+  console.log(seniors);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {isError}</div>;
+  }
+
   return (
     <Container>
       <Flex
@@ -14,8 +24,8 @@ export const SeniorRegisterPage = () => {
         flexGrow={1}
         overflowY='auto'
       >
-        {SENIOR_DATA.map((senior) => (
-          <SeniorInfo key={senior.id} senior={senior} />
+        {seniors?.map((senior) => (
+          <SeniorInfo key={senior.seniorId} senior={senior} />
         ))}
       </Flex>
       <SeniorRegisterBox />
