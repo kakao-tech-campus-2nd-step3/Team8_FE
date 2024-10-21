@@ -1,10 +1,10 @@
+import { formatPhoneNumber } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type SeniorInfoType = {
-  title: string;
-  name: string;
-  phoneNumber: string;
+  seniorName: string;
+  seniorPhoneNumber: string;
 };
 
 const SeniorInfo = ({ senior }: { senior: SeniorInfoType }) => {
@@ -16,15 +16,11 @@ const SeniorInfo = ({ senior }: { senior: SeniorInfoType }) => {
     >
       <Box display='flex' flexDir='column' w='100%' maxW='300px'>
         <Text fontSize='0.9rem' fontWeight={700} mb={2}>
-          {senior.title}
+          {senior.seniorName}
         </Text>
         <InfoBox mb={1}>
-          <InfoText>성함</InfoText>
-          <InfoText>{senior.name}</InfoText>
-        </InfoBox>
-        <InfoBox mb={1}>
           <InfoText>전화번호</InfoText>
-          <InfoText>{senior.phoneNumber}</InfoText>
+          <InfoText>{formatPhoneNumber(senior.seniorPhoneNumber)}</InfoText>
         </InfoBox>
       </Box>
     </SeniorInfoContainer>
