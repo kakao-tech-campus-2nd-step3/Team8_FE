@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: RouterPath.SNITTO,
+    path: RouterPath.SINITTO,
     children: [
       {
         index: true,
