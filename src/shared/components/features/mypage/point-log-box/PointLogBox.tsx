@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import PointLogImg from '../../../../assets/point-log-icon.png';
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {
@@ -40,7 +40,25 @@ const PointLogBox = () => {
               <TextLayout>
                 <DetailText>{item.content}</DetailText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  {item.price.toLocaleString()}
+                  <PriceText
+                    color={
+                      item.status === 'SPEND_COMPLETE' ||
+                      item.status === 'WITHDRAW_COMPLETE'
+                        ? 'blue'
+                        : item.status === 'EARN' ||
+                            item.status === 'CHARGE_COMPLETE'
+                          ? 'red'
+                          : 'black'
+                    }
+                  >
+                    {(item.status === 'SPEND_COMPLETE' ||
+                    item.status === 'WITHDRAW_COMPLETE'
+                      ? '-'
+                      : item.status === 'EARN' ||
+                          item.status === 'CHARGE_COMPLETE'
+                        ? '+'
+                        : '') + item.price.toLocaleString()}
+                  </PriceText>
                 </DetailText>
               </TextLayout>
             </DetailTextBox>
@@ -150,6 +168,11 @@ const DetailText = styled(Box)`
   width: 100%;
   display: flex;
   align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const PriceText = styled(Text)`
   font-size: 16px;
   font-weight: 600;
 `;
