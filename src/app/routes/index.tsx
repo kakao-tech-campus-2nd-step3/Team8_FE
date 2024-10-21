@@ -18,6 +18,8 @@ import {
   SinittoGuideLinePage,
   SinittoReviewPage,
   HelloCallApplyPage,
+  GuardMainPage,
+  SinittoMainPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -38,11 +40,28 @@ export const router = createBrowserRouter([
   },
   {
     path: RouterPath.REDIRECT,
-    element: <Layout title='안내' />,
     children: [
       {
         index: true,
         element: <RedirectPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.GUARD,
+    children: [
+      {
+        index: true,
+        element: <GuardMainPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.SINITTO,
+    children: [
+      {
+        index: true,
+        element: <SinittoMainPage />,
       },
     ],
   },

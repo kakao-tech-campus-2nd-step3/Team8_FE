@@ -6,11 +6,13 @@ import { useRegister } from './store/hooks';
 import { FormValues } from './types';
 import { parsePhoneNumber } from '@/shared';
 import { BasicButton } from '@/shared/components';
+import { useAuth } from '@/shared/provider/auth/Auth';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const RegisterPage = () => {
   const [userType, setUserType] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -19,6 +21,8 @@ const RegisterPage = () => {
 
   // 회원가입 처리
   const mutation = useRegister();
+
+  const { email } = useAuth();
 
   const handleUserType = (id: string) => {
     setUserType(id);
@@ -31,7 +35,7 @@ const RegisterPage = () => {
     const requestData = {
       name: data.name,
       phoneNumber: parsePhoneNumber(data.phoneNumber),
-      email: 'test1@example.com', // 임시 (카카오 로그인 후 넘겨받기)
+      email: email || '',
       isSinitto,
     };
     console.log(requestData);

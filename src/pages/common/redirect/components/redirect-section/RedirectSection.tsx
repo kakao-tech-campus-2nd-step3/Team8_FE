@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetKakaoCallback } from '../../store/hooks';
+import { RouterPath } from '@/app/routes/path';
+import { useGetKakaoCallback } from '@/pages';
+import { useAuth } from '@/shared';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 type Props = {
@@ -11,18 +13,28 @@ type Props = {
 const RedirectSection = ({ code }: Props) => {
   const navigate = useNavigate();
 
+  const { setEmail } = useAuth();
+
   const { data } = useGetKakaoCallback(code);
 
   useEffect(() => {
     if (data) {
       const accessToken = data.accessToken;
       const refreshToken = data.refreshToken;
+
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
 
-      navigate('/');
+      setEmail(data.email);
+
+      if (!data.isMember) return navigate(data.redirectUrl);
+
+      if (accessToken) {
+        const path = data.isSinitto ? RouterPath.SINITTO : RouterPath.GUARD;
+        navigate(path);
+      }
     }
-  }, [data, navigate]);
+  }, [data, navigate, setEmail]);
 
   return (
     <Flex
