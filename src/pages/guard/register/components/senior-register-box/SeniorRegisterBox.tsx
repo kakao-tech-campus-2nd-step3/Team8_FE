@@ -1,40 +1,48 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import { Box, Input, Text } from '@chakra-ui/react';
+import { SeniorRegisterValues } from '../../types';
+import SeniorFormField from './SeniorFormField';
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SeniorRegisterBox = () => {
-  const [name, setName] = useState('');
-  const [seniorName, setSeniorName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SeniorRegisterValues>();
 
-  const handleRegister = () => {
-    setName('');
-    setSeniorName('');
-    setPhoneNumber('');
+  const onSubmit = (data: SeniorRegisterValues) => {
+    console.log(data);
   };
 
   return (
-    <RegisterBox>
+    <RegisterBox as='form' onSubmit={handleSubmit(onSubmit)}>
       <InputBox>
-        <InputText>등록 이름</InputText>
-        <RegisterInput value={name} onChange={(e) => setName(e.target.value)} />
-      </InputBox>
-      <InputBox>
-        <InputText>시니어의 성함</InputText>
-        <RegisterInput
-          value={seniorName}
-          onChange={(e) => setSeniorName(e.target.value)}
+        <SeniorFormField
+          label='시니어의 성함'
+          placeholder='예시: 김노인'
+          error={errors.seniorName?.message}
+          registerProps={register('seniorName', {
+            required: '시니어의 성함을 입력해주세요.',
+          })}
         />
       </InputBox>
       <InputBox>
-        <InputText>시니어의 전화번호</InputText>
-        <RegisterInput
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+        <SeniorFormField
+          label='시니어의 전화번호'
+          placeholder='예시: 010-0000-0000'
+          error={errors.seniorPhoneNumber?.message}
+          registerProps={register('seniorPhoneNumber', {
+            required: '연락처를 입력해주세요.',
+            pattern: {
+              value: /^010-\d{4}-\d{4}$/,
+              message: '유효한 연락처 형식이 아닙니다.',
+            },
+          })}
         />
       </InputBox>
-      <StyledButton onClick={handleRegister}>시니어 등록</StyledButton>
+      <StyledButton type='submit'>시니어 등록</StyledButton>
     </RegisterBox>
   );
 };
@@ -59,22 +67,7 @@ const RegisterBox = styled(Box)`
 
 const InputBox = styled(Box)`
   width: 300px;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
   margin: 0.5rem;
-`;
-
-const InputText = styled(Text)`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const RegisterInput = styled(Input)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 1rem;
 `;
 
 const StyledButton = styled.button`
