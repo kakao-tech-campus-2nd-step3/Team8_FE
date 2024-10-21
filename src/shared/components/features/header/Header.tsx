@@ -44,6 +44,7 @@ const HeaderBox = styled.header`
   justify-content: center;
   align-items: center;
   background-color: var(--color-white);
+  z-index: 999;
 `;
 
 const Icon = styled(Image)`

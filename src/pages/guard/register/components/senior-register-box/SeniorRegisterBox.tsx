@@ -27,7 +27,7 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
       <InputBox>
         <SeniorFormField
           label='시니어의 성함'
-          placeholder='예시: 김노인'
+          placeholder='시니어의 성함을 입력해주세요'
           error={errors.seniorName?.message}
           registerProps={register('seniorName', {
             required: '시니어의 성함을 입력해주세요.',
@@ -37,7 +37,7 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
       <InputBox>
         <SeniorFormField
           label='시니어의 전화번호'
-          placeholder='예시: 010-0000-0000'
+          placeholder='010-0000-0000'
           error={errors.seniorPhoneNumber?.message}
           registerProps={register('seniorPhoneNumber', {
             required: '연락처를 입력해주세요.',
@@ -56,10 +56,9 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
 export default SeniorRegisterBox;
 
 const RegisterBox = styled(Box)`
-  position: absolute;
-  bottom: 0;
+  position: relative;
   width: 100%;
-  height: 360px;
+  height: auto;
   left: 50%;
   transform: translateX(-50%);
   max-width: 370px;
@@ -86,6 +85,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  margin-bottom: 10px;
 
   &:hover {
     background-color: #a67070;
