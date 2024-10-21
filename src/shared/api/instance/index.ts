@@ -5,7 +5,7 @@ import type {
 } from 'axios';
 import axios from 'axios';
 
-import { BASE_URI } from '@/shared/constants';
+import { BASE_URI } from '@/shared';
 import { authLocalStorage } from '@/shared/utils/storage';
 import { QueryClient } from '@tanstack/react-query';
 
@@ -50,6 +50,47 @@ fetchInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+fetchInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const refreshToken = localStorage.getItem('refreshToken');
+
+      if (!refreshToken) {
+        return Promise.reject(error);
+      }
+      const resp = await fetch(`${BASE_URI}/api/auth/refresh`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cross-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      });
+      if (resp.ok) {
+        console.log('토큰 재발급 성공');
+
+        const data = await resp.json();
+
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+
+        return fetchInstance(originalRequest);
+      } else {
+        console.log('토큰 재발급 실패');
+
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+      }
+      return Promise.reject(error);
+    }
     return Promise.reject(error);
   }
 );
