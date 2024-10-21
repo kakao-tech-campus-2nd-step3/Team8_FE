@@ -40,7 +40,6 @@ export const router = createBrowserRouter([
   },
   {
     path: RouterPath.REDIRECT,
-    element: <Layout title='안내' />,
     children: [
       {
         index: true,
