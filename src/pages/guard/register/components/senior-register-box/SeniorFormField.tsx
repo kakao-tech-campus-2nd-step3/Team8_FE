@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import { SeniorRegisterValues } from '../../types';
+import { SeniorRegisterValues } from '../../api';
 import { Box, Input, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

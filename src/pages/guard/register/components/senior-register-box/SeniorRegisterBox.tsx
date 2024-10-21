@@ -6,20 +6,19 @@ import { parsePhoneNumber } from '@/shared';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const SeniorRegisterBox = () => {
+const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SeniorRegisterValues>();
-  const { mutate: postSeniorInfo } = useAddSeniorInfo();
+  const { mutate: postSeniorInfo } = useAddSeniorInfo(refetch);
 
   const onSubmit = (data: SeniorRegisterValues) => {
     const requestSeniorData = {
       seniorName: data.seniorName,
       seniorPhoneNumber: parsePhoneNumber(data.seniorPhoneNumber),
     };
-    console.log(requestSeniorData);
     postSeniorInfo(requestSeniorData);
   };
 
