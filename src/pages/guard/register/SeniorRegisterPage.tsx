@@ -5,7 +5,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SeniorRegisterPage = () => {
-  const { data: seniors, isLoading, isError } = useGetAllSeniorInfo();
+  const { data: seniors, isLoading, isError, refetch } = useGetAllSeniorInfo();
   console.log(seniors);
   if (isLoading) {
     return <div>Loading...</div>;
@@ -25,10 +25,10 @@ export const SeniorRegisterPage = () => {
         overflowY='auto'
       >
         {seniors?.map((senior) => (
-          <SeniorInfo key={senior.seniorId} senior={senior} />
+          <SeniorInfo key={senior.seniorId} senior={senior} refetch={refetch} />
         ))}
       </Flex>
-      <SeniorRegisterBox />
+      <SeniorRegisterBox refetch={refetch} />
     </Container>
   );
 };
