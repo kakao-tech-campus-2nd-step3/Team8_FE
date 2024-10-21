@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { RegisterFields, RegisterType, Tos } from './components';
 import { useRegister } from './store/hooks';
 import { FormValues } from './types';
+import { parsePhoneNumber } from '@/shared';
 import { BasicButton } from '@/shared/components';
 import { useAuth } from '@/shared/provider/auth/Auth';
 import { Divider } from '@chakra-ui/react';
@@ -33,12 +34,11 @@ const RegisterPage = () => {
 
     const requestData = {
       name: data.name,
-      phoneNumber: data.phoneNumber,
+      phoneNumber: parsePhoneNumber(data.phoneNumber),
       email: email || '',
       isSinitto,
     };
     console.log(requestData);
-    // 회원가입 API 호출
     mutation.mutate(requestData);
   };
 
