@@ -30,8 +30,8 @@ const RedirectSection = ({ code }: Props) => {
       if (!data.isMember) return navigate(data.redirectUrl);
 
       if (accessToken) {
-        const path = data.isSinitto ? RouterPath.SNITTO : RouterPath.GUARD;
-        window.location.href = path;
+        const path = data.isSinitto ? RouterPath.SINITTO : RouterPath.GUARD;
+        navigate(path);
       }
     }
   }, [data, navigate, setEmail]);
