@@ -53,14 +53,14 @@ const Label = styled(Text)`
 const StyledInput = styled(Input)`
   background-color: var(--color-white);
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: 0.5rem;
 `;
 
 const StyledTextarea = styled(Textarea)`
   background-color: var(--color-white);
   border: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: 0.5rem;
   min-height: 100px;
   resize: vertical;
