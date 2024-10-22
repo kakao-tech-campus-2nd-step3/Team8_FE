@@ -17,8 +17,7 @@ const initStorage = <T extends keyof StorageKey>(
     if (value === undefined || value === null) {
       return storage.removeItem(storageKey);
     }
-    const stringifiedValue = JSON.stringify(value);
-    storage.setItem(storageKey, stringifiedValue);
+    storage.setItem(storageKey, String(value));
   };
 
   return { get, set };
