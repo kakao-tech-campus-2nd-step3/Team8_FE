@@ -1,12 +1,12 @@
 import { GuideLineList } from './components/guideline-list';
+import { Header } from './components/header/Header';
 import { HelloCallApply } from './components/hello-call-apply';
-import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const GuardMainPage = () => {
   return (
     <GuardMainPageLayout>
-      <Flex>header</Flex>
+      <Header />
       <GuideLineList />
       <HelloCallApply />
     </GuardMainPageLayout>
