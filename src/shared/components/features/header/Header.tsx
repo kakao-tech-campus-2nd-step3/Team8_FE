@@ -34,12 +34,14 @@ const Header = ({ title, defaultBackPath = RouterPath.ROOT }: HeaderProps) => {
 
 export default Header;
 
+export const HEADER_HEIGHT = '50px';
+
 const HeaderBox = styled.header`
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: ${HEADER_HEIGHT};
   display: flex;
   justify-content: center;
   align-items: center;
