@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
     element: <Layout title='가이드라인 목록' />,
     children: [
       {
-        index: true,
+        path: RouterPath.GUARD_GUIDELINE_DETAIL,
         element: <GuideLinePage />,
       },
     ],

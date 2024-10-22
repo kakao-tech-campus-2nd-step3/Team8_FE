@@ -1,9 +1,31 @@
+import { useParams } from 'react-router-dom';
+
+import { useGetSeniorAllGuidelines } from './api';
 import { GuideLineInfo } from './components';
-import { GUIDELINE_DATA } from './data';
 import { Box, Flex, Input, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
+export type GuideLineDetailParams = {
+  seniorId: string; // 시니어 id
+  guidelineType: string; // 가이드라인 type (TAXI, DELIVERY)
+};
+
 export const GuideLinePage = () => {
+  const { seniorId, guidelineType } = useParams<GuideLineDetailParams>();
+
+  const {
+    data: guidelineData,
+    isLoading,
+    isError,
+  } = useGetSeniorAllGuidelines(Number(seniorId), String(guidelineType));
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
   return (
     <Container>
       <Flex
@@ -13,8 +35,8 @@ export const GuideLinePage = () => {
         flexGrow={1}
         overflowY='auto'
       >
-        {GUIDELINE_DATA.map((guideline) => (
-          <GuideLineInfo key={guideline.id} guideline={guideline} />
+        {guidelineData?.map((guideline) => (
+          <GuideLineInfo key={guideline.title} guideline={guideline} />
         ))}
       </Flex>
       <RegisterBox>
