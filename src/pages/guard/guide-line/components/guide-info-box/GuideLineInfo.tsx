@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useModifyGuideline } from '../../api/hooks/useModifyGuideline';
+import { useModifyGuideline } from '@/pages/guard';
 import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
