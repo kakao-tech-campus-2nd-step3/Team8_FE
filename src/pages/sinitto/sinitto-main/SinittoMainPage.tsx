@@ -6,7 +6,7 @@ export const SinittoMainPage = () => {
   return (
     <SinittoMainPageLayout>
       <Header />
-      <Flex w='100%' alignItems='center'>
+      <Flex w='100%' alignItems='center' my={10}>
         <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
           김시니또
         </Text>
