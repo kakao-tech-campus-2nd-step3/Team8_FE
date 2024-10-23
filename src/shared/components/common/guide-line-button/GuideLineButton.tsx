@@ -54,8 +54,8 @@ export const GuideLineButton = ({
     }
 
     if (seniorId === null) {
-      // seniorId가 null인 경우 (보호자가 선택되지 않은 경우)
-      alert('보호자를 선택한 후 다시 선택해주세요');
+      // seniorId가 null인 경우 (시니어가 선택되지 않은 경우)
+      alert('시니어를 선택한 후 다시 선택해주세요');
       return;
     }
 
