@@ -6,8 +6,7 @@ export const RouterPath = {
   REDIRECT: '/redirection',
   GUARD: '/guard',
   GUARD_MYPAGE: `/guard/mypage`,
-  GUARD_GUIDELINE: `/guard/guideline`,
-  GUARD_GUIDELINE_DETAIL: ':seniorId/:guidelineType', // 시니어 id, 가이드라인 type 으로 시니어 별 가이드라인 조회
+  GUARD_GUIDELINE: `:seniorId/:guidelineType`,
   SINITTO: '/sinitto',
   SINITTO_MYPAGE: `/sinitto/mypage`,
   SERVICE_HISTORY: `/service-history`,

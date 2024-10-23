@@ -1,11 +1,23 @@
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
 import IconList from '@/pages/assets/guard-main/list.svg';
 import IconUser from '@/pages/assets/shared/user.svg';
 import { HEADER_HEIGHT, useAllSeniorInfo } from '@/shared';
 import { Flex, Image, Select } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const Header = () => {
+type HeaderProps = {
+  currentSenior: number | null;
+  setCurrentSenior: Dispatch<SetStateAction<number | null>>;
+};
+
+export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
   const { data: seniors } = useAllSeniorInfo();
+  const handleSeniorChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setCurrentSenior(selectedValue ? Number(selectedValue) : null);
+  };
+
   return (
     <Wrapper>
       <Image src={IconList} alt='icon-list' />
@@ -19,6 +31,8 @@ export const Header = () => {
           fontSize='lg'
           fontWeight='700'
           size='sm'
+          value={currentSenior?.toString() || ''}
+          onChange={handleSeniorChange}
         >
           {seniors?.map((senior) => (
             <option key={senior.seniorId} value={senior.seniorId}>

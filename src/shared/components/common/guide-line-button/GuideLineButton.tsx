@@ -13,6 +13,7 @@ type GuideLineCategory = {
 type Props = {
   marginTop?: number;
   marginBottom?: number;
+  seniorId?: number | null;
 };
 
 const GUIDE_LINE_CATEGORIES: GuideLineCategory[] = [
@@ -38,7 +39,11 @@ const GUIDE_LINE_CATEGORIES: GuideLineCategory[] = [
   },
 ];
 
-export const GuideLineButton = ({ marginTop, marginBottom }: Props) => {
+export const GuideLineButton = ({
+  marginTop,
+  marginBottom,
+  seniorId,
+}: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -46,7 +51,11 @@ export const GuideLineButton = ({ marginTop, marginBottom }: Props) => {
     if (id === null) {
       alert('개발 예정입니다.');
     } else {
-      navigate(`${location.pathname}/${id}`);
+      {
+        seniorId
+          ? navigate(`${location.pathname}/${seniorId}/${id}`)
+          : navigate(`${location.pathname}/${id}`);
+      }
     }
   };
 
