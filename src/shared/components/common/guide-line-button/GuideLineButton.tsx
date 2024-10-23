@@ -50,12 +50,21 @@ export const GuideLineButton = ({
   const handleClick = (id: string | null) => {
     if (id === null) {
       alert('개발 예정입니다.');
+      return;
+    }
+
+    if (seniorId === null) {
+      // seniorId가 null인 경우 (보호자가 선택되지 않은 경우)
+      alert('보호자를 선택한 후 다시 선택해주세요');
+      return;
+    }
+
+    if (seniorId === undefined) {
+      // seniorId prop이 전달되지 않은 경우 (시니또의 콜백 요청 상세보기 페이지에서 기본적으로 사용하는 경우)
+      navigate(`${location.pathname}/${id}`);
     } else {
-      {
-        seniorId
-          ? navigate(`${location.pathname}/${seniorId}/${id}`)
-          : navigate(`${location.pathname}/${id}`);
-      }
+      // seniorId prop이 전달된 경우 (보호자 홈 페이지에서 시니어를 선택한 후 그 시니어의 가이드라인 페이지에 접근하려는 경우)
+      navigate(`${location.pathname}/${seniorId}/${id}`);
     }
   };
 
