@@ -1,5 +1,5 @@
 import { IconArrow } from '@/pages/assets';
-import HelloCallImg from '@/pages/assets/guard-main/hello-call.png';
+import HelloCallImg from '@/pages/assets/shared/hello-call.png';
 import { Button, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
