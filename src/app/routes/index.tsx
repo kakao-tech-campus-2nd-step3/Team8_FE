@@ -86,11 +86,11 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: RouterPath.GUARD_GUIDELINE,
+    path: RouterPath.GUARD,
     element: <Layout title='가이드라인 목록' />,
     children: [
       {
-        index: true,
+        path: RouterPath.GUARD_GUIDELINE,
         element: <GuideLinePage />,
       },
     ],

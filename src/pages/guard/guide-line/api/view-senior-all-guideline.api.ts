@@ -1,6 +1,7 @@
 import { fetchInstance } from '@/shared/api/instance';
 
 export type SeniorAllGuideLineResponse = {
+  Id: number;
   type: string;
   title: string;
   content: string;
