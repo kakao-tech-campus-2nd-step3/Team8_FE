@@ -37,7 +37,12 @@ export const GuideLinePage = () => {
         overflowY='auto'
       >
         {guidelineData?.map((guideline) => (
-          <GuideLineInfo key={guideline.Id} guideline={guideline} />
+          <GuideLineInfo
+            key={guideline.Id}
+            refetch={refetch}
+            guideline={guideline}
+            seniorId={Number(seniorId)}
+          />
         ))}
       </Flex>
       <GuidelineRegisterBox
