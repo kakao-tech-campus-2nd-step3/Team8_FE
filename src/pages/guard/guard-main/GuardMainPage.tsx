@@ -1,13 +1,20 @@
+import { useState } from 'react';
+
 import { GuideLineList } from './components/guideline-list';
 import { Header } from './components/header/Header';
 import { HelloCallApply } from './components/hello-call-apply';
 import styled from '@emotion/styled';
 
 export const GuardMainPage = () => {
+  const [currentSenior, setCurrentSenior] = useState<number | null>(null);
+  console.log(currentSenior);
   return (
     <GuardMainPageLayout>
-      <Header />
-      <GuideLineList />
+      <Header
+        currentSenior={currentSenior}
+        setCurrentSenior={setCurrentSenior}
+      />
+      <GuideLineList seniorId={currentSenior} />
       <HelloCallApply />
     </GuardMainPageLayout>
   );

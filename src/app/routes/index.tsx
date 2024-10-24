@@ -54,6 +54,15 @@ export const router = createBrowserRouter([
         index: true,
         element: <GuardMainPage />,
       },
+      {
+        element: <Layout title='가이드라인 목록' />,
+        children: [
+          {
+            path: RouterPath.GUARD_GUIDELINE,
+            element: <GuideLinePage />,
+          },
+        ],
+      },
     ],
   },
   {
@@ -82,16 +91,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <GuardMyPage />,
-      },
-    ],
-  },
-  {
-    path: RouterPath.GUARD_GUIDELINE,
-    element: <Layout title='가이드라인 목록' />,
-    children: [
-      {
-        index: true,
-        element: <GuideLinePage />,
       },
     ],
   },

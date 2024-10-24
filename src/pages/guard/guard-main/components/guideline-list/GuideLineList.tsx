@@ -2,7 +2,11 @@ import { GuideLineButton } from '@/shared';
 import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const GuideLineList = () => {
+type Props = {
+  seniorId: number | null;
+};
+
+export const GuideLineList = ({ seniorId }: Props) => {
   return (
     <Wrapper>
       <NoticeBox>
@@ -11,7 +15,7 @@ export const GuideLineList = () => {
         <NoticeText>시니또들이 더욱 빠르게 도움을 줄 수 있습니다.</NoticeText>
       </NoticeBox>
       <Flex>
-        <GuideLineButton marginTop={5} />
+        <GuideLineButton marginTop={5} seniorId={seniorId} />
       </Flex>
     </Wrapper>
   );

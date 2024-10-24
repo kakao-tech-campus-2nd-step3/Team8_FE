@@ -6,7 +6,7 @@ export const RouterPath = {
   REDIRECT: '/redirection',
   GUARD: '/guard',
   GUARD_MYPAGE: `/guard/mypage`,
-  GUARD_GUIDELINE: `/guard/guideline`,
+  GUARD_GUIDELINE: `:seniorId/:guidelineType`,
   SINITTO: '/sinitto',
   SINITTO_MYPAGE: `/sinitto/mypage`,
   SERVICE_HISTORY: `/service-history`,

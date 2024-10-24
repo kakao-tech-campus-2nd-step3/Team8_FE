@@ -1,9 +1,32 @@
-import { GuideLineInfo } from './components';
-import { GUIDELINE_DATA } from './data';
-import { Box, Flex, Input, Text, Textarea } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+
+import { useGetSeniorAllGuidelines } from './api';
+import { GuideLineInfo, GuidelineRegisterBox } from './components';
+import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
+export type GuideLineDetailParams = {
+  seniorId: string; // 시니어 id
+  guidelineType: string; // 가이드라인 type (TAXI, DELIVERY)
+};
+
 export const GuideLinePage = () => {
+  const { seniorId, guidelineType } = useParams<GuideLineDetailParams>();
+
+  const {
+    data: guidelineData,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetSeniorAllGuidelines(Number(seniorId), String(guidelineType));
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
   return (
     <Container>
       <Flex
@@ -13,21 +36,20 @@ export const GuideLinePage = () => {
         flexGrow={1}
         overflowY='auto'
       >
-        {GUIDELINE_DATA.map((guideline) => (
-          <GuideLineInfo key={guideline.id} guideline={guideline} />
+        {guidelineData?.map((guideline) => (
+          <GuideLineInfo
+            key={guideline.Id}
+            refetch={refetch}
+            guideline={guideline}
+            seniorId={Number(seniorId)}
+          />
         ))}
       </Flex>
-      <RegisterBox>
-        <InputBox>
-          <InputText>가이드라인 제목</InputText>
-          <GuideLineInput />
-        </InputBox>
-        <InputBox>
-          <InputText>가이드라인 내용</InputText>
-          <GuideLineContentInput />
-        </InputBox>
-        <StyledButton>가이드라인 추가하기</StyledButton>
-      </RegisterBox>
+      <GuidelineRegisterBox
+        refetch={refetch}
+        seniorId={Number(seniorId)}
+        guidelineType={String(guidelineType)}
+      />
     </Container>
   );
 };
@@ -35,67 +57,4 @@ export const GuideLinePage = () => {
 const Container = styled(Box)`
   position: relative;
   height: 100vh;
-`;
-const RegisterBox = styled(Box)`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 350px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 370px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--color-white-gray);
-  border: 1px solid var(--color-white-gray);
-  border-radius: 15px;
-`;
-
-const InputBox = styled(Box)`
-  width: 300px;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem;
-`;
-
-const GuideLineContentInput = styled(Textarea)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 1rem;
-`;
-
-const InputText = styled(Text)`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const GuideLineInput = styled(Input)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 1rem;
-`;
-
-const StyledButton = styled.button`
-  position: absolute;
-  bottom: 1rem;
-  width: 300px;
-  height: 40px;
-  background-color: #c69090;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #a67070;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
 `;
