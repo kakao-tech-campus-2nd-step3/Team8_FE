@@ -27,7 +27,6 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
       title: data.title,
       content: data.content,
     };
-    console.log(requestGuidelineData);
     postGuideline(requestGuidelineData);
   };
   return (

@@ -30,6 +30,5 @@ export const getSeniorAllGuidelines = async ({
   const response = await fetchInstance.get(
     getSeniorAllGuidelinesPath(seniorId, guidelineType)
   );
-  console.log(response.data);
   return response.data;
 };
