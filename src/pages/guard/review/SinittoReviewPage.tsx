@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import starIcon from './asset/star-icon.svg';
 import { BasicButton, Notice } from '@/shared/components';
-import { Text, Flex, Box, Textarea, Image, Button } from '@chakra-ui/react';
+import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoReviewPage = () => {
@@ -120,13 +120,15 @@ const Star = styled(Image)`
   transition: opacity 0.2s;
 `;
 
-const EvalButton = styled(Button)<{ isGood: boolean }>`
+const EvalButton = styled.button<{ isGood: boolean }>`
   background-color: ${({ isGood }) =>
     isGood ? 'var(--color-primary)' : '#cfcfcf'};
   color: ${({ isGood }) => (isGood ? 'var(--color-white)' : 'black')};
-  width: 50px;
+  width: 4rem;
   height: 35px;
   font-size: 16px;
+  border: 1px solid var(--color-white-gray);
+  border-radius: 10px;
 
   &:hover {
     background-color: var(--color-primary);
