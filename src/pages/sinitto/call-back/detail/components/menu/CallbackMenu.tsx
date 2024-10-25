@@ -7,6 +7,7 @@ import {
 } from '../../api/hooks';
 import { PostAcceptMenu } from '../../components/menu/post-accept';
 import { PreAcceptMenu } from '../../components/menu/pre-accept';
+import { RouterPath } from '@/app/routes';
 import { Spinner } from '@chakra-ui/react';
 
 type MenuProps = {
@@ -32,7 +33,7 @@ export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
     isSuccess: isCompleteSuccess,
   } = useCompleteCallback();
   if (isCompleteSuccess) {
-    navigate('/call-back'); // TODO: 완료 이후 이동 페이지 지정 필요
+    navigate(RouterPath.CALL_BACK_LIST); // TODO: 완료 이후 이동 페이지 지정 필요
   }
 
   const {
@@ -41,7 +42,7 @@ export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
     isSuccess: isCancelSuccess,
   } = useCancelCallback();
   if (isCancelSuccess) {
-    navigate('/call-back'); // TODO: 취소 이후 이동 페이지 지정 필요
+    navigate(RouterPath.CALL_BACK_LIST); // TODO: 취소 이후 이동 페이지 지정 필요
   }
 
   const isLoading = isAcceptLoading || isCancelLoading || isCompleteLoading;
