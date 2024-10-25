@@ -1,0 +1,195 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { RouterPath } from './path';
+import {
+  MainPage,
+  RegisterPage,
+  RedirectPage,
+  SinittoMypage,
+  GuardMyPage,
+  GuideLinePage,
+  ServiceHistoryPage,
+  HelloCallListPage,
+  HelloCallServicePage,
+  HelloCallReportPage,
+  SeniorRegisterPage,
+  CallBackListPage,
+  CallBackDetailPage,
+  SinittoGuideLinePage,
+  SinittoReviewPage,
+  HelloCallApplyPage,
+  GuardMainPage,
+  SinittoMainPage,
+} from '@/pages';
+import { Layout } from '@/shared/components';
+
+export const router = createBrowserRouter([
+  {
+    path: RouterPath.ROOT,
+    element: <MainPage />,
+  },
+  {
+    path: RouterPath.SIGNUP,
+    element: <Layout title='회원가입' />,
+    children: [
+      {
+        index: true,
+        element: <RegisterPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.REDIRECT,
+    children: [
+      {
+        index: true,
+        element: <RedirectPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.GUARD,
+    children: [
+      {
+        path: '',
+        element: <GuardMainPage />,
+      },
+      {
+        element: <Layout title='가이드라인 목록' />,
+        children: [
+          {
+            path: RouterPath.GUARD_GUIDELINE,
+            element: <GuideLinePage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.MYPAGE,
+        element: <Layout title='마이페이지' />,
+        children: [
+          {
+            index: true,
+            element: <GuardMyPage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.SERVICE_HISTORY,
+        element: <Layout title='서비스 이용내역' />,
+        children: [
+          {
+            index: true,
+            element: <ServiceHistoryPage />,
+          },
+        ],
+      },
+      {
+        // TODO: 이 페이지도 수정이 필요함.
+        path: RouterPath.CALL_BACK_GUID_LINE,
+        element: <Layout title='가이드라인' />,
+        children: [
+          {
+            index: true,
+            element: <SinittoGuideLinePage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.HELLO_CALL_GUARD_APPLY,
+        element: <Layout title='안부전화 서비스 신청' />,
+        children: [
+          {
+            index: true,
+            element: <HelloCallApplyPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: RouterPath.SINITTO,
+    children: [
+      {
+        index: true,
+        element: <SinittoMainPage />,
+      },
+      {
+        path: RouterPath.MYPAGE,
+        element: <Layout title='마이페이지' />,
+        children: [
+          {
+            index: true,
+            element: <SinittoMypage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.CALL_BACK_LIST,
+        children: [
+          {
+            path: '',
+            element: <Layout title='콜백 요청리스트' />,
+            children: [
+              {
+                index: true,
+                element: <CallBackListPage />,
+              },
+            ],
+          },
+          {
+            path: RouterPath.CALL_BACK_DETAIL,
+            element: <Layout title='요청 상세페이지' />,
+            children: [
+              {
+                index: true,
+                element: <CallBackDetailPage />,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        path: RouterPath.HELLO_CALL,
+        element: <Layout title='안부전화 서비스' />,
+        children: [
+          { index: true, element: <HelloCallListPage /> },
+          {
+            path: RouterPath.HELLO_CALL_SERVICE,
+            element: <HelloCallServicePage />,
+          },
+          {
+            // TODO: 이 페이지를 들어갈 수 있는 수단이 없음.
+            path: RouterPath.HELLO_CALL_REPORT,
+            element: <HelloCallReportPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: RouterPath.SENIOR_REGISTER,
+    element: <Layout title='시니어 등록하기' />,
+    children: [
+      {
+        index: true,
+        element: <SeniorRegisterPage />,
+      },
+    ],
+  },
+  {
+    // TODO: 콜백에 들어가야 할지 가이드라인에 들어가야 할지 잘 모르겠음.
+    path: RouterPath.SINITTO_REVIEW,
+    element: <Layout title='시니또 평가하기' />,
+    children: [
+      {
+        index: true,
+        element: <SinittoReviewPage />,
+      },
+    ],
+  },
+]);
+
+export const Routes = () => {
+  return <RouterProvider router={router} />;
+};
