@@ -2,7 +2,7 @@ import {
   getKakaoCallback,
   KakaoCallbackQueryKey,
   KakaoCallbackResponse,
-} from '../api/kakao-callback.api';
+} from '@/pages';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetKakaoCallback = (code: string) => {

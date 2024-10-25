@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout source code.
         uses: actions/checkout@master
+        with: 
+          submodules: true
+          token: ${{ secrets.ACTION_TOKEN }}
 
       - name: Cache node modules
         uses: actions/cache@v4
