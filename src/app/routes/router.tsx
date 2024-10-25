@@ -14,8 +14,7 @@ import {
   HelloCallReportPage,
   SeniorRegisterPage,
   CallBackListPage,
-  CallBackDetailPage,
-  SinittoGuideLinePage,
+  CallBackDetailPage, // SinittoGuideLinePage,
   SinittoReviewPage,
   HelloCallApplyPage,
   GuardMainPage,
@@ -52,7 +51,37 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <GuardMainPage />,
+        children: [
+          {
+            index: true,
+            element: <GuardMainPage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.MYPAGE,
+        children: [
+          {
+            path: '',
+            element: <Layout title='마이페이지' />,
+            children: [
+              {
+                index: true,
+                element: <GuardMyPage />,
+              },
+            ],
+          },
+          {
+            path: RouterPath.SERVICE_HISTORY,
+            element: <Layout title='서비스 이용내역' />,
+            children: [
+              {
+                path: '',
+                element: <ServiceHistoryPage />,
+              },
+            ],
+          },
+        ],
       },
       {
         element: <Layout title='가이드라인 목록' />,
@@ -63,37 +92,17 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: RouterPath.MYPAGE,
-        element: <Layout title='마이페이지' />,
-        children: [
-          {
-            index: true,
-            element: <GuardMyPage />,
-          },
-        ],
-      },
-      {
-        path: RouterPath.SERVICE_HISTORY,
-        element: <Layout title='서비스 이용내역' />,
-        children: [
-          {
-            index: true,
-            element: <ServiceHistoryPage />,
-          },
-        ],
-      },
-      {
-        // TODO: 이 페이지도 수정이 필요함.
-        path: RouterPath.CALL_BACK_GUID_LINE,
-        element: <Layout title='가이드라인' />,
-        children: [
-          {
-            index: true,
-            element: <SinittoGuideLinePage />,
-          },
-        ],
-      },
+      // {
+      //   // TODO: 이 페이지도 수정이 필요함.
+      //   path: RouterPath.CALL_BACK_GUID_LINE,
+      //   element: <Layout title='가이드라인' />,
+      //   children: [
+      //     {
+      //       index: true,
+      //       element: <SinittoGuideLinePage />,
+      //     },
+      //   ],
+      // },
       {
         path: RouterPath.HELLO_CALL_GUARD_APPLY,
         element: <Layout title='안부전화 서비스 신청' />,
@@ -146,6 +155,16 @@ export const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: RouterPath.SINITTO_REVIEW,
+            element: <Layout title='시니또 평가하기' />,
+            children: [
+              {
+                index: true,
+                element: <SinittoReviewPage />,
+              },
+            ],
+          },
         ],
       },
 
@@ -174,17 +193,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <SeniorRegisterPage />,
-      },
-    ],
-  },
-  {
-    // TODO: 콜백에 들어가야 할지 가이드라인에 들어가야 할지 잘 모르겠음.
-    path: RouterPath.SINITTO_REVIEW,
-    element: <Layout title='시니또 평가하기' />,
-    children: [
-      {
-        index: true,
-        element: <SinittoReviewPage />,
       },
     ],
   },
