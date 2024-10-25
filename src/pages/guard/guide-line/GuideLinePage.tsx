@@ -35,10 +35,11 @@ export const GuideLinePage = () => {
         alignItems='center'
         flexGrow={1}
         overflowY='auto'
+        height='60vh'
       >
         {guidelineData?.map((guideline) => (
           <GuideLineInfo
-            key={guideline.Id}
+            key={guideline.id}
             refetch={refetch}
             guideline={guideline}
             seniorId={Number(seniorId)}
