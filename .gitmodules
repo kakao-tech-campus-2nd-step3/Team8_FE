@@ -1,0 +1,3 @@
+[submodule "src/shared/utils/env"]
+	path = src/shared/utils/env
+	url = https://github.com/Dobbymin/sinitto-submodule.git

@@ -1,0 +1,1 @@
+export { TellToSinitto } from './TellToSinitto';

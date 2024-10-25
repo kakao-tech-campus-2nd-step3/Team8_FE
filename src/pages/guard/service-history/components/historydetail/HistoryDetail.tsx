@@ -18,15 +18,16 @@ const HistoryDetail = ({ date, name, status }: HistoryItem) => {
   return (
     <Box
       display='flex'
-      w='15rem'
+      w='100%'
+      gap={2}
       justifyContent='space-between'
       alignItems='center'
-      mb={2}
+      mb={3}
     >
-      <Text fontSize='0.8rem' fontWeight={600} mr={1}>
+      <Text fontSize='md' fontWeight={600} mr={1}>
         {date}
       </Text>
-      <Text fontSize='0.8rem' fontWeight={600}>
+      <Text fontSize='md' fontWeight={600}>
         {name}
       </Text>
       <StatusButton onClick={handleButtonClick} status={currentStatus}>
@@ -37,9 +38,9 @@ const HistoryDetail = ({ date, name, status }: HistoryItem) => {
 };
 
 const StatusButton = styled.button<{ status: string }>`
-  width: 3rem;
-  height: 1.5rem;
-  font-size: 0.7rem;
+  width: 5rem;
+  height: 2rem;
+  font-size: 1rem;
   font-weight: 600;
   background-color: ${({ status }) =>
     status === '완료' ? '#B4D6CD' : '#ffda76'};
