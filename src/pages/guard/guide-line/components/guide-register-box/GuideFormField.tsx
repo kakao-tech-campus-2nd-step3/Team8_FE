@@ -42,26 +42,27 @@ const FieldContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: auto;
 `;
 
 const Label = styled(Text)`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 `;
 
 const StyledInput = styled(Input)`
   background-color: var(--color-white);
   border: none;
   font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 `;
 
 const StyledTextarea = styled(Textarea)`
   background-color: var(--color-white);
   border: none;
   font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
   min-height: 100px;
   resize: vertical;
 `;

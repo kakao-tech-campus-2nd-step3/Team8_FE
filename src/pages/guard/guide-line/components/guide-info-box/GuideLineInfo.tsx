@@ -103,9 +103,9 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
             alignItems='center'
             cursor='pointer'
           >
-            <Text fontSize='1rem' fontWeight={700}>
+            <Box fontSize='1rem' fontWeight={700} width='70%'>
               {guideline.title}
-            </Text>
+            </Box>
             <Box display='flex' flexDir='row' gap={1}>
               <Image src={deleteIcon} onClick={handleDelete} w={4} h={4} />
               <Image

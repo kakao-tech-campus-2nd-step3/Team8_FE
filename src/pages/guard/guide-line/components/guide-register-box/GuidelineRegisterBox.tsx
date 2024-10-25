@@ -65,7 +65,8 @@ const RegisterBox = styled(Box)`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 350px;
+  height: auto;
+  min-height: 350px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 370px;
@@ -83,11 +84,12 @@ const InputBox = styled(Box)`
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
 const StyledButton = styled.button`
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.5rem;
   width: 300px;
   height: 40px;
   background-color: #c69090;
