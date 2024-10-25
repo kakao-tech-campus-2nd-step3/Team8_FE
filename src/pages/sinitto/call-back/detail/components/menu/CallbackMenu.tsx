@@ -7,14 +7,21 @@ import {
 } from '../../api/hooks';
 import { PostAcceptMenu } from '../../components/menu/post-accept';
 import { PreAcceptMenu } from '../../components/menu/pre-accept';
+import { RouterPath } from '@/app/routes/path';
+import { formatPhoneNumber } from '@/shared';
 import { Spinner } from '@chakra-ui/react';
 
 type MenuProps = {
   callBackId: number;
   accept: boolean;
+  phoneNumber: string;
 };
 
-export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
+export const CallbackMenu = ({
+  callBackId,
+  accept,
+  phoneNumber,
+}: MenuProps) => {
   const navigate = useNavigate();
 
   const {
@@ -32,7 +39,7 @@ export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
     isSuccess: isCompleteSuccess,
   } = useCompleteCallback();
   if (isCompleteSuccess) {
-    navigate('/call-back'); // TODO: 완료 이후 이동 페이지 지정 필요
+    navigate(RouterPath.SINITTO);
   }
 
   const {
@@ -41,7 +48,7 @@ export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
     isSuccess: isCancelSuccess,
   } = useCancelCallback();
   if (isCancelSuccess) {
-    navigate('/call-back'); // TODO: 취소 이후 이동 페이지 지정 필요
+    navigate(RouterPath.CALL_BACK_LIST);
   }
 
   const isLoading = isAcceptLoading || isCancelLoading || isCompleteLoading;
@@ -52,7 +59,7 @@ export const CallbackMenu = ({ callBackId, accept }: MenuProps) => {
     <PostAcceptMenu
       handleComplete={() => completeCallback(callBackId)}
       handleCancle={() => cancelCallback(callBackId)}
-      phoneNumber='010-1234-5678' // TODO: api로 콜백 조회 시 response에 전화번호 추가 필요
+      phoneNumber={formatPhoneNumber(phoneNumber)}
     />
   ) : (
     <PreAcceptMenu handleClick={() => acceptCallback(callBackId)} />
