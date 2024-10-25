@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 
 export const GuardMainPage = () => {
   const [currentSenior, setCurrentSenior] = useState<number | null>(null);
-  console.log(currentSenior);
+
   return (
     <GuardMainPageLayout>
       <Header
