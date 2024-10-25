@@ -4,3 +4,4 @@ export * from './hello-call-list';
 export * from './hello-call-report';
 export * from './hello-call-service';
 export * from './mypage';
+export * from './sinitto-main';

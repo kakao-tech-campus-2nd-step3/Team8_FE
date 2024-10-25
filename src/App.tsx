@@ -1,18 +1,26 @@
-import { Routes } from './app/routes';
-import { queryClient } from './shared/api/instance';
-import { globalStyle } from './shared/theme/global';
+import { Routes } from '@/app/routes';
+import {
+  AllSeniorInfoProvider,
+  queryClient,
+  AuthProvider,
+  globalStyle,
+} from '@/shared';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <Global styles={globalStyle} />
-        <Routes />
-      </ChakraProvider>
-    </QueryClientProvider>
+    <ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <AllSeniorInfoProvider>
+          <AuthProvider>
+            <Global styles={globalStyle} />
+            <Routes />
+          </AuthProvider>
+        </AllSeniorInfoProvider>
+      </QueryClientProvider>
+    </ChakraProvider>
   );
 };
 

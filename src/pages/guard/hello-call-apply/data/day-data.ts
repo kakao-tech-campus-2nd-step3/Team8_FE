@@ -1,9 +1,11 @@
 export const DAY_DATA = [
-  { value: 'monday', label: '월' },
-  { value: 'tuesday', label: '화' },
-  { value: 'wednesday', label: '수' },
-  { value: 'thursday', label: '목' },
-  { value: 'friday', label: '금' },
-  { value: 'saturday', label: '토' },
-  { value: 'sunday', label: '일' },
+  { value: '월', label: '월' },
+  { value: '화', label: '화' },
+  { value: '수', label: '수' },
+  { value: '목', label: '목' },
+  { value: '금', label: '금' },
+  { value: '토', label: '토' },
+  { value: '일', label: '일' },
 ];
+
+export const DAY_ORDER = ['월', '화', '수', '목', '금', '토', '일'];

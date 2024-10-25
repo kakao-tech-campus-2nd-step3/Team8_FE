@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 
 type Props = {
   title: string;
-  id: string;
+  id: string | null;
   backgroundColor: string;
 };
 
@@ -15,7 +15,11 @@ export const GuideLineButton = ({ title, backgroundColor, id }: Props) => {
   const location = useLocation();
 
   const handleClick = () => {
-    navigate(`${location.pathname}/${id}`);
+    if (id == null) {
+      alert('개발 예정입니다.');
+    } else {
+      navigate(`${location.pathname}/${id}`);
+    }
   };
 
   return (
