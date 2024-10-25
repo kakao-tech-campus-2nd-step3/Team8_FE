@@ -38,7 +38,7 @@ export const GuideLinePage = () => {
       >
         {guidelineData?.map((guideline) => (
           <GuideLineInfo
-            key={guideline.Id}
+            key={guideline.id}
             refetch={refetch}
             guideline={guideline}
             seniorId={Number(seniorId)}

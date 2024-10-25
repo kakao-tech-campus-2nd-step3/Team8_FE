@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
+import { useDeleteGuideline } from '../../api/hooks/useDeleteGuideline';
 import { useModifyGuideline } from '@/pages/guard';
 import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type GuidelineInfo = {
-  Id: number;
+  id: number;
   type: string;
   title: string;
   content: string;
@@ -24,7 +25,8 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
   const [guidelineTitle, setGuidelineTitle] = useState(guideline.title);
   const [guidelineContent, setGuidelineContent] = useState(guideline.content);
 
-  const editMutation = useModifyGuideline(refetch, guideline.Id);
+  const editMutation = useModifyGuideline(refetch, guideline.id);
+  const deleteMutation = useDeleteGuideline(refetch, guideline.id);
 
   const toggleContent = () => {
     setIsMore(!isMore);
@@ -40,7 +42,9 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
     setIsEditing(false);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    deleteMutation.mutate(guideline.id);
+  };
 
   return (
     <GuideLineInfoContainer>
