@@ -1,1 +1,1 @@
-export { authLocalStorage } from './authLocalStorage';
+export { authStorage } from './authStorage';

@@ -5,7 +5,7 @@ import type {
 } from 'axios';
 import axios from 'axios';
 
-import { authLocalStorage } from '../../utils/storage/authLocalStorage';
+import { authStorage } from '../../utils/storage/authStorage';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -43,7 +43,7 @@ export const queryClient = new QueryClient({
 
 fetchInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = authLocalStorage.get();
+    const accessToken = authStorage.accessToken.get();
     if (accessToken !== undefined) {
       config.headers['Content-Type'] = 'application/json';
       config.headers.Authorization = `Bearer ${accessToken}`;
