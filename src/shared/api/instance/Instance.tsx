@@ -6,7 +6,6 @@ import type {
 import axios from 'axios';
 
 import { authLocalStorage } from '@/shared';
-import { BASE_URI } from '@/shared/utils/env/config';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -24,6 +23,8 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
 
   return instance;
 };
+
+export const BASE_URI = `http://sinitto.site:8080`;
 
 export const fetchInstance = initInstance({
   baseURL: BASE_URI,
