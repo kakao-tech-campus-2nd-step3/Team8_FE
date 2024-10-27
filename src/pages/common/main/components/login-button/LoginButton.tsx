@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Logo from '../../assets/kakao.svg';
+import Logo from '@/pages/assets/main/kakao.svg';
 import { BASE_URI } from '@/shared/api';
 import { Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
