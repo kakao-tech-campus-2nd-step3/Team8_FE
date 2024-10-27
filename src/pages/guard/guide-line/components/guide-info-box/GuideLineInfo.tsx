@@ -48,7 +48,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
   return (
     <GuideLineInfoContainer>
       {isEditing ? (
-        <Box display='flex' flexDir='row' w='100%' maxW='300px'>
+        <Box display='flex' flexDir='row' w='100%' maxW='370px'>
           <Box w='80%'>
             <Input
               fontSize='0.9rem'
@@ -97,7 +97,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
             display='flex'
             flexDir='row'
             w='100%'
-            maxW='300px'
+            maxW='370px'
             justifyContent='space-between'
             alignItems='center'
             cursor='pointer'
@@ -136,7 +136,7 @@ const GuideLineInfoContainer = styled(Flex)`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: 330px;
+  max-width: 370px;
   height: auto;
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
@@ -153,7 +153,7 @@ const InfoText = styled(Text)`
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

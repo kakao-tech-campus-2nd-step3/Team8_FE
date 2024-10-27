@@ -126,7 +126,7 @@ const SeniorInfo = ({
 
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;
-  max-width: 330px;
+  max-width: 370px;
   height: 5rem;
   min-height: 5rem;
   background-color: var(--color-secondary);
@@ -143,7 +143,7 @@ const InfoText = styled(Text)`
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
