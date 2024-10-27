@@ -2,7 +2,7 @@ import { Routes } from '@/app/routes';
 import {
   AllSeniorInfoProvider,
   queryClient,
-  AuthProvider,
+  UserEmailProvider,
   globalStyle,
 } from '@/shared';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -14,10 +14,10 @@ const App = () => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <AllSeniorInfoProvider>
-          <AuthProvider>
+          <UserEmailProvider>
             <Global styles={globalStyle} />
             <Routes />
-          </AuthProvider>
+          </UserEmailProvider>
         </AllSeniorInfoProvider>
       </QueryClientProvider>
     </ChakraProvider>
