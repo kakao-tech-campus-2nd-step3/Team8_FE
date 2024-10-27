@@ -34,7 +34,7 @@ export const chargePoint = async (
   price: number
 ): Promise<ChargePointResponse> => {
   const response = await fetchInstance.put(`${pointApiPath}/charge`, {
-    price: price,
+    price,
   });
   return response.data;
 };
