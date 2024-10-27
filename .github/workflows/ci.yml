@@ -32,6 +32,4 @@ jobs:
         run: pnpm lint
       
       - name: Build Test
-        run: |
-          echo "build를 진행하여 배포시 오류가 발생하는지 확인합니다."
-          pnpm run build
+        run: pnpm run build
