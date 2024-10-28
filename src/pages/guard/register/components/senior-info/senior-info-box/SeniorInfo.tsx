@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-import { useDeleteSeniorInfo, useEditSeniorInfo } from '../../../api';
+import {
+  useDeleteSeniorInfo,
+  useEditSeniorInfo,
+  useSeniorInfo,
+} from '@/pages/guard';
 import { formatPhoneNumber } from '@/shared';
 import { deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
@@ -19,30 +21,23 @@ const SeniorInfo = ({
   senior: SeniorInfoType;
   refetch: () => void;
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [seniorName, setSeniorName] = useState(senior.seniorName);
-  const [seniorPhoneNumber, setSeniorPhoneNumber] = useState(
-    senior.seniorPhoneNumber
-  );
-
   const deleteMutation = useDeleteSeniorInfo(refetch);
   const editMutation = useEditSeniorInfo(refetch);
 
-  const deleteSenior = () => {
-    const isConfirmed = window.confirm('정말 시니어를 삭제하시겠습니까?');
-
-    if (isConfirmed) {
-      deleteMutation.mutate(senior.seniorId);
-    }
-  };
-
-  const editSenior = () => {
-    editMutation.mutate({
-      seniorId: senior.seniorId,
-      seniorInfo: { seniorName, seniorPhoneNumber },
-    });
-    setIsEditing(false);
-  };
+  const {
+    isEditing,
+    seniorName,
+    seniorPhoneNumber,
+    setIsEditing,
+    setSeniorName,
+    setSeniorPhoneNumber,
+    deleteSenior,
+    editSenior,
+  } = useSeniorInfo({
+    senior,
+    deleteMutation,
+    editMutation,
+  });
 
   return (
     <SeniorInfoContainer
