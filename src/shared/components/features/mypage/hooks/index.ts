@@ -1,1 +1,0 @@
-export { useToggleDetailBox } from './useToggleDetailBox';
