@@ -154,6 +154,21 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: RouterPath.CALL_BACK_LIST,
+    element: <Layout title='요청 상세페이지' />,
+    children: [
+      {
+        path: RouterPath.CALL_BACK_DETAIL,
+        children: [
+          {
+            path: RouterPath.CALL_BACK_GUID_LINE,
+            element: <SinittoGuideLinePage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: RouterPath.SINITTO_REVIEW,
     element: <Layout title='시니또 평가하기' />,
     children: [
