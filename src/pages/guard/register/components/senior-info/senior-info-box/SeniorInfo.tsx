@@ -28,11 +28,15 @@ const SeniorInfo = ({
   const deleteMutation = useDeleteSeniorInfo(refetch);
   const editMutation = useEditSeniorInfo(refetch);
 
-  const handleDelete = () => {
-    deleteMutation.mutate(senior.seniorId);
+  const deleteSenior = () => {
+    const isConfirmed = window.confirm('정말 시니어를 삭제하시겠습니까?');
+
+    if (isConfirmed) {
+      deleteMutation.mutate(senior.seniorId);
+    }
   };
 
-  const handleEdit = () => {
+  const editSenior = () => {
     editMutation.mutate({
       seniorId: senior.seniorId,
       seniorInfo: { seniorName, seniorPhoneNumber },
@@ -73,21 +77,44 @@ const SeniorInfo = ({
           </Box>
           <Box
             w='20%'
-            h='100%'
             display='flex'
-            justifyContent='center'
-            alignItems='center'
-            ml={1}
-            border='1px solid var(--color-primary)'
-            borderRadius='5px'
-            bg='var(--color-primary)'
-            onClick={handleEdit}
-            fontSize='0.9rem'
-            fontWeight={700}
-            cursor='pointer'
-            color='var(--color-white)'
+            flexDir='column'
+            justifyContent='space-between'
           >
-            저장
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-primary)'
+              borderRadius='5px'
+              bg='var(--color-primary)'
+              onClick={editSenior}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-white)'
+            >
+              저장
+            </Box>
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-white)'
+              borderRadius='5px'
+              bg='var(--color-white)'
+              onClick={() => setIsEditing(false)}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-primary)'
+            >
+              취소
+            </Box>
           </Box>
         </Box>
       ) : (
@@ -110,7 +137,7 @@ const SeniorInfo = ({
                 h={4}
                 ml={1}
                 cursor='pointer'
-                onClick={handleDelete}
+                onClick={deleteSenior}
               />
             </Box>
           </Box>
@@ -126,7 +153,7 @@ const SeniorInfo = ({
 
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;
-  max-width: 330px;
+  max-width: 370px;
   height: 5rem;
   min-height: 5rem;
   background-color: var(--color-secondary);
@@ -143,7 +170,7 @@ const InfoText = styled(Text)`
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
