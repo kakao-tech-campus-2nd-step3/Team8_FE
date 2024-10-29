@@ -5,8 +5,16 @@ import { BASE_URI } from '@/shared/api';
 import { Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const LoginButton = () => {
-  const KAKAO_LOGIN = `${BASE_URI}/api/auth/oauth/kakao`;
+type Props = {
+  originURI: string;
+};
+
+const LoginButton = ({ originURI }: Props) => {
+  const FRONTEND_REDIRECT_URI =
+    'http://sinitto.s3-website.ap-northeast-2.amazonaws.com/redirect';
+
+  const KAKAO_LOGIN = `${BASE_URI}/api/auth/oauth/kakao?redirect_uri=${FRONTEND_REDIRECT_URI}&origin=${originURI}`;
+
   return (
     <Link to={KAKAO_LOGIN}>
       <KakaoLoginButton>
