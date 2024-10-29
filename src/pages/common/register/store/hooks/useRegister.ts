@@ -19,7 +19,9 @@ const useRegister = () => {
         authStorage.accessToken.set(data.accessToken);
         authStorage.refreshToken.set(data.refreshToken);
         alert('회원가입이 완료되었습니다.');
-        navigate(data.isSinitto === 'true' ? RouterPath.ROOT : RouterPath.ROOT);
+        navigate(
+          data.isSinitto === 'true' ? RouterPath.SINITTO : RouterPath.GUARD
+        );
       }
     }
   };
