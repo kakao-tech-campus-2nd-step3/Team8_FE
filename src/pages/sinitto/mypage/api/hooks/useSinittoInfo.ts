@@ -1,23 +1,9 @@
-import { getSinittoInformation } from '../api';
 import {
-  getSinittoInformationQueryKey,
   modifySinittoBankInfomation,
   modifySinittoInfomation,
-  SinittoBankInfo,
-  SinittoInformation,
-} from '../api/sinitto-information.api';
-import {
-  useMutation,
-  UseMutationResult,
-  useQuery,
-} from '@tanstack/react-query';
-
-export const useGetSinittoInformation = () => {
-  return useQuery<SinittoInformation, Error>({
-    queryKey: getSinittoInformationQueryKey,
-    queryFn: () => getSinittoInformation(),
-  });
-};
+} from '../sinitto-information.api';
+import { SinittoBankInfo, SinittoInformation } from '../types';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 export const useModifySinittoBankInfomation = (): UseMutationResult<
   string,
