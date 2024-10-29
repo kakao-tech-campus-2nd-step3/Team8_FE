@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { SinittoProfileBox, AccountInfoBox } from './components';
 import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoMypage = () => {
@@ -41,8 +41,7 @@ const SinittoMypage = () => {
 
 export default SinittoMypage;
 
-const MyPageLayout = styled(Box)`
-  display: flex;
+const MyPageLayout = styled(Flex)`
   flex-direction: column;
   align-items: center;
 `;
