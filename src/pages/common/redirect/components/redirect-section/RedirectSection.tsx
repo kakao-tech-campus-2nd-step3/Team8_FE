@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes/path';
 import { useGetKakaoCallback } from '@/pages';
@@ -12,9 +12,6 @@ type Props = {
 
 const RedirectSection = ({ code }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const origin = new URLSearchParams(location.search).get('origin');
 
   const { setEmail } = useUserEmail();
 
@@ -34,11 +31,10 @@ const RedirectSection = ({ code }: Props) => {
 
       if (accessToken) {
         const path = data.isSinitto ? RouterPath.SINITTO : RouterPath.GUARD;
-        // navigate(path);
-        window.location.href = `${origin}${path}`;
+        navigate(path);
       }
     }
-  }, [data, navigate, setEmail, origin]);
+  }, [data, navigate, setEmail]);
 
   return (
     <Flex

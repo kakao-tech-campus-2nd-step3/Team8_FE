@@ -3,8 +3,6 @@ import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const MainPage = () => {
-  const ORIGIN_URI = window.location.origin;
-
   return (
     <MainPageLayout>
       <FlexBox marginY='1.5rem' mb={10}>
@@ -17,7 +15,7 @@ const MainPage = () => {
         <ReviewBox />
       </Box>
       <Box mt={20}>
-        <LoginButton originURI={ORIGIN_URI} />
+        <LoginButton />
       </Box>
     </MainPageLayout>
   );
