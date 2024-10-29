@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+
+import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
 import { ResponseBox } from '@/pages/sinitto';
@@ -12,12 +15,14 @@ export const CallBackApply = () => {
     <Wrapper>
       <Flex justifyContent='space-between' alignItems='center'>
         <NoticeTitle>콜백 요청</NoticeTitle>
-        <MoreButton gap={3}>
-          <Text fontWeight='700' color='var(--color-gray)'>
-            요청 더보기
-          </Text>
-          <IconArrow fill='var(--color-gray)' type='solid' />
-        </MoreButton>
+        <Link to={RouterPath.CALL_BACK_LIST}>
+          <MoreButton gap={3}>
+            <Text fontWeight='700' color='var(--color-gray)'>
+              요청 더보기
+            </Text>
+            <IconArrow fill='var(--color-gray)' type='solid' />
+          </MoreButton>
+        </Link>
       </Flex>
       <Flex w='100%' gap={5}>
         <Image src={IconCall} alt='call-icon' />
