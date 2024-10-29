@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 
 const LoginButton = () => {
   const KAKAO_LOGIN = `${BASE_URI}/api/auth/oauth/kakao`;
+
   return (
     <Link to={KAKAO_LOGIN}>
       <KakaoLoginButton>
