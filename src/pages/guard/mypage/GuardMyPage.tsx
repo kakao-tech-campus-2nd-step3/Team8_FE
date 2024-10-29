@@ -1,5 +1,5 @@
 import { GuardProfileBox } from './components';
-import { PointBox, PointLogBox } from '@/shared/components';
+import { Logout, PointBox, PointLogBox } from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -9,6 +9,7 @@ export const GuardMyPage = () => {
       <GuardProfileBox />
       <PointBox />
       <PointLogBox />
+      <Logout />
     </MyPageLayout>
   );
 };

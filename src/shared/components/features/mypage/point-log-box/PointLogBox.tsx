@@ -98,7 +98,7 @@ const UseDetailBoxLayout = styled(Box)`
   background-color: #2e2e2e;
   border: 1px solid #2e2e2e;
   border-radius: 10px;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
 `;
 
 const TextBox = styled(Box)`

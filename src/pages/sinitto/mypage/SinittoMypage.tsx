@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
 import { SinittoProfileBox, AccountInfoBox } from './components';
-import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
+import {
+  BasicButton,
+  Logout,
+  PointBox,
+  PointLogBox,
+} from '@/shared/components';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -35,6 +40,7 @@ const SinittoMypage = () => {
       </BasicButton>
       <PointBox />
       <PointLogBox />
+      <Logout />
     </MyPageLayout>
   );
 };
