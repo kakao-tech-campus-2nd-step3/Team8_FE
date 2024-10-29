@@ -4,6 +4,7 @@ import {
   queryClient,
   UserEmailProvider,
   globalStyle,
+  SinittoInfoProvider,
 } from '@/shared';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
@@ -14,10 +15,12 @@ const App = () => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <AllSeniorInfoProvider>
-          <UserEmailProvider>
-            <Global styles={globalStyle} />
-            <Routes />
-          </UserEmailProvider>
+          <SinittoInfoProvider>
+            <UserEmailProvider>
+              <Global styles={globalStyle} />
+              <Routes />
+            </UserEmailProvider>
+          </SinittoInfoProvider>
         </AllSeniorInfoProvider>
       </QueryClientProvider>
     </ChakraProvider>
