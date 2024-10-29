@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import HelloCallImg from '@/pages/assets/shared/hello-call.png';
-import { ResponseBox } from '@/pages/sinitto';
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { ResponseBox, useGetServiceList } from '@/pages/sinitto';
+import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const HelloCallApply = () => {
-  const seniorName = '김순자';
-  const seniorId = 1;
+  const { data: helloCallList, isLoading } = useGetServiceList(2);
 
   return (
     <Wrapper>
@@ -33,11 +32,21 @@ export const HelloCallApply = () => {
           </NoticeText>
         </Flex>
       </Flex>
-      <GridBox mt={5} mb={10}>
-        {[...Array(2)].map((_, index) => (
-          <ResponseBox key={seniorId + index} seniorName={seniorName} />
-        ))}
-      </GridBox>
+      {isLoading ? (
+        <Flex justifyContent='center' mt={5}>
+          <Spinner size='lg' color='var(--color-primary)' />
+        </Flex>
+      ) : (
+        <GridBox mt={5} mb={10}>
+          {helloCallList?.pages?.[0]?.content.map((helloCall) => (
+            <ResponseBox
+              key={helloCall.helloCallId}
+              seniorName={helloCall.seniorName}
+              requestTime={String(helloCall.days.length) + '일 수행'}
+            />
+          ))}
+        </GridBox>
+      )}
     </Wrapper>
   );
 };
