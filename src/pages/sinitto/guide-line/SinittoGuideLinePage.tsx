@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { useGetGuideline } from './api/hooks';
@@ -28,13 +27,11 @@ export const SinittoGuideLinePage = () => {
     isError: isGuideLineError,
   } = useGetGuideline(Number(callBackId), guideLineId);
 
-  useEffect(() => {
-    if (isGuideLineError) {
-      const errorMessage = handleCallbackError(isGuideLineError);
-      alert(errorMessage);
-      navigate(RouterPath.CALL_BACK_LIST);
-    }
-  }, [isGuideLineError, isGuideLineError, navigate]);
+  if (isGuideLineError) {
+    const errorMessage = handleCallbackError(isGuideLineError);
+    alert(errorMessage);
+    navigate(RouterPath.CALL_BACK_LIST);
+  }
 
   return (
     <Wrapper>
