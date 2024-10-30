@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useModifySinittoInformation } from '@/pages';
-import { useSinittoInfo } from '@/shared';
+import { Logout, useSinittoInfo } from '@/shared';
 import { Box, Text, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -43,9 +43,17 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
 
   return (
     <SinittoProfileBoxLayout mb={2}>
-      <Text ml='1rem' mt={3} fontSize='18px' fontWeight={700}>
-        {data?.name} 님 환영합니다.
-      </Text>
+      <Box
+        display='flex'
+        w='100%'
+        justifyContent='space-between'
+        alignItems='center'
+      >
+        <Text ml='1rem' fontSize='18px' fontWeight={700}>
+          {data?.name} 님 환영합니다.
+        </Text>
+        <Logout />
+      </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
         <Text
           ml='1rem'

@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-import { useDeleteGuideline, useModifyGuideline } from '@/pages/guard';
+import {
+  useDeleteGuideline,
+  useGuidelineInfo,
+  useModifyGuideline,
+} from '@/pages/guard';
 import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -19,35 +21,26 @@ type Props = {
 };
 
 const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
-  const [isMore, setIsMore] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [guidelineTitle, setGuidelineTitle] = useState(guideline.title);
-  const [guidelineContent, setGuidelineContent] = useState(guideline.content);
-
   const editMutation = useModifyGuideline(refetch, guideline.id);
   const deleteMutation = useDeleteGuideline(refetch, guideline.id);
 
-  const toggleContent = () => {
-    setIsMore(!isMore);
-  };
-
-  const editGuideline = () => {
-    editMutation.mutate({
-      seniorId: seniorId,
-      type: guideline.type,
-      title: guidelineTitle,
-      content: guidelineContent,
-    });
-    setIsEditing(false);
-  };
-
-  const deleteGuideline = () => {
-    const isConfirmed = window.confirm('정말 가이드라인을 삭제하시겠습니까?');
-
-    if (isConfirmed) {
-      deleteMutation.mutate(guideline.id);
-    }
-  };
+  const {
+    isMore,
+    isEditing,
+    guidelineTitle,
+    guidelineContent,
+    toggleContent,
+    setIsEditing,
+    setGuidelineTitle,
+    setGuidelineContent,
+    editGuideline,
+    deleteGuideline,
+  } = useGuidelineInfo({
+    guideline,
+    seniorId,
+    editMutation,
+    deleteMutation,
+  });
 
   return (
     <GuideLineInfoContainer>

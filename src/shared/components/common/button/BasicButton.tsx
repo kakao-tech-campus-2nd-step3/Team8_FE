@@ -3,11 +3,12 @@ import styled from '@emotion/styled';
 type Props = {
   themeType?: 'default' | 'outline';
   width?: string;
+  height?: string;
 };
 
 export const BasicButton = styled.button<Props>`
   width: ${(props) => (props.width ? props.width : '100%')};
-  height: 50px;
+  height: ${(props) => (props.height ? props.height : '50px')};
   border-radius: 10px;
   outline: 0;
 

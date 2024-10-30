@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom';
 
 import { useGetGuardInformation } from '../../api';
 import { RouterPath } from '@/app/routes/path';
-import { Box } from '@chakra-ui/react';
+import { Logout } from '@/shared';
+import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
-  const { data, isLoading, isError } = useGetGuardInformation();
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+  const { data } = useGetGuardInformation();
 
   return (
     <GuardProfileBoxLayout>
@@ -17,12 +15,14 @@ const GuardProfileBox = () => {
         <Box
           display='flex'
           w='100%'
-          pl={4}
-          mt={3}
-          fontSize='18px'
-          fontWeight={700}
+          justifyContent='space-between'
+          alignItems='center'
+          mt={1}
         >
-          {data?.name} 님 환영합니다.
+          <Text ml='1rem' fontSize='18px' fontWeight={700}>
+            {data?.name} 님 환영합니다.
+          </Text>
+          <Logout />
         </Box>
         <ServiceManualBox mt={2} fontWeight={600}>
           서비스 이용 방법 한번에 이해하기!
@@ -78,6 +78,7 @@ const TopContainer = styled(Box)`
   align-items: center;
   height: 70%;
   max-height: 120px;
+  padding: 1rem;
 `;
 
 const BottomContainer = styled(Box)`
