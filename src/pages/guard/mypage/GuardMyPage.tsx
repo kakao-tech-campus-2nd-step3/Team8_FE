@@ -1,6 +1,6 @@
 import { GuardProfileBox } from './components';
-import { Logout, PointBox, PointLogBox } from '@/shared/components';
-import { Box } from '@chakra-ui/react';
+import { PointBox, PointLogBox } from '@/shared/components';
+import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const GuardMyPage = () => {
@@ -9,13 +9,12 @@ export const GuardMyPage = () => {
       <GuardProfileBox />
       <PointBox />
       <PointLogBox />
-      <Logout />
     </MyPageLayout>
   );
 };
 
-const MyPageLayout = styled(Box)`
-  display: flex;
+const MyPageLayout = styled(Flex)`
   flex-direction: column;
   align-items: center;
+  gap: 0.2rem;
 `;

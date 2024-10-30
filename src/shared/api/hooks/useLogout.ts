@@ -13,6 +13,7 @@ export const useLogout = () => {
     onSuccess: () => {
       authStorage.accessToken.set(undefined);
       authStorage.refreshToken.set(undefined);
+      alert('로그아웃 되었습니다.');
       navigate(RouterPath.ROOT);
     },
   });

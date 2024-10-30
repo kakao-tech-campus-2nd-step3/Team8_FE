@@ -1,13 +1,8 @@
 import { useState } from 'react';
 
 import { SinittoProfileBox, AccountInfoBox } from './components';
-import {
-  BasicButton,
-  Logout,
-  PointBox,
-  PointLogBox,
-} from '@/shared/components';
-import { Box } from '@chakra-ui/react';
+import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
+import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoMypage = () => {
@@ -23,6 +18,7 @@ const SinittoMypage = () => {
       <BasicButton
         themeType='default'
         width='338px'
+        height='40px'
         onClick={() => setIsEditingProfile(true)}
       >
         내 정보 수정하기
@@ -34,21 +30,21 @@ const SinittoMypage = () => {
       <BasicButton
         themeType='default'
         width='338px'
+        height='40px'
         onClick={() => setIsEditingAccount(true)}
       >
         계좌번호 수정하기
       </BasicButton>
       <PointBox />
       <PointLogBox />
-      <Logout />
     </MyPageLayout>
   );
 };
 
 export default SinittoMypage;
 
-const MyPageLayout = styled(Box)`
-  display: flex;
+const MyPageLayout = styled(Flex)`
   flex-direction: column;
   align-items: center;
+  gap: 0.2rem;
 `;
