@@ -48,7 +48,7 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
           })}
         />
       </InputBox>
-      <StyledButton type='submit'>시니어 등록</StyledButton>
+      <StyledButton type='submit'>시니어 등록하기</StyledButton>
     </RegisterBox>
   );
 };
@@ -56,11 +56,8 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
 export default SeniorRegisterBox;
 
 const RegisterBox = styled(Box)`
-  position: relative;
   width: 100%;
   height: auto;
-  left: 50%;
-  transform: translateX(-50%);
   max-width: 370px;
   display: flex;
   flex-direction: column;
@@ -68,17 +65,19 @@ const RegisterBox = styled(Box)`
   background-color: var(--color-white-gray);
   border: 1px solid var(--color-white-gray);
   border-radius: 15px;
+  margin-top: 0.25rem;
 `;
 
 const InputBox = styled(Box)`
   width: 300px;
-  margin: 0.5rem;
+  margin: 0.2rem;
 `;
 
 const StyledButton = styled.button`
   width: 300px;
   height: 40px;
   background-color: #c69090;
+  font-weight: bold;
   color: #ffffff;
   border: none;
   border-radius: 5px;

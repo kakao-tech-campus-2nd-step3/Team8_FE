@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes/path';
 import { useGetKakaoCallback } from '@/pages';
-import { useAuth } from '@/shared';
+import { useUserEmail } from '@/shared';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 const RedirectSection = ({ code }: Props) => {
   const navigate = useNavigate();
 
-  const { setEmail } = useAuth();
+  const { setEmail } = useUserEmail();
 
   const { data } = useGetKakaoCallback(code);
 

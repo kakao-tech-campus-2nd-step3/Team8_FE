@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-import { useDeleteSeniorInfo, useEditSeniorInfo } from '../../../api';
+import {
+  useDeleteSeniorInfo,
+  useEditSeniorInfo,
+  useSeniorInfo,
+} from '@/pages/guard';
 import { formatPhoneNumber } from '@/shared';
 import { deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
@@ -19,26 +21,23 @@ const SeniorInfo = ({
   senior: SeniorInfoType;
   refetch: () => void;
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [seniorName, setSeniorName] = useState(senior.seniorName);
-  const [seniorPhoneNumber, setSeniorPhoneNumber] = useState(
-    senior.seniorPhoneNumber
-  );
-
   const deleteMutation = useDeleteSeniorInfo(refetch);
   const editMutation = useEditSeniorInfo(refetch);
 
-  const handleDelete = () => {
-    deleteMutation.mutate(senior.seniorId);
-  };
-
-  const handleEdit = () => {
-    editMutation.mutate({
-      seniorId: senior.seniorId,
-      seniorInfo: { seniorName, seniorPhoneNumber },
-    });
-    setIsEditing(false);
-  };
+  const {
+    isEditing,
+    seniorName,
+    seniorPhoneNumber,
+    setIsEditing,
+    setSeniorName,
+    setSeniorPhoneNumber,
+    deleteSenior,
+    editSenior,
+  } = useSeniorInfo({
+    senior,
+    deleteMutation,
+    editMutation,
+  });
 
   return (
     <SeniorInfoContainer
@@ -73,21 +72,44 @@ const SeniorInfo = ({
           </Box>
           <Box
             w='20%'
-            h='100%'
             display='flex'
-            justifyContent='center'
-            alignItems='center'
-            ml={1}
-            border='1px solid var(--color-primary)'
-            borderRadius='5px'
-            bg='var(--color-primary)'
-            onClick={handleEdit}
-            fontSize='0.9rem'
-            fontWeight={700}
-            cursor='pointer'
-            color='var(--color-white)'
+            flexDir='column'
+            justifyContent='space-between'
           >
-            저장
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-primary)'
+              borderRadius='5px'
+              bg='var(--color-primary)'
+              onClick={editSenior}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-white)'
+            >
+              저장
+            </Box>
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-white)'
+              borderRadius='5px'
+              bg='var(--color-white)'
+              onClick={() => setIsEditing(false)}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-primary)'
+            >
+              취소
+            </Box>
           </Box>
         </Box>
       ) : (
@@ -110,7 +132,7 @@ const SeniorInfo = ({
                 h={4}
                 ml={1}
                 cursor='pointer'
-                onClick={handleDelete}
+                onClick={deleteSenior}
               />
             </Box>
           </Box>
@@ -126,7 +148,7 @@ const SeniorInfo = ({
 
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;
-  max-width: 330px;
+  max-width: 370px;
   height: 5rem;
   min-height: 5rem;
   background-color: var(--color-secondary);
@@ -143,7 +165,7 @@ const InfoText = styled(Text)`
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -44,7 +44,7 @@ jobs:
         run: pnpm lint
 
       - name: Build
-        run: CI='' pnpm run build
+        run: pnpm run build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4

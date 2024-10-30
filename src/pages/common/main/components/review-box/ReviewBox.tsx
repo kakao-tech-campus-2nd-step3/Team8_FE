@@ -1,4 +1,4 @@
-import StarIcon from '../../assets/star-icon.svg';
+import StarIcon from '@/pages/assets/main/star-icon.svg';
 import { Box, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

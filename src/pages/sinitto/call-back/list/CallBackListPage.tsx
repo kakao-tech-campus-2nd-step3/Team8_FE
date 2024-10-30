@@ -1,5 +1,4 @@
 import { useRef, useCallback } from 'react';
-import { Outlet } from 'react-router-dom';
 
 import { useGetCallbacks } from './api/hooks';
 import { RequestRow } from './components';
@@ -29,40 +28,37 @@ export const CallBackListPage = () => {
   );
 
   return (
-    <>
-      <Wrapper>
-        {isLoading && <Spinner size='xl' />}
-        {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
-        {data &&
-          (data.pages.length === 0 ? (
-            <p>콜백 요청이 없습니다.</p>
-          ) : (
-            data?.pages.map((page, pageIndex) =>
-              page.content.map((callback, index) => {
-                const isLastElement =
-                  pageIndex === data.pages.length - 1 &&
-                  index === page.content.length - 1;
-                return (
-                  <RequestRow
-                    key={callback.callbackId}
-                    name={callback.seniorName}
-                    time={callback.postTime}
-                    id={callback.callbackId.toString()}
-                    ref={isLastElement ? lastElementRef : null}
-                  />
-                );
-              })
-            )
-          ))}
-      </Wrapper>
-      <Outlet />
-    </>
+    <CallBackListLayout>
+      {isLoading && <Spinner size='xl' />}
+      {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
+      {data &&
+        (data.pages.length === 0 ? (
+          <p>콜백 요청이 없습니다.</p>
+        ) : (
+          data?.pages.map((page, pageIndex) =>
+            page.content.map((callback, index) => {
+              const isLastElement =
+                pageIndex === data.pages.length - 1 &&
+                index === page.content.length - 1;
+              return (
+                <RequestRow
+                  key={callback.callbackId}
+                  name={callback.seniorName}
+                  time={callback.postTime}
+                  id={callback.callbackId.toString()}
+                  ref={isLastElement ? lastElementRef : null}
+                />
+              );
+            })
+          )
+        ))}
+    </CallBackListLayout>
   );
 };
 
 export default CallBackListPage;
 
-const Wrapper = styled.div`
+const CallBackListLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

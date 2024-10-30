@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import {
-  useGetSinittoInformation,
-  useModifySinittoInformation,
-} from '../../store/hooks';
+import { useModifySinittoInformation } from '@/pages';
+import { Logout, useSinittoInfo } from '@/shared';
 import { Box, Text, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -13,11 +11,12 @@ type Props = {
 };
 
 const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
-  const { data, isLoading, isError, refetch } = useGetSinittoInformation();
-  const modifySinittoInfoMutation = useModifySinittoInformation();
-
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+
+  const { data, refetch } = useSinittoInfo();
+
+  const modifySinittoInfoMutation = useModifySinittoInformation();
 
   useEffect(() => {
     if (isEditing) {
@@ -42,14 +41,19 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
     });
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
-
   return (
     <SinittoProfileBoxLayout mb={2}>
-      <Text ml='1rem' mt={3} fontSize='18px' fontWeight={700}>
-        {data?.name} 님 환영합니다.
-      </Text>
+      <Box
+        display='flex'
+        w='100%'
+        justifyContent='space-between'
+        alignItems='center'
+      >
+        <Text ml='1rem' fontSize='18px' fontWeight={700}>
+          {data?.name} 님 환영합니다.
+        </Text>
+        <Logout />
+      </Box>
       <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
         <Text
           ml='1rem'

@@ -2,17 +2,22 @@ import { useState } from 'react';
 
 import PointLogImg from '../../../../assets/point-log-icon.png';
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data, isLoading, isError } = useGetPointLogs(currentPage, pageSize);
+  const { data, isLoading } = useGetPointLogs(currentPage, pageSize);
   const totalPages = data?.totalPages || 1;
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+  if (isLoading) {
+    return (
+      <UseDetailBoxLayout>
+        <Spinner size='sm' />
+      </UseDetailBoxLayout>
+    );
+  }
 
   return (
     <UseDetailBoxLayout>
@@ -73,7 +78,7 @@ const PointLogBox = () => {
           이전
         </PaginationButton>
         <span>
-          페이지 {currentPage + 1} / {data?.totalPages}
+          페이지 {currentPage + 1} / {data?.totalPages ? data.totalPages : 1}
         </span>
         <PaginationButton
           onClick={() => setCurrentPage((prev) => prev + 1)}
@@ -98,7 +103,7 @@ const UseDetailBoxLayout = styled(Box)`
   background-color: #2e2e2e;
   border: 1px solid #2e2e2e;
   border-radius: 10px;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
 `;
 
 const TextBox = styled(Box)`
