@@ -2,17 +2,22 @@ import { useState } from 'react';
 
 import PointLogImg from '../../../../assets/point-log-icon.png';
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data, isLoading, isError } = useGetPointLogs(currentPage, pageSize);
+  const { data, isLoading } = useGetPointLogs(currentPage, pageSize);
   const totalPages = data?.totalPages || 1;
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
+  if (isLoading) {
+    return (
+      <UseDetailBoxLayout>
+        <Spinner size='sm' />
+      </UseDetailBoxLayout>
+    );
+  }
 
   return (
     <UseDetailBoxLayout>
