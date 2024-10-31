@@ -8,7 +8,7 @@ export const DummyRedirectPage = () => {
   const [statusMessage, setStatusMessage] = useState(
     '유저 정보를 기다리고 있습니다...'
   );
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,8 +19,6 @@ export const DummyRedirectPage = () => {
     const isSinitto = params.get('isSinitto');
 
     if (accessToken && refreshToken && isSinitto) {
-      console.log('Received tokens:', accessToken, refreshToken, isSinitto);
-
       // 로컬 스토리지에 토큰 저장
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
