@@ -19,6 +19,7 @@ import {
   HelloCallApplyPage,
   GuardMainPage,
   SinittoMainPage,
+  DummyRedirectPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -43,6 +44,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <RedirectPage />,
+      },
+    ],
+  },
+  {
+    path: RouterPath.DUMMY_LOGIN,
+    element: <Layout title='더미 로그인 Redirect' />,
+    children: [
+      {
+        index: true,
+        element: <DummyRedirectPage />,
       },
     ],
   },
