@@ -18,4 +18,6 @@ export const RouterPath = {
   CALL_BACK_GUID_LINE: `:guideLineId`,
   SENIOR_REGISTER: `/senior-register`,
   SINITTO_REVIEW: `review`,
+
+  DUMMY_LOGIN: `/dummy`,
 };
