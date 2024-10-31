@@ -21,9 +21,11 @@ const RedirectSection = ({ code }: Props) => {
     if (data) {
       const accessToken = data.accessToken;
       const refreshToken = data.refreshToken;
+      const isSinitto = data.isSinitto;
 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('isSinitto', isSinitto.toString());
 
       setEmail(data.email);
 
