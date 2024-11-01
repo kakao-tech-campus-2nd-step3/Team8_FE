@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import {
-  useGetSinittoInformation,
-  useModifySinittoBankInfomation,
-} from '../../store/hooks';
-import { Box, Text, Button, Input } from '@chakra-ui/react';
+import { useModifySinittoBankInfomation } from '@/pages';
+import { useSinittoInfo } from '@/shared';
+import { Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -13,7 +11,7 @@ type Props = {
 };
 
 const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
-  const { data, isLoading, isError, refetch } = useGetSinittoInformation();
+  const { data, refetch } = useSinittoInfo();
   const modifyBankInfoMutation = useModifySinittoBankInfomation();
 
   const [accountNumber, setAccountNumber] = useState('');
@@ -38,20 +36,12 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
     );
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>데이터를 가져오는 데 오류가 발생했습니다.</div>;
-
   return (
     <AccountBoxLayout mb={2}>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        alignItems='center'
-      >
+      <Flex w='full' justifyContent='space-between' alignItems='center'>
         <Text
           ml='1rem'
-          fontSize='16px'
+          fontSize='md'
           fontWeight={600}
           color='var(--color-gray)'
         >
@@ -72,17 +62,11 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             {data?.accountNumber}
           </Text>
         )}
-      </Box>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        mt={2}
-        alignItems='center'
-      >
+      </Flex>
+      <Flex w='full' justifyContent='space-between' mt={2} alignItems='center'>
         <Text
           ml='1rem'
-          fontSize='16px'
+          fontSize='md'
           fontWeight={600}
           color='var(--color-gray)'
         >
@@ -99,37 +83,31 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
+          <Text mr='1rem' fontSize='md' fontWeight={600}>
             {data?.bankName}
           </Text>
         )}
-      </Box>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        mt={2}
-        alignItems='center'
-      >
+      </Flex>
+      <Flex w='full' justifyContent='space-between' mt={2} alignItems='center'>
         <Text
           ml='1rem'
-          fontSize='16px'
+          fontSize='md'
           fontWeight={600}
           color='var(--color-gray)'
         >
           계좌 인증 여부
         </Text>
-        <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          인증 완료
+        <Text mr='1rem' fontSize='md' fontWeight={600}>
+          {data?.accountNumber ? '인증 완료' : '인증 미완료'}
         </Text>
-      </Box>
-      <Box display='flex' justifyContent='flex-end' mt={2}>
+      </Flex>
+      <Flex justifyContent='flex-end' mt={2}>
         {isEditing ? (
           <>
             <Button
               w='100px'
               h='40px'
-              fontSize='16px'
+              fontSize='md'
               colorScheme='teal'
               onClick={handleSaveClick}
               mr={2}
@@ -139,7 +117,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             <Button
               w='100px'
               h='40px'
-              fontSize='16px'
+              fontSize='md'
               colorScheme='red'
               onClick={() => setIsEditing(false)}
             >
@@ -147,15 +125,14 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
             </Button>
           </>
         ) : null}
-      </Box>
+      </Flex>
     </AccountBoxLayout>
   );
 };
 
 export default AccountInfoBox;
 
-const AccountBoxLayout = styled(Box)`
-  display: flex;
+const AccountBoxLayout = styled(Flex)`
   flex-direction: column;
   justify-content: center;
   background-color: #f2f2f2;

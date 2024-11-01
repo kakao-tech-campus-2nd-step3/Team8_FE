@@ -38,4 +38,5 @@ const NoticeTitle = styled(Text)`
 
 const NoticeText = styled(Text)`
   color: var(--color-gray);
+  font-size: 20px;
 `;

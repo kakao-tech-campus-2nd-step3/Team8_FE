@@ -1,19 +1,16 @@
-import { CallBackApply, Header, HelloCallApply } from './components';
-import { Flex, Text } from '@chakra-ui/react';
+import {
+  CallBackApply,
+  Header,
+  HelloCallApply,
+  SinittoName,
+} from './components';
 import styled from '@emotion/styled';
 
 export const SinittoMainPage = () => {
   return (
     <SinittoMainPageLayout>
       <Header />
-      <Flex w='100%' alignItems='center' my={10}>
-        <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
-          김시니또
-        </Text>
-        <Text fontSize='lg' fontWeight='700'>
-          님 안녕하세요!
-        </Text>
-      </Flex>
+      <SinittoName />
       <CallBackApply />
       <HelloCallApply />
     </SinittoMainPageLayout>

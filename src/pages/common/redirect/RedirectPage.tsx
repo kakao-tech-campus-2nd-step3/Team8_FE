@@ -6,6 +6,7 @@ const RedirectPage = () => {
   const location = useLocation();
 
   const code = new URLSearchParams(location.search).get('code');
+
   if (!code) {
     return <div>로그인을 다시 진행해주세요.</div>;
   }

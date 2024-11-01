@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 
 import { registerUser, SignupApiResponse } from '../api';
 import { RouterPath } from '@/app/routes/path';
-import { authLocalStorage } from '@/shared/utils/storage';
+import { authStorage } from '@/shared/utils/storage';
 import { useMutation } from '@tanstack/react-query';
 
 const useRegister = () => {
@@ -16,10 +16,10 @@ const useRegister = () => {
     } else {
       console.log(data);
       if ('accessToken' in data) {
-        authLocalStorage.set(data.accessToken);
-        authLocalStorage.set(data.refreshToken);
+        authStorage.accessToken.set(data.accessToken);
+        authStorage.refreshToken.set(data.refreshToken);
         alert('회원가입이 완료되었습니다.');
-        navigate(data.isSinitto === 'true' ? RouterPath.ROOT : RouterPath.ROOT);
+        navigate(data.isSinitto ? RouterPath.SINITTO : RouterPath.GUARD);
       }
     }
   };

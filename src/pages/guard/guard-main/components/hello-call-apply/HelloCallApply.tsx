@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+
+import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import HelloCallImg from '@/pages/assets/shared/hello-call.png';
 import { Button, Flex, Image, Text } from '@chakra-ui/react';
@@ -10,13 +13,15 @@ export const HelloCallApply = () => {
       <NoticeText>안부 전화 서비스를 이용해보세요.</NoticeText>
       <NoticeText>다정한 시니또들이 대신 말 벗이 되어드립니다.</NoticeText>
       <ContentWrapper>
-        <ServiceApplyButton>
-          <Flex flexDir='column' gap={1.5} alignItems='start'>
-            <ButtonText>안부 전화 서비스</ButtonText>
-            <ButtonText>신청하기</ButtonText>
-          </Flex>
-          <IconArrow fill='black' />
-        </ServiceApplyButton>
+        <Link to={RouterPath.HELLO_CALL_GUARD_APPLY}>
+          <ServiceApplyButton>
+            <Flex flexDir='column' gap={1.5} alignItems='start'>
+              <ButtonText>안부 전화 서비스</ButtonText>
+              <ButtonText>신청하기</ButtonText>
+            </Flex>
+            <IconArrow fill='black' />
+          </ServiceApplyButton>
+        </Link>
         <StyledImage src={HelloCallImg} alt='hello-call' />
       </ContentWrapper>
     </Wrapper>
@@ -38,6 +43,7 @@ const NoticeTitle = styled(Text)`
 
 const NoticeText = styled(Text)`
   color: var(--color-gray);
+  font-size: 20px;
 `;
 
 const ContentWrapper = styled(Flex)`

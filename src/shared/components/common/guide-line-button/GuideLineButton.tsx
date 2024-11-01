@@ -4,19 +4,13 @@ import { IconArrow } from '@/pages/assets';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-type GuideLineCategory = {
-  title: string;
-  id: string | null;
-  backgroundColor: string;
-};
-
 type Props = {
   marginTop?: number;
   marginBottom?: number;
   seniorId?: number | null;
 };
 
-const GUIDE_LINE_CATEGORIES: GuideLineCategory[] = [
+const GUIDE_LINE_CATEGORIES = [
   {
     title: '택시 호출하기',
     id: 'TAXI',
@@ -37,7 +31,9 @@ const GUIDE_LINE_CATEGORIES: GuideLineCategory[] = [
     id: null,
     backgroundColor: '#ff4d68',
   },
-];
+] as const;
+
+type GuideLineCategory = (typeof GUIDE_LINE_CATEGORIES)[number];
 
 export const GuideLineButton = ({
   marginTop,
@@ -47,7 +43,7 @@ export const GuideLineButton = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleClick = (id: string | null) => {
+  const goToSinitto = (id: string | null) => {
     if (id === null) {
       alert('개발 예정입니다.');
       return;
@@ -69,12 +65,12 @@ export const GuideLineButton = ({
   };
 
   return (
-    <Wrapper mt={marginTop} mb={marginBottom}>
-      {GUIDE_LINE_CATEGORIES.map((data) => (
+    <Box w='full' mt={marginTop} mb={marginBottom}>
+      {GUIDE_LINE_CATEGORIES.map((data: GuideLineCategory) => (
         <ButtonWrapper
           key={data.title}
           backgroundColor={data.backgroundColor}
-          onClick={() => handleClick(data.id)}
+          onClick={() => goToSinitto(data.id)}
         >
           <Content>
             <Title>{data.title}</Title>
@@ -82,13 +78,9 @@ export const GuideLineButton = ({
           </Content>
         </ButtonWrapper>
       ))}
-    </Wrapper>
+    </Box>
   );
 };
-
-const Wrapper = styled(Box)`
-  width: 100%;
-`;
 
 const ButtonWrapper = styled.div<{ backgroundColor: string }>`
   width: 100%;
