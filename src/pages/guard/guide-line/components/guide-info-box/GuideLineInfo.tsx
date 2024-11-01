@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-import { useDeleteGuideline, useModifyGuideline } from '@/pages/guard';
+import {
+  useDeleteGuideline,
+  useGuidelineInfo,
+  useModifyGuideline,
+} from '@/pages/guard';
 import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -19,36 +21,31 @@ type Props = {
 };
 
 const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
-  const [isMore, setIsMore] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [guidelineTitle, setGuidelineTitle] = useState(guideline.title);
-  const [guidelineContent, setGuidelineContent] = useState(guideline.content);
-
   const editMutation = useModifyGuideline(refetch, guideline.id);
   const deleteMutation = useDeleteGuideline(refetch, guideline.id);
 
-  const toggleContent = () => {
-    setIsMore(!isMore);
-  };
-
-  const handleEdit = () => {
-    editMutation.mutate({
-      seniorId: seniorId,
-      type: guideline.type,
-      title: guidelineTitle,
-      content: guidelineContent,
-    });
-    setIsEditing(false);
-  };
-
-  const handleDelete = () => {
-    deleteMutation.mutate(guideline.id);
-  };
+  const {
+    isMore,
+    isEditing,
+    guidelineTitle,
+    guidelineContent,
+    toggleContent,
+    setIsEditing,
+    setGuidelineTitle,
+    setGuidelineContent,
+    editGuideline,
+    deleteGuideline,
+  } = useGuidelineInfo({
+    guideline,
+    seniorId,
+    editMutation,
+    deleteMutation,
+  });
 
   return (
     <GuideLineInfoContainer>
       {isEditing ? (
-        <Box display='flex' flexDir='row' w='100%' maxW='300px'>
+        <Box display='flex' flexDir='row' w='100%' maxW='370px'>
           <Box w='80%'>
             <Input
               fontSize='0.9rem'
@@ -74,21 +71,44 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
           </Box>
           <Box
             w='20%'
-            h='100%'
             display='flex'
-            justifyContent='center'
-            alignItems='center'
-            ml={1}
-            border='1px solid var(--color-primary)'
-            borderRadius='5px'
-            bg='var(--color-primary)'
-            onClick={handleEdit}
-            fontSize='0.9rem'
-            fontWeight={700}
-            cursor='pointer'
-            color='var(--color-white)'
+            flexDir='column'
+            justifyContent='space-between'
           >
-            저장
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-primary)'
+              borderRadius='5px'
+              bg='var(--color-primary)'
+              onClick={editGuideline}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-white)'
+            >
+              저장
+            </Box>
+            <Box
+              h='45%'
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              ml={1}
+              border='1px solid var(--color-white)'
+              borderRadius='5px'
+              bg='var(--color-white)'
+              onClick={() => setIsEditing(false)}
+              fontSize='0.9rem'
+              fontWeight={700}
+              cursor='pointer'
+              color='var(--color-primary)'
+            >
+              취소
+            </Box>
           </Box>
         </Box>
       ) : (
@@ -97,7 +117,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
             display='flex'
             flexDir='row'
             w='100%'
-            maxW='300px'
+            maxW='370px'
             justifyContent='space-between'
             alignItems='center'
             cursor='pointer'
@@ -106,13 +126,13 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
               {guideline.title}
             </Box>
             <Box display='flex' flexDir='row' gap={1}>
-              <Image src={deleteIcon} onClick={handleDelete} w={4} h={4} />
               <Image
                 src={editIcon}
                 onClick={() => setIsEditing(true)}
                 w={4}
                 h={4}
               />
+              <Image src={deleteIcon} onClick={deleteGuideline} w={4} h={4} />
               <ImageWrapper isMore={isMore}>
                 <Image src={arrowIcon} onClick={toggleContent} w={4} h={4} />
               </ImageWrapper>
@@ -136,7 +156,7 @@ const GuideLineInfoContainer = styled(Flex)`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  max-width: 330px;
+  max-width: 370px;
   height: auto;
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
@@ -153,7 +173,7 @@ const InfoText = styled(Text)`
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 300px;
+  max-width: 330px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -3,14 +3,15 @@ import styled from '@emotion/styled';
 
 type Props = {
   seniorName: string;
+  requestTime: string;
 };
 
-export const ResponseBox = ({ seniorName }: Props) => {
+export const ResponseBox = ({ seniorName, requestTime }: Props) => {
   return (
     <Wrapper>
       <Text fontSize='lg'>{seniorName}님</Text>
       <Flex justify='space-between' alignItems='center'>
-        <Text color='var(--color-gray)'>6 분전</Text>
+        <Text color='var(--color-gray)'>{requestTime}</Text>
         <StateBox>대기</StateBox>
       </Flex>
     </Wrapper>

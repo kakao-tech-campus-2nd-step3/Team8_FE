@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { useGetGuideline } from './api/hooks';
 import { GuidelineResponse } from './api/types';
+import { GuideLineContainer } from './components';
 import { CATEGORIES } from './data';
 import { Category } from './types';
 import { RouterPath } from '@/app/routes/path';
-import { useGetCallback } from '@/shared/api/hooks';
 import { handleCallbackError } from '@/shared/utils';
-import { Container, Spinner } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type GuideLineParams = {
@@ -23,31 +22,20 @@ export const SinittoGuideLinePage = () => {
     CATEGORIES.find((item: Category) => item.id === guideLineId)?.name || null;
 
   const {
-    data: callBack,
-    isLoading: isCallBackLoading,
-    isError: isCallBackError,
-    error: callBackError,
-  } = useGetCallback(callBackId);
-  const seniorId =
-    !isCallBackLoading && callBack ? callBack.seniorId : undefined;
-
-  const {
     data: guideLine,
     isLoading: isGuideLineLoading,
     isError: isGuideLineError,
-  } = useGetGuideline(Number(seniorId), guideLineId);
+  } = useGetGuideline(Number(callBackId), guideLineId);
 
-  useEffect(() => {
-    if (isCallBackError) {
-      const errorMessage = handleCallbackError(callBackError);
-      alert(errorMessage);
-      navigate(RouterPath.CALL_BACK_LIST);
-    }
-  }, [isCallBackError, callBackError, navigate]);
+  if (isGuideLineError) {
+    const errorMessage = handleCallbackError(isGuideLineError);
+    alert(errorMessage);
+    navigate(RouterPath.CALL_BACK_LIST);
+  }
 
   return (
     <Wrapper>
-      {isCallBackLoading || isGuideLineLoading ? (
+      {isGuideLineLoading ? (
         <Spinner size='xl' />
       ) : (
         <>
@@ -61,9 +49,9 @@ export const SinittoGuideLinePage = () => {
             (guideLine.length == 0 ? (
               <p>등록된 가이드라인이 없습니다.</p>
             ) : (
-              guideLine.map((data: GuidelineResponse, index: number) => (
-                <Container
-                  key={index}
+              guideLine.map((data: GuidelineResponse) => (
+                <GuideLineContainer
+                  key={data.id}
                   title={data.title}
                   content={data.content}
                 />

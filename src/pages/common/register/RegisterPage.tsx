@@ -4,9 +4,7 @@ import { useForm } from 'react-hook-form';
 import { RegisterFields, RegisterType, Tos } from './components';
 import { useRegister } from './store/hooks';
 import { FormValues } from './types';
-import { parsePhoneNumber } from '@/shared';
-import { BasicButton } from '@/shared/components';
-import { useAuth } from '@/shared/provider/auth/Auth';
+import { BasicButton, parsePhoneNumber, useUserEmail } from '@/shared';
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -22,7 +20,7 @@ const RegisterPage = () => {
   // 회원가입 처리
   const mutation = useRegister();
 
-  const { email } = useAuth();
+  const { email } = useUserEmail();
 
   const handleUserType = (id: string) => {
     setUserType(id);

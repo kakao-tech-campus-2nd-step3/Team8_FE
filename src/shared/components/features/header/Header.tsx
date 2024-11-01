@@ -18,7 +18,7 @@ type Props = {
 const Header = ({ title, defaultBackPath = RouterPath.ROOT }: Props) => {
   const navigate = useNavigate();
 
-  const handleBackClick = () => {
+  const goToBack = () => {
     if (window.history.length > 1) {
       navigate(-1);
     } else {
@@ -28,7 +28,7 @@ const Header = ({ title, defaultBackPath = RouterPath.ROOT }: Props) => {
 
   return (
     <HeaderBox>
-      <Icon src={IconBack} onClick={handleBackClick} />
+      <Icon src={IconBack} onClick={goToBack} />
       <Text fontSize='var(--font-size-xxl)' fontWeight={700}>
         {title}
       </Text>

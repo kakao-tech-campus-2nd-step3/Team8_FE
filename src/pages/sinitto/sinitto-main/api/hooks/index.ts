@@ -1,0 +1,1 @@
+export { useGetSinittoInfo } from './useGetSinittoInfo';

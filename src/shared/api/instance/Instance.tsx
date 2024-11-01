@@ -5,8 +5,7 @@ import type {
 } from 'axios';
 import axios from 'axios';
 
-import { authLocalStorage } from '@/shared';
-import { BASE_URI } from '@/shared/utils/env/config';
+import { authStorage } from '../../utils/storage/authStorage';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -25,6 +24,8 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
+export const BASE_URI = `http://sinitto.site:8080`;
+
 export const fetchInstance = initInstance({
   baseURL: BASE_URI,
 });
@@ -42,7 +43,7 @@ export const queryClient = new QueryClient({
 
 fetchInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = authLocalStorage.get();
+    const accessToken = authStorage.accessToken.get();
     if (accessToken !== undefined) {
       config.headers['Content-Type'] = 'application/json';
       config.headers.Authorization = `Bearer ${accessToken}`;

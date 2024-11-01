@@ -24,18 +24,9 @@
 
     "<THIRD_PARTY_MODULES>",
 
-    "^@components/(.*)$",
+    "^@app/(.*)$",
     "^@pages/(.*)$",
-    "^@hooks/(.*)$",
-    "^@assets/(.*)$",
-
-    "^@constants/(.*)$",
-    "^@utils/(.*)$",
-    "^@api/(.*)$",
-    "^@types/(.*)$",
-    "^@store/(.*)$",
-
-    "^@styles/(.*)$",
+    "^@shared/(.*)$",
 
     "^(.*)/(.*)$"
   ],
