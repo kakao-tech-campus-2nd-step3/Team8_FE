@@ -11,7 +11,7 @@ import styled from '@emotion/styled';
 export const ServiceHistoryPage = () => {
   const [showAll, setShowAll] = useState(false);
 
-  const { data: helloCallHistory } = useGetHelloHistoryList();
+  const { data: helloCallHistory, refetch } = useGetHelloHistoryList();
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
@@ -41,6 +41,7 @@ export const ServiceHistoryPage = () => {
           <HelloServiceHistory
             key={history.helloCallId}
             historyData={history}
+            refetch={refetch}
           />
         ))}
       </ButtonWrapper>

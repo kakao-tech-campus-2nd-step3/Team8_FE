@@ -13,6 +13,7 @@ const DAYS: string[] = ['월', '화', '수', '목', '금', '토', '일'];
 
 type HelloServiceHistoryProps = {
   historyData: HelloCallHistory;
+  refetch: () => void;
 };
 
 type DayProps = {
@@ -23,14 +24,20 @@ type StatusButtonProps = {
   status: string;
 };
 
-const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
+const HelloServiceHistory = ({
+  historyData,
+  refetch,
+}: HelloServiceHistoryProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedDays, setSelectedDays] = useState<string[]>(historyData.days);
   const { days, seniorName, status } = historyData;
   const { data: helloCallDate } = useGetServiceDetail(historyData.helloCallId);
 
-  const deleteHelloCallMutation = useDeleteHelloCall();
-  const editHelloCallMutation = useModifyHelloCall(historyData.helloCallId);
+  const deleteHelloCallMutation = useDeleteHelloCall(refetch);
+  const editHelloCallMutation = useModifyHelloCall(
+    historyData.helloCallId,
+    refetch
+  );
 
   const isDaySelected = (day: string): boolean =>
     isEditMode ? selectedDays.includes(day) : days.includes(day);
