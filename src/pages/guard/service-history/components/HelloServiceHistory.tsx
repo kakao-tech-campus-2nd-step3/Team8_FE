@@ -1,5 +1,9 @@
+import { useState } from 'react';
+
 import { HelloCallHistory } from '../api';
 import { useDeleteHelloCall } from '../api/hooks/useDeleteHelloCall';
+import { useModifyHelloCall } from '../api/hooks/useModifyHelloCall';
+import { ModifyHelloCallRequest } from '../api/modify-hello-call.api';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
 import { getStatusStyle } from '@/shared/utils/status/statusUtils';
 import { Text } from '@chakra-ui/react';
@@ -20,12 +24,16 @@ type StatusButtonProps = {
 };
 
 const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedDays, setSelectedDays] = useState<string[]>(historyData.days);
   const { days, seniorName, status } = historyData;
   const { data: helloCallDate } = useGetServiceDetail(historyData.helloCallId);
 
   const deleteHelloCallMutation = useDeleteHelloCall();
+  const editHelloCallMutation = useModifyHelloCall(historyData.helloCallId);
 
-  const isDaySelected = (day: string): boolean => days.includes(day);
+  const isDaySelected = (day: string): boolean =>
+    isEditMode ? selectedDays.includes(day) : days.includes(day);
 
   const deleteHelloCall = () => {
     const isConfirmed = window.confirm(
@@ -34,6 +42,55 @@ const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
     if (isConfirmed) {
       deleteHelloCallMutation.mutate(historyData.helloCallId);
     }
+  };
+
+  const toggleDay = (day: string) => {
+    if (!isEditMode) return;
+
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
+
+  const handleEditStart = () => {
+    setIsEditMode(true);
+    setSelectedDays(days);
+  };
+
+  const handleEditCancel = () => {
+    setIsEditMode(false);
+    setSelectedDays(days);
+  };
+
+  const editHelloCall = () => {
+    if (
+      !helloCallDate ||
+      !helloCallDate.timeSlots ||
+      helloCallDate.timeSlots.length === 0
+    ) {
+      alert('기존 시간 정보를 불러올 수 없습니다.');
+      return;
+    }
+
+    const baseTimeSlot = helloCallDate.timeSlots[0];
+    const requestData: ModifyHelloCallRequest = {
+      startDate: helloCallDate.startDate,
+      endDate: helloCallDate.endDate,
+      timeSlots: selectedDays.map((day) => ({
+        dayName: day,
+        startTime: String(baseTimeSlot.startTime), // 서버에서 오는 데이터가 TIME 형식임.
+        endTime: String(baseTimeSlot.endTime),
+      })),
+      price: helloCallDate.price,
+      serviceTime: 10, // TODO : serviceTime 추가되면 변경
+      requirement: helloCallDate.requirement,
+    };
+
+    editHelloCallMutation.mutate(requestData, {
+      onSuccess: () => {
+        setIsEditMode(false);
+      },
+    });
   };
 
   return (
@@ -52,7 +109,12 @@ const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
       {status === 'COMPLETE' ? null : (
         <DayContainer>
           {DAYS.map((day) => (
-            <Day key={day} isSelected={isDaySelected(day)}>
+            <Day
+              key={day}
+              isSelected={isDaySelected(day)}
+              onClick={() => toggleDay(day)}
+              style={{ cursor: isEditMode ? 'pointer' : 'default' }}
+            >
               {day}
             </Day>
           ))}
@@ -60,8 +122,17 @@ const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
       )}
       {status === 'WAITING' ? (
         <InfoEditContainer>
-          <EditButton>수정하기</EditButton>
-          <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
+          {isEditMode ? (
+            <>
+              <EditButton onClick={editHelloCall}>수정 완료</EditButton>
+              <DeleteButton onClick={handleEditCancel}>수정 취소</DeleteButton>
+            </>
+          ) : (
+            <>
+              <EditButton onClick={handleEditStart}>수정하기</EditButton>
+              <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
+            </>
+          )}
         </InfoEditContainer>
       ) : status === 'PENDING_COMPLETE' ? (
         <ReviewButton>리뷰하기</ReviewButton>
