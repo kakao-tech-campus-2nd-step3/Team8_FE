@@ -26,7 +26,7 @@ export const ServiceHistoryPage = () => {
     <ServiceHistoryLayout>
       <CallbackHistoryText />
       <ButtonWrapper>
-        {callbackHistory?.content.map((history, _) => (
+        {callbackHistory?.content.map((history) => (
           <CallbackHistoryDetail
             key={history.callbackId}
             historyData={history}
@@ -53,7 +53,7 @@ export const ServiceHistoryPage = () => {
       </ButtonWrapper>
       <HelloServiceHistoryText />
       <ButtonWrapper>
-        {helloCallHistory?.map((history, _) => (
+        {helloCallHistory?.map((history) => (
           <HelloServiceHistory
             key={history.helloCallId}
             historyData={history}
