@@ -1,1 +1,1 @@
-export { default as HelloCallStatue } from './HelloCallStatus';
+export { default as ServiceStatus } from './ServiceStatus';
