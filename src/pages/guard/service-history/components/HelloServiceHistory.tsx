@@ -89,7 +89,7 @@ const HelloServiceHistory = ({
         endTime: String(baseTimeSlot.endTime),
       })),
       price: helloCallDate.price,
-      serviceTime: 10, // TODO : serviceTime 추가되면 변경
+      serviceTime: helloCallDate.serviceTime,
       requirement: helloCallDate.requirement,
     };
 
