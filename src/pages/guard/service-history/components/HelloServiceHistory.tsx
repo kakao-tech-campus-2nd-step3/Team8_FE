@@ -1,29 +1,59 @@
+import { HelloCallHistory } from '../api';
+import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
+import { getStatusStyle } from '@/shared/utils/status/statusUtils';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const HelloServiceHistory = () => {
+const DAYS: string[] = ['월', '화', '수', '목', '금', '토', '일'];
+
+type HelloServiceHistoryProps = {
+  historyData: HelloCallHistory;
+};
+
+type DayProps = {
+  isSelected: boolean;
+};
+
+type StatusButtonProps = {
+  status: string;
+};
+
+const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
+  const { days, seniorName, status } = historyData;
+  const { data: helloCallDate } = useGetServiceDetail(historyData.helloCallId);
+
+  const isDaySelected = (day: string): boolean => days.includes(day);
+
   return (
     <HistoryContainer>
       <HistoryInfo>
         <Text fontSize='16px' fontWeight='700'>
-          8월15일-8월30일
+          {helloCallDate?.startDate}-{helloCallDate?.endDate}
         </Text>
         <Text fontSize='16px' fontWeight='700'>
-          김숙자
+          {seniorName}
         </Text>
-        <StatusButton status='완료'>완료</StatusButton>
+        <StatusButton status={status}>
+          {getStatusStyle(status).text}
+        </StatusButton>
       </HistoryInfo>
-      <DayContainer>
-        <Day>월</Day>
-        <Day>화</Day>
-        <Day>수</Day>
-        <Day>목</Day>
-        <Day>금</Day>
-      </DayContainer>
-      <InfoEditContainer>
-        <EditButton>수정하기</EditButton>
-        <DeleteButton>삭제하기</DeleteButton>
-      </InfoEditContainer>
+      {status === 'COMPLETE' ? null : (
+        <DayContainer>
+          {DAYS.map((day) => (
+            <Day key={day} isSelected={isDaySelected(day)}>
+              {day}
+            </Day>
+          ))}
+        </DayContainer>
+      )}
+      {status === 'WAITING' ? (
+        <InfoEditContainer>
+          <EditButton>수정하기</EditButton>
+          <DeleteButton>삭제하기</DeleteButton>
+        </InfoEditContainer>
+      ) : status === 'PENDING_COMPLETE' ? (
+        <ReviewButton>리뷰하기</ReviewButton>
+      ) : null}
     </HistoryContainer>
   );
 };
@@ -58,13 +88,16 @@ const DayContainer = styled.div`
   height: auto;
 `;
 
-const Day = styled.button`
+const Day = styled.button<DayProps>`
   width: 45px;
   height: 45px;
-  background-color: var(--color-primary);
   font-size: 16px;
-  color: var(--color-white);
   border-radius: 5px;
+  color: var(--color-white);
+  ${({ isSelected }) =>
+    isSelected
+      ? `background-color: var(--color-primary);`
+      : `background-color: var(--color-gray);`}
 `;
 
 const InfoEditContainer = styled.div`
@@ -104,15 +137,13 @@ const ReviewButton = styled.button`
   font-weight: bold;
 `;
 
-const StatusButton = styled.button<{ status: string }>`
+const StatusButton = styled.button<StatusButtonProps>`
   width: 5rem;
   height: 2rem;
   font-size: 1rem;
-  font-weight: 600;
-  background-color: ${({ status }) =>
-    status === '완료' ? '#B4D6CD' : '#ffda76'};
-  border: 1px solid
-    ${({ status }) => (status === '완료' ? '#B4D6CD' : '#ffda76')};
+  font-weight: bold;
+  background-color: ${({ status }) => getStatusStyle(status).backgroundColor};
+  border: 1px solid ${({ status }) => getStatusStyle(status).backgroundColor};
   border-radius: 10px;
   cursor: pointer;
 `;

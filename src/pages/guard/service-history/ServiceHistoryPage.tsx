@@ -1,14 +1,17 @@
 import { useState } from 'react';
 
+import { useGetHelloHistoryList } from './api';
 import { CallbackHistoryText, HistoryDetail } from './components';
 import HelloServiceHistory from './components/HelloServiceHistory';
 import { HelloServiceHistoryText } from './components/helloserviceHistoryText';
-import { CALL_DUMMY_DATA, HELLO_DUMMY_DATA } from './data';
+import { CALL_DUMMY_DATA } from './data';
 import { Button, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
   const [showAll, setShowAll] = useState(false);
+
+  const { data: helloCallHistory } = useGetHelloHistoryList();
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
@@ -34,7 +37,12 @@ export const ServiceHistoryPage = () => {
       </ButtonWrapper>
       <HelloServiceHistoryText />
       <ButtonWrapper>
-        <HelloServiceHistory />
+        {helloCallHistory?.map((history, _) => (
+          <HelloServiceHistory
+            key={history.helloCallId}
+            historyData={history}
+          />
+        ))}
       </ButtonWrapper>
     </ServiceHistoryLayout>
   );
@@ -52,6 +60,7 @@ const ServiceHistoryLayout = styled.div`
 const ButtonWrapper = styled(Flex)`
   width: 100%;
   flex-direction: column;
+  gap: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 `;
