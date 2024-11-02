@@ -1,4 +1,4 @@
-import type { CallbacksResponse } from './types';
+import type { CallbackListResponse } from './types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getCallbacksPath = () => `/api/callbacks`;
@@ -8,7 +8,7 @@ export const getCallbacks = async (
   size: number,
   sort: string = 'DESC'
 ) => {
-  const response = await fetchInstance.get<CallbacksResponse>(
+  const response = await fetchInstance.get<CallbackListResponse>(
     getCallbacksPath(),
     {
       params: {

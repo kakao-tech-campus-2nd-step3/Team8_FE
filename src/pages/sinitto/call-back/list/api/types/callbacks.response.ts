@@ -1,6 +1,6 @@
 import { CallbackResponse } from '@/shared/types';
 
-export type CallbacksResponse = {
+export type CallbackListResponse = {
   totalElements: number;
   totalPages: number;
   first: boolean;
