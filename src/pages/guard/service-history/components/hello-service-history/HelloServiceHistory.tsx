@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import ServiceStatus from '../service-status/ServiceStatus';
 import {
   HelloCallHistory,
   ModifyHelloCallRequest,
@@ -8,7 +9,6 @@ import {
 } from '@/pages/guard';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
 import { formatDate } from '@/shared/utils/date/dateUtils';
-import { getStatusStyle } from '@/shared/utils/status/statusUtils';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -21,10 +21,6 @@ type HelloServiceHistoryProps = {
 
 type DayProps = {
   isSelected: boolean;
-};
-
-type StatusButtonProps = {
-  status: string;
 };
 
 const HelloServiceHistory = ({
@@ -112,9 +108,7 @@ const HelloServiceHistory = ({
         <Text fontSize='16px' fontWeight='700'>
           {seniorName}
         </Text>
-        <StatusButton status={status}>
-          {getStatusStyle(status).text}
-        </StatusButton>
+        <ServiceStatus status={status} />
       </HistoryInfo>
       {status === 'COMPLETE' ? null : (
         <DayContainer>
@@ -145,7 +139,7 @@ const HelloServiceHistory = ({
           )}
         </InfoEditContainer>
       ) : status === 'PENDING_COMPLETE' ? (
-        <ReviewButton>리뷰하기</ReviewButton>
+        <ReviewButton>리뷰 작성하기</ReviewButton>
       ) : null}
     </HistoryContainer>
   );
@@ -228,15 +222,4 @@ const ReviewButton = styled.button`
   border-radius: 5px;
   font-size: 1rem;
   font-weight: bold;
-`;
-
-const StatusButton = styled.button<StatusButtonProps>`
-  width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: ${({ status }) => getStatusStyle(status).backgroundColor};
-  border: 1px solid ${({ status }) => getStatusStyle(status).backgroundColor};
-  border-radius: 10px;
-  cursor: pointer;
 `;
