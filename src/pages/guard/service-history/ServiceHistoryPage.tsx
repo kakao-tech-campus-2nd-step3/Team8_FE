@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-import {
-  CallbackHistoryText,
-  HistoryDetail,
-  HelloServiceHistoryText,
-} from './components';
+import { CallbackHistoryText, HistoryDetail } from './components';
+import HelloServiceHistory from './components/HelloServiceHistory';
+import { HelloServiceHistoryText } from './components/helloserviceHistoryText';
 import { CALL_DUMMY_DATA, HELLO_DUMMY_DATA } from './data';
 import { Button, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -36,14 +34,7 @@ export const ServiceHistoryPage = () => {
       </ButtonWrapper>
       <HelloServiceHistoryText />
       <ButtonWrapper>
-        {HELLO_DUMMY_DATA.map((item, index) => (
-          <HistoryDetail
-            key={index}
-            date={item.date}
-            name={item.name}
-            status={item.status}
-          />
-        ))}
+        <HelloServiceHistory />
       </ButtonWrapper>
     </ServiceHistoryLayout>
   );
