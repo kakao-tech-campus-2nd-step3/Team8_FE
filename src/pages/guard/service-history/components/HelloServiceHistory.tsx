@@ -5,6 +5,7 @@ import { useDeleteHelloCall } from '../api/hooks/useDeleteHelloCall';
 import { useModifyHelloCall } from '../api/hooks/useModifyHelloCall';
 import { ModifyHelloCallRequest } from '../api/modify-hello-call.api';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
+import { formatDate } from '@/shared/utils/date/dateUtils';
 import { getStatusStyle } from '@/shared/utils/status/statusUtils';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -104,7 +105,7 @@ const HelloServiceHistory = ({
     <HistoryContainer>
       <HistoryInfo>
         <Text fontSize='16px' fontWeight='700'>
-          {helloCallDate?.startDate}-{helloCallDate?.endDate}
+          {formatDate(helloCallDate?.startDate, helloCallDate?.endDate)}
         </Text>
         <Text fontSize='16px' fontWeight='700'>
           {seniorName}
