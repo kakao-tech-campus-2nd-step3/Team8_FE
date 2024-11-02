@@ -1,4 +1,5 @@
 import { HelloCallHistory } from '../api';
+import { useDeleteHelloCall } from '../api/hooks/useDeleteHelloCall';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
 import { getStatusStyle } from '@/shared/utils/status/statusUtils';
 import { Text } from '@chakra-ui/react';
@@ -22,7 +23,18 @@ const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
   const { days, seniorName, status } = historyData;
   const { data: helloCallDate } = useGetServiceDetail(historyData.helloCallId);
 
+  const deleteHelloCallMutation = useDeleteHelloCall();
+
   const isDaySelected = (day: string): boolean => days.includes(day);
+
+  const deleteHelloCall = () => {
+    const isConfirmed = window.confirm(
+      '정말 안부전화 신청을 삭제하시겠습니까?'
+    );
+    if (isConfirmed) {
+      deleteHelloCallMutation.mutate(historyData.helloCallId);
+    }
+  };
 
   return (
     <HistoryContainer>
@@ -49,7 +61,7 @@ const HelloServiceHistory = ({ historyData }: HelloServiceHistoryProps) => {
       {status === 'WAITING' ? (
         <InfoEditContainer>
           <EditButton>수정하기</EditButton>
-          <DeleteButton>삭제하기</DeleteButton>
+          <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
         </InfoEditContainer>
       ) : status === 'PENDING_COMPLETE' ? (
         <ReviewButton>리뷰하기</ReviewButton>
