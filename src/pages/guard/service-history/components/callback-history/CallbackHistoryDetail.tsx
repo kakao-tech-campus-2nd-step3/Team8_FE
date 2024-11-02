@@ -4,7 +4,7 @@ import { HistoryItem } from '../../types';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const HistoryDetail = ({ date, name, status }: HistoryItem) => {
+const CallbackHistoryDetail = ({ date, name, status }: HistoryItem) => {
   const [currentStatus, setCurrentStatus] = useState(status);
 
   const handleButtonClick = () => {
@@ -50,4 +50,4 @@ const StatusButton = styled.button<{ status: string }>`
   cursor: pointer;
 `;
 
-export default HistoryDetail;
+export default CallbackHistoryDetail;

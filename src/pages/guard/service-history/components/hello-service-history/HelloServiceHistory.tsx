@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
-import { HelloCallHistory } from '../api';
-import { useDeleteHelloCall } from '../api/hooks/useDeleteHelloCall';
-import { useModifyHelloCall } from '../api/hooks/useModifyHelloCall';
-import { ModifyHelloCallRequest } from '../api/modify-hello-call.api';
+import {
+  HelloCallHistory,
+  ModifyHelloCallRequest,
+  useDeleteHelloCall,
+  useModifyHelloCall,
+} from '@/pages/guard';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
 import { formatDate } from '@/shared/utils/date/dateUtils';
 import { getStatusStyle } from '@/shared/utils/status/statusUtils';
