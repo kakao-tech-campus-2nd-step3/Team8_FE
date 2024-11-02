@@ -3,10 +3,15 @@ import styled from '@emotion/styled';
 
 type StatusContainerProps = {
   status: string;
+  onClick?: () => void;
 };
 
-const ServiceStatus = ({ status }: StatusContainerProps) => {
-  return <Wrapper status={status}>{getStatusStyle(status).text}</Wrapper>;
+const ServiceStatus = ({ status, onClick }: StatusContainerProps) => {
+  return (
+    <Wrapper onClick={onClick} status={status}>
+      {getStatusStyle(status).text}
+    </Wrapper>
+  );
 };
 
 export default ServiceStatus;

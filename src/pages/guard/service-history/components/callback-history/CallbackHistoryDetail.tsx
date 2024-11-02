@@ -1,17 +1,25 @@
-import { useState } from 'react';
-
-import { HistoryItem } from '../../types';
+import {
+  CallbackHistory,
+  ServiceStatus,
+  useCompleteCallback,
+} from '@/pages/guard';
+import { formatPostTime } from '@/shared/utils/date/dateUtils';
 import { Box, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
-const CallbackHistoryDetail = ({ date, name, status }: HistoryItem) => {
-  const [currentStatus, setCurrentStatus] = useState(status);
+type CallbackHistoryDetailProps = {
+  historyData: CallbackHistory;
+};
+
+const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
+  const completeCallbackMutation = useCompleteCallback();
 
   const handleButtonClick = () => {
-    if (currentStatus === '완료대기') {
-      setCurrentStatus('완료');
-    } else {
+    if (historyData.status === 'COMPLETE') {
       alert('이미 완료 확인한 서비스입니다.');
+    } else if (historyData.status === 'WAITING') {
+      alert('아직 완료되지 않은 대기중인 서비스입니다.');
+    } else if (historyData.status === 'PENDING_COMPLETE') {
+      completeCallbackMutation.mutate(historyData.callbackId);
     }
   };
 
@@ -25,29 +33,14 @@ const CallbackHistoryDetail = ({ date, name, status }: HistoryItem) => {
       mb={3}
     >
       <Text fontSize='md' fontWeight={600} mr={1}>
-        {date}
+        {formatPostTime(historyData.postTime)}
       </Text>
       <Text fontSize='md' fontWeight={600}>
-        {name}
+        {historyData.seniorName}
       </Text>
-      <StatusButton onClick={handleButtonClick} status={currentStatus}>
-        {currentStatus}
-      </StatusButton>
+      <ServiceStatus onClick={handleButtonClick} status={historyData.status} />
     </Box>
   );
 };
-
-const StatusButton = styled.button<{ status: string }>`
-  width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: ${({ status }) =>
-    status === '완료' ? '#B4D6CD' : '#ffda76'};
-  border: 1px solid
-    ${({ status }) => (status === '완료' ? '#B4D6CD' : '#ffda76')};
-  border-radius: 10px;
-  cursor: pointer;
-`;
 
 export default CallbackHistoryDetail;

@@ -18,6 +18,5 @@ export const getHelloCallHistory =
     const response = await fetchInstance.get<HelloCallHistory[]>(
       getHelloCallHistoryPath()
     );
-    console.log(response.data);
     return response.data;
   };
