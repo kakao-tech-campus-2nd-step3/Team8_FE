@@ -1,5 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 
+import { RouterPath } from '@/app/routes';
 import IconList from '@/pages/assets/guard-main/list.svg';
 import IconUser from '@/pages/assets/shared/user.svg';
 import { HEADER_HEIGHT, useAllSeniorInfo } from '@/shared';
@@ -27,8 +29,8 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
           bg='var(--color-secondary)'
           border={0}
           color='var(--color-black)'
-          borderRadius={5}
-          fontSize='lg'
+          borderRadius={20}
+          fontSize='sm'
           fontWeight='700'
           size='sm'
           value={currentSenior?.toString() || ''}
@@ -40,7 +42,9 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
             </option>
           ))}
         </Select>
-        <Image src={IconUser} alt='icon-user' />
+        <Link to={RouterPath.MYPAGE}>
+          <Image src={IconUser} alt='icon-user' />
+        </Link>
       </Flex>
     </Wrapper>
   );

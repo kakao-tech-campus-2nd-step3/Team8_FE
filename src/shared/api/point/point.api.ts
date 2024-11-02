@@ -24,7 +24,7 @@ export const getPointInfo = async (): Promise<PointData> => {
 // 포인트 인출 API
 export const withdrawPoint = async (price: number) => {
   const response = await fetchInstance.post(`${pointApiPath}/withdraw`, {
-    price: price,
+    price,
   });
   return response.data;
 };
@@ -34,7 +34,7 @@ export const chargePoint = async (
   price: number
 ): Promise<ChargePointResponse> => {
   const response = await fetchInstance.put(`${pointApiPath}/charge`, {
-    price: price,
+    price,
   });
   return response.data;
 };

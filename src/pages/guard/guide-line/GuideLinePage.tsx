@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { useGetSeniorAllGuidelines } from './api';
 import { GuideLineInfo, GuidelineRegisterBox } from './components';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export type GuideLineDetailParams = {
@@ -29,14 +29,27 @@ export const GuideLinePage = () => {
 
   return (
     <Container>
-      <Flex
-        h='100%'
-        flexDir='column'
-        alignItems='center'
-        flexGrow={1}
-        overflowY='auto'
-        height='60vh'
-      >
+      <GuidelineRegisterBox
+        refetch={refetch}
+        seniorId={Number(seniorId)}
+        guidelineType={String(guidelineType)}
+      />
+      <Flex w='100%' h='100%' flexDir='column' alignItems='center'>
+        <Box
+          mt={2}
+          w='370px'
+          display='flex'
+          flexDir='row'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <Text color='var(--color-black)' fontSize='24px' fontWeight='700'>
+            등록한 가이드라인
+          </Text>
+          <Text color='var(--color-black)' fontSize='20px' fontWeight='700'>
+            총 {guidelineData?.length}개
+          </Text>
+        </Box>
         {guidelineData?.map((guideline) => (
           <GuideLineInfo
             key={guideline.id}
@@ -46,16 +59,13 @@ export const GuideLinePage = () => {
           />
         ))}
       </Flex>
-      <GuidelineRegisterBox
-        refetch={refetch}
-        seniorId={Number(seniorId)}
-        guidelineType={String(guidelineType)}
-      />
     </Container>
   );
 };
 
 const Container = styled(Box)`
   position: relative;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

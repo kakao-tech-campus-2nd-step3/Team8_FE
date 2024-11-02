@@ -2,8 +2,9 @@ import { Routes } from '@/app/routes';
 import {
   AllSeniorInfoProvider,
   queryClient,
-  AuthProvider,
+  UserEmailProvider,
   globalStyle,
+  SinittoInfoProvider,
 } from '@/shared';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
@@ -14,10 +15,12 @@ const App = () => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <AllSeniorInfoProvider>
-          <AuthProvider>
-            <Global styles={globalStyle} />
-            <Routes />
-          </AuthProvider>
+          <SinittoInfoProvider>
+            <UserEmailProvider>
+              <Global styles={globalStyle} />
+              <Routes />
+            </UserEmailProvider>
+          </SinittoInfoProvider>
         </AllSeniorInfoProvider>
       </QueryClientProvider>
     </ChakraProvider>

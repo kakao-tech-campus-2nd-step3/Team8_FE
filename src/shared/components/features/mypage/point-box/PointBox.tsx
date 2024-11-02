@@ -5,11 +5,11 @@ import {
   useGetPointInfo,
   useWithdrawPoint,
 } from '@/shared/hooks';
-import { Box, Text, Spinner, Button, Input } from '@chakra-ui/react';
+import { Box, Spinner, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointBox = () => {
-  const { data: pointData, isLoading, error, refetch } = useGetPointInfo();
+  const { data: pointData, isLoading, refetch } = useGetPointInfo();
   const chargePointMutation = useChargePoint();
   const withdrawPointMutation = useWithdrawPoint();
   const [actionType, setActionType] = useState('');
@@ -38,16 +38,6 @@ const PointBox = () => {
     return (
       <PointBoxLayout>
         <Spinner size='sm' />
-      </PointBoxLayout>
-    );
-  }
-
-  if (error) {
-    return (
-      <PointBoxLayout>
-        <Text color='red.300' fontWeight={700}>
-          포인트 조회 중 오류가 발생했습니다.
-        </Text>
       </PointBoxLayout>
     );
   }

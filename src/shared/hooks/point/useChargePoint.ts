@@ -9,8 +9,8 @@ export const useChargePoint = (): UseMutationResult<
 > => {
   return useMutation({
     mutationFn: (price) => chargePoint(price),
-    onSuccess: (data: ChargePointResponse) => {
-      alert(data.depositMessage);
+    onSuccess: () => {
+      alert('포인트 충전 요청 완료했습니다.');
     },
     onError: (error: Error) => {
       console.error(error);

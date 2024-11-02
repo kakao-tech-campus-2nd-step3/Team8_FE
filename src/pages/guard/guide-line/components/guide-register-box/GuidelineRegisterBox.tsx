@@ -61,13 +61,8 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
 export default GuidelineRegisterBox;
 
 const RegisterBox = styled(Box)`
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: auto;
-  min-height: 350px;
-  left: 50%;
-  transform: translateX(-50%);
   max-width: 370px;
   display: flex;
   flex-direction: column;
@@ -75,29 +70,26 @@ const RegisterBox = styled(Box)`
   background-color: var(--color-white-gray);
   border: 1px solid var(--color-white-gray);
   border-radius: 15px;
+  margin-top: 0.25rem;
 `;
 
 const InputBox = styled(Box)`
   width: 300px;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 0.2rem;
 `;
 
 const StyledButton = styled.button`
-  position: absolute;
-  bottom: 0.5rem;
   width: 300px;
   height: 40px;
   background-color: #c69090;
+  font-weight: bold;
   color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  margin-bottom: 10px;
 
   &:hover {
     background-color: #a67070;
