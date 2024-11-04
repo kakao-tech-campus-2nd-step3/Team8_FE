@@ -24,7 +24,7 @@ export type PointLogData = {
   status: string;
 };
 
-const getPointLogPath = () => 'api/points/logs';
+const getPointLogPath = () => '/api/points/logs';
 
 // 쿼리 키
 export const getPointLogQueryKey = (page: number) => ['pointLogs', page];

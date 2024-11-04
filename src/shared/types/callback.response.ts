@@ -4,4 +4,6 @@ export type CallbackResponse = {
   postTime: string;
   status: string;
   seniorId: number;
+  isAssignedToSelf: boolean;
+  seniorPhoneNumber: string;
 };

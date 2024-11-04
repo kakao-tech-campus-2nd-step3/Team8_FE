@@ -24,7 +24,7 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-export const BASE_URI = `http://sinitto.site:8080`;
+export const BASE_URI = `https://sinitto.site`;
 
 export const fetchInstance = initInstance({
   baseURL: BASE_URI,
