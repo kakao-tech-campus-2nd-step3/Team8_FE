@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import ServiceStatus from '../service-status/ServiceStatus';
+import { RouterPath } from '@/app/routes';
 import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
 import { formatDate } from '@/shared/utils/date/dateUtils';
 import { Text } from '@chakra-ui/react';
@@ -72,7 +75,9 @@ const HelloServiceHistory = ({
           )}
         </InfoEditContainer>
       ) : status === 'PENDING_COMPLETE' ? (
-        <ReviewButton>리뷰 작성하기</ReviewButton>
+        <Link to={RouterPath.SINITTO_REVIEW}>
+          <ReviewButton>리뷰 작성하기</ReviewButton>
+        </Link>
       ) : null}
     </HistoryContainer>
   );
