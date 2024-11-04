@@ -1,4 +1,4 @@
-import { CallbacksResponse } from './types';
+import { CallbackListResponse } from './types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getCallbackListPath = '/api/callbacks';
@@ -12,7 +12,7 @@ export const CallbackListQueryKey = (page: number, size: number) => [
 export const getCallbackList = async (
   page: number,
   size: number
-): Promise<CallbacksResponse> => {
+): Promise<CallbackListResponse> => {
   const response = await fetchInstance.get(getCallbackListPath, {
     params: {
       pageable: {

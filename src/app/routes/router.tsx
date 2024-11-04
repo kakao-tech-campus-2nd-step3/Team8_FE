@@ -14,7 +14,8 @@ import {
   HelloCallReportPage,
   SeniorRegisterPage,
   CallBackListPage,
-  CallBackDetailPage, // SinittoGuideLinePage,
+  CallBackDetailPage,
+  SinittoGuideLinePage,
   SinittoReviewPage,
   HelloCallApplyPage,
   GuardMainPage,
@@ -158,11 +159,26 @@ export const router = createBrowserRouter([
           },
           {
             path: RouterPath.CALL_BACK_DETAIL,
-            element: <Layout title='요청 상세페이지' />,
             children: [
               {
-                index: true,
-                element: <CallBackDetailPage />,
+                path: '',
+                element: <Layout title='요청 상세페이지' />,
+                children: [
+                  {
+                    index: true,
+                    element: <CallBackDetailPage />,
+                  },
+                ],
+              },
+              {
+                path: RouterPath.CALL_BACK_GUID_LINE,
+                element: <Layout title='요청 상세페이지' />,
+                children: [
+                  {
+                    index: true,
+                    element: <SinittoGuideLinePage />,
+                  },
+                ],
               },
             ],
           },

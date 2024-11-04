@@ -5,7 +5,7 @@ type Props = {
   content: string;
 };
 
-export const Container = ({ title, content }: Props) => {
+export const GuideLineContainer = ({ title, content }: Props) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
