@@ -7,7 +7,6 @@ import styled from '@emotion/styled';
 
 const SinittoMypage = () => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
-  const [isEditingAccount, setIsEditingAccount] = useState(false);
 
   return (
     <MyPageLayout>
@@ -23,18 +22,7 @@ const SinittoMypage = () => {
       >
         내 정보 수정하기
       </BasicButton>
-      <AccountInfoBox
-        isEditing={isEditingAccount}
-        setIsEditing={setIsEditingAccount}
-      />
-      <BasicButton
-        themeType='default'
-        width='338px'
-        height='40px'
-        onClick={() => setIsEditingAccount(true)}
-      >
-        계좌번호 수정하기
-      </BasicButton>
+      <AccountInfoBox />
       <PointBox />
       <PointLogBox />
     </MyPageLayout>

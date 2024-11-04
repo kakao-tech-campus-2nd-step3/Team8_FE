@@ -1,35 +1,49 @@
 import { useEffect, useState } from 'react';
 
-import { useModifySinittoBankInfomation } from '@/pages';
-import { useSinittoInfo } from '@/shared';
+import {
+  useGetSinittoBankInfo,
+  useModifySinittoBankInformation,
+  useRegisterSinittoBankInformation,
+} from '@/pages';
+import { BasicButton } from '@/shared';
 import { Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-type Props = {
-  isEditing: boolean;
-  setIsEditing: (value: boolean) => void;
-};
-
-const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
-  const { data, refetch } = useSinittoInfo();
-  const modifyBankInfoMutation = useModifySinittoBankInfomation();
-
-  const [accountNumber, setAccountNumber] = useState('');
-  const [bankName, setBankName] = useState('');
+const AccountInfoBox = () => {
+  const { data: sinittoBankInfo, refetch } = useGetSinittoBankInfo();
+  const [isEditingAccount, setIsEditingAccount] = useState(false);
+  const modifyBankInfoMutation = useModifySinittoBankInformation();
+  const [accountNumber, setAccountNumber] = useState(
+    sinittoBankInfo?.accountNumber || ''
+  );
+  const [bankName, setBankName] = useState(sinittoBankInfo?.bankName || '');
+  const registerBankInfoMutation = useRegisterSinittoBankInformation();
 
   useEffect(() => {
-    if (isEditing) {
-      setAccountNumber(data?.accountNumber || '');
-      setBankName(data?.bankName || '');
+    if (isEditingAccount) {
+      setAccountNumber(sinittoBankInfo?.accountNumber || '');
+      setBankName(sinittoBankInfo?.bankName || '');
     }
-  }, [isEditing, data]);
+  }, [isEditingAccount, sinittoBankInfo]);
 
   const handleSaveClick = () => {
     modifyBankInfoMutation.mutate(
       { accountNumber, bankName },
       {
         onSuccess: () => {
-          setIsEditing(false);
+          setIsEditingAccount(false);
+          refetch();
+        },
+      }
+    );
+  };
+
+  const registerBank = () => {
+    registerBankInfoMutation.mutate(
+      { accountNumber, bankName },
+      {
+        onSuccess: () => {
+          setIsEditingAccount(false);
           refetch();
         },
       }
@@ -47,7 +61,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
         >
           계좌번호
         </Text>
-        {isEditing ? (
+        {isEditingAccount ? (
           <Input
             ml='1rem'
             value={accountNumber}
@@ -59,7 +73,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {data?.accountNumber}
+            {sinittoBankInfo?.accountNumber}
           </Text>
         )}
       </Flex>
@@ -72,7 +86,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
         >
           은행 이름
         </Text>
-        {isEditing ? (
+        {isEditingAccount ? (
           <Input
             ml='1rem'
             value={bankName}
@@ -84,7 +98,7 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
           />
         ) : (
           <Text mr='1rem' fontSize='md' fontWeight={600}>
-            {data?.bankName}
+            {sinittoBankInfo?.bankName}
           </Text>
         )}
       </Flex>
@@ -98,11 +112,11 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
           계좌 인증 여부
         </Text>
         <Text mr='1rem' fontSize='md' fontWeight={600}>
-          {data?.accountNumber ? '인증 완료' : '인증 미완료'}
+          {sinittoBankInfo?.accountNumber ? '인증 완료' : '인증 미완료'}
         </Text>
       </Flex>
       <Flex justifyContent='flex-end' mt={2}>
-        {isEditing ? (
+        {isEditingAccount ? (
           <>
             <Button
               w='100px'
@@ -119,13 +133,32 @@ const AccountInfoBox = ({ isEditing, setIsEditing }: Props) => {
               h='40px'
               fontSize='md'
               colorScheme='red'
-              onClick={() => setIsEditing(false)}
+              onClick={() => setIsEditingAccount(false)}
             >
               취소
             </Button>
           </>
         ) : null}
       </Flex>
+      {sinittoBankInfo?.accountNumber === null ? (
+        <BasicButton
+          themeType='default'
+          width='338px'
+          height='40px'
+          onClick={registerBank}
+        >
+          계좌번호 등록하기
+        </BasicButton>
+      ) : (
+        <BasicButton
+          themeType='default'
+          width='338px'
+          height='40px'
+          onClick={() => setIsEditingAccount(true)}
+        >
+          계좌번호 수정하기
+        </BasicButton>
+      )}
     </AccountBoxLayout>
   );
 };

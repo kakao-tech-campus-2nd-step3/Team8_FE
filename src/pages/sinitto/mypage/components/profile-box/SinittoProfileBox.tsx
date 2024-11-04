@@ -14,24 +14,21 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const { data, refetch } = useSinittoInfo();
+  const { data: seniorInfo, refetch } = useSinittoInfo();
 
   const modifySinittoInfoMutation = useModifySinittoInformation();
 
   useEffect(() => {
     if (isEditing) {
-      setName(data?.name || '');
-      setPhoneNumber(data?.phoneNumber || '');
+      setName(seniorInfo?.name || '');
+      setPhoneNumber(seniorInfo?.phoneNumber || '');
     }
-  }, [isEditing, data]);
+  }, [isEditing, seniorInfo]);
 
   const handleSaveClick = () => {
     const modifiedSinittoInfo = {
       name: name,
       phoneNumber: phoneNumber,
-      email: String(data?.email),
-      accountNumber: String(data?.accountNumber),
-      bankName: String(data?.bankName),
     };
     modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
       onSuccess: () => {
@@ -50,7 +47,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
         alignItems='center'
       >
         <Text ml='1rem' fontSize='18px' fontWeight={700}>
-          {data?.name} 님 환영합니다.
+          {seniorInfo?.name} 님 환영합니다.
         </Text>
         <Logout />
       </Box>
@@ -75,7 +72,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {data?.name}
+            {seniorInfo?.name}
           </Text>
         )}
       </Box>
@@ -100,7 +97,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
           />
         ) : (
           <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {data?.phoneNumber}
+            {seniorInfo?.phoneNumber}
           </Text>
         )}
       </Box>

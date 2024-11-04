@@ -1,4 +1,7 @@
 export {
-  useModifySinittoBankInfomation,
+  useModifySinittoBankInformation,
   useModifySinittoInformation,
+  useGetSinittoBankInfo,
+  useGetSinittoInfomation,
+  useRegisterSinittoBankInformation,
 } from './useSinittoInfo';
