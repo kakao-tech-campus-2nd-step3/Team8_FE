@@ -116,15 +116,23 @@ const AccountInfoBox = () => {
         </Text>
       </Flex>
       <Flex justifyContent='flex-end' mt={2}>
-        {isEditingAccount ? (
-          <>
+        {sinittoBankInfo?.accountNumber === null ? (
+          <BasicButton
+            themeType='default'
+            width='310px'
+            height='40px'
+            onClick={registerBank}
+          >
+            계좌번호 등록하기
+          </BasicButton>
+        ) : isEditingAccount ? (
+          <Flex gap={2}>
             <Button
               w='100px'
               h='40px'
               fontSize='md'
               colorScheme='teal'
               onClick={handleSaveClick}
-              mr={2}
             >
               수정 완료
             </Button>
@@ -137,28 +145,18 @@ const AccountInfoBox = () => {
             >
               취소
             </Button>
-          </>
-        ) : null}
+          </Flex>
+        ) : (
+          <BasicButton
+            themeType='default'
+            width='310px'
+            height='40px'
+            onClick={() => setIsEditingAccount(true)}
+          >
+            계좌번호 수정하기
+          </BasicButton>
+        )}
       </Flex>
-      {sinittoBankInfo?.accountNumber === null ? (
-        <BasicButton
-          themeType='default'
-          width='338px'
-          height='40px'
-          onClick={registerBank}
-        >
-          계좌번호 등록하기
-        </BasicButton>
-      ) : (
-        <BasicButton
-          themeType='default'
-          width='338px'
-          height='40px'
-          onClick={() => setIsEditingAccount(true)}
-        >
-          계좌번호 수정하기
-        </BasicButton>
-      )}
     </AccountBoxLayout>
   );
 };
@@ -168,6 +166,7 @@ export default AccountInfoBox;
 const AccountBoxLayout = styled(Flex)`
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: #f2f2f2;
   width: 100%;
   max-width: 338px;
