@@ -37,6 +37,9 @@ const RegisterPage = () => {
       isSinitto,
     };
     console.log(requestData);
+
+    localStorage.setItem('isSinitto', requestData.isSinitto.toString());
+
     mutation.mutate(requestData);
   };
 
