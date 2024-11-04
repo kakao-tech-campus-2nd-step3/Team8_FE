@@ -1,1 +1,1 @@
-export type { CallbacksResponse } from './callbacks.response';
+export type { CallbackListResponse } from './callbacks.response';

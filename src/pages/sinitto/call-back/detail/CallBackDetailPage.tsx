@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Outlet, useNavigate } from 'react-router-dom';
 
-import { useGetAccepted } from './api/hooks';
 import { CallbackMenu } from './components';
 import { GuideLineList } from './components/guide-line-list';
 import { RouterPath } from '@/app/routes/path';
@@ -34,16 +33,6 @@ export const CallBackDetailPage = () => {
     }
   }, [isCallBackError, callBackError, navigate]);
 
-  const {
-    data: currentReq,
-    isLoading: iscurrentReqLoading,
-    isError: iscurrentReqError,
-  } = useGetAccepted();
-  const accept =
-    iscurrentReqError || !currentReq
-      ? false
-      : currentReq.callbackId == Number(callBackId);
-
   return (
     <>
       <Wrapper>
@@ -59,11 +48,11 @@ export const CallBackDetailPage = () => {
               />
               <GuideLineList />
               <Divider />
-              {iscurrentReqLoading ? (
-                <Spinner size='xl' marginTop='30px' />
-              ) : (
-                <CallbackMenu callBackId={Number(callBackId)} accept={accept} />
-              )}
+              <CallbackMenu
+                callBackId={Number(callBackId)}
+                accept={callbackData.isAssignedToSelf}
+                phoneNumber={callbackData.seniorPhoneNumber}
+              />
             </>
           )
         )}
