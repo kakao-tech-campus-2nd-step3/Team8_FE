@@ -1,13 +1,5 @@
-import { useState } from 'react';
-
 import ServiceStatus from '../service-status/ServiceStatus';
-import {
-  HelloCallHistory,
-  ModifyHelloCallRequest,
-  useDeleteHelloCall,
-  useModifyHelloCall,
-} from '@/pages/guard';
-import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
+import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
 import { formatDate } from '@/shared/utils/date/dateUtils';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -27,83 +19,24 @@ const HelloServiceHistory = ({
   historyData,
   refetch,
 }: HelloServiceHistoryProps) => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [selectedDays, setSelectedDays] = useState<string[]>(historyData.days);
-  const { days, seniorName, status } = historyData;
-  const { data: helloCallDate } = useGetServiceDetail(historyData.helloCallId);
+  const { seniorName, status } = historyData;
 
-  const deleteHelloCallMutation = useDeleteHelloCall(refetch);
-  const editHelloCallMutation = useModifyHelloCall(
-    historyData.helloCallId,
-    refetch
-  );
-
-  const isDaySelected = (day: string): boolean =>
-    isEditMode ? selectedDays.includes(day) : days.includes(day);
-
-  const deleteHelloCall = () => {
-    const isConfirmed = window.confirm(
-      '정말 안부전화 신청을 삭제하시겠습니까?'
-    );
-    if (isConfirmed) {
-      deleteHelloCallMutation.mutate(historyData.helloCallId);
-    }
-  };
-
-  const toggleDay = (day: string) => {
-    if (!isEditMode) return;
-
-    setSelectedDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
-    );
-  };
-
-  const handleEditStart = () => {
-    setIsEditMode(true);
-    setSelectedDays(days);
-  };
-
-  const handleEditCancel = () => {
-    setIsEditMode(false);
-    setSelectedDays(days);
-  };
-
-  const editHelloCall = () => {
-    if (
-      !helloCallDate ||
-      !helloCallDate.timeSlots ||
-      helloCallDate.timeSlots.length === 0
-    ) {
-      alert('기존 시간 정보를 불러올 수 없습니다.');
-      return;
-    }
-
-    const baseTimeSlot = helloCallDate.timeSlots[0];
-    const requestData: ModifyHelloCallRequest = {
-      startDate: helloCallDate.startDate,
-      endDate: helloCallDate.endDate,
-      timeSlots: selectedDays.map((day) => ({
-        dayName: day,
-        startTime: String(baseTimeSlot.startTime), // 서버에서 오는 데이터가 TIME 형식임.
-        endTime: String(baseTimeSlot.endTime),
-      })),
-      price: helloCallDate.price,
-      serviceTime: helloCallDate.serviceTime,
-      requirement: helloCallDate.requirement,
-    };
-
-    editHelloCallMutation.mutate(requestData, {
-      onSuccess: () => {
-        setIsEditMode(false);
-      },
-    });
-  };
+  const {
+    isEditMode,
+    helloCallDetail,
+    isDaySelected,
+    deleteHelloCall,
+    toggleDay,
+    handleEditStart,
+    handleEditCancel,
+    editHelloCall,
+  } = useHelloServiceHistory({ historyData, refetch });
 
   return (
     <HistoryContainer>
       <HistoryInfo>
         <Text fontSize='16px' fontWeight='700'>
-          {formatDate(helloCallDate?.startDate, helloCallDate?.endDate)}
+          {formatDate(helloCallDetail?.startDate, helloCallDetail?.endDate)}
         </Text>
         <Text fontSize='16px' fontWeight='700'>
           {seniorName}
