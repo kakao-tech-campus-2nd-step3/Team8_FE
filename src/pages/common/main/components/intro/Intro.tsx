@@ -10,8 +10,8 @@ const Intro = ({ title, content }: Props) => {
     <Wrapper>
       <Title>{title}</Title>
       <Content>
-        {content.map((element) => (
-          <p>{element}</p>
+        {content.map((element, index) => (
+          <p key={index}>{element}</p>
         ))}
       </Content>
     </Wrapper>
