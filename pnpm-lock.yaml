@@ -22,7 +22,7 @@ importers:
         version: 5.52.1(react@18.3.1)
       '@vitejs/plugin-basic-ssl':
         specifier: ^1.1.0
-        version: 1.1.0(vite@5.4.2(@types/node@20.16.1)(terser@5.31.6))
+        version: 1.1.0(vite@5.4.10(@types/node@20.16.1)(terser@5.31.6))
       axios:
         specifier: ^1.7.5
         version: 1.7.5
@@ -7515,11 +7515,11 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-basic-ssl@1.1.0(vite@5.4.2(@types/node@20.16.1)(terser@5.31.6))':
+  '@vitejs/plugin-basic-ssl@1.1.0(vite@5.4.10(@types/node@20.16.1)(terser@5.31.6))':
     dependencies:
-      vite: 5.4.2(@types/node@20.16.1)(terser@5.31.6)
+      vite: 5.4.10(@types/node@20.16.1)(terser@5.31.6)
 
-  '@vitejs/plugin-react-swc@3.7.0(vite@5.4.2(@types/node@20.16.1)(terser@5.31.6))':
+  '@vitejs/plugin-react-swc@3.7.0(vite@5.4.10(@types/node@20.16.1)(terser@5.31.6))':
     dependencies:
       '@swc/core': 1.7.14
       vite: 5.4.10(@types/node@20.16.1)(terser@5.31.6)

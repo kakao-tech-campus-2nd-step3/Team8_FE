@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import type { Swiper as SwiperType } from 'swiper';
+
 import { LoginButton } from './components';
 import { FirstPage, SecondPage, ThirdPage } from './components/swipe-page';
 import styled from '@emotion/styled';
@@ -11,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 const MainPage = () => {
   const [page, setPage] = useState(0);
 
-  const handleSlideChange = (swiper: any) => {
+  const handleSlideChange = (swiper: SwiperType) => {
     setPage(swiper.activeIndex);
   };
 
