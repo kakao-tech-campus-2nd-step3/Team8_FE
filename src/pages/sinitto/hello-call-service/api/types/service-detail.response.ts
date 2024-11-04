@@ -18,5 +18,6 @@ export type ServiceDetailResponse = {
   requirement: string;
   seniorName: string;
   seniorPhoneNumber: string;
+  serviceTime: number;
   price: number;
 };
