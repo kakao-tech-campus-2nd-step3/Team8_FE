@@ -30,11 +30,14 @@ const PointBox = ({ isSinitto }: Props) => {
 
   const handleWithdrawButtonClick = () => {
     const parsedAmount = Number(amount);
-    if (parsedAmount > 0) {
+    if (parsedAmount > 0 && parsedAmount <= Number(pointData?.price)) {
       withdrawPointMutation.mutate(parsedAmount);
       setAmount('');
       setActionType('');
       refetch();
+    } else {
+      alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
+      setAmount('');
     }
   };
 
