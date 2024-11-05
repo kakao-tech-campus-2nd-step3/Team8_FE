@@ -25,7 +25,7 @@ const SinittoMypage = () => {
         </BasicButton>
       )}
       <AccountInfoBox />
-      <PointBox />
+      <PointBox isSinitto={true} />
       <PointLogBox />
     </MyPageLayout>
   );

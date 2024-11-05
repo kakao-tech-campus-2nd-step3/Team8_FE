@@ -72,7 +72,6 @@ const AccountInfoBox = () => {
             ml='1rem'
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
-            placeholder='계좌번호 입력'
             fontSize='16px'
             fontWeight='bold'
             width='60%'
@@ -105,7 +104,6 @@ const AccountInfoBox = () => {
             ml='1rem'
             value={bankName}
             onChange={(e) => setBankName(e.target.value)}
-            placeholder='해당 은행 기입'
             fontSize='16px'
             fontWeight='bold'
             width='40%'
@@ -145,8 +143,10 @@ const AccountInfoBox = () => {
               <Button
                 w='100px'
                 h='40px'
-                fontSize='md'
-                colorScheme='teal'
+                fontSize='16px'
+                bg='var(--color-primary)'
+                color='var(--color-white)'
+                fontWeight='bold'
                 onClick={registerBank}
               >
                 등록 완료
@@ -155,10 +155,12 @@ const AccountInfoBox = () => {
                 w='100px'
                 h='40px'
                 fontSize='16px'
-                colorScheme='red'
+                bg='var(--color-gray)'
+                color='var(--color-white)'
+                fontWeight='bold'
                 onClick={() => setIsRegistering(false)}
               >
-                취소
+                등록 취소
               </Button>
             </Flex>
           ) : (

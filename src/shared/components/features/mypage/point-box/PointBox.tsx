@@ -8,7 +8,11 @@ import {
 import { Box, Spinner, Button, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const PointBox = () => {
+type Props = {
+  isSinitto: boolean;
+};
+
+const PointBox = ({ isSinitto }: Props) => {
   const { data: pointData, isLoading, refetch } = useGetPointInfo();
   const chargePointMutation = useChargePoint();
   const withdrawPointMutation = useWithdrawPoint();
@@ -72,6 +76,8 @@ const PointBox = () => {
             m={1}
             w='100%'
             h='40px'
+            bg='var(--color-white)'
+            fontSize='16px'
             placeholder={
               actionType === 'charge' ? '충전할 포인트' : '출금할 포인트'
             }
@@ -85,37 +91,60 @@ const PointBox = () => {
               w='100px'
               h='40px'
               fontSize='16px'
+              bg='var(--color-primary)'
+              color='var(--color-white)'
+              fontWeight='bold'
+              mr={2}
               onClick={
                 actionType === 'charge'
                   ? handleChargeButtonClick
                   : handleWithdrawButtonClick
               }
-              colorScheme='teal'
             >
-              {actionType === 'charge' ? '충전' : '출금'}
+              {actionType === 'charge' ? '충전 신청' : '출금 신청'}
             </Button>
             <Button
               w='100px'
               h='40px'
               fontSize='16px'
+              bg='var(--color-gray)'
+              color='var(--color-white)'
+              fontWeight='bold'
               onClick={() => {
                 setActionType('');
               }}
-              colorScheme='red'
             >
-              취소
+              {actionType === 'charge' ? '충전 취소' : '출금 취소'}
             </Button>
           </ButtonContainer>
         </Box>
       ) : (
-        <ButtonContainer mt={2}>
-          <ButtonBox onClick={() => setActionType('charge')}>
-            충전하기
-          </ButtonBox>
-          <ButtonBox onClick={() => setActionType('withdraw')}>
-            출금하기
-          </ButtonBox>
-        </ButtonContainer>
+        <>
+          <Box
+            mt={1}
+            bg='var(--color-primary)'
+            color='var(--color-white)'
+            w='90%'
+            borderRadius='5px'
+            fontSize='16px'
+            fontWeight='bold'
+            display='flex'
+            justifyContent='center'
+          >
+            {isSinitto ? null : '보낼 계좌 : 3333-17-1913-736'}
+          </Box>
+          <ButtonContainer mt={2}>
+            {isSinitto ? (
+              <ActingButton onClick={() => setActionType('withdraw')}>
+                출금하기
+              </ActingButton>
+            ) : (
+              <ActingButton onClick={() => setActionType('charge')}>
+                충전하기
+              </ActingButton>
+            )}
+          </ButtonContainer>
+        </>
       )}
     </PointBoxLayout>
   );
@@ -131,8 +160,7 @@ const PointBoxLayout = styled(Box)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f6e4e4;
-  border: 1px solid #f6e4e4;
+  background-color: var(--color-secondary);
   border-radius: 10px;
   margin-top: 0.5rem;
 `;
@@ -141,26 +169,23 @@ const ButtonContainer = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
   max-width: 338px;
-  height: 30%;
-  max-height: 40px;
+  max-height: 70px;
   margin-bottom: 10px;
 `;
 
-const ButtonBox = styled(Box)`
+const ActingButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 145px;
-  height: 100%;
-  max-height: 30px;
+  width: 90%;
+  height: 30px;
   font-size: 16px;
   font-weight: 600;
-  background-color: #fff;
-  border: 1px solid #fff;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
   border-radius: 5px;
   cursor: pointer;
 `;
