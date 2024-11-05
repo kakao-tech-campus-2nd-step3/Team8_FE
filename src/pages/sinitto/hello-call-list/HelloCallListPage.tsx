@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useGetServiceList } from './api';
 import { CallRequest } from './components';
-import { RouterPath } from '@/app/routes/path';
 import { LoadingView } from '@/shared/components';
 import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -20,7 +19,7 @@ const HelloCallListPage = () => {
   const allContent = data?.pages.flatMap((page) => page.content) ?? [];
 
   const handlerNavigate = (helloCallId: number) => {
-    navigate(`${RouterPath.HELLO_CALL_SERVICE}/${helloCallId}`);
+    navigate(`${helloCallId}`);
   };
 
   const lastElementRef = useCallback(

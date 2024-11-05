@@ -10,7 +10,7 @@ export const RouterPath = {
   SINITTO: '/sinitto',
   SERVICE_HISTORY: `service-history`,
   HELLO_CALL: `hello-call`,
-  HELLO_CALL_SERVICE: `service`,
+  HELLO_CALL_SERVICE: `:helloCallId`,
   HELLO_CALL_REPORT: `report`,
   HELLO_CALL_GUARD_APPLY: `apply`,
   CALL_BACK_LIST: `call-back`,
