@@ -139,7 +139,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
               fontWeight='bold'
               onClick={() => setIsEditing(false)}
             >
-              취소
+              수정 취소
             </Button>
           </>
         ) : null}
