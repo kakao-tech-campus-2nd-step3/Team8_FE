@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 const ThirdPage = () => {
   return (
     <Wrapper>
-      <Image marginTop='auto' src={PointIllust} height='270px' />
+      <Image marginTop='auto' src={PointIllust} height='270px' width='90%' />
       <Intro
         title='따뜻한 마음과 함께하는 보람과 혜택'
         content={[

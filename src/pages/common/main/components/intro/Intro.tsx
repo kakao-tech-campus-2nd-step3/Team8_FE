@@ -1,3 +1,4 @@
+import { breakpoints } from '@/shared/styles/variants';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -31,15 +32,25 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   color: var(--color-basic);
+  white-space: nowrap;
+
+  @media only screen and (min-width: ${breakpoints.xs}) {
+    font-size: var(--font-size-xl);
+  }
 `;
 
 const Content = styled.div`
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--color-gray);
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  white-space: nowrap;
+
+  @media only screen and (min-width: ${breakpoints.xs}) {
+    font-size: var(--font-size-md);
+  }
 `;
