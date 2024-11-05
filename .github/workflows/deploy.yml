@@ -17,18 +17,11 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@master
 
-      - name: Cache node modules
-        uses: actions/cache@v4
+      - name: Install NodeJs & Pnpm package manager
+        uses: actions/setup-node@v4
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
+          node-version: 22
+          cache: 'pnpm'
 
       - name: Create .env file
         run: |
