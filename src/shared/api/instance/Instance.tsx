@@ -59,7 +59,7 @@ fetchInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 461 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       const refreshToken = localStorage.getItem('refreshToken');
@@ -74,6 +74,7 @@ fetchInstance.interceptors.response.use(
           'Cross-Control-Allow-Origin': '*',
           Authorization: `Bearer ${refreshToken}`,
         },
+        body: JSON.stringify({ refreshToken }),
       });
       if (resp.ok) {
         console.log('토큰 재발급 성공');
