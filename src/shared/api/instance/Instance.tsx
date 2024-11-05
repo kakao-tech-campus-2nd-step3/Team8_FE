@@ -85,7 +85,7 @@ fetchInstance.interceptors.response.use(
         localStorage.setItem('refreshToken', data.refreshToken);
 
         return fetchInstance(originalRequest);
-      } else {
+      } else if (resp.status === 460 || resp.status === 462) {
         console.log('토큰 재발급 실패');
 
         localStorage.removeItem('accessToken');
