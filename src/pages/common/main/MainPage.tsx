@@ -1,40 +1,87 @@
-import { ReviewBox, LoginButton } from './components';
-import { Box, Text } from '@chakra-ui/react';
+import { useState } from 'react';
+
+import type { Swiper as SwiperType } from 'swiper';
+
+import { LoginButton } from './components';
+import { FirstPage, SecondPage, ThirdPage } from './components/swipe-page';
 import styled from '@emotion/styled';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const MainPage = () => {
+  const [page, setPage] = useState(0);
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    setPage(swiper.activeIndex);
+  };
+
   return (
-    <MainPageLayout>
-      <FlexBox marginY='1.5rem' mb={10}>
-        <Text fontSize='2rem' fontWeight='700'>
-          나만의 작은 시니또
-        </Text>
-        <Text fontSize='1.2rem'>디지털 시대? 나도 두렵지 않아!</Text>
-      </FlexBox>
-      <Box>
-        <ReviewBox />
-      </Box>
-      <Box mt={20}>
+    <MainPageLayout page={page}>
+      <Wrapper>
+        <StyledSwiper
+          slidesPerView={1}
+          navigation={true}
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          keyboard={true}
+          modules={[Pagination]}
+          onSlideChange={handleSlideChange}
+        >
+          <SwiperSlide>
+            <FirstPage />
+          </SwiperSlide>
+          <SwiperSlide>
+            <SecondPage />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ThirdPage />
+          </SwiperSlide>
+        </StyledSwiper>
+
         <LoginButton />
-      </Box>
+      </Wrapper>
     </MainPageLayout>
   );
 };
 
 export default MainPage;
 
-const MainPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  margin: 1rem 0;
-`;
+type PageProps = {
+  page: number;
+};
 
-const FlexBox = styled(Box)`
+const MainPageLayout = styled.div<PageProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: ${(props) =>
+    props.page === 0 ? 'var(--color-primary)' : 'var(--color-white)'};
+  transition: background 0.3s ease;
+
+  .swiper-pagination-bullet-active {
+  background-color: ${(props) =>
+    props.page === 0 ? 'var(--color-secondary)' : 'var(--color-primary)'};;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  max-height: 700px;
+`;
+
+const StyledSwiper = styled(Swiper)`
+  width: 80%;
+  max-width: 28.75rem;
+  height: 100%;
+  margin-bottom: 1rem;
 `;
