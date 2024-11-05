@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import PointLogImg from '../../../../assets/point-log-icon.png';
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
@@ -8,8 +8,16 @@ import styled from '@emotion/styled';
 const PointLogBox = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data, isLoading } = useGetPointLogs(currentPage, pageSize);
+  const { data, isLoading, refetch } = useGetPointLogs(currentPage, pageSize);
   const totalPages = data?.totalPages || 1;
+
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      refetch();
+    },
+    [refetch]
+  );
 
   if (isLoading) {
     return (
@@ -35,15 +43,15 @@ const PointLogBox = () => {
             />
             <DetailTextBox>
               <TextLayout>
-                <DetailText>
+                <ContentText>
                   {new Date(item.postTime).toLocaleDateString()}
-                </DetailText>
+                </ContentText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
                   {getPointStatusLabel(item.status)}
                 </DetailText>
               </TextLayout>
               <TextLayout>
-                <DetailText>{item.content}</DetailText>
+                <ContentText>{item.content}</ContentText>
                 <DetailText display='flex' justifyContent='flex-end' mr={2}>
                   <PriceText
                     color={
@@ -72,7 +80,7 @@ const PointLogBox = () => {
       </DetailBox>
       <Pagination>
         <PaginationButton
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+          onClick={() => handlePageChange(Math.max(currentPage - 1, 0))}
           disabled={currentPage === 0}
         >
           이전
@@ -81,7 +89,7 @@ const PointLogBox = () => {
           페이지 {currentPage + 1} / {data?.totalPages ? data.totalPages : 1}
         </span>
         <PaginationButton
-          onClick={() => setCurrentPage((prev) => prev + 1)}
+          onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage >= totalPages - 1}
         >
           다음
@@ -92,7 +100,6 @@ const PointLogBox = () => {
 };
 
 export default PointLogBox;
-
 const UseDetailBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -170,6 +177,14 @@ const PaginationButton = styled.button`
 `;
 
 const DetailText = styled(Box)`
+  width: 45%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const ContentText = styled(Box)`
   width: 100%;
   display: flex;
   align-items: center;
