@@ -16,7 +16,7 @@ export type SeniorAllGuideLineRequest = {
 const getSeniorAllGuidelinesPath = (
   seniorId?: number,
   guidelineType?: string
-) => `/api/guardguidelines/${seniorId}/${guidelineType}`;
+) => `/api/guardguidelines/guard/${seniorId}/${guidelineType}`;
 
 export const getSeniorAllGuidelinesQueryKey = (
   seniorId: number,
