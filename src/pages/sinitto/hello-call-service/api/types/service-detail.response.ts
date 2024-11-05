@@ -5,7 +5,7 @@ type Time = {
   nano: number;
 };
 
-type TimeSlot = {
+export type TimeSlot = {
   dayName: string;
   startTime: Time;
   endTime: Time;
