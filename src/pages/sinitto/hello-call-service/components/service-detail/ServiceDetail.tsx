@@ -1,15 +1,28 @@
+import { TimeSlot } from '../../api';
 import IconCalendar from '../../assets/calendar.svg';
 import IconClock from '../../assets/clock.svg';
 import IconSpeaker from '../../assets/speaker.svg';
-import { SERVICE_DATA } from '../../test';
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const ServiceDetail = () => {
+type Props = {
+  startDate: string;
+  endDate: string;
+  timeSlots: TimeSlot[] | undefined;
+  serviceTime: number | undefined;
+  requirement: string | undefined;
+};
+
+const ServiceDetail = ({
+  startDate,
+  endDate,
+  timeSlots,
+  serviceTime,
+  requirement,
+}: Props) => {
   return (
-    <Box
+    <Flex
       display='flex'
-      w='full'
       p={4}
       flexDir='column'
       borderRadius='0.5rem'
@@ -18,24 +31,26 @@ const ServiceDetail = () => {
       border='1px solid var(--color-gray)'
     >
       <InfoBox>
-        <TitleBox>
+        <Flex flexDir='row' alignItems='center' gap='0.5rem'>
           <Image src={IconCalendar} alt='calendar-icon' />
           <Text fontSize='var(--font-size-lg)' fontWeight='700'>
             서비스 수행 기간
           </Text>
-        </TitleBox>
+        </Flex>
         <Box ml={8}>
-          <Text>{SERVICE_DATA.servicePeriod}</Text>
+          <Text>
+            {startDate} ~ {endDate}
+          </Text>
         </Box>
       </InfoBox>
       <InfoBox>
-        <TitleBox>
+        <Flex flexDir='row' alignItems='center' gap='0.5rem'>
           <Image src={IconClock} alt='clock-icon' />
           <Text fontSize='var(--font-size-lg)' fontWeight='700'>
             서비스 수행 시간대
           </Text>
-        </TitleBox>
-        {SERVICE_DATA.serviceTimes.map((time, index) => (
+        </Flex>
+        {timeSlots?.map((time, index) => (
           <Box
             key={index}
             display='flex'
@@ -44,27 +59,29 @@ const ServiceDetail = () => {
             textAlign='center'
             alignItems='center'
           >
-            <Text>{time.day}</Text>
-            <Text>{time.time}</Text>
+            <Text>{time.dayName}요일</Text>
+            <Text>
+              {String(time.startTime)} ~ {String(time.endTime)}
+            </Text>
             <Box backgroundColor='var(--color-primary)' px={1} borderRadius={5}>
-              <Text color='var(--color-white)'>{time.extraTime}</Text>
+              <Text color='var(--color-white)'>{serviceTime} 분</Text>
             </Box>
           </Box>
         ))}
       </InfoBox>
 
       <InfoBox>
-        <TitleBox>
+        <Flex flexDir='row' alignItems='center' gap='0.5rem'>
           <Image src={IconSpeaker} alt='speaker-icon' />
           <Text fontSize='var(--font-size-lg)' fontWeight='700'>
             안부전화 시 요청사항
           </Text>
-        </TitleBox>
-        <Box ml={8}>
-          <Text>{SERVICE_DATA.request}</Text>
+        </Flex>
+        <Box mx={8}>
+          <Text>{requirement}</Text>
         </Box>
       </InfoBox>
-    </Box>
+    </Flex>
   );
 };
 
@@ -78,11 +95,4 @@ const InfoBox = styled(Box)`
   gap: 0.5rem;
   background-color: var(--color-white);
   border: 1px solid var(--color-gray);
-`;
-
-const TitleBox = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
 `;
