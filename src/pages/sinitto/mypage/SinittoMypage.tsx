@@ -14,14 +14,16 @@ const SinittoMypage = () => {
         isEditing={isEditingProfile}
         setIsEditing={setIsEditingProfile}
       />
-      <BasicButton
-        themeType='default'
-        width='338px'
-        height='40px'
-        onClick={() => setIsEditingProfile(true)}
-      >
-        내 정보 수정하기
-      </BasicButton>
+      {isEditingProfile ? null : (
+        <BasicButton
+          themeType='default'
+          width='338px'
+          height='40px'
+          onClick={() => setIsEditingProfile(true)}
+        >
+          내 정보 수정하기
+        </BasicButton>
+      )}
       <AccountInfoBox />
       <PointBox />
       <PointLogBox />
