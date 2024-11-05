@@ -1,5 +1,5 @@
-import PointIllust from '../../../assets/point-illust.svg';
 import { Intro } from '../../intro';
+import PointIllust from '@/pages/assets/main/point-illust.svg';
 import { Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
