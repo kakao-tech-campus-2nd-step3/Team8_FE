@@ -11,7 +11,7 @@ export const RouterPath = {
   SERVICE_HISTORY: `service-history`,
   HELLO_CALL: `hello-call`,
   HELLO_CALL_SERVICE: `:helloCallId`,
-  HELLO_CALL_REPORT: `report`,
+  HELLO_CALL_REPORT: `:helloCallId/report`,
   HELLO_CALL_GUARD_APPLY: `apply`,
   CALL_BACK_LIST: `call-back`,
   CALL_BACK_DETAIL: `:callBackId`,
