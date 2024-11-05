@@ -12,6 +12,7 @@ import styled from '@emotion/styled';
 const AccountInfoBox = () => {
   const { data: sinittoBankInfo, refetch } = useGetSinittoBankInfo();
   const [isEditingAccount, setIsEditingAccount] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
   const modifyBankInfoMutation = useModifySinittoBankInformation();
   const [accountNumber, setAccountNumber] = useState(
     sinittoBankInfo?.accountNumber || ''
@@ -20,11 +21,11 @@ const AccountInfoBox = () => {
   const registerBankInfoMutation = useRegisterSinittoBankInformation();
 
   useEffect(() => {
-    if (isEditingAccount) {
+    if (isEditingAccount || isRegistering) {
       setAccountNumber(sinittoBankInfo?.accountNumber || '');
       setBankName(sinittoBankInfo?.bankName || '');
     }
-  }, [isEditingAccount, sinittoBankInfo]);
+  }, [isEditingAccount, isRegistering, sinittoBankInfo]);
 
   const handleSaveClick = () => {
     modifyBankInfoMutation.mutate(
@@ -43,7 +44,7 @@ const AccountInfoBox = () => {
       { accountNumber, bankName },
       {
         onSuccess: () => {
-          setIsEditingAccount(false);
+          setIsRegistering(false);
           refetch();
         },
       }
@@ -61,7 +62,7 @@ const AccountInfoBox = () => {
         >
           계좌번호
         </Text>
-        {isEditingAccount ? (
+        {isEditingAccount || isRegistering ? (
           <Input
             ml='1rem'
             value={accountNumber}
@@ -86,7 +87,7 @@ const AccountInfoBox = () => {
         >
           은행 이름
         </Text>
-        {isEditingAccount ? (
+        {isEditingAccount || isRegistering ? (
           <Input
             ml='1rem'
             value={bankName}
@@ -117,14 +118,37 @@ const AccountInfoBox = () => {
       </Flex>
       <Flex justifyContent='flex-end' mt={2}>
         {sinittoBankInfo?.accountNumber === null ? (
-          <BasicButton
-            themeType='default'
-            width='310px'
-            height='40px'
-            onClick={registerBank}
-          >
-            계좌번호 등록하기
-          </BasicButton>
+          isRegistering ? (
+            <Flex gap={2}>
+              <Button
+                w='100px'
+                h='40px'
+                fontSize='md'
+                colorScheme='teal'
+                onClick={registerBank}
+              >
+                등록 완료
+              </Button>
+              <Button
+                w='100px'
+                h='40px'
+                fontSize='md'
+                colorScheme='red'
+                onClick={() => setIsRegistering(false)}
+              >
+                취소
+              </Button>
+            </Flex>
+          ) : (
+            <BasicButton
+              themeType='default'
+              width='310px'
+              height='40px'
+              onClick={() => setIsRegistering(true)}
+            >
+              계좌번호 등록하기
+            </BasicButton>
+          )
         ) : isEditingAccount ? (
           <Flex gap={2}>
             <Button
