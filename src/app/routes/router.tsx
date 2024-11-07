@@ -21,6 +21,7 @@ import {
   GuardMainPage,
   SinittoMainPage,
   DummyRedirectPage,
+  SinittoServiceHistoryPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -141,6 +142,21 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <SinittoMypage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.SINITTO_SERVICE_HISTORY,
+        children: [
+          {
+            path: '',
+            element: <Layout title='서비스 이용내역' />,
+            children: [
+              {
+                index: true,
+                element: <SinittoServiceHistoryPage />,
+              },
+            ],
           },
         ],
       },
