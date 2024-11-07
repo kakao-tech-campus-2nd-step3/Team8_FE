@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
 import { SinittoProfileBox, AccountInfoBox } from './components';
-import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
+import {
+  BasicButton,
+  PointBox,
+  PointLogBox,
+  Withdrawal,
+} from '@/shared/components';
 import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -14,17 +19,20 @@ const SinittoMypage = () => {
         isEditing={isEditingProfile}
         setIsEditing={setIsEditingProfile}
       />
-      <BasicButton
-        themeType='default'
-        width='338px'
-        height='40px'
-        onClick={() => setIsEditingProfile(true)}
-      >
-        내 정보 수정하기
-      </BasicButton>
+      {isEditingProfile ? null : (
+        <BasicButton
+          themeType='default'
+          width='338px'
+          height='40px'
+          onClick={() => setIsEditingProfile(true)}
+        >
+          내 정보 수정하기
+        </BasicButton>
+      )}
       <AccountInfoBox />
-      <PointBox />
+      <PointBox isSinitto={true} />
       <PointLogBox />
+      <Withdrawal />
     </MyPageLayout>
   );
 };

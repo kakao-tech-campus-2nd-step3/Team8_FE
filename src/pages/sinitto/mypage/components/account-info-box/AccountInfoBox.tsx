@@ -12,6 +12,7 @@ import styled from '@emotion/styled';
 const AccountInfoBox = () => {
   const { data: sinittoBankInfo, refetch } = useGetSinittoBankInfo();
   const [isEditingAccount, setIsEditingAccount] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
   const modifyBankInfoMutation = useModifySinittoBankInformation();
   const [accountNumber, setAccountNumber] = useState(
     sinittoBankInfo?.accountNumber || ''
@@ -20,11 +21,11 @@ const AccountInfoBox = () => {
   const registerBankInfoMutation = useRegisterSinittoBankInformation();
 
   useEffect(() => {
-    if (isEditingAccount) {
+    if (isEditingAccount || isRegistering) {
       setAccountNumber(sinittoBankInfo?.accountNumber || '');
       setBankName(sinittoBankInfo?.bankName || '');
     }
-  }, [isEditingAccount, sinittoBankInfo]);
+  }, [isEditingAccount, isRegistering, sinittoBankInfo]);
 
   const handleSaveClick = () => {
     modifyBankInfoMutation.mutate(
@@ -39,11 +40,15 @@ const AccountInfoBox = () => {
   };
 
   const registerBank = () => {
+    if (!accountNumber || !bankName) {
+      alert('은행 정보와 계좌번호를 기입해주세요.');
+      return;
+    }
     registerBankInfoMutation.mutate(
       { accountNumber, bankName },
       {
         onSuccess: () => {
-          setIsEditingAccount(false);
+          setIsRegistering(false);
           refetch();
         },
       }
@@ -52,23 +57,29 @@ const AccountInfoBox = () => {
 
   return (
     <AccountBoxLayout mb={2}>
-      <Flex w='full' justifyContent='space-between' alignItems='center'>
+      <Flex
+        w='100%'
+        h='1.5rem'
+        justifyContent='space-between'
+        alignItems='center'
+      >
         <Text
           ml='1rem'
-          fontSize='md'
+          fontSize='16px'
           fontWeight={600}
           color='var(--color-gray)'
         >
           계좌번호
         </Text>
-        {isEditingAccount ? (
+        {isEditingAccount || isRegistering ? (
           <Input
             ml='1rem'
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
-            placeholder='계좌번호 입력'
-            size='sm'
+            fontSize='16px'
+            fontWeight='bold'
             width='60%'
+            h='1.5rem'
             bg='var(--color-white)'
           />
         ) : (
@@ -77,61 +88,105 @@ const AccountInfoBox = () => {
           </Text>
         )}
       </Flex>
-      <Flex w='full' justifyContent='space-between' mt={2} alignItems='center'>
+      <Flex
+        w='100%'
+        h='1.5rem'
+        justifyContent='space-between'
+        mt={2}
+        alignItems='center'
+      >
         <Text
           ml='1rem'
-          fontSize='md'
+          fontSize='16px'
           fontWeight={600}
           color='var(--color-gray)'
         >
           은행 이름
         </Text>
-        {isEditingAccount ? (
+        {isEditingAccount || isRegistering ? (
           <Input
             ml='1rem'
             value={bankName}
             onChange={(e) => setBankName(e.target.value)}
-            placeholder='해당 은행 기입'
-            size='sm'
+            fontSize='16px'
+            fontWeight='bold'
             width='40%'
+            h='1.5rem'
             bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='md' fontWeight={600}>
+          <Text mr='1rem' fontSize='16px' fontWeight={600}>
             {sinittoBankInfo?.bankName}
           </Text>
         )}
       </Flex>
-      <Flex w='full' justifyContent='space-between' mt={2} alignItems='center'>
+      <Flex
+        w='100%'
+        h='1.5rem'
+        justifyContent='space-between'
+        mt={2}
+        mb={1}
+        alignItems='center'
+      >
         <Text
           ml='1rem'
-          fontSize='md'
+          fontSize='16px'
           fontWeight={600}
           color='var(--color-gray)'
         >
           계좌 인증 여부
         </Text>
-        <Text mr='1rem' fontSize='md' fontWeight={600}>
+        <Text mr='1rem' fontSize='16px' fontWeight={600}>
           {sinittoBankInfo?.accountNumber ? '인증 완료' : '인증 미완료'}
         </Text>
       </Flex>
       <Flex justifyContent='flex-end' mt={2}>
         {sinittoBankInfo?.accountNumber === null ? (
-          <BasicButton
-            themeType='default'
-            width='310px'
-            height='40px'
-            onClick={registerBank}
-          >
-            계좌번호 등록하기
-          </BasicButton>
+          isRegistering ? (
+            <Flex gap={2}>
+              <Button
+                w='100px'
+                h='40px'
+                fontSize='16px'
+                bg='var(--color-primary)'
+                color='var(--color-white)'
+                fontWeight='bold'
+                onClick={registerBank}
+              >
+                등록 완료
+              </Button>
+              <Button
+                w='100px'
+                h='40px'
+                fontSize='16px'
+                bg='var(--color-gray)'
+                color='var(--color-white)'
+                fontWeight='bold'
+                onClick={() => setIsRegistering(false)}
+              >
+                등록 취소
+              </Button>
+            </Flex>
+          ) : (
+            <BasicButton
+              themeType='default'
+              width='310px'
+              height='40px'
+              onClick={() => setIsRegistering(true)}
+            >
+              계좌번호 등록하기
+            </BasicButton>
+          )
         ) : isEditingAccount ? (
           <Flex gap={2}>
             <Button
               w='100px'
               h='40px'
-              fontSize='md'
-              colorScheme='teal'
+              fontSize='16px'
+              bg='var(--color-primary)'
+              color='var(--color-white)'
+              fontWeight='bold'
+              mr={2}
               onClick={handleSaveClick}
             >
               수정 완료
@@ -139,11 +194,13 @@ const AccountInfoBox = () => {
             <Button
               w='100px'
               h='40px'
-              fontSize='md'
-              colorScheme='red'
+              fontSize='16px'
+              bg='var(--color-gray)'
+              color='var(--color-white)'
+              fontWeight='bold'
               onClick={() => setIsEditingAccount(false)}
             >
-              취소
+              수정 취소
             </Button>
           </Flex>
         ) : (

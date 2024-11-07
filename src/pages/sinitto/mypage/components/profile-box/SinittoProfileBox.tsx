@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { useModifySinittoInformation } from '@/pages';
-import { Logout, useSinittoInfo } from '@/shared';
-import { Box, Text, Button, Input } from '@chakra-ui/react';
+import { formatPhoneNumber, Logout, useSinittoInfo } from '@/shared';
+import { Box, Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -40,18 +40,20 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
 
   return (
     <SinittoProfileBoxLayout mb={2}>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        alignItems='center'
-      >
+      <Flex justifyContent='space-between' alignItems='center'>
         <Text ml='1rem' fontSize='18px' fontWeight={700}>
           {seniorInfo?.name} 님 환영합니다.
         </Text>
         <Logout />
-      </Box>
-      <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
+      </Flex>
+      <Box
+        display='flex'
+        w='100%'
+        height='2rem'
+        justifyContent='space-between'
+        alignItems='center'
+        mt={2}
+      >
         <Text
           ml='1rem'
           fontSize='16px'
@@ -62,21 +64,28 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
         </Text>
         {isEditing ? (
           <Input
-            ml='1rem'
+            fontSize='16px'
+            fontWeight='bold'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder='이름 입력'
-            size='sm'
-            width='40%'
+            width='5rem'
+            height='100%'
             bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
+          <Text textAlign='right' w='3rem' fontSize='16px' fontWeight={600}>
             {seniorInfo?.name}
           </Text>
         )}
       </Box>
-      <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
+      <Box
+        display='flex'
+        w='100%'
+        height='2rem'
+        justifyContent='space-between'
+        alignItems='center'
+        mt={2}
+      >
         <Text
           ml='1rem'
           fontSize='16px'
@@ -87,28 +96,30 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
         </Text>
         {isEditing ? (
           <Input
-            ml='1rem'
+            fontSize='16px'
+            fontWeight='bold'
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder='전화번호 입력'
-            size='sm'
-            width='60%'
+            width='9rem'
+            height='100%'
             bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {seniorInfo?.phoneNumber}
+          <Text w='9rem' textAlign='right' fontSize='16px' fontWeight={600}>
+            {formatPhoneNumber(String(seniorInfo?.phoneNumber))}
           </Text>
         )}
       </Box>
-      <Box display='flex' justifyContent='flex-end' mt={2}>
+      <Box display='flex' w='100%' mt={1.5} justifyContent='center' gap={1}>
         {isEditing ? (
           <>
             <Button
               w='100px'
               h='40px'
               fontSize='16px'
-              colorScheme='teal'
+              bg='var(--color-primary)'
+              color='var(--color-white)'
+              fontWeight='bold'
               onClick={handleSaveClick}
               mr={2}
             >
@@ -118,10 +129,12 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
               w='100px'
               h='40px'
               fontSize='16px'
-              colorScheme='red'
+              bg='var(--color-gray)'
+              color='var(--color-white)'
+              fontWeight='bold'
               onClick={() => setIsEditing(false)}
             >
-              취소
+              수정 취소
             </Button>
           </>
         ) : null}
@@ -135,7 +148,7 @@ export default SinittoProfileBox;
 const SinittoProfileBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
-  background-color: #f2f2f2;
+  background-color: var(--color-white-gray);
   width: 100%;
   max-width: 338px;
   height: auto;
