@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { usePostWriteReport, WriteReportRequest } from '../../api';
 import IconCalendar from '../../assets/calendar.svg';
@@ -14,6 +15,8 @@ const ReportDetail = () => {
 
   const { mutate: postWriteReport } = usePostWriteReport();
 
+  const navigate = useNavigate();
+
   const helloCallId = localStorage.getItem('helloCallId');
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,7 +28,12 @@ const ReportDetail = () => {
       helloCallId,
       report: reportContent,
     };
-    postWriteReport(requestPayload);
+    postWriteReport(requestPayload, {
+      onSuccess: () => {
+        localStorage.removeItem('helloCallId');
+        navigate(-1);
+      },
+    });
   };
 
   return (
