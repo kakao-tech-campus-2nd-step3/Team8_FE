@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useModifySinittoInformation } from '@/pages';
 import { formatPhoneNumber, Logout, useSinittoInfo } from '@/shared';
-import { Box, Text, Button, Input } from '@chakra-ui/react';
+import { Box, Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -40,17 +40,12 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
 
   return (
     <SinittoProfileBoxLayout mb={2}>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        alignItems='center'
-      >
+      <Flex justifyContent='space-between' alignItems='center'>
         <Text ml='1rem' fontSize='18px' fontWeight={700}>
           {seniorInfo?.name} 님 환영합니다.
         </Text>
         <Logout />
-      </Box>
+      </Flex>
       <Box
         display='flex'
         w='100%'

@@ -65,7 +65,7 @@ export const GuideLineButton = ({
   };
 
   return (
-    <Box w='full' mt={marginTop} mb={marginBottom}>
+    <Box mt={marginTop} mb={marginBottom}>
       {GUIDE_LINE_CATEGORIES.map((data: GuideLineCategory) => (
         <ButtonWrapper
           key={data.title}
