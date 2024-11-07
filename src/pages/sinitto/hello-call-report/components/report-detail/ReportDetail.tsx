@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { usePostWriteReport, WriteReportRequest } from '../../api';
 import IconCalendar from '../../assets/calendar.svg';
 import IconClock from '../../assets/clock.svg';
 import IconFile from '../../assets/file.svg';
@@ -9,10 +10,22 @@ import { Box, Button, Divider, Image, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const ReportDetail = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const [reportContent, setReportContent] = useState('');
 
-  const handlerSubmit = () => {
-    setSubmitted(true);
+  const { mutate: postWriteReport } = usePostWriteReport();
+
+  const helloCallId = localStorage.getItem('helloCallId');
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReportContent(e.target.value);
+  };
+
+  const handlerSubmit = (helloCallId: number) => {
+    const requestPayload: WriteReportRequest = {
+      helloCallId,
+      report: reportContent,
+    };
+    postWriteReport(requestPayload);
   };
 
   return (
@@ -85,15 +98,17 @@ const ReportDetail = () => {
               어떤 이야기를 나누었나요?
             </Text>
           </TitleBox>
-          <ReportTextArea />
+          <Textarea
+            border='none'
+            height='full'
+            onChange={(e) => handleContentChange(e)}
+          />
         </InfoBox>
       </Box>
       <Divider />
-      {!submitted ? (
-        <SubmitButton onClick={handlerSubmit}>보고서 제출하기</SubmitButton>
-      ) : (
-        <SubmitButton>서비스 완료 확인하기</SubmitButton>
-      )}
+      <SubmitButton onClick={() => handlerSubmit(Number(helloCallId))}>
+        보고서 제출하기
+      </SubmitButton>
     </>
   );
 };
@@ -115,11 +130,6 @@ const TitleBox = styled(Box)`
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-`;
-
-const ReportTextArea = styled(Textarea)`
-  border: none;
-  height: 100%;
 `;
 
 const SubmitButton = styled(Button)`
