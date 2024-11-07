@@ -40,6 +40,10 @@ const AccountInfoBox = () => {
   };
 
   const registerBank = () => {
+    if (!accountNumber || !bankName) {
+      alert('은행 정보와 계좌번호를 기입해주세요.');
+      return;
+    }
     registerBankInfoMutation.mutate(
       { accountNumber, bankName },
       {
