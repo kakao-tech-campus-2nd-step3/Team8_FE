@@ -24,16 +24,8 @@ const HelloServiceHistory = ({
 }: HelloServiceHistoryProps) => {
   const { seniorName, status } = historyData;
 
-  const {
-    isEditMode,
-    helloCallDetail,
-    isDaySelected,
-    deleteHelloCall,
-    toggleDay,
-    handleEditStart,
-    handleEditCancel,
-    editHelloCall,
-  } = useHelloServiceHistory({ historyData, refetch });
+  const { helloCallDetail, toggleDay, deleteHelloCall, isDaySelected } =
+    useHelloServiceHistory({ historyData, refetch });
 
   return (
     <HistoryContainer>
@@ -53,7 +45,6 @@ const HelloServiceHistory = ({
               key={day}
               isSelected={isDaySelected(day)}
               onClick={() => toggleDay(day)}
-              style={{ cursor: isEditMode ? 'pointer' : 'default' }}
             >
               {day}
             </Day>
@@ -62,17 +53,7 @@ const HelloServiceHistory = ({
       )}
       {status === 'WAITING' ? (
         <InfoEditContainer>
-          {isEditMode ? (
-            <>
-              <EditButton onClick={editHelloCall}>수정 완료</EditButton>
-              <DeleteButton onClick={handleEditCancel}>수정 취소</DeleteButton>
-            </>
-          ) : (
-            <>
-              <EditButton onClick={handleEditStart}>수정하기</EditButton>
-              <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
-            </>
-          )}
+          <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
         </InfoEditContainer>
       ) : status === 'PENDING_COMPLETE' ? (
         <Link to={RouterPath.SINITTO_REVIEW}>
@@ -113,15 +94,18 @@ const DayContainer = styled.div`
   height: auto;
 `;
 
-const Day = styled.button<DayProps>`
+const Day = styled.div<DayProps>`
   width: 45px;
   height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
   border-radius: 5px;
   color: var(--color-white);
   ${({ isSelected }) =>
     isSelected
-      ? `background-color: var(--color-primary);`
+      ? `background-color: var(--color-primary); font-weight: bold`
       : `background-color: var(--color-gray);`}
 `;
 
@@ -129,21 +113,11 @@ const InfoEditContainer = styled.div`
   width: 95%;
   height: auto;
   display: flex;
-  justify-content: space-between;
-`;
-
-const EditButton = styled.button`
-  width: 45%;
-  height: 2rem;
-  background-color: #81b6ff;
-  color: var(--color-white);
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
+  justify-content: center;
 `;
 
 const DeleteButton = styled.button`
-  width: 45%;
+  width: 95%;
   height: 2rem;
   background-color: #ff4d68;
   color: var(--color-white);
