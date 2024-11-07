@@ -38,6 +38,7 @@ export const HelloCallServiceList = ({
   };
 
   const goToReport = (helloCallId: number) => {
+    localStorage.setItem('helloCallId', helloCallId.toString());
     navigate(`/sinitto/hello-call/report/${helloCallId}`);
   };
 
