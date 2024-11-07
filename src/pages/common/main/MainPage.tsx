@@ -64,8 +64,9 @@ const MainPageLayout = styled.div<PageProps>`
   transition: background 0.3s ease;
 
   .swiper-pagination-bullet-active {
-  background-color: ${(props) =>
-    props.page === 0 ? 'var(--color-secondary)' : 'var(--color-primary)'};;
+    background-color: ${(props) =>
+      props.page === 0 ? 'var(--color-secondary)' : 'var(--color-primary)'};
+  }
 `;
 
 const Wrapper = styled.div`

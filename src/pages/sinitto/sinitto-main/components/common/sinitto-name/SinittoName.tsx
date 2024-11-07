@@ -5,7 +5,7 @@ export const SinittoName = () => {
   const { data } = useSinittoInfo();
 
   return (
-    <Flex w='100%' alignItems='center' my={10}>
+    <Flex w='100%' alignItems='center' mt={10}>
       <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
         {data?.name}
       </Text>
