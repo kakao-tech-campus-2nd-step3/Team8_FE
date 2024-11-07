@@ -1,0 +1,1 @@
+export { SinittoServiceHistoryPage } from './SinittoServiceHistory';
