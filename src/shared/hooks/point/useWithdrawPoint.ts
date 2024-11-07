@@ -1,4 +1,6 @@
+import { queryClient } from '@/shared/api';
 import { withdrawPoint } from '@/shared/api/point';
+import { getPointInfoQueryKey } from '@/shared/api/point/point.api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 // 포인트 출금
@@ -11,6 +13,10 @@ export const useWithdrawPoint = (): UseMutationResult<
     mutationFn: (price) => withdrawPoint(price),
     onSuccess: (price: number) => {
       alert(`${price} 포인트 출금 신청 완료되었습니다.`);
+      queryClient.invalidateQueries({ queryKey: getPointInfoQueryKey });
+      queryClient.invalidateQueries({
+        queryKey: ['pointLogs'],
+      });
     },
     onError: (error: Error) => {
       console.error(error);

@@ -13,7 +13,7 @@ type Props = {
 };
 
 const PointBox = ({ isSinitto }: Props) => {
-  const { data: pointData, isLoading, refetch } = useGetPointInfo();
+  const { data: pointData, isLoading } = useGetPointInfo();
   const chargePointMutation = useChargePoint();
   const withdrawPointMutation = useWithdrawPoint();
   const [actionType, setActionType] = useState('');
@@ -34,7 +34,6 @@ const PointBox = ({ isSinitto }: Props) => {
       withdrawPointMutation.mutate(parsedAmount);
       setAmount('');
       setActionType('');
-      refetch();
     } else {
       alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
       setAmount('');

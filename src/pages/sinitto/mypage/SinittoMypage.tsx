@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
 import { SinittoProfileBox, AccountInfoBox } from './components';
-import { BasicButton, PointBox, PointLogBox } from '@/shared/components';
+import {
+  BasicButton,
+  PointBox,
+  PointLogBox,
+  Withdrawal,
+} from '@/shared/components';
 import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -27,6 +32,7 @@ const SinittoMypage = () => {
       <AccountInfoBox />
       <PointBox isSinitto={true} />
       <PointLogBox />
+      <Withdrawal />
     </MyPageLayout>
   );
 };

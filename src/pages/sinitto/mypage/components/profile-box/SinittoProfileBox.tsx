@@ -54,7 +54,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
       <Box
         display='flex'
         w='100%'
-        height='1.5rem'
+        height='2rem'
         justifyContent='space-between'
         alignItems='center'
         mt={2}
@@ -73,12 +73,12 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
             fontWeight='bold'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            width='4rem'
+            width='5rem'
             height='100%'
             bg='var(--color-white)'
           />
         ) : (
-          <Text textAlign='center' w='3rem' fontSize='16px' fontWeight={600}>
+          <Text textAlign='right' w='3rem' fontSize='16px' fontWeight={600}>
             {seniorInfo?.name}
           </Text>
         )}
@@ -86,7 +86,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
       <Box
         display='flex'
         w='100%'
-        height='1.5rem'
+        height='2rem'
         justifyContent='space-between'
         alignItems='center'
         mt={2}
@@ -105,12 +105,12 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
             fontWeight='bold'
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            width='7rem'
+            width='9rem'
             height='100%'
             bg='var(--color-white)'
           />
         ) : (
-          <Text w='6rem' textAlign='center' fontSize='16px' fontWeight={600}>
+          <Text w='9rem' textAlign='right' fontSize='16px' fontWeight={600}>
             {formatPhoneNumber(String(seniorInfo?.phoneNumber))}
           </Text>
         )}
