@@ -1,7 +1,7 @@
 import { fetchInstance } from '@/shared/api/instance';
 
 const getCompleteCallbackPath = (callbackId: number) =>
-  `/api/callbacks/complete/${callbackId}`;
+  `/api/callbacks/pendingComplete/${callbackId}`;
 
 export const CompleteCallback = async (callbackId: number) => {
   const response = await fetchInstance.put(getCompleteCallbackPath(callbackId));
