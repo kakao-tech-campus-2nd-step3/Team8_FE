@@ -42,7 +42,8 @@ export const HelloCallApply = () => {
             <ResponseBox
               key={helloCall.helloCallId}
               seniorName={helloCall.seniorName}
-              requestTime={String(helloCall.days.length) + '일 수행'}
+              requestTime={`${helloCall.days.length}일 수행`}
+              targetPath={`/sinitto/hello-call/${helloCall.helloCallId}`}
             />
           ))}
         </GridBox>
