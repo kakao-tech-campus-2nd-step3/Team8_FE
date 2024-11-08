@@ -48,7 +48,7 @@ export const CallbackMenu = ({
     isSuccess: isCancelSuccess,
   } = useCancelCallback();
   if (isCancelSuccess) {
-    navigate(RouterPath.SINITTO + '/' + RouterPath.CALL_BACK_LIST);
+    navigate(RouterPath.SINITTO);
   }
 
   const isLoading = isAcceptLoading || isCancelLoading || isCompleteLoading;

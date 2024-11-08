@@ -7,8 +7,8 @@ export const useCancelCallback = () => {
     onSuccess: () => {
       alert('진행중인 콜백 서비스가 취소되었습니다.');
     },
-    onError: (error) => {
-      alert(`콜백 서비스 취소 중 오류가 발생했습니다: ${error.message}`);
+    onError: () => {
+      alert(`콜백 서비스 취소 중 오류가 발생했습니다`);
     },
   });
 };
