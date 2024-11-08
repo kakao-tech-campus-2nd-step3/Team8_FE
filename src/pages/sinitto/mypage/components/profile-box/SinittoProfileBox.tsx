@@ -31,7 +31,6 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
   }, [isEditing, seniorInfo]);
 
   const handleSaveClick = () => {
-    console.log(name, phoneNumber);
     if (!validateName(name) || !validatePhoneNumber(phoneNumber)) {
       alert(
         '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'

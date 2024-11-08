@@ -63,7 +63,7 @@ const SeniorInfo = ({
             <Input
               value={seniorPhoneNumber}
               onChange={(e) => setSeniorPhoneNumber(e.target.value)}
-              placeholder='전화번호를 입력하세요'
+              placeholder='010-0000-0000'
               bg='var(--color-white)'
               border='1px solid var(--color-white)'
               borderRadius='10px'
