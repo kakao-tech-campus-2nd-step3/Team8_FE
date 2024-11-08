@@ -179,7 +179,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '',
-            element: <Layout title='서비스 이용내역' />,
+            element: <Layout title='서비스 신청내역' />,
             children: [
               {
                 index: true,

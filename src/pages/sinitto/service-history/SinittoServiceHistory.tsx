@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useGetAcceptedCallBackList, useGetApplyHelloCallList } from './api';
 import {
   CallBackServiceList,
@@ -9,12 +11,26 @@ import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoServiceHistoryPage = () => {
-  const { data: acceptedCallBackList, isLoading: isAcceptedLoading } =
-    useGetAcceptedCallBackList();
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  const {
+    data: acceptedCallBackList,
+    isLoading: isAcceptedLoading,
+    refetch: refetchAccepted,
+  } = useGetAcceptedCallBackList();
   const { data: applyHelloCallList, isLoading: isApplyHelloLoading } =
     useGetApplyHelloCallList();
 
-  console.log(applyHelloCallList);
+  useEffect(() => {
+    if (
+      !isDataFetched &&
+      (!Array.isArray(acceptedCallBackList) ||
+        acceptedCallBackList.length === 0)
+    ) {
+      refetchAccepted();
+      setIsDataFetched(true);
+    }
+  }, [acceptedCallBackList, isDataFetched, refetchAccepted]);
+
   return (
     <ServiceHistoryLayout>
       <TextArea
@@ -27,7 +43,8 @@ export const SinittoServiceHistoryPage = () => {
         <StyledSpinnerWrapper>
           <Spinner size='lg' thickness='3px' color='blue.500' />
         </StyledSpinnerWrapper>
-      ) : acceptedCallBackList ? (
+      ) : Array.isArray(acceptedCallBackList) &&
+        acceptedCallBackList.length > 0 ? (
         <CallBackServiceList
           key={acceptedCallBackList.callbackId}
           date={acceptedCallBackList.postTime}
