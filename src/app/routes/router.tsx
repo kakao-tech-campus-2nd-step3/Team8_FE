@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { ProtectedRoute } from './components';
 import { RouterPath } from './path';
 import {
   MainPage,
@@ -27,39 +28,41 @@ import { Layout } from '@/shared/components';
 export const router = createBrowserRouter([
   {
     path: RouterPath.ROOT,
-    element: <MainPage />,
-  },
-  {
-    path: RouterPath.SIGNUP,
-    element: <Layout title='회원가입' />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <RegisterPage />,
+        path: '',
+        children: [
+          {
+            index: true,
+            element: <MainPage />,
+          },
+        ],
       },
-    ],
-  },
-  {
-    path: RouterPath.REDIRECT,
-    children: [
       {
-        index: true,
-        element: <RedirectPage />,
+        path: RouterPath.SIGNUP,
+        element: <Layout title='회원가입' />,
+        children: [
+          {
+            index: true,
+            element: <RegisterPage />,
+          },
+        ],
       },
-    ],
-  },
-  {
-    path: RouterPath.DUMMY_LOGIN,
-    element: <Layout title='더미 로그인 Redirect' />,
-    children: [
       {
-        index: true,
-        element: <DummyRedirectPage />,
+        path: RouterPath.REDIRECT,
+        children: [
+          {
+            index: true,
+            element: <RedirectPage />,
+          },
+        ],
       },
     ],
   },
   {
     path: RouterPath.GUARD,
+    element: <ProtectedRoute requiresAuth guardOnly />,
     children: [
       {
         path: '',
@@ -125,10 +128,36 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: RouterPath.SENIOR_REGISTER,
+        element: <Layout title='시니어 등록하기' />,
+        children: [
+          {
+            index: true,
+            element: <SeniorRegisterPage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.CALL_BACK_LIST,
+        children: [
+          {
+            path: RouterPath.SINITTO_REVIEW,
+            element: <Layout title='시니또 평가하기' />,
+            children: [
+              {
+                index: true,
+                element: <SinittoReviewPage />,
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
     path: RouterPath.SINITTO,
+    element: <ProtectedRoute requiresAuth sinittoOnly />,
     children: [
       {
         index: true,
@@ -182,16 +211,6 @@ export const router = createBrowserRouter([
               },
             ],
           },
-          {
-            path: RouterPath.SINITTO_REVIEW,
-            element: <Layout title='시니또 평가하기' />,
-            children: [
-              {
-                index: true,
-                element: <SinittoReviewPage />,
-              },
-            ],
-          },
         ],
       },
 
@@ -199,7 +218,10 @@ export const router = createBrowserRouter([
         path: RouterPath.HELLO_CALL,
         element: <Layout title='안부전화 서비스' />,
         children: [
-          { index: true, element: <HelloCallListPage /> },
+          {
+            index: true,
+            element: <HelloCallListPage />,
+          },
           {
             path: RouterPath.HELLO_CALL_SERVICE,
             element: <HelloCallServicePage />,
@@ -214,12 +236,12 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: RouterPath.SENIOR_REGISTER,
-    element: <Layout title='시니어 등록하기' />,
+    path: RouterPath.DUMMY_LOGIN,
+    element: <Layout title='더미 로그인 Redirect' />,
     children: [
       {
         index: true,
-        element: <SeniorRegisterPage />,
+        element: <DummyRedirectPage />,
       },
     ],
   },

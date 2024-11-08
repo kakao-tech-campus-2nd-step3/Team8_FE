@@ -1,9 +1,9 @@
 export const RouterPath = {
   ROOT: '/',
-  LOGIN: '/login',
-  SIGNUP: '/signup',
-  REGISTER: '/register',
-  REDIRECT: '/redirection',
+  LOGIN: 'login',
+  SIGNUP: 'signup',
+  REGISTER: 'register',
+  REDIRECT: 'redirection',
   GUARD: '/guard',
   MYPAGE: `mypage`,
   GUARD_GUIDELINE: `:seniorId/:guidelineType`,
@@ -16,7 +16,7 @@ export const RouterPath = {
   CALL_BACK_LIST: `call-back`,
   CALL_BACK_DETAIL: `:callBackId`,
   CALL_BACK_GUID_LINE: `:guideLineId`,
-  SENIOR_REGISTER: `/senior-register`,
+  SENIOR_REGISTER: `senior-register`,
   SINITTO_REVIEW: `review`,
 
   DUMMY_LOGIN: `/dummy`,
