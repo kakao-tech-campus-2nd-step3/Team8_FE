@@ -55,6 +55,8 @@ export const CallBackApply = () => {
               key={callback.callbackId}
               seniorName={callback.seniorName}
               requestTime={timeSince(callback.postTime)}
+              status={callback.status}
+              targetPath={`/sinitto/call-back/${callback.callbackId}`}
             />
           ))}
         </GridBox>
