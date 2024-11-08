@@ -5,8 +5,8 @@ export const useAcceptCallback = () => {
   return useMutation({
     mutationFn: acceptCallback,
     onSuccess: () => {},
-    onError: (error) => {
-      alert(`콜백 요청 수락 신청 중 오류가 발생했습니다: ${error.message}`);
+    onError: () => {
+      alert(`콜백 요청 수락 신청 중 오류가 발생했습니다`);
     },
   });
 };
