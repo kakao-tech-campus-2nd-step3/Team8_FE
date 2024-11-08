@@ -1,5 +1,4 @@
-import { Navigate } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import { RouterPath } from '../../path';
 
