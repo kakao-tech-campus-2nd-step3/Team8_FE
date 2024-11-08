@@ -25,6 +25,9 @@ const PointBox = ({ isSinitto }: Props) => {
       chargePointMutation.mutate(parsedAmount);
       setAmount('');
       setActionType('');
+    } else {
+      alert('올바른 포인트를 입력해주세요.');
+      setAmount('');
     }
   };
 
@@ -35,7 +38,11 @@ const PointBox = ({ isSinitto }: Props) => {
       setAmount('');
       setActionType('');
     } else {
-      alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
+      if (parsedAmount <= 0) {
+        alert('올바른 포인트를 입력해주세요.');
+      } else {
+        alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
+      }
       setAmount('');
     }
   };
