@@ -89,11 +89,25 @@ export const router = createBrowserRouter([
           },
           {
             path: RouterPath.SERVICE_HISTORY,
-            element: <Layout title='서비스 이용내역' />,
             children: [
               {
-                path: '',
-                element: <ServiceHistoryPage />,
+                element: <Layout title='서비스 이용내역' />,
+                children: [
+                  {
+                    index: true,
+                    element: <ServiceHistoryPage />,
+                  },
+                ],
+              },
+              {
+                path: RouterPath.SINITTO_REVIEW,
+                element: <Layout title='시니또 평가하기' />,
+                children: [
+                  {
+                    index: true,
+                    element: <SinittoReviewPage />,
+                  },
+                ],
               },
             ],
           },

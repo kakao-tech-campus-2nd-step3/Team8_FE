@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
 import { RouterPath } from '@/app/routes';
@@ -27,6 +27,8 @@ const HelloServiceHistory = ({
   const { helloCallDetail, toggleDay, deleteHelloCall, isDaySelected } =
     useHelloServiceHistory({ historyData, refetch });
 
+  const navigate = useNavigate();
+
   return (
     <HistoryContainer>
       <HistoryInfo>
@@ -51,15 +53,15 @@ const HelloServiceHistory = ({
           ))}
         </DayContainer>
       )}
-      {status === 'WAITING' ? (
-        <InfoEditContainer>
+      <InfoEditContainer>
+        {status === 'WAITING' ? (
           <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
-        </InfoEditContainer>
-      ) : status === 'PENDING_COMPLETE' ? (
-        <Link to={RouterPath.SINITTO_REVIEW}>
-          <ReviewButton>리뷰 작성하기</ReviewButton>
-        </Link>
-      ) : null}
+        ) : status === 'PENDING_COMPLETE' ? (
+          <ReviewButton onClick={() => navigate(RouterPath.SINITTO_REVIEW)}>
+            리뷰 작성하기
+          </ReviewButton>
+        ) : null}
+      </InfoEditContainer>
     </HistoryContainer>
   );
 };
