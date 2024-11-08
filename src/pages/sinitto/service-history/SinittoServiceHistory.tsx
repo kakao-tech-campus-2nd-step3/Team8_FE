@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import axios from 'axios';
+
 import { useGetAcceptedCallBackList, useGetApplyHelloCallList } from './api';
 import {
   CallBackServiceList,
@@ -11,25 +13,25 @@ import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoServiceHistoryPage = () => {
-  const [isDataFetched, setIsDataFetched] = useState(false);
+  const [isAcceptedError, setIsAcceptedError] = useState(false);
+
   const {
     data: acceptedCallBackList,
     isLoading: isAcceptedLoading,
-    refetch: refetchAccepted,
+    error: acceptedError,
   } = useGetAcceptedCallBackList();
+
   const { data: applyHelloCallList, isLoading: isApplyHelloLoading } =
     useGetApplyHelloCallList();
 
   useEffect(() => {
     if (
-      !isDataFetched &&
-      (!Array.isArray(acceptedCallBackList) ||
-        acceptedCallBackList.length === 0)
+      axios.isAxiosError(acceptedError) &&
+      acceptedError.response?.status === 404
     ) {
-      refetchAccepted();
-      setIsDataFetched(true);
+      setIsAcceptedError(true);
     }
-  }, [acceptedCallBackList, isDataFetched, refetchAccepted]);
+  }, [acceptedError]);
 
   return (
     <ServiceHistoryLayout>
@@ -43,8 +45,11 @@ export const SinittoServiceHistoryPage = () => {
         <StyledSpinnerWrapper>
           <Spinner size='lg' thickness='3px' color='blue.500' />
         </StyledSpinnerWrapper>
-      ) : Array.isArray(acceptedCallBackList) &&
-        acceptedCallBackList.length > 0 ? (
+      ) : isAcceptedError ? (
+        <NoServiceMessage>
+          요청한 시니또에 할당된 콜백이 없습니다
+        </NoServiceMessage>
+      ) : acceptedCallBackList ? (
         <CallBackServiceList
           key={acceptedCallBackList.callbackId}
           date={acceptedCallBackList.postTime}
