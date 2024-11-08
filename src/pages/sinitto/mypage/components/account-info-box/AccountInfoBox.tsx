@@ -178,7 +178,7 @@ const AccountInfoBox = () => {
             <BasicButton
               themeType='default'
               width='310px'
-              height='40px'
+              height='36px'
               onClick={() => setIsRegistering(true)}
             >
               계좌번호 등록하기
@@ -214,7 +214,7 @@ const AccountInfoBox = () => {
           <BasicButton
             themeType='default'
             width='310px'
-            height='40px'
+            height='36px'
             onClick={() => setIsEditingAccount(true)}
           >
             계좌번호 수정하기
