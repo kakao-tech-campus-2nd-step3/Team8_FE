@@ -16,7 +16,6 @@ export const ResponseBox = ({
   targetPath,
   status,
 }: Props) => {
-  console.log(status);
   const displayStatus = status === 'WAITING' ? '대기' : '대기';
 
   return (
