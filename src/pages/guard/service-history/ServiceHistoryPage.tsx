@@ -1,47 +1,63 @@
 import { useState } from 'react';
 
+import { useGetCallbackHistory, useGetHelloHistoryList } from './api';
 import {
   CallbackHistoryText,
-  HistoryDetail,
   HelloServiceHistoryText,
+  CallbackHistoryDetail,
+  HelloServiceHistory,
 } from './components';
-import { CALL_DUMMY_DATA, HELLO_DUMMY_DATA } from './data';
-import { Button, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
-  const [showAll, setShowAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageSize = 5;
+  const { data: callbackHistory } = useGetCallbackHistory(
+    currentPage,
+    pageSize
+  );
 
-  const toggleShowAll = () => {
-    setShowAll(!showAll);
-  };
+  const { data: helloCallHistory, refetch } = useGetHelloHistoryList();
+
+  const totalPages = callbackHistory?.totalPages || 1;
 
   return (
     <ServiceHistoryLayout>
       <CallbackHistoryText />
       <ButtonWrapper>
-        {CALL_DUMMY_DATA.slice(0, showAll ? CALL_DUMMY_DATA.length : 5).map(
-          (item, index) => (
-            <HistoryDetail
-              key={index}
-              date={item.date}
-              name={item.name}
-              status={item.status}
-            />
-          )
-        )}
-        <Button h='3rem' my={3} fontSize='lg' onClick={toggleShowAll}>
-          {showAll ? '숨기기' : '더보기'}
-        </Button>
+        {callbackHistory?.content.map((history) => (
+          <CallbackHistoryDetail
+            key={history.callbackId}
+            historyData={history}
+          />
+        ))}
+        <Pagination>
+          <PaginationButton
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            이전
+          </PaginationButton>
+          <span>
+            페이지 {currentPage + 1} /{' '}
+            {callbackHistory?.totalPages ? callbackHistory.totalPages : 1}
+          </span>
+          <PaginationButton
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage >= totalPages - 1}
+          >
+            다음
+          </PaginationButton>
+        </Pagination>
       </ButtonWrapper>
       <HelloServiceHistoryText />
       <ButtonWrapper>
-        {HELLO_DUMMY_DATA.map((item, index) => (
-          <HistoryDetail
-            key={index}
-            date={item.date}
-            name={item.name}
-            status={item.status}
+        {helloCallHistory?.map((history) => (
+          <HelloServiceHistory
+            key={history.helloCallId}
+            historyData={history}
+            refetch={refetch}
           />
         ))}
       </ButtonWrapper>
@@ -61,6 +77,26 @@ const ServiceHistoryLayout = styled.div`
 const ButtonWrapper = styled(Flex)`
   width: 100%;
   flex-direction: column;
+  gap: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+`;
+
+const Pagination = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  color: var(--color-black);
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const PaginationButton = styled.button`
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 1rem;
 `;

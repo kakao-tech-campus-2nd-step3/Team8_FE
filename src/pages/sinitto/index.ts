@@ -5,3 +5,4 @@ export * from './hello-call-report';
 export * from './hello-call-service';
 export * from './mypage';
 export * from './sinitto-main';
+export * from './service-history';

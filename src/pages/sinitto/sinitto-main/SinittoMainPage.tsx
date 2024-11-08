@@ -2,6 +2,7 @@ import {
   CallBackApply,
   Header,
   HelloCallApply,
+  ServiceHistoryButton,
   SinittoName,
 } from './components';
 import styled from '@emotion/styled';
@@ -11,6 +12,7 @@ export const SinittoMainPage = () => {
     <SinittoMainPageLayout>
       <Header />
       <SinittoName />
+      <ServiceHistoryButton />
       <CallBackApply />
       <HelloCallApply />
     </SinittoMainPageLayout>

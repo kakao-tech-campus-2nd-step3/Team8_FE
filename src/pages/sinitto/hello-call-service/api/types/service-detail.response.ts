@@ -5,7 +5,7 @@ type Time = {
   nano: number;
 };
 
-type TimeSlot = {
+export type TimeSlot = {
   dayName: string;
   startTime: Time;
   endTime: Time;
@@ -18,5 +18,6 @@ export type ServiceDetailResponse = {
   requirement: string;
   seniorName: string;
   seniorPhoneNumber: string;
+  serviceTime: number;
   price: number;
 };

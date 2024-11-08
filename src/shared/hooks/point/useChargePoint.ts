@@ -1,4 +1,9 @@
-import { chargePoint, ChargePointResponse } from '@/shared/api/point/point.api';
+import { queryClient } from '@/shared/api';
+import {
+  chargePoint,
+  ChargePointResponse,
+  getPointInfoQueryKey,
+} from '@/shared/api/point/point.api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 // 포인트 충전
@@ -11,6 +16,10 @@ export const useChargePoint = (): UseMutationResult<
     mutationFn: (price) => chargePoint(price),
     onSuccess: () => {
       alert('포인트 충전 요청 완료했습니다.');
+      queryClient.invalidateQueries({ queryKey: getPointInfoQueryKey });
+      queryClient.invalidateQueries({
+        queryKey: ['pointLogs'],
+      });
     },
     onError: (error: Error) => {
       console.error(error);
