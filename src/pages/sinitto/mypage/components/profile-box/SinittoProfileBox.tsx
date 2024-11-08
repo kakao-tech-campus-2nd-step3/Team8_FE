@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { useModifySinittoInformation } from '@/pages';
-import { formatPhoneNumber, Logout, useSinittoInfo } from '@/shared';
+import {
+  formatPhoneNumber,
+  Logout,
+  parsePhoneNumber,
+  useSinittoInfo,
+  validatePhoneNumber,
+  validateName,
+} from '@/shared';
 import { Box, Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -13,9 +20,7 @@ type Props = {
 const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-
   const { data: seniorInfo, refetch } = useSinittoInfo();
-
   const modifySinittoInfoMutation = useModifySinittoInformation();
 
   useEffect(() => {
@@ -26,16 +31,26 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
   }, [isEditing, seniorInfo]);
 
   const handleSaveClick = () => {
-    const modifiedSinittoInfo = {
-      name: name,
-      phoneNumber: phoneNumber,
-    };
-    modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
-      onSuccess: () => {
-        setIsEditing(false);
-        refetch();
-      },
-    });
+    console.log(name, phoneNumber);
+    if (!validateName(name) || !validatePhoneNumber(phoneNumber)) {
+      alert(
+        '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'
+      );
+      setName('');
+      setPhoneNumber('');
+      return;
+    } else {
+      const modifiedSinittoInfo = {
+        name: name,
+        phoneNumber: parsePhoneNumber(phoneNumber),
+      };
+      modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
+        onSuccess: () => {
+          setIsEditing(false);
+          refetch();
+        },
+      });
+    }
   };
 
   return (
@@ -67,6 +82,7 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
             fontSize='16px'
             fontWeight='bold'
             value={name}
+            placeholder='홍길동'
             onChange={(e) => setName(e.target.value)}
             width='5rem'
             height='100%'
@@ -98,7 +114,8 @@ const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
           <Input
             fontSize='16px'
             fontWeight='bold'
-            value={phoneNumber}
+            value={formatPhoneNumber(phoneNumber)}
+            placeholder='010-0000-0000'
             onChange={(e) => setPhoneNumber(e.target.value)}
             width='9rem'
             height='100%'

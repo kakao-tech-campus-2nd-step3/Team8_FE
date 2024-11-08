@@ -6,6 +6,7 @@ import {
   useRegisterSinittoBankInformation,
 } from '@/pages';
 import { BasicButton } from '@/shared';
+import { validateAccountNumber } from '@/shared/utils/account-number/validateAccountNumber';
 import { Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -28,15 +29,21 @@ const AccountInfoBox = () => {
   }, [isEditingAccount, isRegistering, sinittoBankInfo]);
 
   const handleSaveClick = () => {
-    modifyBankInfoMutation.mutate(
-      { accountNumber, bankName },
-      {
-        onSuccess: () => {
-          setIsEditingAccount(false);
-          refetch();
-        },
-      }
-    );
+    if (validateAccountNumber(accountNumber, bankName)) {
+      modifyBankInfoMutation.mutate(
+        { accountNumber, bankName },
+        {
+          onSuccess: () => {
+            setIsEditingAccount(false);
+            refetch();
+          },
+        }
+      );
+    } else {
+      setAccountNumber('');
+      setBankName('');
+      return;
+    }
   };
 
   const registerBank = () => {
@@ -134,10 +141,10 @@ const AccountInfoBox = () => {
           fontWeight={600}
           color='var(--color-gray)'
         >
-          계좌 인증 여부
+          계좌 등록 여부
         </Text>
         <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          {sinittoBankInfo?.accountNumber ? '인증 완료' : '인증 미완료'}
+          {sinittoBankInfo?.accountNumber ? '등록 완료' : '등록 미완료'}
         </Text>
       </Flex>
       <Flex justifyContent='flex-end' mt={2}>

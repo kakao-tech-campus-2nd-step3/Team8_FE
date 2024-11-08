@@ -33,17 +33,18 @@ const PointBox = ({ isSinitto }: Props) => {
 
   const handleWithdrawButtonClick = () => {
     const parsedAmount = Number(amount);
-    if (parsedAmount > 0 && parsedAmount <= Number(pointData?.price)) {
-      withdrawPointMutation.mutate(parsedAmount);
+    if (parsedAmount < 5000) {
+      alert('포인트 출금은 5,000포인트 이상부터 가능합니다.');
       setAmount('');
-      setActionType('');
     } else {
-      if (parsedAmount <= 0) {
-        alert('올바른 포인트를 입력해주세요.');
+      if (parsedAmount <= Number(pointData?.price)) {
+        withdrawPointMutation.mutate(parsedAmount);
+        setAmount('');
+        setActionType('');
       } else {
-        alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
+        alert('보유 포인트보다 더 많이 출금할 수 없습니다.');
+        setAmount('');
       }
-      setAmount('');
     }
   };
 
