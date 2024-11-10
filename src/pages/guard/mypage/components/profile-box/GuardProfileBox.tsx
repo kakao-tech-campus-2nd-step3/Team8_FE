@@ -30,7 +30,7 @@ const GuardProfileBox = () => {
       </TopContainer>
       <BottomContainer>
         <Link to={RouterPath.SENIOR_REGISTER}>
-          <ButtonBox>시니어 등록하기</ButtonBox>
+          <ButtonBox>내 시니어 관리</ButtonBox>
         </Link>
         <DivideLine />
         <Link to={RouterPath.SERVICE_HISTORY}>

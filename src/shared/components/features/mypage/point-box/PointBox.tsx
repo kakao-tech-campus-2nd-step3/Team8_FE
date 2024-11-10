@@ -1,11 +1,20 @@
 import { useState } from 'react';
 
+import { mailIcon } from '@/shared/assets';
 import {
   useChargePoint,
   useGetPointInfo,
   useWithdrawPoint,
 } from '@/shared/hooks';
-import { Box, Spinner, Button, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Spinner,
+  Text,
+  Button,
+  Input,
+  Image,
+} from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -25,18 +34,26 @@ const PointBox = ({ isSinitto }: Props) => {
       chargePointMutation.mutate(parsedAmount);
       setAmount('');
       setActionType('');
+    } else {
+      alert('올바른 포인트를 입력해주세요.');
+      setAmount('');
     }
   };
 
   const handleWithdrawButtonClick = () => {
     const parsedAmount = Number(amount);
-    if (parsedAmount > 0 && parsedAmount <= Number(pointData?.price)) {
-      withdrawPointMutation.mutate(parsedAmount);
+    if (parsedAmount < 5000) {
+      alert('포인트 출금은 5,000포인트 이상부터 가능합니다.');
       setAmount('');
-      setActionType('');
     } else {
-      alert('보유 포인트보다 더 많은 금액을 출금할 수 없습니다.');
-      setAmount('');
+      if (parsedAmount <= Number(pointData?.price)) {
+        withdrawPointMutation.mutate(parsedAmount);
+        setAmount('');
+        setActionType('');
+      } else {
+        alert('보유 포인트보다 더 많이 출금할 수 없습니다.');
+        setAmount('');
+      }
     }
   };
 
@@ -88,7 +105,7 @@ const PointBox = ({ isSinitto }: Props) => {
             type='number'
             min='1'
           />
-          <ButtonContainer>
+          <ButtonContainer mt={1}>
             <Button
               w='100px'
               h='40px'
@@ -122,19 +139,26 @@ const PointBox = ({ isSinitto }: Props) => {
         </Box>
       ) : (
         <>
-          <Box
-            mt={1}
-            bg='var(--color-primary)'
-            color='var(--color-white)'
-            w='90%'
-            borderRadius='5px'
-            fontSize='16px'
-            fontWeight='bold'
-            display='flex'
-            justifyContent='center'
-          >
-            {isSinitto ? null : '보낼 계좌 : 3333-17-1913-736'}
-          </Box>
+          {isSinitto ? null : (
+            <Flex
+              mt={1}
+              bg='var(--color-primary)'
+              color='var(--color-white)'
+              w='90%'
+              borderRadius='5px'
+              gap={2}
+            >
+              <Image src={mailIcon} ml={2} />
+              <Flex flexDir='column'>
+                <Text fontSize='16px' fontWeight='bold'>
+                  포인트 충전 요청 후 꼭 카카오톡
+                </Text>
+                <Text fontSize='16px' fontWeight='bold'>
+                  나에게 보내기 메세지를 확인해주세요.
+                </Text>
+              </Flex>
+            </Flex>
+          )}
           <ButtonContainer mt={2}>
             {isSinitto ? (
               <ActingButton onClick={() => setActionType('withdraw')}>

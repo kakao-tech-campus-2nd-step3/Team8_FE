@@ -15,7 +15,7 @@ export type PointStatus =
 // 상태 맵핑
 export const pointStatusMapping: Record<PointStatus, string> = {
   SPEND_COMPLETE: '소비 확정',
-  SPEND_CANCEL: '소비 취소',
+  SPEND_CANCEL: '포인트 환급',
   WITHDRAW_REQUEST: '출금 신청',
   WITHDRAW_WAITING: '출금 대기',
   WITHDRAW_COMPLETE: '출금 완료',

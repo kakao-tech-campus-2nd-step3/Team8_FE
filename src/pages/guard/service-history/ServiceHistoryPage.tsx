@@ -17,7 +17,6 @@ export const ServiceHistoryPage = () => {
     currentPage,
     pageSize
   );
-
   const { data: helloCallHistory, refetch } = useGetHelloHistoryList();
 
   const totalPages = callbackHistory?.totalPages || 1;
@@ -26,12 +25,18 @@ export const ServiceHistoryPage = () => {
     <ServiceHistoryLayout>
       <CallbackHistoryText />
       <ButtonWrapper>
-        {callbackHistory?.content.map((history) => (
-          <CallbackHistoryDetail
-            key={history.callbackId}
-            historyData={history}
-          />
-        ))}
+        {callbackHistory &&
+        callbackHistory.content &&
+        callbackHistory.content.length > 0 ? (
+          callbackHistory.content.map((history) => (
+            <CallbackHistoryDetail
+              key={history.callbackId}
+              historyData={history}
+            />
+          ))
+        ) : (
+          <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
+        )}
         <Pagination>
           <PaginationButton
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
@@ -40,8 +45,7 @@ export const ServiceHistoryPage = () => {
             이전
           </PaginationButton>
           <span>
-            페이지 {currentPage + 1} /{' '}
-            {callbackHistory?.totalPages ? callbackHistory.totalPages : 1}
+            페이지 {currentPage + 1} / {totalPages}
           </span>
           <PaginationButton
             onClick={() => setCurrentPage((prev) => prev + 1)}
@@ -53,13 +57,17 @@ export const ServiceHistoryPage = () => {
       </ButtonWrapper>
       <HelloServiceHistoryText />
       <ButtonWrapper>
-        {helloCallHistory?.map((history) => (
-          <HelloServiceHistory
-            key={history.helloCallId}
-            historyData={history}
-            refetch={refetch}
-          />
-        ))}
+        {helloCallHistory && helloCallHistory.length > 0 ? (
+          helloCallHistory.map((history) => (
+            <HelloServiceHistory
+              key={history.helloCallId}
+              historyData={history}
+              refetch={refetch}
+            />
+          ))
+        ) : (
+          <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
+        )}
       </ButtonWrapper>
     </ServiceHistoryLayout>
   );
@@ -99,4 +107,11 @@ const PaginationButton = styled.button`
   cursor: pointer;
   font-weight: bold;
   padding: 0 1rem;
+`;
+const NoServiceMessage = styled.p`
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-align: center;
+  margin: 20px 0;
 `;

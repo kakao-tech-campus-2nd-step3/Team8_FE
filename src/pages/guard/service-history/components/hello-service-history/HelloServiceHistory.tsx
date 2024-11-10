@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
-import { RouterPath } from '@/app/routes';
 import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
 import { formatDate } from '@/shared/utils/date/dateUtils';
 import { Text } from '@chakra-ui/react';
@@ -23,9 +22,10 @@ const HelloServiceHistory = ({
   refetch,
 }: HelloServiceHistoryProps) => {
   const { seniorName, status } = historyData;
-
   const { helloCallDetail, toggleDay, deleteHelloCall, isDaySelected } =
     useHelloServiceHistory({ historyData, refetch });
+
+  const navigate = useNavigate();
 
   return (
     <HistoryContainer>
@@ -51,15 +51,19 @@ const HelloServiceHistory = ({
           ))}
         </DayContainer>
       )}
-      {status === 'WAITING' ? (
-        <InfoEditContainer>
+      <InfoEditContainer>
+        {status === 'WAITING' ? (
           <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
-        </InfoEditContainer>
-      ) : status === 'PENDING_COMPLETE' ? (
-        <Link to={RouterPath.SINITTO_REVIEW}>
-          <ReviewButton>리뷰 작성하기</ReviewButton>
-        </Link>
-      ) : null}
+        ) : status === 'PENDING_COMPLETE' ? (
+          <>
+            <ReportButton
+              onClick={() => navigate(`report/${historyData.helloCallId}`)}
+            >
+              보고서 확인 및 완료처리
+            </ReportButton>
+          </>
+        ) : null}
+      </InfoEditContainer>
     </HistoryContainer>
   );
 };
@@ -114,6 +118,7 @@ const InfoEditContainer = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
+  gap: 1rem;
 `;
 
 const DeleteButton = styled.button`
@@ -126,10 +131,10 @@ const DeleteButton = styled.button`
   font-weight: bold;
 `;
 
-const ReviewButton = styled.button`
+const ReportButton = styled.button`
   width: 95%;
   height: 2rem;
-  background-color: #b28bff;
+  background-color: #81b6ff;
   color: var(--color-white);
   border-radius: 5px;
   font-size: 1rem;
