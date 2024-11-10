@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useGetGuardInformation } from '../../api';
-import { RouterPath } from '@/app/routes/path';
+import { RouterPath } from '@/app/routes';
 import { Logout } from '@/shared';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
   const { data } = useGetGuardInformation();
-
+  const navigate = useNavigate();
   return (
     <GuardProfileBoxLayout>
       <TopContainer>
@@ -24,7 +24,10 @@ const GuardProfileBox = () => {
           </Text>
           <Logout />
         </Box>
-        <ServiceManualBox mt={2} fontWeight={600}>
+        <ServiceManualBox
+          mt={2}
+          onClick={() => navigate(RouterPath.SERVICE_MANUAL)}
+        >
           서비스 이용 방법 한번에 이해하기!
         </ServiceManualBox>
       </TopContainer>
@@ -53,21 +56,6 @@ const GuardProfileBoxLayout = styled(Box)`
   border: 1px solid #909090;
   border-radius: 5px;
   margin-top: 0.5rem;
-`;
-
-const ServiceManualBox = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 300px;
-  height: 40px;
-  background-color: #2e2e2e;
-  color: #fff;
-  border: 1px solid #2e2e2e;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
 `;
 
 const TopContainer = styled(Box)`
@@ -103,6 +91,22 @@ const ButtonBox = styled(Box)`
   max-width: 165px;
   height: 70px;
   font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+const ServiceManualBox = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  background-color: #2e2e2e;
+  color: #fff;
+  border: 1px solid #2e2e2e;
+  border-radius: 5px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 `;
