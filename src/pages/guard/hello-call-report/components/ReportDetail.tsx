@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import IconCalendar from '../../../sinitto/hello-call-report/assets/calendar.svg';
 import IconFile from '../../../sinitto/hello-call-report/assets/file.svg';
 import { useGetReport } from '../api';
@@ -15,11 +13,9 @@ type Props = {
 const ReportDetail = ({ helloCallId }: Props) => {
   const { data: reportData } = useGetReport(helloCallId);
   const completeHelloCallMutation = usePutCompleteHelloCall(helloCallId);
-  const navigate = useNavigate();
 
   const completeHelloCall = () => {
     completeHelloCallMutation.mutate();
-    navigate('/guard/mypage/service-history');
   };
 
   return (
