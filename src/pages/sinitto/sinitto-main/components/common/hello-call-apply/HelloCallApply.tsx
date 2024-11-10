@@ -15,8 +15,13 @@ export const HelloCallApply = () => {
       <Flex justifyContent='space-between' alignItems='center'>
         <NoticeTitle>안부전화 요청</NoticeTitle>
         <Link to={RouterPath.HELLO_CALL}>
-          <MoreButton gap={3}>
-            <Text fontWeight='700' color='var(--color-gray)'>
+          <MoreButton>
+            <Text
+              fontWeight='700'
+              color='var(--color-gray)'
+              mr='var(--space-xs)'
+              display='block'
+            >
               요청 더보기
             </Text>
             <IconArrow fill='var(--color-gray)' type='solid' />
@@ -53,7 +58,7 @@ export const HelloCallApply = () => {
 };
 
 const NoticeTitle = styled(Text)`
-  font-size: 24px;
+  font-size: var(--font-size-xxl);
   font-weight: 700;
   align-items: center;
 `;
@@ -63,12 +68,9 @@ const NoticeText = styled(Text)`
 `;
 
 const MoreButton = styled(Flex)`
-  border: solid 1px var(--color-gray);
-  border-radius: 5px;
-  padding: 3px 0.5rem;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  width: fit-content;
   height: 100%;
 `;
 

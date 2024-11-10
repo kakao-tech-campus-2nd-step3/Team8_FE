@@ -30,14 +30,21 @@ export const CallBackServiceList = ({
     <Wrapper>
       <Link to={`/sinitto/call-back/${callbackId}`}>
         <ItemListBox>
-          <Text fontWeight='700'>{serviceDate}</Text>
-          <Flex gap={1}>
-            <Text fontWeight='700'>{name}</Text>
-            <Text fontWeight='700'>시니어</Text>
+          <Text
+            fontWeight='700'
+            color='var(--color-gray)'
+            w='68px'
+            mr='var(--space-xs)'
+          >
+            {serviceDate}
+          </Text>
+          <Flex alignItems='end' gap={1} mr='auto'>
+            <Text fontSize='var(--font-size-lg)' fontWeight='700'>
+              {name}
+            </Text>
+            <Text fontWeight='500'>시니어</Text>
           </Flex>
-          <Flex>
-            <StatusButton status={serviceStatus ?? 'WAITING'} />
-          </Flex>
+          <StatusButton status={serviceStatus ?? 'WAITING'} />
         </ItemListBox>
       </Link>
     </Wrapper>
@@ -55,8 +62,7 @@ const ItemListBox = styled.div`
   flex-direction: row;
   width: 100%;
   background-color: var(--color-white-gray);
-  padding: 14px;
+  padding: var(--space-sm);
   border-radius: 10px;
-  justify-content: space-between;
   align-items: center;
 `;

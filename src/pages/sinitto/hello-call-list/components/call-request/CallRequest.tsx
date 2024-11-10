@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
-import ArrowIcon from '../../assets/arrow.svg';
-import { Box, Image, Text } from '@chakra-ui/react';
+import { IconArrow } from '@/pages/assets';
+import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -19,24 +19,29 @@ const CallRequest = forwardRef<HTMLDivElement, Props>(
         alignItems='center'
         textAlign='center'
         justifyContent='space-between'
-        px={5}
-        gap={5}
+        px='var(--space-md)'
+        py='var(--space-sm)'
         backgroundColor='var(--color-white-gray)'
         width='100%'
-        borderRadius='0.5rem'
-        h='3.5rem'
+        borderRadius='10px'
         ref={ref}
         onClick={onClick}
       >
         <Box>
           <Text>{seniorName}님의 요청</Text>
         </Box>
-        <Box display='flex' gap={5} alignItems='center'>
-          <Box display='flex' flexDir='row' gap={1} alignItems='center'>
+        <Box display='flex' alignItems='center'>
+          <Box
+            display='flex'
+            flexDir='row'
+            alignItems='center'
+            marginRight='var(--space-xs)'
+            gap='var(--space-xxs)'
+          >
             {days?.map((day, index) => <DayBox key={index}>{day}</DayBox>)}
           </Box>
           <Box>
-            <Image src={ArrowIcon} alt='arrow-icon' />
+            <IconArrow fill='var(--color-gray)' type='solid' height='24' />
           </Box>
         </Box>
       </Box>

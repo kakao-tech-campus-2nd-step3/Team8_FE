@@ -38,7 +38,7 @@ const Wrapper = styled(Flex)`
   flex-direction: column;
   gap: var(--space-xs);
   padding: var(--space-sm);
-  box-shadow: 0 0 5px 2px var(--color-shadow);
+  box-shadow: 0 0 4px 1px var(--color-shadow);
   border-radius: 1rem;
   width: 100%;
   cursor: pointer;

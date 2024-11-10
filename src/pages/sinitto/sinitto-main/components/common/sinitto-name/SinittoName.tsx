@@ -12,7 +12,11 @@ export const SinittoName = () => {
         </Flex>
       ) : (
         <>
-          <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
+          <Text
+            color='var(--color-primary)'
+            fontSize='var(--font-size-xxl)'
+            fontWeight='700'
+          >
             {data?.name}
           </Text>
           <Text fontSize='lg' fontWeight='700'>

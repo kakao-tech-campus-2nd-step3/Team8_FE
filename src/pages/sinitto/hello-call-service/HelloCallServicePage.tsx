@@ -6,9 +6,8 @@ import TitleImg from './assets/title-icon.png';
 import { ServiceDetail } from './components';
 import { SERVICE_NOTICE } from './data';
 import { useFormatPhoneNumber, useServiceDate } from './hooks';
-import { PageLayout } from '@/shared';
-import { Notice } from '@/shared/components';
-import { Box, Button, Divider, Image, Text } from '@chakra-ui/react';
+import { PageLayout, Notice, BasicButton } from '@/shared';
+import { Box, Divider, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const HelloCallServicePage = () => {
@@ -39,29 +38,20 @@ const HelloCallServicePage = () => {
     <PageLayout>
       {!detailed ? (
         <Box
+          w='full'
           display='flex'
           py={3}
           justifyContent='center'
           backgroundColor='#E6DFD1'
-          borderRadius='0.5rem'
+          borderRadius='5px'
         >
           <Image src={TitleImg} alt='title-img' />
         </Box>
       ) : (
-        <Box display='flex' flexDir='column' alignItems='center'>
-          <Box
-            display='flex'
-            w='10rem'
-            justifyContent='center'
-            backgroundColor='var(--color-secondary)'
-            borderRadius='5px'
-          >
-            <Text color='var(--color-primary)'>시니어 전화번호</Text>
-          </Box>
-          <Text fontSize='var(--font-size-xl)' fontWeight='700'>
-            {phoneNumber}
-          </Text>
-        </Box>
+        <ContectSection>
+          <Title>시니어 전화번호</Title>
+          <Content>{phoneNumber}</Content>
+        </ContectSection>
       )}
       <ServiceDetail
         startDate={startDate}
@@ -70,29 +60,27 @@ const HelloCallServicePage = () => {
         serviceTime={data?.serviceTime}
         requirement={data?.requirement}
       />
-      <Box display='flex' flexDir='column' gap={2}>
+      <Box display='flex' flexDir='column' gap='var(--space-sm)'>
         <Notice
           title={SERVICE_NOTICE.service_title}
           contents={SERVICE_NOTICE.service_contents}
           noticeType='안부전화'
         />
         {detailed && (
-          <>
-            <Notice
-              title={SERVICE_NOTICE.finish_title}
-              contents={SERVICE_NOTICE.finish_contents}
-              noticeType='안부전화'
-            />
-            <Divider />
-          </>
+          <Notice
+            title={SERVICE_NOTICE.finish_title}
+            contents={SERVICE_NOTICE.finish_contents}
+            noticeType='안부전화'
+          />
         )}
       </Box>
+      <Divider />
       {!detailed ? (
-        <AcceptButton onClick={goToDetail}>서비스 상세 확인하기</AcceptButton>
+        <BasicButton onClick={goToDetail}>서비스 상세 확인하기</BasicButton>
       ) : (
-        <AcceptButton onClick={handleAcceptService}>
+        <BasicButton onClick={handleAcceptService}>
           서비스 수락하기 ({data?.price.toLocaleString()}P)
-        </AcceptButton>
+        </BasicButton>
       )}
     </PageLayout>
   );
@@ -100,16 +88,26 @@ const HelloCallServicePage = () => {
 
 export default HelloCallServicePage;
 
-const AcceptButton = styled(Button)`
-  height: 3rem;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  font-weight: 700;
-  border-radius: 0.5rem;
-  text-align: center;
-  margin-bottom: 10px;
+const ContectSection = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-  &:hover {
-    background-color: var(--color-primary);
-  }
+const Title = styled.div`
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f6e4e4;
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: #c69090;
+  text-align: center;
+`;
+
+const Content = styled.p`
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  margin-top: var(--space-xs);
 `;

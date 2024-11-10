@@ -1,41 +1,33 @@
-import { Box, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Text, Flex } from '@chakra-ui/react';
 
 type Props = {
-  title: string;
-  contents: string;
+  title?: string;
+  contents?: string;
   noticeType?: string;
 };
 
 const Notice = ({ title, contents, noticeType }: Props) => {
   return (
-    <Wrapper>
-      <Box
+    <Flex w='full' flexDir='column' gap='var(--space-xs)'>
+      <Text
         backgroundColor='var(--color-secondary)'
-        w='3.75rem'
+        color='var(--color-primary)'
+        fontSize='var(--font-size-sm)'
+        fontWeight='700'
         textAlign='center'
         borderRadius='7px'
+        width='fit-content'
+        px='var(--space-xs)'
+        py='1px'
       >
-        <Text
-          color='var(--color-primary)'
-          fontSize='var(--font-size-sm)'
-          fontWeight='700'
-        >
-          {noticeType}
-        </Text>
+        {noticeType}
+      </Text>
+      <Box display='flex' flexDir='column' gap='var(--space-xxs)'>
+        {title && <Text fontWeight='700'>{title}</Text>}
+        {contents && <Text color='var(--color-gray)'>{contents}</Text>}
       </Box>
-      <Box display='flex' flexDir='column' gap={1}>
-        <Text fontWeight='700'>{title}</Text>
-        <Text color='var(--color-gray)'>{contents}</Text>
-      </Box>
-    </Wrapper>
+    </Flex>
   );
 };
 
 export default Notice;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;

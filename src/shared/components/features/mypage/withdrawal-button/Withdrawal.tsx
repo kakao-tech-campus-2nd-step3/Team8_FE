@@ -20,7 +20,7 @@ const Withdrawal = () => {
 export default Withdrawal;
 
 const WithdrawalButton = styled(BasicButton)`
-  color: white;
+  color: var(--color-white);
   height: 40px;
   background-color: #ff4d68;
   box-shadow: none;

@@ -54,18 +54,20 @@ const HelloCallListPage = () => {
       <Flex w='100%' justifyContent='end'>
         <Text>새로고침</Text>
       </Flex>
-      {allContent.map((item, index) => {
-        const isLastElement = index === allContent.length - 1; // 마지막 요소인지 확인
-        return (
-          <CallRequest
-            key={item.helloCallId}
-            seniorName={item.seniorName}
-            days={item.days}
-            onClick={() => handlerNavigate(item.helloCallId)}
-            ref={isLastElement ? lastElementRef : null} // 마지막 요소에 ref 할당
-          />
-        );
-      })}
+      <Flex w='100%' flexDir='column' gap='var(--space-xs)'>
+        {allContent.map((item, index) => {
+          const isLastElement = index === allContent.length - 1; // 마지막 요소인지 확인
+          return (
+            <CallRequest
+              key={item.helloCallId}
+              seniorName={item.seniorName}
+              days={item.days}
+              onClick={() => handlerNavigate(item.helloCallId)}
+              ref={isLastElement ? lastElementRef : null} // 마지막 요소에 ref 할당
+            />
+          );
+        })}
+      </Flex>
       {(!hasNextPage || isLastPageReached) && (
         <Text>더 이상 요청이 없어요 🥲</Text>
       )}
