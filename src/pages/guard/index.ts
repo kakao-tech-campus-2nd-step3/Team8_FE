@@ -6,3 +6,4 @@ export * from './register';
 export * from './review';
 export * from './service-history';
 export * from './guard-main';
+export * from './hello-call-report';

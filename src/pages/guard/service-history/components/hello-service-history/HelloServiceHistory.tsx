@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
 import { RouterPath } from '@/app/routes';
@@ -23,7 +23,6 @@ const HelloServiceHistory = ({
   refetch,
 }: HelloServiceHistoryProps) => {
   const { seniorName, status } = historyData;
-
   const { helloCallDetail, toggleDay, deleteHelloCall, isDaySelected } =
     useHelloServiceHistory({ historyData, refetch });
 
@@ -57,9 +56,16 @@ const HelloServiceHistory = ({
         {status === 'WAITING' ? (
           <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
         ) : status === 'PENDING_COMPLETE' ? (
-          <ReviewButton onClick={() => navigate(RouterPath.SINITTO_REVIEW)}>
-            리뷰 작성하기
-          </ReviewButton>
+          <>
+            <ReportButton
+              onClick={() => navigate(`report/${historyData.helloCallId}`)}
+            >
+              보고서 보기
+            </ReportButton>
+            <ReviewButton onClick={() => navigate(RouterPath.SINITTO_REVIEW)}>
+              리뷰 작성하기
+            </ReviewButton>
+          </>
         ) : null}
       </InfoEditContainer>
     </HistoryContainer>
@@ -116,6 +122,7 @@ const InfoEditContainer = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
+  gap: 1rem;
 `;
 
 const DeleteButton = styled.button`
@@ -132,6 +139,16 @@ const ReviewButton = styled.button`
   width: 95%;
   height: 2rem;
   background-color: #b28bff;
+  color: var(--color-white);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+`;
+
+const ReportButton = styled.button`
+  width: 95%;
+  height: 2rem;
+  background-color: #81b6ff;
   color: var(--color-white);
   border-radius: 5px;
   font-size: 1rem;
