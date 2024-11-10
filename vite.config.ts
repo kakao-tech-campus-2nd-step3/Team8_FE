@@ -68,7 +68,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './index.html',
-        sw: './service-worker.js',
+        sw: './sw.js',
       },
     },
   },
