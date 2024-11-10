@@ -1,20 +1,12 @@
 import { ReportDetail } from './components';
-import styled from '@emotion/styled';
+import { PageLayout } from '@/shared';
 
 const HelloCallReportPage = () => {
   return (
-    <HelloCallReportPageLayout>
+    <PageLayout>
       <ReportDetail />
-    </HelloCallReportPageLayout>
+    </PageLayout>
   );
 };
 
 export default HelloCallReportPage;
-
-const HelloCallReportPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 1rem;
-  margin: 1rem 1.5rem;
-`;

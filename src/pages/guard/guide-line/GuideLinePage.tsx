@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { useGetSeniorAllGuidelines } from './api';
 import { GuideLineInfo, GuidelineRegisterBox } from './components';
+import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 export type GuideLineDetailParams = {
   seniorId: string; // 시니어 id
@@ -28,7 +28,7 @@ export const GuideLinePage = () => {
   }
 
   return (
-    <Container>
+    <PageLayout>
       <GuidelineRegisterBox
         refetch={refetch}
         seniorId={Number(seniorId)}
@@ -59,13 +59,6 @@ export const GuideLinePage = () => {
           />
         ))}
       </Flex>
-    </Container>
+    </PageLayout>
   );
 };
-
-const Container = styled(Box)`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

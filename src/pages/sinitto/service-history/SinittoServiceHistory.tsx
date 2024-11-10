@@ -9,6 +9,7 @@ import {
   TextArea,
 } from './components';
 import { CALLBACK_SCHEMA, HELLO_CALL_SCHEMA } from './data';
+import { PageLayout } from '@/shared';
 import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -34,7 +35,7 @@ export const SinittoServiceHistoryPage = () => {
   }, [acceptedError]);
 
   return (
-    <ServiceHistoryLayout>
+    <PageLayout>
       <TextArea
         title={CALLBACK_SCHEMA.TITLE}
         status={CALLBACK_SCHEMA.STATUS}
@@ -90,18 +91,9 @@ export const SinittoServiceHistoryPage = () => {
       ) : (
         <NoServiceMessage>진행중인 서비스가 없어요! 😥</NoServiceMessage>
       )}
-    </ServiceHistoryLayout>
+    </PageLayout>
   );
 };
-
-const ServiceHistoryLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0 2rem;
-`;
 
 const StyledSpinnerWrapper = styled.div`
   display: flex;

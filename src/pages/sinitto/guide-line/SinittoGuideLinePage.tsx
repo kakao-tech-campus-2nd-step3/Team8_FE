@@ -6,6 +6,7 @@ import { GuideLineContainer } from './components';
 import { CATEGORIES } from './data';
 import { Category } from './types';
 import { RouterPath } from '@/app/routes/path';
+import { PageLayout } from '@/shared';
 import { handleCallbackError } from '@/shared/utils';
 import { Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -34,7 +35,7 @@ export const SinittoGuideLinePage = () => {
   }
 
   return (
-    <Wrapper>
+    <PageLayout>
       {isGuideLineLoading ? (
         <Spinner size='xl' />
       ) : (
@@ -59,17 +60,9 @@ export const SinittoGuideLinePage = () => {
             ))}
         </>
       )}
-    </Wrapper>
+    </PageLayout>
   );
 };
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 45px;
-`;
 
 const Title = styled.h2`
   width: 100%;

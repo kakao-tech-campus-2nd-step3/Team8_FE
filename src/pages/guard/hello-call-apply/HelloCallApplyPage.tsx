@@ -9,7 +9,7 @@ import {
 } from './components';
 import { ServiceApply } from './components/service-apply/ServiceApply';
 import { useHelloCallState } from './hooks';
-import styled from '@emotion/styled';
+import { PageLayout } from '@/shared';
 
 export type TimeSlots = {
   selectedTime?: number | null;
@@ -34,7 +34,7 @@ export const HelloCallApplyPage = () => {
   } = useHelloCallState();
 
   return (
-    <HelloCallApplyPageLayout>
+    <PageLayout>
       <NoticeArea />
       <SelectSenior setSelectedSeniorId={setSelectedSeniorId} />
       <ServiceUsingTime
@@ -63,16 +63,6 @@ export const HelloCallApplyPage = () => {
         price={price}
         selectedSeniorId={selectedSeniorId}
       />
-    </HelloCallApplyPageLayout>
+    </PageLayout>
   );
 };
-
-const HelloCallApplyPageLayout = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 1rem 1.5rem;
-`;

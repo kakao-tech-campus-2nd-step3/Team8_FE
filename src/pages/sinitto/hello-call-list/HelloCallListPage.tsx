@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useGetServiceList } from './api';
 import { CallRequest } from './components';
+import { PageLayout } from '@/shared';
 import { LoadingView } from '@/shared/components';
 import { Flex, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 const HelloCallListPage = () => {
   const [isLastPageReached, setIsLastPageReached] = useState(false);
@@ -50,7 +50,7 @@ const HelloCallListPage = () => {
   if (!data) return null;
 
   return (
-    <HelloCallListLayout>
+    <PageLayout>
       <Flex w='100%' justifyContent='end'>
         <Text>새로고침</Text>
       </Flex>
@@ -70,17 +70,8 @@ const HelloCallListPage = () => {
         <Text>더 이상 요청이 없어요 🥲</Text>
       )}
       {isLoading && hasNextPage && !isLastPageReached && <LoadingView />}
-    </HelloCallListLayout>
+    </PageLayout>
   );
 };
 
 export default HelloCallListPage;
-
-const HelloCallListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  gap: 1rem;
-  margin: 3rem 1.5rem;
-`;

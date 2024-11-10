@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { GuideLineList } from './components/guideline-list';
 import { Header } from './components/header/Header';
 import { HelloCallApply } from './components/hello-call-apply';
+import { PageLayout } from '@/shared';
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -10,7 +11,7 @@ export const GuardMainPage = () => {
   const [currentSenior, setCurrentSenior] = useState<number | null>(null);
 
   return (
-    <GuardMainPageLayout>
+    <PageLayout>
       <Header
         currentSenior={currentSenior}
         setCurrentSenior={setCurrentSenior}
@@ -36,17 +37,9 @@ export const GuardMainPage = () => {
       </CallbackNumber>
       <GuideLineList seniorId={currentSenior} />
       <HelloCallApply />
-    </GuardMainPageLayout>
+    </PageLayout>
   );
 };
-
-const GuardMainPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-`;
 
 const CallbackNumber = styled.div`
   display: flex;

@@ -1,6 +1,7 @@
 import { useGetAllSeniorInfo } from '../mypage';
 import { SeniorInfo } from './components';
 import SeniorRegisterBox from './components/senior-register-box/SeniorRegisterBox';
+import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -16,7 +17,7 @@ export const SeniorRegisterPage = () => {
   }
 
   return (
-    <Container>
+    <PageLayout>
       <SeniorRegisterBox refetch={refetch} />
       <SeniorInfoContainer mt={2}>
         <Box
@@ -39,16 +40,9 @@ export const SeniorRegisterPage = () => {
           <SeniorInfo key={senior.seniorId} senior={senior} refetch={refetch} />
         ))}
       </SeniorInfoContainer>
-    </Container>
+    </PageLayout>
   );
 };
-
-const Container = styled(Box)`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;

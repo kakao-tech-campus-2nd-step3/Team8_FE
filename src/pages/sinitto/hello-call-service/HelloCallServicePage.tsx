@@ -6,6 +6,7 @@ import TitleImg from './assets/title-icon.png';
 import { ServiceDetail } from './components';
 import { SERVICE_NOTICE } from './data';
 import { useFormatPhoneNumber, useServiceDate } from './hooks';
+import { PageLayout } from '@/shared';
 import { Notice } from '@/shared/components';
 import { Box, Button, Divider, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -35,7 +36,7 @@ const HelloCallServicePage = () => {
   };
 
   return (
-    <HelloCallServicePageLayout>
+    <PageLayout>
       {!detailed ? (
         <Box
           display='flex'
@@ -93,19 +94,11 @@ const HelloCallServicePage = () => {
           서비스 수락하기 ({data?.price.toLocaleString()}P)
         </AcceptButton>
       )}
-    </HelloCallServicePageLayout>
+    </PageLayout>
   );
 };
 
 export default HelloCallServicePage;
-
-const HelloCallServicePageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 1rem;
-  margin: 1rem 1.5rem;
-`;
 
 const AcceptButton = styled(Button)`
   height: 3rem;

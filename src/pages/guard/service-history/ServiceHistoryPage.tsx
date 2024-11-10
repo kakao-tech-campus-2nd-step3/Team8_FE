@@ -7,6 +7,7 @@ import {
   CallbackHistoryDetail,
   HelloServiceHistory,
 } from './components';
+import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -23,7 +24,7 @@ export const ServiceHistoryPage = () => {
   const totalPages = callbackHistory?.totalPages || 1;
 
   return (
-    <ServiceHistoryLayout>
+    <PageLayout>
       <CallbackHistoryText />
       <ButtonWrapper>
         {callbackHistory?.content.map((history) => (
@@ -61,18 +62,9 @@ export const ServiceHistoryPage = () => {
           />
         ))}
       </ButtonWrapper>
-    </ServiceHistoryLayout>
+    </PageLayout>
   );
 };
-
-const ServiceHistoryLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0 2rem;
-`;
 
 const ButtonWrapper = styled(Flex)`
   width: 100%;

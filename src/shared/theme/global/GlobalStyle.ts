@@ -16,6 +16,15 @@ const colorPrimary = '#C69090';
 const colorSecondary = '#F6E4E4';
 const colorWhiteGray = '#F2F2F2';
 
+// Space 정의
+const spaceXXs = '0.25rem'; // 4px
+const spaceXs = '0.5rem'; // 8px
+const spaceSm = '1rem'; // 16px
+const spaceMd = '1.5rem'; // 24px
+const spaceLg = '2.25rem'; // 36px
+const spaceXl = '3rem'; // 48px
+const spaceXXl = '3.75rem'; // 60px
+
 // Global Style 정의
 export const globalStyle = css`
   :root {
@@ -32,6 +41,14 @@ export const globalStyle = css`
     --color-primary: ${colorPrimary};
     --color-secondary: ${colorSecondary};
     --color-white-gray: ${colorWhiteGray};
+
+    --space-xxs: ${spaceXXs};
+    --space-xs: ${spaceXs};
+    --space-sm: ${spaceSm};
+    --space-md: ${spaceMd};
+    --space-lg: ${spaceLg};
+    --space-xl: ${spaceXl};
+    --space-xxl: ${spaceXXl};
   }
 
   @font-face {

@@ -7,14 +7,13 @@ import {
   PointLogBox,
   Withdrawal,
 } from '@/shared/components';
-import { Flex } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { PageLayout } from '@/shared/components';
 
 const SinittoMypage = () => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   return (
-    <MyPageLayout>
+    <PageLayout>
       <SinittoProfileBox
         isEditing={isEditingProfile}
         setIsEditing={setIsEditingProfile}
@@ -33,14 +32,8 @@ const SinittoMypage = () => {
       <PointBox isSinitto={true} />
       <PointLogBox />
       <Withdrawal />
-    </MyPageLayout>
+    </PageLayout>
   );
 };
 
 export default SinittoMypage;
-
-const MyPageLayout = styled(Flex)`
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-`;

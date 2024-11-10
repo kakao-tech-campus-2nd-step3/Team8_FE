@@ -2,8 +2,8 @@ import { useRef, useCallback } from 'react';
 
 import { useGetCallbacks } from './api/hooks';
 import { RequestRow } from './components';
+import { PageLayout } from '@/shared';
 import { Spinner } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 export const CallBackListPage = () => {
   const { data, isLoading, isError, fetchNextPage, hasNextPage } =
@@ -28,7 +28,7 @@ export const CallBackListPage = () => {
   );
 
   return (
-    <CallBackListLayout>
+    <PageLayout>
       {isLoading && <Spinner size='xl' />}
       {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
       {data &&
@@ -52,16 +52,8 @@ export const CallBackListPage = () => {
             })
           )
         ))}
-    </CallBackListLayout>
+    </PageLayout>
   );
 };
 
 export default CallBackListPage;
-
-const CallBackListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 45px;
-`;
