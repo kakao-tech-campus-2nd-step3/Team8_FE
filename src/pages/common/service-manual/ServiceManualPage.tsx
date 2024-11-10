@@ -52,35 +52,35 @@ const ServiceManualPage = () => {
             <ManualDetail
               title='보호자 홈페이지의 기능을 보여드릴게요.'
               description='기능을 사용하기 위해서는 마이페이지의 내 시니어 관리를 통해 시니어를 등록해야해요!'
-              imageSrc='/public/image/service-manual1.png'
+              imageSrc='/image/service-manual1.png'
             />
           </SwiperSlide>
           <SwiperSlide>
             <ManualDetail
               title='가이드라인 만들기'
               description='시니어를 등록했다면 시니어마다 가이드라인을 등록해보세요! 시니또들이 빠르게 도움을 줄 수 있습니다. '
-              imageSrc='/public/image/service-manual2.png'
+              imageSrc='/image/service-manual2.png'
             />
           </SwiperSlide>
           <SwiperSlide>
             <ManualDetail
               title='서비스를 이용하려면 포인트가 필요해요'
               description='포인트를 충전 요청하고 카카오톡 나에게 보내기 메세지를 확인해 충전 요청을 확인하세요.'
-              imageSrc='/public/image/service-manual3.png'
+              imageSrc='/image/service-manual3.png'
             />
           </SwiperSlide>
           <SwiperSlide>
             <ManualDetail
               title='시니어에게 서비스 번호를 알려주세요'
               description='시니어가 서비스 번호로 전화를 걸면 자동으로 도움 요청이 완료되고 서비스 이용 내역 페이지에 나타나요!'
-              imageSrc='/public/image/service-manual4.png'
+              imageSrc='/image/service-manual4.png'
             />
           </SwiperSlide>
           <SwiperSlide>
             <ManualDetail
               title='시니어의 서비스를 확인하세요'
               description='서비스 확인하고 완료 처리해주세요. 안부전화의 경우 시니또가 작성한 보고서를 볼 수 있습니다!'
-              imageSrc='/public/image/service-manual5.png'
+              imageSrc='/image/service-manual5.png'
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -210,7 +210,7 @@ const StartMessage = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 60vh;
+  margin-top: 40vh;
   font-size: 24px;
   font-weight: bold;
   color: var(--color-primary);
