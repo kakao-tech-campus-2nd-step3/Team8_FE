@@ -4,7 +4,7 @@ import {
   useModifyGuideline,
 } from '@/pages/guard';
 import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
-import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
+import { Box, Flex, Text, Image, Input, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type GuidelineInfo = {
@@ -59,7 +59,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
               border='1px solid var(--color-white)'
               borderRadius='10px'
             />
-            <Input
+            <Textarea
               value={guidelineContent}
               onChange={(e) => setGuidelineContent(e.target.value)}
               placeholder='내용을 입력하세요.'

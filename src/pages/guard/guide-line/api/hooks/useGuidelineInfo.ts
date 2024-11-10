@@ -33,13 +33,21 @@ export const useGuidelineInfo = ({
   };
 
   const editGuideline = () => {
-    editMutation.mutate({
-      seniorId: seniorId,
-      type: guideline.type,
-      title: guidelineTitle,
-      content: guidelineContent,
-    });
-    setIsEditing(false);
+    if (guidelineTitle.trim() === '' || guidelineContent.trim() === '') {
+      alert('제목과 내용을 입력해주세요');
+      return;
+    } else if (guidelineTitle.length > 20 || guidelineContent.length > 150) {
+      alert('제목은 20자 이하 내용은 150자 이하여야합니다.');
+      return;
+    } else {
+      editMutation.mutate({
+        seniorId: seniorId,
+        type: guideline.type,
+        title: guidelineTitle,
+        content: guidelineContent,
+      });
+      setIsEditing(false);
+    }
   };
 
   const deleteGuideline = () => {
