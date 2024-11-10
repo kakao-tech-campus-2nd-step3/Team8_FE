@@ -33,48 +33,39 @@ const PointLogBox = () => {
       <DetailBox>
         {data?.content.map((item, index) => (
           <DetailFactor key={index}>
-            <Image
-              ml='5px'
-              mr='5px'
-              w='50px'
-              h='50px'
-              borderRadius='50%'
-              src={PointLogImg}
-            />
-            <DetailTextBox>
-              <TextLayout>
-                <ContentText>
-                  {new Date(item.postTime).toLocaleDateString()}
-                </ContentText>
-                <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  {getPointStatusLabel(item.status)}
-                </DetailText>
-              </TextLayout>
-              <TextLayout>
-                <ContentText>{item.content}</ContentText>
-                <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                  <PriceText
-                    color={
-                      item.status === 'SPEND_COMPLETE' ||
-                      item.status === 'WITHDRAW_COMPLETE'
-                        ? 'blue'
-                        : item.status === 'EARN' ||
-                            item.status === 'CHARGE_COMPLETE'
-                          ? 'red'
-                          : 'black'
-                    }
-                  >
-                    {(item.status === 'SPEND_COMPLETE' ||
+            <TextLayout>
+              <DetailText>
+                {new Date(item.postTime).toLocaleDateString()}
+              </DetailText>
+              <DetailText display='flex' justifyContent='flex-end' mr={2}>
+                {getPointStatusLabel(item.status)}
+              </DetailText>
+            </TextLayout>
+
+            <TextLayout>
+              <ContentText>{item.content}</ContentText>
+              <DetailText display='flex' justifyContent='flex-end' mr={2}>
+                <PriceText
+                  color={
+                    item.status === 'SPEND_COMPLETE' ||
                     item.status === 'WITHDRAW_COMPLETE'
-                      ? '-'
+                      ? 'blue'
                       : item.status === 'EARN' ||
                           item.status === 'CHARGE_COMPLETE'
-                        ? '+'
-                        : '') + item.price.toLocaleString()}
-                  </PriceText>
-                </DetailText>
-              </TextLayout>
-            </DetailTextBox>
+                        ? 'red'
+                        : 'black'
+                  }
+                >
+                  {(item.status === 'SPEND_COMPLETE' ||
+                  item.status === 'WITHDRAW_COMPLETE'
+                    ? '-'
+                    : item.status === 'EARN' ||
+                        item.status === 'CHARGE_COMPLETE'
+                      ? '+'
+                      : '') + item.price.toLocaleString()}
+                </PriceText>
+              </DetailText>
+            </TextLayout>
           </DetailFactor>
         ))}
       </DetailBox>
@@ -100,28 +91,22 @@ const PointLogBox = () => {
 };
 
 export default PointLogBox;
+
 const UseDetailBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 338px;
-  height: auto;
-  background-color: #2e2e2e;
-  border: 1px solid #2e2e2e;
-  border-radius: 10px;
-  margin: 0.5rem;
+  background-color: var(--color-white-gray);
+  border-radius: 5px;
+  padding: var(--space-md);
+  gap: var(--space-sm);
 `;
 
 const TextBox = styled(Box)`
-  display: flex;
-  justify-content: flex-start;
   width: 100%;
-  max-width: 310px;
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
-  margin: 0.5rem 0;
 `;
 
 const DetailBox = styled(Box)`
@@ -130,28 +115,16 @@ const DetailBox = styled(Box)`
   align-items: center;
   width: 100%;
   height: auto;
-  max-width: 338px;
+  gap: var(--space-xs);
 `;
 
 const DetailFactor = styled(Box)`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  max-width: 310px;
-  min-height: 55px;
-  background-color: var(--color-white);
-  margin: 0.3rem 0;
-  border-radius: 10px;
-`;
-
-const DetailTextBox = styled(Box)`
-  margin-left: 0.3rem;
-  display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  align-items: flex-start;
+  background-color: var(--color-white);
+  border-radius: 5px;
+  padding: var(--space-xs) var(--space-sm);
 `;
 
 const TextLayout = styled(Box)`
@@ -165,34 +138,28 @@ const Pagination = styled(Box)`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 310px;
-  margin: 0.5rem 0;
-  color: var(--color-white);
+  color: var(--color-gray);
   font-size: 16px;
 `;
 
 const PaginationButton = styled.button`
   cursor: pointer;
   font-weight: bold;
+  padding: 0 var(--space-xs);
+  outline: 0;
 `;
 
-const DetailText = styled(Box)`
-  width: 45%;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
+const DetailText = styled(Text)`
+  font-size: 14px;
+  color: var(--color-gray);
 `;
 
-const ContentText = styled(Box)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+const ContentText = styled(Text)`
+  font-size: 18px;
   font-weight: 600;
 `;
 
 const PriceText = styled(Text)`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 `;

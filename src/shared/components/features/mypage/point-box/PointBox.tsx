@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
+import { BasicButton } from '@/shared/components';
 import {
   useChargePoint,
   useGetPointInfo,
   useWithdrawPoint,
 } from '@/shared/hooks';
-import { Box, Spinner, Button, Input } from '@chakra-ui/react';
+import { Box, Spinner, Input, Text, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -50,32 +51,22 @@ const PointBox = ({ isSinitto }: Props) => {
 
   return (
     <PointBoxLayout>
-      <Box
-        w='100%'
-        display='flex'
-        justifyContent='flex-start'
-        pl={3}
-        mt={2}
-        fontSize='20px'
-        fontWeight={700}
-      >
-        내 포인트
-      </Box>
-      <Box
-        w='100%'
-        display='flex'
-        justifyContent='flex-start'
-        pl={3}
-        mt={1}
-        fontSize='18px'
-        fontWeight={700}
-      >
-        {pointData?.price.toLocaleString()} 포인트
-      </Box>
+      <Flex w='full' justifyContent='space-between' mb='var(--space-sm)'>
+        <Text fontSize='20px' fontWeight={700}>
+          내 포인트
+        </Text>
+        <Text fontSize='20px' fontWeight={700}>
+          {pointData?.price.toLocaleString()} 포인트
+        </Text>
+      </Flex>
       {actionType ? (
-        <Box display='flex' flexDir='column' alignItems='center'>
+        <Flex
+          w='full'
+          flexDir='column'
+          alignItems='center'
+          gap='var(--space-xs)'
+        >
           <Input
-            m={1}
             w='100%'
             h='40px'
             bg='var(--color-white)'
@@ -89,14 +80,18 @@ const PointBox = ({ isSinitto }: Props) => {
             min='1'
           />
           <ButtonContainer>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              bg='var(--color-primary)'
-              color='var(--color-white)'
-              fontWeight='bold'
-              mr={2}
+            <BasicButton
+              themeType='gray'
+              height='40px'
+              onClick={() => {
+                setActionType('');
+              }}
+            >
+              {actionType === 'charge' ? '충전 취소' : '출금 취소'}
+            </BasicButton>
+            <BasicButton
+              themeType='default'
+              height='40px'
               onClick={
                 actionType === 'charge'
                   ? handleChargeButtonClick
@@ -104,22 +99,9 @@ const PointBox = ({ isSinitto }: Props) => {
               }
             >
               {actionType === 'charge' ? '충전 신청' : '출금 신청'}
-            </Button>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              bg='var(--color-gray)'
-              color='var(--color-white)'
-              fontWeight='bold'
-              onClick={() => {
-                setActionType('');
-              }}
-            >
-              {actionType === 'charge' ? '충전 취소' : '출금 취소'}
-            </Button>
+            </BasicButton>
           </ButtonContainer>
-        </Box>
+        </Flex>
       ) : (
         <>
           <Box
@@ -135,15 +117,23 @@ const PointBox = ({ isSinitto }: Props) => {
           >
             {isSinitto ? null : '보낼 계좌 : 3333-17-1913-736'}
           </Box>
-          <ButtonContainer mt={2}>
+          <ButtonContainer>
             {isSinitto ? (
-              <ActingButton onClick={() => setActionType('withdraw')}>
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={() => setActionType('withdraw')}
+              >
                 출금하기
-              </ActingButton>
+              </BasicButton>
             ) : (
-              <ActingButton onClick={() => setActionType('charge')}>
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={() => setActionType('charge')}
+              >
                 충전하기
-              </ActingButton>
+              </BasicButton>
             )}
           </ButtonContainer>
         </>
@@ -156,38 +146,19 @@ export default PointBox;
 
 const PointBoxLayout = styled(Box)`
   width: 100%;
-  max-width: 338px;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--color-secondary);
-  border-radius: 10px;
-  margin-top: 0.5rem;
+  border-radius: 5px;
+  padding: var(--space-md);
 `;
 
 const ButtonContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  max-width: 338px;
-  max-height: 70px;
-  margin-bottom: 10px;
-`;
-
-const ActingButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-white);
-  border-radius: 5px;
-  cursor: pointer;
+  gap: var(--space-xs);
 `;

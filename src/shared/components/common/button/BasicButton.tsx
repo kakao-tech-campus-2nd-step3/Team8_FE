@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 type Props = {
-  themeType?: 'default' | 'outline';
+  themeType?: 'default' | 'outline' | 'gray';
   width?: string;
   height?: string;
 };
@@ -15,12 +15,16 @@ export const BasicButton = styled.button<Props>`
   background-color: ${(props) =>
     props.themeType === 'outline'
       ? 'var(--color-white)'
-      : 'var(--color-primary)'};
+      : props.themeType === 'gray'
+        ? 'var(--color-gray)'
+        : 'var(--color-primary)'};
   color: ${(props) =>
     props.themeType === 'outline'
       ? 'var(--color-primary)'
       : 'var(--color-white)'};
-  box-shadow: inset 0 0 0 2px var(--color-primary);
+  box-shadow: inset 0 0 0 2px
+    ${(props) =>
+      props.themeType === 'gray' ? 'var(#848484)' : 'var(--color-primary)'};
 
   font-size: var(--font-size-md);
   font-weight: 300;

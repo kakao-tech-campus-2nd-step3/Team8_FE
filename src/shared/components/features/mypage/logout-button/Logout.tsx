@@ -5,7 +5,7 @@ const Logout = () => {
 
   return (
     <BasicButton
-      theme='default'
+      themeType='outline'
       width='80px'
       height='35px'
       onClick={() => logout()}
