@@ -41,7 +41,7 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
           ))}
         </Select>
         <Link to={RouterPath.MYPAGE}>
-          <Image src={IconUser} alt='icon-user' />
+          <Image height='50px' src={IconUser} alt='icon-user' />
         </Link>
       </Flex>
     </Wrapper>
@@ -49,11 +49,13 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
 };
 
 const Wrapper = styled.header`
+  position: fixed;
+  top: 0;
   width: 100%;
   height: ${HEADER_HEIGHT};
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 1.5rem 0;
+  padding: 0 var(--space-lg);
   background-color: var(--color-white);
 `;
