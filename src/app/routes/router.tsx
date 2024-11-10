@@ -23,6 +23,7 @@ import {
   SinittoMainPage,
   DummyRedirectPage,
   SinittoServiceHistoryPage,
+  HelloCallDetailPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -243,9 +244,12 @@ export const router = createBrowserRouter([
             element: <HelloCallServicePage />,
           },
           {
-            // TODO: 이 페이지를 들어갈 수 있는 수단이 없음.
             path: RouterPath.HELLO_CALL_REPORT,
             element: <HelloCallReportPage />,
+          },
+          {
+            path: RouterPath.HELLO_CALL_DETAIL,
+            element: <HelloCallDetailPage />,
           },
         ],
       },
