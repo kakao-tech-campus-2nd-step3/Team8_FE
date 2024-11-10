@@ -20,7 +20,7 @@ export const BasicButton = styled.button<Props>`
     props.themeType === 'outline'
       ? 'var(--color-primary)'
       : 'var(--color-white)'};
-  border: 2px solid var(--color-primary);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
 
   font-size: var(--font-size-md);
   font-weight: 300;
@@ -30,6 +30,6 @@ export const BasicButton = styled.button<Props>`
   &:hover {
     background-color: #e3e8ef;
     color: var(--color-white);
-    border: 2px solid #e3e8ef;
+    box-shadow: inset 0 0 0 2px #e3e8ef;
   }
 `;

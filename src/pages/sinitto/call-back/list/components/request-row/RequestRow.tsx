@@ -55,7 +55,6 @@ const Wrapper = styled.button`
   border-radius: 10px;
   background-color: var(--color-white-gray);
   outline: 0;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.div`

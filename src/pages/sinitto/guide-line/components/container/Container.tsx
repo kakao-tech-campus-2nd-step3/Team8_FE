@@ -10,11 +10,8 @@ export const GuideLineContainer = ({ title, content }: Props) => {
     <Wrapper>
       <Title>{title}</Title>
       <Content>
-        {content.split('\\n').map((line) => (
-          <>
-            {line}
-            <br />
-          </>
+        {content.split('\\n').map((line, index) => (
+          <p key={index}>{line}</p>
         ))}
       </Content>
     </Wrapper>
@@ -27,7 +24,6 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0px 2px 4px 0px #00000040;
   border: 1px solid #fafafa;
-  margin-bottom: 20px;
 `;
 
 const Title = styled.h2`
@@ -35,8 +31,8 @@ const Title = styled.h2`
   font-weight: 700;
 `;
 
-const Content = styled.p`
-  margin-top: 10px;
+const Content = styled.div`
+  margin-top: var(--space-xxs);
   font-size: var(--font-size-md);
   white-space: pre-wrap;
   font-weight: 350;

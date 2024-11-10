@@ -40,7 +40,6 @@ const Wrapper = styled(Button)`
     props.backgroundColor ? props.backgroundColor : '#81b6ff'};
   outline: 0;
   padding: 0;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.div`
