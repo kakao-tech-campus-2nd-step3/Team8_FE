@@ -5,7 +5,7 @@ export const SinittoName = () => {
   const { data, isLoading } = useGetSinittoInfo();
 
   return (
-    <Flex w='100%' alignItems='center' mt={10}>
+    <Flex w='100%' alignItems='center' mt='var(--space-md)'>
       {isLoading ? (
         <Flex w='100%' justifyContent='left'>
           <Spinner color='var(--color-primary)' size='md' />

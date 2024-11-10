@@ -15,6 +15,7 @@ const colorGray = '#909090';
 const colorPrimary = '#C69090';
 const colorSecondary = '#F6E4E4';
 const colorWhiteGray = '#F2F2F2';
+const colorShadow = '#d8d8d8';
 
 // Space 정의
 const spaceXXs = '0.25rem'; // 4px
@@ -41,6 +42,7 @@ export const globalStyle = css`
     --color-primary: ${colorPrimary};
     --color-secondary: ${colorSecondary};
     --color-white-gray: ${colorWhiteGray};
+    --color-shadow: ${colorShadow};
 
     --space-xxs: ${spaceXXs};
     --space-xs: ${spaceXs};

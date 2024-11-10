@@ -1,6 +1,5 @@
 import {
   CallBackApply,
-  Header,
   HelloCallApply,
   ServiceHistoryButton,
   SinittoName,
@@ -10,7 +9,6 @@ import { PageLayout } from '@/shared';
 export const SinittoMainPage = () => {
   return (
     <PageLayout>
-      <Header />
       <SinittoName />
       <ServiceHistoryButton />
       <CallBackApply />

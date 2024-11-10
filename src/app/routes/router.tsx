@@ -161,8 +161,13 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute requiresAuth sinittoOnly />,
     children: [
       {
-        index: true,
-        element: <SinittoMainPage />,
+        element: <Layout SinittoHome />,
+        children: [
+          {
+            index: true,
+            element: <SinittoMainPage />,
+          },
+        ],
       },
       {
         path: RouterPath.MYPAGE,

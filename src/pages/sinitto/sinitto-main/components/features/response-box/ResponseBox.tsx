@@ -36,11 +36,11 @@ export const ResponseBox = ({
 const Wrapper = styled(Flex)`
   justify-content: space-between;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  box-shadow: 0 0 5px 2px #d2d2d2;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  box-shadow: 0 0 5px 2px var(--color-shadow);
   border-radius: 1rem;
-  width: 145px;
+  width: 100%;
   cursor: pointer;
 `;
 

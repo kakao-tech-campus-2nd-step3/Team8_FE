@@ -26,7 +26,7 @@ export const CallBackApply = () => {
   };
 
   return (
-    <Wrapper>
+    <Flex flexDirection='column' width='100%' gap='var(--space-sm)'>
       <Flex justifyContent='space-between' alignItems='center'>
         <NoticeTitle>콜백 요청</NoticeTitle>
         <Link to={RouterPath.CALL_BACK_LIST}>
@@ -39,17 +39,17 @@ export const CallBackApply = () => {
         </Link>
       </Flex>
       <Flex w='100%' gap={5}>
-        <Image src={IconCall} alt='call-icon' />
+        <Image w='50px' src={IconCall} alt='call-icon' />
         <NoticeText>
           대기 중인 요청을 잡아 가이드라인을 확인하고 도움을 시작해보세요.
         </NoticeText>
       </Flex>
       {isLoading ? (
-        <Flex justifyContent='center' mt={5}>
+        <Flex justifyContent='center'>
           <Spinner size='lg' color='var(--color-primary)' />
         </Flex>
       ) : (
-        <GridBox mt={5} mb={10}>
+        <GridBox>
           {callBackList?.pages?.[0]?.content.map((callback) => (
             <ResponseBox
               key={callback.callbackId}
@@ -61,23 +61,20 @@ export const CallBackApply = () => {
           ))}
         </GridBox>
       )}
-    </Wrapper>
+    </Flex>
   );
 };
-
-const Wrapper = styled.section`
-  width: 100%;
-`;
 
 const NoticeTitle = styled(Text)`
   font-size: 24px;
   font-weight: 700;
-  margin: 0.5rem 0;
   align-items: center;
 `;
 
 const NoticeText = styled(Text)`
   color: var(--color-gray);
+  display: flex;
+  align-items: center;
 `;
 
 const MoreButton = styled(Flex)`
@@ -93,7 +90,7 @@ const MoreButton = styled(Flex)`
 const GridBox = styled(Box)`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  column-gap: 20px;
-  row-gap: 20px;
+  gap: var(--space-sm);
+
+  grid-template-columns: repeat(2, 1fr);
 `;
