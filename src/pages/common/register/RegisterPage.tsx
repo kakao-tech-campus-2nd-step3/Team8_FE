@@ -7,7 +7,6 @@ import { FormValues } from './types';
 import { BasicButton, parsePhoneNumber, useUserEmail } from '@/shared';
 import { PageLayout } from '@/shared';
 import { Divider } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 const RegisterPage = () => {
   const [userType, setUserType] = useState('');

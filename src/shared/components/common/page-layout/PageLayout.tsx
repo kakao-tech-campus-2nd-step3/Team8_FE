@@ -6,5 +6,5 @@ export const PageLayout = styled.div`
   align-items: center;
   width: 100%;
   padding: var(--space-sm) var(--space-lg) var(--space-lg);
-  gap: var(--space-sm);
+  gap: var(--space-md);
 `;

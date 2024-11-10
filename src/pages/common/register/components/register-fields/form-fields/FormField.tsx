@@ -29,8 +29,7 @@ export const FormField = ({
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 700;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-sm);
 `;
 
 const EmphasisSpan = styled.span`

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import starIcon from './asset/star-icon.svg';
 import { BasicButton, Notice, PageLayout } from '@/shared';
-import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
+import { Text, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoReviewPage = () => {
