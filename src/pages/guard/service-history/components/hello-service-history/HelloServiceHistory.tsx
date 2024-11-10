@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
-import { RouterPath } from '@/app/routes';
 import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
 import { formatDate } from '@/shared/utils/date/dateUtils';
 import { Text } from '@chakra-ui/react';
