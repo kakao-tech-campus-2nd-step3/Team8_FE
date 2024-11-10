@@ -58,7 +58,7 @@ export const HelloCallServiceList = ({
         </Flex>
         {isExpanded && serviceStatus === 'IN_PROGRESS' && (
           <ExpandedContent>
-            <Flex w='full' justifyContent='space-between' mb='1rem'>
+            <Flex w='full' justifyContent='space-between'>
               {DAY_SCHEMA.map((day) => (
                 <DayButton
                   key={day}
@@ -108,7 +108,6 @@ const ItemListBox = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: var(--color-white-gray);
-  margin: 10px 0;
   padding: 14px;
   border-radius: 10px;
   justify-content: space-between;

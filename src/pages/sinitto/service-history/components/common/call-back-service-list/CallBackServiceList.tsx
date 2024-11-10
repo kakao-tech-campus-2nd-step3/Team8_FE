@@ -55,7 +55,6 @@ const ItemListBox = styled.div`
   flex-direction: row;
   width: 100%;
   background-color: var(--color-white-gray);
-  margin: 10px 0;
   padding: 14px;
   border-radius: 10px;
   justify-content: space-between;

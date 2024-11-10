@@ -19,14 +19,19 @@ export const TextArea = ({
   const descriptions = useArrayFormatting(description);
 
   return (
-    <Flex w='full' flexDir='column' textAlign={textDirection}>
-      <Flex mt='1rem' w='full' justifyContent={textDirection}>
+    <Flex
+      w='full'
+      flexDir='column'
+      textAlign={textDirection}
+      gap='var(--space-xs)'
+    >
+      <Flex w='full' justifyContent={textDirection}>
         <Text fontSize='xl' fontWeight='700'>
           {title}
         </Text>
       </Flex>
       {statuses.map((stat, index) => (
-        <Flex w='full' my={2} justifyContent={textDirection} key={index}>
+        <Flex w='full' justifyContent={textDirection} key={index}>
           <Text fontSize='sm' fontWeight='700' color='#6D6D6D'>
             <Highlight>{stat}</Highlight> {descriptions[index] || ''}
           </Text>
