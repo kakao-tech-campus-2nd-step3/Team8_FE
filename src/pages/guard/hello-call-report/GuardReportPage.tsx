@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { ReportDetail } from './components';
+import { GuardReportDetail } from './components';
 import styled from '@emotion/styled';
 
 type Params = {
@@ -12,7 +12,7 @@ const GuardReportPage = () => {
 
   return (
     <HelloCallReportPageLayout>
-      <ReportDetail helloCallId={Number(helloCallId)} />
+      <GuardReportDetail helloCallId={Number(helloCallId)} />
     </HelloCallReportPageLayout>
   );
 };

@@ -1,1 +1,1 @@
-export { default as ReportDetail } from './ReportDetail';
+export { default as GuardReportDetail } from './GuardReportDetail';

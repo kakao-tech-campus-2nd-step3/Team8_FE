@@ -10,7 +10,7 @@ type Props = {
   helloCallId: number;
 };
 
-const ReportDetail = ({ helloCallId }: Props) => {
+const GuardReportDetail = ({ helloCallId }: Props) => {
   const { data: reportData } = useGetReport(helloCallId);
   const completeHelloCallMutation = usePutCompleteHelloCall(helloCallId);
 
@@ -86,7 +86,7 @@ const ReportDetail = ({ helloCallId }: Props) => {
   );
 };
 
-export default ReportDetail;
+export default GuardReportDetail;
 
 const InfoBox = styled(Box)`
   display: flex;
