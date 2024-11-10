@@ -25,6 +25,7 @@ import {
   SinittoServiceHistoryPage,
   HelloCallDetailPage,
   GuardReportPage,
+  ServiceManualPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
                     element: <GuardMyPage />,
                   },
                 ],
+              },
+              {
+                path: RouterPath.SERVICE_MANUAL,
+                element: <ServiceManualPage />,
               },
               {
                 element: <Layout title='내 시니어 관리' />,

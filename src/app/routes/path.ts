@@ -4,6 +4,7 @@ export const RouterPath = {
   SIGNUP: 'signup',
   REGISTER: 'register',
   REDIRECT: 'redirection',
+  SERVICE_MANUAL: 'service-manual',
   GUARD: '/guard',
   MYPAGE: `mypage`,
   GUARD_GUIDELINE: `:seniorId/:guidelineType`,
