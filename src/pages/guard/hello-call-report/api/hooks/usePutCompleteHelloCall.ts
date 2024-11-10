@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { putCompleteHelloCall } from '../complete-hello-call';
 import { CompleteHellCallResponse } from '../types/complete-hello-call.response';
+import { RouterPath } from '@/app/routes';
 import { getHelloCallHistoryQueryKey } from '@/pages/guard/service-history';
 import { queryClient } from '@/shared';
 import { useMutation } from '@tanstack/react-query';
@@ -15,7 +16,7 @@ export const usePutCompleteHelloCall = (callId: number) => {
       await queryClient.invalidateQueries({
         queryKey: [getHelloCallHistoryQueryKey],
       });
-      navigate('/guard/mypage/service-history');
+      navigate(RouterPath.SINITTO_REVIEW);
     },
     onError: (error) => {
       console.error('안부전화 서비스 완료에 실패했습니다.', error);

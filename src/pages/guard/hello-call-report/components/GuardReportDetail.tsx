@@ -80,7 +80,7 @@ const GuardReportDetail = ({ helloCallId }: Props) => {
       </Box>
       <Divider />
       <SubmitButton onClick={completeHelloCall}>
-        서비스 완료 확인하기
+        서비스 완료 확인 및 리뷰하기
       </SubmitButton>
     </>
   );

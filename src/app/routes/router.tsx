@@ -104,25 +104,33 @@ export const router = createBrowserRouter([
             path: RouterPath.SERVICE_HISTORY,
             children: [
               {
-                element: <Layout title='서비스 이용내역' />,
                 children: [
                   {
-                    index: true,
-                    element: <ServiceHistoryPage />,
+                    element: <Layout title='서비스 이용내역' />,
+                    children: [
+                      {
+                        index: true,
+                        element: <ServiceHistoryPage />,
+                      },
+                    ],
                   },
                   {
                     path: RouterPath.GUARD_HELLO_CALL_REPORT,
-                    element: <GuardReportPage />,
-                  },
-                ],
-              },
-              {
-                path: RouterPath.SINITTO_REVIEW,
-                element: <Layout title='시니또 평가하기' />,
-                children: [
-                  {
-                    index: true,
-                    element: <SinittoReviewPage />,
+                    children: [
+                      {
+                        element: <Layout title='보고서 확인 및 시니또 평가' />,
+                        children: [
+                          {
+                            index: true,
+                            element: <GuardReportPage />,
+                          },
+                          {
+                            path: RouterPath.SINITTO_REVIEW,
+                            element: <SinittoReviewPage />,
+                          },
+                        ],
+                      },
+                    ],
                   },
                 ],
               },
@@ -157,22 +165,6 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <HelloCallApplyPage />,
-          },
-        ],
-      },
-
-      {
-        path: RouterPath.CALL_BACK_LIST,
-        children: [
-          {
-            path: RouterPath.SINITTO_REVIEW,
-            element: <Layout title='시니또 평가하기' />,
-            children: [
-              {
-                index: true,
-                element: <SinittoReviewPage />,
-              },
-            ],
           },
         ],
       },
