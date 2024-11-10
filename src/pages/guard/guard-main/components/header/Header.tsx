@@ -2,7 +2,6 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes';
-import IconList from '@/pages/assets/guard-main/list.svg';
 import IconUser from '@/pages/assets/shared/user.svg';
 import { HEADER_HEIGHT, useAllSeniorInfo } from '@/shared';
 import { Flex, Image, Select } from '@chakra-ui/react';
@@ -22,7 +21,6 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
 
   return (
     <Wrapper>
-      <Image src={IconList} alt='icon-list' />
       <Flex gap={3} alignItems='center'>
         <Select
           placeholder='부모님'
@@ -55,7 +53,7 @@ const Wrapper = styled.header`
   height: ${HEADER_HEIGHT};
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding: 1.5rem 0;
-  justify-content: space-between;
   background-color: var(--color-white);
 `;

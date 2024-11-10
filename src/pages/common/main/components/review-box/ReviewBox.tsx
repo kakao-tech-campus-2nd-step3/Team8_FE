@@ -1,71 +1,76 @@
-import StarIcon from '@/pages/assets/main/star-icon.svg';
-import { Box, Image, Text } from '@chakra-ui/react';
+import StarIconUnfill from '@/pages/assets/main/star-icon-unfill.svg';
+import StarIconFill from '@/pages/assets/main/star-icon.svg';
+import { Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const ReviewBox = () => {
+type Props = {
+  name: string;
+  postDate: string;
+  rate: number;
+  content: string;
+};
+
+const ReviewBox = ({ name, postDate, rate, content }: Props) => {
   return (
-    <ReviewBoxLayout>
-      <ContentsBox>
-        <Box
-          display='flex'
-          flexDirection='row'
-          textAlign='center'
-          alignItems='center'
-          gap={2}
-        >
-          <Text fontSize='1.2rem' fontWeight='700'>
-            김춘식
-          </Text>
-          <IconBox flexDirection='row' gap={1}>
-            <StarIconItem src={StarIcon} alt='star-icon' />
-            <StarIconItem src={StarIcon} alt='star-icon' />
-            <StarIconItem src={StarIcon} alt='star-icon' />
-            <StarIconItem src={StarIcon} alt='star-icon' />
-            <StarIconItem src={StarIcon} alt='star-icon' />
-          </IconBox>
-          <Text>2024.08.16</Text>
-        </Box>
-        <Box display='flex' flexDirection='column' gap={2}>
-          <Text>
-            홀로 계신 어머님에게 대신 여러가지 일을 해주어서 정말 좋은 것
-            같아요!
-          </Text>
-          <Text>어머니께서도 만족 대 만족... ^^</Text>
-        </Box>
-      </ContentsBox>
-    </ReviewBoxLayout>
+    <Wrapper>
+      <InnerWrapper>
+        <UserName>{name}</UserName>
+        <PostDate>{postDate}</PostDate>
+        <StarIcons>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <StarIconItem
+              key={index}
+              src={index < rate ? StarIconFill : StarIconUnfill}
+              alt='star-icon'
+            />
+          ))}
+        </StarIcons>
+      </InnerWrapper>
+      {content}
+      <Content></Content>
+    </Wrapper>
   );
 };
 
 export default ReviewBox;
 
-const ReviewBoxLayout = styled(Box)`
-  display: flex;
-  /* align-items: center; */
-  padding: 1rem;
-  width: 18rem;
-  height: 10rem;
-  background-color: #80c1ff;
+const Wrapper = styled.div`
+  width: 100%;
   border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white-gray);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
 `;
 
-const ContentsBox = styled(Box)`
+const InnerWrapper = styled.div`
   display: flex;
-  gap: 0.5rem;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  align-items: end;
+  margin-bottom: 0.5rem;
+`;
+
+const StarIcons = styled.div`
+  display: flex;
 `;
 
 const StarIconItem = styled(Image)`
-  width: 1rem;
+  width: 1.2rem;
+  margin-right: 0.3rem;
 `;
 
-const IconBox = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
+const UserName = styled.h3`
+  font-size: var(--font-size-lg);
+  margin-right: 0.5rem;
+`;
+
+const PostDate = styled.p`
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+  margin-right: auto;
+`;
+
+const Content = styled.div`
+  font-size: var(--font-size-md);
+  gap: 0.5rem;
 `;

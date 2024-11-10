@@ -10,24 +10,11 @@ type GuidelineInfo = {
   content: string;
 };
 
-type UseGuidelineInfoProps = {
+type Props = {
   guideline: GuidelineInfo;
   seniorId: number;
   editMutation: UseMutationResult<string, Error, ModifyGuidelineRequest>;
   deleteMutation: UseMutationResult<string, Error, number>;
-};
-
-type UseGuidelineInfoReturn = {
-  isMore: boolean;
-  isEditing: boolean;
-  guidelineTitle: string;
-  guidelineContent: string;
-  toggleContent: () => void;
-  setIsEditing: (value: boolean) => void;
-  setGuidelineTitle: (value: string) => void;
-  setGuidelineContent: (value: string) => void;
-  editGuideline: () => void;
-  deleteGuideline: () => void;
 };
 
 export const useGuidelineInfo = ({
@@ -35,7 +22,7 @@ export const useGuidelineInfo = ({
   seniorId,
   editMutation,
   deleteMutation,
-}: UseGuidelineInfoProps): UseGuidelineInfoReturn => {
+}: Props) => {
   const [isMore, setIsMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [guidelineTitle, setGuidelineTitle] = useState(guideline.title);

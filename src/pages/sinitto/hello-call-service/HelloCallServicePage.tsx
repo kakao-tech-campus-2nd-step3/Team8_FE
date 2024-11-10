@@ -1,33 +1,44 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import { useGetServiceDetail, usePutAcceptHelloCall } from './api';
 import TitleImg from './assets/title-icon.png';
 import { ServiceDetail } from './components';
 import { SERVICE_NOTICE } from './data';
-import { RouterPath } from '@/app/routes/path';
+import { useFormatPhoneNumber, useServiceDate } from './hooks';
 import { Notice } from '@/shared/components';
 import { Box, Button, Divider, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const HelloCallServicePage = () => {
-  const [accepted, setAccepted] = useState(false);
+  const [detailed, setDetailed] = useState(false);
 
-  const handlerAccept = () => {
-    setAccepted(true);
+  const { helloCallId } = useParams();
+
+  const { data } = useGetServiceDetail(Number(helloCallId));
+
+  const { mutate: acceptHelloCall } = usePutAcceptHelloCall(
+    Number(helloCallId)
+  );
+
+  const startDate = useServiceDate(data?.startDate);
+  const endDate = useServiceDate(data?.endDate);
+
+  const phoneNumber = useFormatPhoneNumber(data?.seniorPhoneNumber);
+
+  const goToDetail = () => {
+    setDetailed(true);
   };
 
-  const navigate = useNavigate();
-
-  const handlerNavigate = () => {
-    navigate(RouterPath.HELLO_CALL_REPORT);
+  const handleAcceptService = () => {
+    acceptHelloCall();
   };
 
   return (
     <HelloCallServicePageLayout>
-      {!accepted ? (
+      {!detailed ? (
         <Box
           display='flex'
-          w='full'
           py={3}
           justifyContent='center'
           backgroundColor='#E6DFD1'
@@ -47,18 +58,24 @@ const HelloCallServicePage = () => {
             <Text color='var(--color-primary)'>시니어 전화번호</Text>
           </Box>
           <Text fontSize='var(--font-size-xl)' fontWeight='700'>
-            010 - 1234 - 1234
+            {phoneNumber}
           </Text>
         </Box>
       )}
-      <ServiceDetail />
+      <ServiceDetail
+        startDate={startDate}
+        endDate={endDate}
+        timeSlots={data?.timeSlots}
+        serviceTime={data?.serviceTime}
+        requirement={data?.requirement}
+      />
       <Box display='flex' flexDir='column' gap={2}>
         <Notice
           title={SERVICE_NOTICE.service_title}
           contents={SERVICE_NOTICE.service_contents}
           noticeType='안부전화'
         />
-        {accepted && (
+        {detailed && (
           <>
             <Notice
               title={SERVICE_NOTICE.finish_title}
@@ -69,13 +86,11 @@ const HelloCallServicePage = () => {
           </>
         )}
       </Box>
-      {!accepted ? (
-        <AcceptButton onClick={handlerAccept}>
-          서비스 수락하기 (3,000P)
-        </AcceptButton>
+      {!detailed ? (
+        <AcceptButton onClick={goToDetail}>서비스 상세 확인하기</AcceptButton>
       ) : (
-        <AcceptButton onClick={handlerNavigate}>
-          서비스 완료 및 보고서 제출
+        <AcceptButton onClick={handleAcceptService}>
+          서비스 수락하기 ({data?.price.toLocaleString()}P)
         </AcceptButton>
       )}
     </HelloCallServicePageLayout>
@@ -93,6 +108,7 @@ const HelloCallServicePageLayout = styled.div`
 `;
 
 const AcceptButton = styled(Button)`
+  height: 3rem;
   background-color: var(--color-primary);
   color: var(--color-white);
   font-weight: 700;

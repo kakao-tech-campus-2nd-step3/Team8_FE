@@ -1,5 +1,5 @@
 import { GuardProfileBox } from './components';
-import { PointBox, PointLogBox } from '@/shared/components';
+import { PointBox, PointLogBox, Withdrawal } from '@/shared/components';
 import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -7,8 +7,9 @@ export const GuardMyPage = () => {
   return (
     <MyPageLayout>
       <GuardProfileBox />
-      <PointBox />
+      <PointBox isSinitto={false} />
       <PointLogBox />
+      <Withdrawal />
     </MyPageLayout>
   );
 };

@@ -16,6 +16,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@tanstack/react-query": "^5.51.11",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "axios": "^1.7.5",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
@@ -62,7 +63,7 @@
     "prettier": "^3.2.5",
     "ts-node": "10.9.2",
     "typescript": "^5.2.2",
-    "vite": "^5.4.1",
+    "vite": "^5.4.10",
     "vite-plugin-pwa": "^0.20.1"
   }
 }

@@ -24,7 +24,7 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-export const BASE_URI = `http://sinitto.site:8080`;
+export const BASE_URI = `https://sinitto.site`;
 
 export const fetchInstance = initInstance({
   baseURL: BASE_URI,
@@ -59,7 +59,7 @@ fetchInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 461 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       const refreshToken = localStorage.getItem('refreshToken');
@@ -74,6 +74,7 @@ fetchInstance.interceptors.response.use(
           'Cross-Control-Allow-Origin': '*',
           Authorization: `Bearer ${refreshToken}`,
         },
+        body: JSON.stringify({ refreshToken }),
       });
       if (resp.ok) {
         console.log('토큰 재발급 성공');
@@ -84,7 +85,7 @@ fetchInstance.interceptors.response.use(
         localStorage.setItem('refreshToken', data.refreshToken);
 
         return fetchInstance(originalRequest);
-      } else {
+      } else if (resp.status === 460 || resp.status === 462) {
         console.log('토큰 재발급 실패');
 
         localStorage.removeItem('accessToken');

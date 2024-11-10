@@ -9,16 +9,24 @@ const LoginButton = () => {
   const KAKAO_LOGIN = `${BASE_URI}/api/auth/oauth/kakao`;
 
   return (
-    <Link to={KAKAO_LOGIN}>
+    <StyledLink to={KAKAO_LOGIN}>
       <KakaoLoginButton>
         <Image src={Logo} alt='kakao-icon' />
         <Text fontWeight='500'>카카오톡 로그인</Text>
       </KakaoLoginButton>
-    </Link>
+    </StyledLink>
   );
 };
 
 export default LoginButton;
+
+const StyledLink = styled(Link)`
+  width: 80%;
+  max-width: 28.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const KakaoLoginButton = styled.button`
   background-color: #ffeb00;
@@ -28,9 +36,10 @@ const KakaoLoginButton = styled.button`
   align-items: center;
   border: none;
   border-radius: 10px;
-  width: 15rem;
+  width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  outline: none;
 `;
