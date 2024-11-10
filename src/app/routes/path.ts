@@ -9,6 +9,7 @@ export const RouterPath = {
   GUARD_GUIDELINE: `:seniorId/:guidelineType`,
   SINITTO: '/sinitto',
   SERVICE_HISTORY: `service-history`,
+  GUARD_HELLO_CALL_REPORT: 'report/:helloCallId',
   HELLO_CALL: `hello-call`,
   HELLO_CALL_SERVICE: `:helloCallId`,
   HELLO_CALL_REPORT: `report/:helloCallId`,

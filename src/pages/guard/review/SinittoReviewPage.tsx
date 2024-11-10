@@ -1,36 +1,52 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { ReviewRequest, usePostReview } from './api';
 import starIcon from './asset/star-icon.svg';
 import { BasicButton, Notice } from '@/shared/components';
 import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoReviewPage = () => {
-  const [ratings, setRatings] = useState<number[]>([0, 0, 0]); // 각 질문에 대한 별점
-  const [isGood, setIsGood] = useState<boolean | null>(null);
+  const navigate = useNavigate();
+  const [ratings, setRatings] = useState<number[]>([0, 0, 0]);
+  const [reviewContent, setReviewContent] = useState<string>('');
+
+  const { mutate: postReview } = usePostReview();
 
   const handleStarClick = (questionIndex: number, starIndex: number) => {
     const newRatings = [...ratings];
-    newRatings[questionIndex] = starIndex + 1; // 별점 설정
+    newRatings[questionIndex] = starIndex + 1;
     setRatings(newRatings);
   };
 
-  const handleEvalButtonClick = (value: boolean) => {
-    setIsGood(value);
+  const handleSubmit = () => {
+    if (ratings.some((rating) => rating === 0)) {
+      alert('모든 항목에 별점을 남겨주세요.');
+      return;
+    }
+
+    const reviewRequest: ReviewRequest = {
+      starCountForRequest: ratings[0],
+      starCountForService: ratings[1],
+      starCountForSatisfaction: ratings[2],
+      content: reviewContent,
+    };
+    postReview(reviewRequest, {
+      onSuccess: () => {
+        navigate('/guard/mypage');
+      },
+    });
   };
 
   return (
     <Flex w='100%' flexDir='column' alignItems='center'>
       <Box display='flex' flexDir='column' w='100%' maxW='18rem' mt={4}>
         <Notice
-          title='시니또에게 평가를 남겨주세요!'
-          contents='서비스에 만족하셨다면 시니또에게 긍적적인 평가를 남겨주세요!'
+          title='서비스에 대한 평가를 남겨주세요!'
+          contents='서비스에 만족하셨다면 긍적적인 평가를 남겨주세요!'
           noticeType='리뷰하기'
         />
-      </Box>
-      <Box display='flex' flexDir='column' w='100%' maxW='18rem' mb={4} mt={4}>
-        <TitleText>시니또 정보</TitleText>
-        <Text fontSize='18px'>김춘식 / 22세 / 대학생</Text>
       </Box>
       <Box display='flex' flexDir='column' w='100%' maxW='18rem'>
         <TitleText>평가하기</TitleText>
@@ -50,35 +66,24 @@ export const SinittoReviewPage = () => {
                     src={starIcon}
                     alt='star-icon'
                     style={{
-                      opacity: starIndex < ratings[questionIndex] ? 1 : 0.3, // 설정된 별점보다 낮은 별들은 채우기
+                      opacity: starIndex < ratings[questionIndex] ? 1 : 0.3,
                     }}
                   />
                 ))}
               </Box>
             </Box>
           ))}
-          <TitleText>봉사자가 마음에 드나요?</TitleText>
-          <Box display='flex' justifyContent='space-between' gap={1} mt={1}>
-            <EvalButton
-              isGood={isGood === true}
-              onClick={() => handleEvalButtonClick(true)}
-            >
-              최고에요
-            </EvalButton>
-            <EvalButton
-              isGood={isGood === false}
-              onClick={() => handleEvalButtonClick(false)}
-            >
-              별로에요
-            </EvalButton>
-          </Box>
         </ReviewBox>
       </Box>
       <Box display='flex' flexDir='column' w='100%' maxW='18rem' mt={4} mb={4}>
         <TitleText>전체 평가 내용 (선택)</TitleText>
-        <ReviewTextBox />
+        <ReviewTextBox
+          value={reviewContent}
+          onChange={(e) => setReviewContent(e.target.value)}
+          placeholder='평가 내용을 입력해주세요'
+        />
       </Box>
-      <BasicButton width='18rem' themeType='default'>
+      <BasicButton width='18rem' themeType='default' onClick={handleSubmit}>
         제출하기
       </BasicButton>
     </Flex>
@@ -118,20 +123,4 @@ const Star = styled(Image)`
   cursor: pointer;
   margin-right: 4px;
   transition: opacity 0.2s;
-`;
-
-const EvalButton = styled.button<{ isGood: boolean }>`
-  background-color: ${({ isGood }) =>
-    isGood ? 'var(--color-primary)' : '#cfcfcf'};
-  color: ${({ isGood }) => (isGood ? 'var(--color-white)' : 'black')};
-  width: 4rem;
-  height: 35px;
-  font-size: 16px;
-  border: 1px solid var(--color-white-gray);
-  border-radius: 10px;
-
-  &:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
 `;

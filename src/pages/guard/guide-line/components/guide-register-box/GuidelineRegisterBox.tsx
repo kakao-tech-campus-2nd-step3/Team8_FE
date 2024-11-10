@@ -16,6 +16,7 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<GuidelineValues>();
 
   const { mutate: postGuideline } = useAddGuideline(refetch);
@@ -28,7 +29,9 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
       content: data.content,
     };
     postGuideline(requestGuidelineData);
+    reset();
   };
+
   return (
     <RegisterBox as='form' onSubmit={handleSubmit(onSubmit)}>
       <InputBox>
@@ -39,17 +42,37 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
           error={errors.title?.message}
           registerProps={register('title', {
             required: '제목을 입력해주세요.',
+            maxLength: {
+              value: 20,
+              message: '제목은 20자 이하로 입력해주세요.',
+            },
+            validate: {
+              notEmpty: (value) =>
+                value.trim().length > 0 || '제목은 필수로 작성해야합니다.',
+            },
           })}
         />
       </InputBox>
       <InputBox>
         <GuidelineFormField
           label='가이드라인 내용'
-          placeholder='가이드라인 내용을 입력해주세요.'
+          placeholder={
+            guidelineType === 'TAXI'
+              ? '내용은 구체적으로 명시해주세요. (예: 목적지, 출발지 등)'
+              : '내용은 구체적으로 명시해주세요. (예: 음식 맵기 정도, 양, 가격 등)'
+          }
           type='textarea'
           error={errors.content?.message}
           registerProps={register('content', {
             required: '내용을 입력해주세요.',
+            maxLength: {
+              value: 150,
+              message: '내용은 150자 이하로 입력해주세요.',
+            },
+            validate: {
+              notEmpty: (value) =>
+                value.trim().length > 0 || '내용은 필수로 작성해야합니다',
+            },
           })}
         />
       </InputBox>

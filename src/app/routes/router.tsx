@@ -23,6 +23,7 @@ import {
   SinittoMainPage,
   DummyRedirectPage,
   SinittoServiceHistoryPage,
+  GuardReportPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
 
@@ -78,22 +79,60 @@ export const router = createBrowserRouter([
         path: RouterPath.MYPAGE,
         children: [
           {
-            path: '',
-            element: <Layout title='마이페이지' />,
             children: [
               {
-                index: true,
-                element: <GuardMyPage />,
+                element: <Layout title='마이페이지' />,
+                children: [
+                  {
+                    index: true,
+                    element: <GuardMyPage />,
+                  },
+                ],
+              },
+              {
+                element: <Layout title='내 시니어 관리' />,
+                children: [
+                  {
+                    path: RouterPath.SENIOR_REGISTER,
+                    element: <SeniorRegisterPage />,
+                  },
+                ],
               },
             ],
           },
           {
             path: RouterPath.SERVICE_HISTORY,
-            element: <Layout title='서비스 이용내역' />,
             children: [
               {
-                path: '',
-                element: <ServiceHistoryPage />,
+                children: [
+                  {
+                    element: <Layout title='서비스 이용내역' />,
+                    children: [
+                      {
+                        index: true,
+                        element: <ServiceHistoryPage />,
+                      },
+                    ],
+                  },
+                  {
+                    path: RouterPath.GUARD_HELLO_CALL_REPORT,
+                    children: [
+                      {
+                        element: <Layout title='보고서 확인 및 시니또 평가' />,
+                        children: [
+                          {
+                            index: true,
+                            element: <GuardReportPage />,
+                          },
+                          {
+                            path: RouterPath.SINITTO_REVIEW,
+                            element: <SinittoReviewPage />,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -126,31 +165,6 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <HelloCallApplyPage />,
-          },
-        ],
-      },
-      {
-        path: RouterPath.SENIOR_REGISTER,
-        element: <Layout title='시니어 등록하기' />,
-        children: [
-          {
-            index: true,
-            element: <SeniorRegisterPage />,
-          },
-        ],
-      },
-      {
-        path: RouterPath.CALL_BACK_LIST,
-        children: [
-          {
-            path: RouterPath.SINITTO_REVIEW,
-            element: <Layout title='시니또 평가하기' />,
-            children: [
-              {
-                index: true,
-                element: <SinittoReviewPage />,
-              },
-            ],
           },
         ],
       },
@@ -243,7 +257,6 @@ export const router = createBrowserRouter([
             element: <HelloCallServicePage />,
           },
           {
-            // TODO: 이 페이지를 들어갈 수 있는 수단이 없음.
             path: RouterPath.HELLO_CALL_REPORT,
             element: <HelloCallReportPage />,
           },
