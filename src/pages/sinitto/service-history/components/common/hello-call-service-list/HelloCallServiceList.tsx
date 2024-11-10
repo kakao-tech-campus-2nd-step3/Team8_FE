@@ -37,9 +37,9 @@ export const HelloCallServiceList = ({
     }
   };
 
-  const goToReport = (helloCallId: number) => {
+  const goToDetail = (helloCallId: number) => {
     localStorage.setItem('helloCallId', helloCallId.toString());
-    navigate(`/sinitto/hello-call/report/${helloCallId}`);
+    navigate(`/sinitto/hello-call/${helloCallId}/detail`);
   };
 
   return (
@@ -83,9 +83,9 @@ export const HelloCallServiceList = ({
                 w='full'
                 color='var(--color-white)'
                 backgroundColor='#B28BFF'
-                onClick={() => goToReport(helloCallId)}
+                onClick={() => goToDetail(helloCallId)}
               >
-                보고서 작성
+                상세보기
               </Button>
             </Flex>
           </ExpandedContent>

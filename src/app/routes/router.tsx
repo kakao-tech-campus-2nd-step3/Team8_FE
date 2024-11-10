@@ -23,6 +23,7 @@ import {
   SinittoMainPage,
   DummyRedirectPage,
   SinittoServiceHistoryPage,
+  HelloCallDetailPage,
   GuardReportPage,
 } from '@/pages';
 import { Layout } from '@/shared/components';
@@ -259,6 +260,10 @@ export const router = createBrowserRouter([
           {
             path: RouterPath.HELLO_CALL_REPORT,
             element: <HelloCallReportPage />,
+          },
+          {
+            path: RouterPath.HELLO_CALL_DETAIL,
+            element: <HelloCallDetailPage />,
           },
         ],
       },

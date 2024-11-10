@@ -5,8 +5,7 @@ import { usePostWriteReport, WriteReportRequest } from '../../api';
 import IconCalendar from '../../assets/calendar.svg';
 import IconClock from '../../assets/clock.svg';
 import IconFile from '../../assets/file.svg';
-import { REPORT_DATA } from '../../test';
-import { ServiceTime } from '../../types';
+import { useGetServiceDetail, useServiceDate } from '@/pages';
 import { Box, Button, Divider, Image, Text, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -14,16 +13,23 @@ const ReportDetail = () => {
   const [reportContent, setReportContent] = useState('');
 
   const { mutate: postWriteReport } = usePostWriteReport();
-
   const navigate = useNavigate();
 
   const helloCallId = localStorage.getItem('helloCallId');
 
+  const { data: getServiceDetail } = useGetServiceDetail(Number(helloCallId));
+
+  console.log(getServiceDetail);
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReportContent(e.target.value);
   };
 
   const handlerSubmit = (helloCallId: number) => {
+    if (!reportContent.trim()) {
+      alert('안부전화 내용을 간략하게 기록해주세요!');
+      return;
+    }
+
     const requestPayload: WriteReportRequest = {
       helloCallId,
       report: reportContent,
@@ -31,10 +37,14 @@ const ReportDetail = () => {
     postWriteReport(requestPayload, {
       onSuccess: () => {
         localStorage.removeItem('helloCallId');
-        navigate(-1);
+
+        navigate(`/sinitto/service-history`);
       },
     });
   };
+
+  const startDate = useServiceDate(getServiceDetail?.startDate);
+  const endDate = useServiceDate(getServiceDetail?.endDate);
 
   return (
     <>
@@ -68,7 +78,9 @@ const ReportDetail = () => {
             </Text>
           </TitleBox>
           <Box ml={8}>
-            <Text>{REPORT_DATA.servicePeriod}</Text>
+            <Text>
+              {startDate} ~ {endDate}
+            </Text>
           </Box>
         </InfoBox>
         <InfoBox>
@@ -78,7 +90,7 @@ const ReportDetail = () => {
               서비스 수행 시간대
             </Text>
           </TitleBox>
-          {REPORT_DATA.serviceTimes.map((time: ServiceTime, index: number) => (
+          {getServiceDetail?.timeSlots?.map((time, index) => (
             <Box
               key={index}
               display='flex'
@@ -87,14 +99,18 @@ const ReportDetail = () => {
               textAlign='center'
               alignItems='center'
             >
-              <Text>{time.day}</Text>
-              <Text>{time.time}</Text>
+              <Text>{time.dayName}요일</Text>
+              <Text>
+                {String(time.startTime)} ~ {String(time.endTime)}
+              </Text>
               <Box
                 backgroundColor='var(--color-primary)'
                 px={1}
                 borderRadius={5}
               >
-                <Text color='var(--color-white)'>{time.extraTime}</Text>
+                <Text color='var(--color-white)'>
+                  {getServiceDetail.serviceTime} 분
+                </Text>
               </Box>
             </Box>
           ))}
