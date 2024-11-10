@@ -79,12 +79,24 @@ export const router = createBrowserRouter([
         path: RouterPath.MYPAGE,
         children: [
           {
-            path: '',
-            element: <Layout title='마이페이지' />,
             children: [
               {
-                index: true,
-                element: <GuardMyPage />,
+                element: <Layout title='마이페이지' />,
+                children: [
+                  {
+                    index: true,
+                    element: <GuardMyPage />,
+                  },
+                ],
+              },
+              {
+                element: <Layout title='내 시니어 관리' />,
+                children: [
+                  {
+                    path: RouterPath.SENIOR_REGISTER,
+                    element: <SeniorRegisterPage />,
+                  },
+                ],
               },
             ],
           },
@@ -148,16 +160,7 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: RouterPath.SENIOR_REGISTER,
-        element: <Layout title='시니어 등록하기' />,
-        children: [
-          {
-            index: true,
-            element: <SeniorRegisterPage />,
-          },
-        ],
-      },
+
       {
         path: RouterPath.CALL_BACK_LIST,
         children: [

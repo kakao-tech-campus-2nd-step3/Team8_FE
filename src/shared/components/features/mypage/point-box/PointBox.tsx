@@ -154,7 +154,7 @@ const PointBox = ({ isSinitto }: Props) => {
                   포인트 충전 요청 후 꼭 카카오톡
                 </Text>
                 <Text fontSize='16px' fontWeight='bold'>
-                  &quot;나에게 보내기&quot; 메세지를 확인해주세요.
+                  나에게 보내기 메세지를 확인해주세요.
                 </Text>
               </Flex>
             </Flex>

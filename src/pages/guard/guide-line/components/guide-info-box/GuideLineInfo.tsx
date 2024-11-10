@@ -129,12 +129,12 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
               <Image
                 src={editIcon}
                 onClick={() => setIsEditing(true)}
-                w={4}
-                h={4}
+                w={6}
+                h={6}
               />
-              <Image src={deleteIcon} onClick={deleteGuideline} w={4} h={4} />
+              <Image src={deleteIcon} onClick={deleteGuideline} w={6} h={6} />
               <ImageWrapper isMore={isMore}>
-                <Image src={arrowIcon} onClick={toggleContent} w={4} h={4} />
+                <Image src={arrowIcon} onClick={toggleContent} w={6} h={6} />
               </ImageWrapper>
             </Box>
           </Box>

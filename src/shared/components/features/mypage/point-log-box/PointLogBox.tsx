@@ -177,7 +177,7 @@ const PaginationButton = styled.button`
 `;
 
 const DetailText = styled(Box)`
-  width: 50%;
+  width: 55%;
   display: flex;
   align-items: center;
   font-size: 16px;
