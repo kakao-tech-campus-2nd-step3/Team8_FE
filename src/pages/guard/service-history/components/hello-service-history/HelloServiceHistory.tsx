@@ -39,7 +39,11 @@ const HelloServiceHistory = ({
         </Text>
         <ServiceStatus status={status} />
       </HistoryInfo>
-      {status === 'COMPLETE' ? null : (
+      {status === 'COMPLETE' ? (
+        <ReviewButton onClick={() => navigate(RouterPath.SINITTO_REVIEW)}>
+          리뷰 작성하기
+        </ReviewButton>
+      ) : (
         <DayContainer>
           {DAYS.map((day) => (
             <Day
@@ -60,11 +64,8 @@ const HelloServiceHistory = ({
             <ReportButton
               onClick={() => navigate(`report/${historyData.helloCallId}`)}
             >
-              보고서 보기
+              보고서 보기 및 완료처리
             </ReportButton>
-            <ReviewButton onClick={() => navigate(RouterPath.SINITTO_REVIEW)}>
-              리뷰 작성하기
-            </ReviewButton>
           </>
         ) : null}
       </InfoEditContainer>
@@ -143,6 +144,7 @@ const ReviewButton = styled.button`
   border-radius: 5px;
   font-size: 1rem;
   font-weight: bold;
+  margin-top: 1rem;
 `;
 
 const ReportButton = styled.button`
