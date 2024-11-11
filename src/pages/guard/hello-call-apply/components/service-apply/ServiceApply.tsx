@@ -9,6 +9,7 @@ type Props = {
   timeSlotsArray: TimeSlots[];
   price: number | null;
   selectedSeniorId: string | null;
+  requirement: string;
 };
 
 export const ServiceApply = ({
@@ -18,6 +19,7 @@ export const ServiceApply = ({
   timeSlotsArray,
   price,
   selectedSeniorId,
+  requirement,
 }: Props) => {
   const { mutate: postCostHelloCall } = usePostApplyHelloCall();
 
@@ -29,7 +31,7 @@ export const ServiceApply = ({
       timeSlots: timeSlotsArray,
       price: price || 0,
       serviceTime,
-      requirement: '테스트',
+      requirement,
     };
 
     postCostHelloCall(requestPayload);

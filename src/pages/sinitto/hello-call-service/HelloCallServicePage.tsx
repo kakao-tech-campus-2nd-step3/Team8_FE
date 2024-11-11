@@ -1,29 +1,14 @@
-import { useParams } from 'react-router-dom';
-
-import { useGetServiceDetail, usePutAcceptHelloCall } from './api';
 import { ServiceDetail } from './components';
 import { SERVICE_NOTICE } from './data';
-import { useServiceDate } from './hooks';
+import { useHelloCallService } from './hooks';
 import TitleImg from '@/pages/assets/shared/hello-call/title-icon.png';
 import { Notice } from '@/shared/components';
 import { Box, Button, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const HelloCallServicePage = () => {
-  const { helloCallId } = useParams();
-
-  const { data } = useGetServiceDetail(Number(helloCallId));
-
-  const { mutate: acceptHelloCall } = usePutAcceptHelloCall(
-    Number(helloCallId)
-  );
-
-  const startDate = useServiceDate(data?.startDate);
-  const endDate = useServiceDate(data?.endDate);
-
-  const handleAcceptService = () => {
-    acceptHelloCall();
-  };
+  const { serviceData, startDate, endDate, handleAcceptService } =
+    useHelloCallService();
 
   return (
     <HelloCallServicePageLayout>
@@ -39,9 +24,9 @@ const HelloCallServicePage = () => {
       <ServiceDetail
         startDate={startDate}
         endDate={endDate}
-        timeSlots={data?.timeSlots}
-        serviceTime={data?.serviceTime}
-        requirement={data?.requirement}
+        timeSlots={serviceData?.timeSlots}
+        serviceTime={serviceData?.serviceTime}
+        requirement={serviceData?.requirement}
       />
       <Box display='flex' flexDir='column' gap={2}>
         <Notice
@@ -51,7 +36,7 @@ const HelloCallServicePage = () => {
         />
       </Box>
       <AcceptButton onClick={handleAcceptService}>
-        서비스 수락하기 ({data?.price.toLocaleString()}P)
+        서비스 수락하기 ({serviceData?.price.toLocaleString()}P)
       </AcceptButton>
     </HelloCallServicePageLayout>
   );
