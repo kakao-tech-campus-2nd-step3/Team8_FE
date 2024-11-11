@@ -3,7 +3,7 @@ import {
   useEditSeniorInfo,
   useSeniorInfo,
 } from '@/pages/guard';
-import { formatPhoneNumber } from '@/shared';
+import { BasicButton, formatPhoneNumber } from '@/shared';
 import { deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -46,42 +46,24 @@ const SeniorInfo = ({
       justifyContent='center'
     >
       {isEditing ? (
-        <Box display='flex' flexDir='row' w='100%' maxW='300px'>
-          <Box w='80%'>
+        <Flex flexDir='column' w='100%' gap='var(--space-xs)'>
+          <Flex w='full' gap='var(--space-xxs)'>
             <Input
-              fontSize='0.9rem'
-              fontWeight={700}
-              mb={2}
               value={seniorName}
               onChange={(e) => setSeniorName(e.target.value)}
               placeholder='이름을 입력하세요'
-              size='sm'
-              bg='var(--color-white)'
-              border='1px solid var(--color-white)'
+              size='md'
+              border='1px solid var(--color-white-gray)'
               borderRadius='10px'
+              height='30px'
             />
-            <Input
-              value={seniorPhoneNumber}
-              onChange={(e) => setSeniorPhoneNumber(e.target.value)}
-              placeholder='010-0000-0000'
-              bg='var(--color-white)'
-              border='1px solid var(--color-white)'
-              borderRadius='10px'
-              size='sm'
-            />
-          </Box>
-          <Box
-            w='20%'
-            display='flex'
-            flexDir='column'
-            justifyContent='space-between'
-          >
-            <Box
-              h='45%'
+            <BasicButton height='30px' width='80px' onClick={editSenior}>
+              저장
+            </BasicButton>
+            {/* <Box
               display='flex'
               justifyContent='center'
               alignItems='center'
-              ml={1}
               border='1px solid var(--color-primary)'
               borderRadius='5px'
               bg='var(--color-primary)'
@@ -92,8 +74,28 @@ const SeniorInfo = ({
               color='var(--color-white)'
             >
               저장
-            </Box>
-            <Box
+            </Box> */}
+          </Flex>
+
+          <Flex w='full' gap='var(--space-xxs)'>
+            <Input
+              value={seniorPhoneNumber}
+              onChange={(e) => setSeniorPhoneNumber(e.target.value)}
+              placeholder='010-0000-0000'
+              size='md'
+              border='1px solid var(--color-white-gray)'
+              borderRadius='10px'
+              height='30px'
+            />
+            <BasicButton
+              height='30px'
+              width='80px'
+              themeType='gray'
+              onClick={() => setIsEditing(false)}
+            >
+              취소
+            </BasicButton>
+            {/* <Box
               h='45%'
               display='flex'
               justifyContent='center'
@@ -109,36 +111,41 @@ const SeniorInfo = ({
               color='var(--color-primary)'
             >
               취소
-            </Box>
-          </Box>
-        </Box>
+            </Box> */}
+          </Flex>
+        </Flex>
       ) : (
-        <Box display='flex' flexDir='column' w='100%' maxW='300px'>
-          <Box display='flex' w='100%' justifyContent='space-between'>
-            <Text fontSize='0.9rem' fontWeight={700} mb={2}>
-              {senior.seniorName}
-            </Text>
+        <Box display='flex' flexDir='column' w='100%' gap='var(--space-xs)'>
+          <InfoBox justifyContent='space-between'>
+            <Flex>
+              <Text fontSize='var(--font-size-lg)' fontWeight={700}>
+                {senior.seniorName}
+              </Text>
+              <Text mt='4px' ml='4px'>
+                시니어
+              </Text>
+            </Flex>
             <Box display='flex'>
               <Image
                 src={editIcon}
-                w={6}
-                h={6}
+                h='30px'
                 cursor='pointer'
                 onClick={() => setIsEditing(true)}
+                mx='var(--space-xxs)'
               />
               <Image
                 src={deleteIcon}
-                w={6}
-                h={6}
-                ml={1}
+                h='30px'
                 cursor='pointer'
                 onClick={deleteSenior}
+                mx='var(--space-xxs)'
               />
             </Box>
-          </Box>
-          <InfoBox mb={1}>
-            <InfoText>전화번호</InfoText>
-            <InfoText>{formatPhoneNumber(senior.seniorPhoneNumber)}</InfoText>
+          </InfoBox>
+          <InfoBox>
+            <Text fontSize='var(--font-size-lg)'>
+              {formatPhoneNumber(senior.seniorPhoneNumber)}
+            </Text>
           </InfoBox>
         </Box>
       )}
@@ -148,27 +155,18 @@ const SeniorInfo = ({
 
 const SeniorInfoContainer = styled(Flex)`
   width: 100%;
-  max-width: 370px;
-  height: 5rem;
-  min-height: 5rem;
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-secondary);
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin: 0.5rem 0;
-`;
-
-const InfoText = styled(Text)`
-  font-size: 0.8rem;
-  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-white-gray);
+  border-radius: 5px;
+  padding: var(--space-md);
 `;
 
 const InfoBox = styled(Box)`
+  height: 30px;
   width: 100%;
-  max-width: 350px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: var(--space-xs);
 `;
 
 export default SeniorInfo;
