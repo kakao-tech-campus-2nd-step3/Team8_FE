@@ -10,6 +10,7 @@ import {
 import { ServiceApply } from './components/service-apply/ServiceApply';
 import { useHelloCallState } from './hooks';
 import { PageLayout } from '@/shared';
+import { Divider } from '@chakra-ui/react';
 
 export type TimeSlots = {
   selectedTime?: number | null;
@@ -36,7 +37,10 @@ export const HelloCallApplyPage = () => {
   return (
     <PageLayout>
       <NoticeArea />
+      <Divider />
       <SelectSenior setSelectedSeniorId={setSelectedSeniorId} />
+      <Divider />
+
       <ServiceUsingTime
         setTimeSlotsArray={setTimeSlotsArray}
         setServiceTime={setServiceTime}
@@ -54,6 +58,8 @@ export const HelloCallApplyPage = () => {
         serviceTime={serviceTime}
         setPrice={setPrice}
       />
+      <Divider />
+
       <TellToSinitto message={message} setMessage={setMessage} />
       <ServiceApply
         startDate={startDate}

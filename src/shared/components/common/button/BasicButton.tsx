@@ -4,6 +4,7 @@ type Props = {
   themeType?: 'default' | 'outline' | 'gray';
   width?: string;
   height?: string;
+  isDisabled?: boolean;
 };
 
 export const BasicButton = styled.button<Props>`
@@ -11,6 +12,9 @@ export const BasicButton = styled.button<Props>`
   height: ${(props) => (props.height ? props.height : '50px')};
   border-radius: 10px;
   outline: 0;
+  cursor: ${(props) => (props.isDisabled ? 'not-allowed' : 'pointer')};
+  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+  pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 
   background-color: ${(props) =>
     props.themeType === 'outline'
@@ -24,7 +28,9 @@ export const BasicButton = styled.button<Props>`
       : 'var(--color-white)'};
   box-shadow: inset 0 0 0 2px
     ${(props) =>
-      props.themeType === 'gray' ? 'var(#848484)' : 'var(--color-primary)'};
+      props.themeType === 'gray'
+        ? 'var(--color-gray-dark)'
+        : 'var(--color-primary)'};
 
   font-size: var(--font-size-md);
   font-weight: 300;
@@ -32,8 +38,11 @@ export const BasicButton = styled.button<Props>`
   transition-property: background-color, color;
 
   &:hover {
-    background-color: #e3e8ef;
-    color: var(--color-white);
-    box-shadow: inset 0 0 0 2px #e3e8ef;
+    background-color: ${(props) =>
+      props.isDisabled ? 'var(--color-gray)' : '#e3e8ef'};
+    color: ${(props) =>
+      props.isDisabled ? 'var(--color-light-gray)' : 'var(--color-white)'};
+    box-shadow: ${(props) =>
+      props.isDisabled ? 'none' : 'inset 0 0 0 2px #e3e8ef'};
   }
 `;

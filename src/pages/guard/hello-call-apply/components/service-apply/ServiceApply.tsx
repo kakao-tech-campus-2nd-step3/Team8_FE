@@ -1,6 +1,6 @@
 import { ApplyHelloCallRequest, usePostApplyHelloCall } from '../../api';
 import { TimeSlots } from '@/pages';
-import { Button } from '@chakra-ui/react';
+import { BasicButton } from '@/shared';
 
 type Props = {
   serviceTime: number;
@@ -36,14 +36,8 @@ export const ServiceApply = ({
   };
 
   return (
-    <Button
-      w='90%'
-      mt={5}
-      backgroundColor='var(--color-primary)'
-      color='var(--color-white)'
-      onClick={handleServiceApply}
-    >
+    <BasicButton onClick={handleServiceApply}>
       {price} point로 신청하기
-    </Button>
+    </BasicButton>
   );
 };

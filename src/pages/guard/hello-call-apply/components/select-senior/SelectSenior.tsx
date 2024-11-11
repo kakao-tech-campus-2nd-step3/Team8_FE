@@ -43,8 +43,7 @@ const ContentsBox = styled(Box)`
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
+  gap: var(--space-xs);
 `;
 
 const TitleText = styled(Text)`
