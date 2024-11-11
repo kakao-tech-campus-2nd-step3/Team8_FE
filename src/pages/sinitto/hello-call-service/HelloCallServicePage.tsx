@@ -43,13 +43,11 @@ const HelloCallServicePage = () => {
         serviceTime={data?.serviceTime}
         requirement={data?.requirement}
       />
-      <Box display='flex' flexDir='column' gap='var(--space-sm)'>
-        <Notice
-          title={SERVICE_NOTICE.service_title}
-          contents={SERVICE_NOTICE.service_contents}
-          noticeType='안부전화'
-        />
-      </Box>
+      <Notice
+        title={SERVICE_NOTICE.service_title}
+        contents={SERVICE_NOTICE.service_contents}
+        noticeType='안부전화'
+      />
       <BasicButton onClick={handleAcceptService}>
         서비스 수락하기 ({data?.price.toLocaleString()}P)
       </BasicButton>

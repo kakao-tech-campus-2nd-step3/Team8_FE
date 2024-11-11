@@ -29,7 +29,11 @@ export const useGuidelineInfo = ({
   const [guidelineContent, setGuidelineContent] = useState(guideline.content);
 
   const toggleContent = () => {
-    setIsMore(!isMore);
+    if (isEditing) {
+      setIsMore(true);
+    } else {
+      setIsMore(!isMore);
+    }
   };
 
   const editGuideline = () => {

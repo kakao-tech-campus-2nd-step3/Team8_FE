@@ -3,7 +3,8 @@ import {
   useGuidelineInfo,
   useModifyGuideline,
 } from '@/pages/guard';
-import { arrowIcon, deleteIcon, editIcon } from '@/shared/assets';
+import { BasicButton } from '@/shared';
+import { deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input, Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -43,107 +44,98 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
   });
 
   return (
-    <GuideLineInfoContainer>
+    <GuideLineInfoContainer onClick={toggleContent}>
       {isEditing ? (
-        <Box display='flex' flexDir='row' w='100%' maxW='370px'>
-          <Box w='80%'>
+        <Box
+          display='flex'
+          flexDir='row'
+          w='100%'
+          maxW='370px'
+          gap='var(--space-xxs)'
+        >
+          <Flex w='full' flexDir='column' gap='var(--space-xs)'>
             <Input
-              fontSize='0.9rem'
-              fontWeight={700}
-              mb={2}
               value={guidelineTitle}
               onChange={(e) => setGuidelineTitle(e.target.value)}
-              placeholder='제목을 입력하세요'
-              size='sm'
-              bg='var(--color-white)'
-              border='1px solid var(--color-white)'
+              placeholder='이름을 입력하세요'
+              size='md'
+              border='1px solid var(--color-white-gray)'
               borderRadius='10px'
+              height='30px'
             />
             <Textarea
               value={guidelineContent}
               onChange={(e) => setGuidelineContent(e.target.value)}
               placeholder='내용을 입력하세요.'
-              bg='var(--color-white)'
-              border='1px solid var(--color-white)'
+              border='1px solid var(--color-white-gray)'
               borderRadius='10px'
-              size='sm'
+              size='md'
+              height='120px'
             />
-          </Box>
-          <Box
-            w='20%'
-            display='flex'
-            flexDir='column'
-            justifyContent='space-between'
-          >
-            <Box
-              h='45%'
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              ml={1}
-              border='1px solid var(--color-primary)'
-              borderRadius='5px'
-              bg='var(--color-primary)'
-              onClick={editGuideline}
-              fontSize='0.9rem'
-              fontWeight={700}
-              cursor='pointer'
-              color='var(--color-white)'
-            >
+          </Flex>
+          <Flex flexDir='column' gap='var(--space-xs)'>
+            <BasicButton height='30px' width='70px' onClick={editGuideline}>
               저장
-            </Box>
-            <Box
-              h='45%'
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              ml={1}
-              border='1px solid var(--color-white)'
-              borderRadius='5px'
-              bg='var(--color-white)'
+            </BasicButton>
+            <BasicButton
+              height='30px'
+              width='70px'
+              themeType='gray'
               onClick={() => setIsEditing(false)}
-              fontSize='0.9rem'
-              fontWeight={700}
-              cursor='pointer'
-              color='var(--color-primary)'
             >
               취소
-            </Box>
-          </Box>
+            </BasicButton>
+          </Flex>
         </Box>
       ) : (
-        <>
+        <Flex flexDir='column' w='100%' gap='var(--space-xs)'>
           <Box
             display='flex'
             flexDir='row'
             w='100%'
-            maxW='370px'
             justifyContent='space-between'
-            alignItems='center'
             cursor='pointer'
           >
-            <Box fontSize='1rem' fontWeight={700} width='70%'>
-              {guideline.title}
-            </Box>
-            <Box display='flex' flexDir='row' gap={1}>
+            {isMore ? (
+              <Text fontSize='var(--font-size-md)' fontWeight={700} mt={1}>
+                {guideline.title}
+              </Text>
+            ) : (
+              <Text
+                fontSize='var(--font-size-md)'
+                whiteSpace='nowrap'
+                overflow='hidden'
+                textOverflow='ellipsis'
+                fontWeight={700}
+                mt={1}
+              >
+                {guideline.title}
+              </Text>
+            )}
+
+            <Flex align='flex-start'>
               <Image
                 src={editIcon}
+                h='30px'
+                cursor='pointer'
                 onClick={() => setIsEditing(true)}
-                w={6}
-                h={6}
+                mx='var(--space-xxs)'
               />
-              <Image src={deleteIcon} onClick={deleteGuideline} w={6} h={6} />
-              <ImageWrapper isMore={isMore}>
-                <Image src={arrowIcon} onClick={toggleContent} w={6} h={6} />
-              </ImageWrapper>
-            </Box>
+              <Image
+                src={deleteIcon}
+                h='30px'
+                cursor='pointer'
+                onClick={deleteGuideline}
+                mx='var(--space-xxs)'
+              />
+            </Flex>
           </Box>
           {isMore && (
-            <InfoBox mb={1}>
+            <InfoBox>
               <InfoText>{guideline.content}</InfoText>
             </InfoBox>
           )}
-        </>
+        </Flex>
       )}
     </GuideLineInfoContainer>
   );
@@ -152,35 +144,21 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
 export default GuideLineInfo;
 
 const GuideLineInfoContainer = styled(Flex)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
-  max-width: 370px;
-  height: auto;
-  background-color: var(--color-secondary);
-  border: 1px solid var(--color-secondary);
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-white-gray);
   border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin: 0.5rem 0;
-  padding: 1rem;
+  padding: var(--space-md);
 `;
 
 const InfoText = styled(Text)`
-  font-size: 0.8rem;
-  color: var(--color-black);
+  font-size: var(--font-size-sm);
 `;
 
 const InfoBox = styled(Box)`
   width: 100%;
-  max-width: 330px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-`;
-
-const ImageWrapper = styled.div<{ isMore: boolean }>`
-  transition: transform 0.3s ease;
-  transform: ${({ isMore }) => (isMore ? 'rotate(180deg)' : 'rotate(0deg)')};
+  gap: var(--space-xs);
 `;

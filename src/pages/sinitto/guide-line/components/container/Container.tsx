@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import { Flex, Text, Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -6,34 +9,64 @@ type Props = {
 };
 
 export const GuideLineContainer = ({ title, content }: Props) => {
+  const [isMore, setIsMore] = useState(false);
   return (
-    <Wrapper>
-      <Title>{title}</Title>
-      <Content>
-        {content.split('\\n').map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
-      </Content>
-    </Wrapper>
+    <GuideLineInfoContainer onClick={() => setIsMore(!isMore)}>
+      <Flex flexDir='column' w='100%' gap='var(--space-xs)'>
+        <Box
+          display='flex'
+          flexDir='row'
+          w='100%'
+          justifyContent='space-between'
+          cursor='pointer'
+        >
+          {isMore ? (
+            <Text fontSize='var(--font-size-md)' fontWeight={700} mt={1}>
+              {title}
+            </Text>
+          ) : (
+            <Text
+              fontSize='var(--font-size-md)'
+              whiteSpace='nowrap'
+              overflow='hidden'
+              textOverflow='ellipsis'
+              fontWeight={700}
+              mt={1}
+            >
+              {title}
+            </Text>
+          )}
+        </Box>
+        {isMore && (
+          <InfoBox>
+            <InfoText>
+              {content.split('\\n').map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </InfoText>
+          </InfoBox>
+        )}
+      </Flex>
+    </GuideLineInfoContainer>
   );
 };
 
-export const Wrapper = styled.div`
+const GuideLineInfoContainer = styled(Flex)`
   width: 100%;
-  padding: 15px 20px;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-white-gray);
   border-radius: 10px;
-  box-shadow: 0px 2px 4px 0px #00000040;
-  border: 1px solid #fafafa;
+  padding: var(--space-md);
 `;
 
-const Title = styled.h2`
-  font-size: var(--font-size-xl);
-  font-weight: 700;
+const InfoText = styled(Text)`
+  font-size: var(--font-size-sm);
 `;
 
-const Content = styled.div`
-  margin-top: var(--space-xxs);
-  font-size: var(--font-size-md);
-  white-space: pre-wrap;
-  font-weight: 350;
+const InfoBox = styled(Box)`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-xs);
 `;

@@ -57,24 +57,9 @@ const SeniorInfo = ({
               borderRadius='10px'
               height='30px'
             />
-            <BasicButton height='30px' width='80px' onClick={editSenior}>
+            <BasicButton height='30px' width='70px' onClick={editSenior}>
               저장
             </BasicButton>
-            {/* <Box
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              border='1px solid var(--color-primary)'
-              borderRadius='5px'
-              bg='var(--color-primary)'
-              onClick={editSenior}
-              fontSize='0.9rem'
-              fontWeight={700}
-              cursor='pointer'
-              color='var(--color-white)'
-            >
-              저장
-            </Box> */}
           </Flex>
 
           <Flex w='full' gap='var(--space-xxs)'>
@@ -89,29 +74,12 @@ const SeniorInfo = ({
             />
             <BasicButton
               height='30px'
-              width='80px'
+              width='70px'
               themeType='gray'
               onClick={() => setIsEditing(false)}
             >
               취소
             </BasicButton>
-            {/* <Box
-              h='45%'
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              ml={1}
-              border='1px solid var(--color-white)'
-              borderRadius='5px'
-              bg='var(--color-white)'
-              onClick={() => setIsEditing(false)}
-              fontSize='0.9rem'
-              fontWeight={700}
-              cursor='pointer'
-              color='var(--color-primary)'
-            >
-              취소
-            </Box> */}
           </Flex>
         </Flex>
       ) : (
@@ -157,7 +125,7 @@ const SeniorInfoContainer = styled(Flex)`
   width: 100%;
   background-color: var(--color-white);
   border: 2px solid var(--color-white-gray);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: var(--space-md);
 `;
 

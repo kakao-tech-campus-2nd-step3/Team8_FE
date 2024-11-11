@@ -48,13 +48,11 @@ export const HelloCallDetailPage = () => {
         serviceTime={data?.serviceTime}
         requirement={data?.requirement}
       />
-      <Box display='flex' flexDir='column' gap={2}>
-        <Notice
-          title={SERVICE_DETAIL.detail_title}
-          contents={SERVICE_DETAIL.detail_contents}
-          noticeType='안부전화'
-        />
-      </Box>
+      <Notice
+        title={SERVICE_DETAIL.detail_title}
+        contents={SERVICE_DETAIL.detail_contents}
+        noticeType='안부전화'
+      />
       <BasicButton onClick={goToReport}>서비스 완료 및 보고서 제출</BasicButton>
     </PageLayout>
   );

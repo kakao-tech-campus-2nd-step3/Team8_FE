@@ -70,25 +70,3 @@ const RegisterBox = styled(Flex)`
   padding: var(--space-md);
   gap: var(--space-sm);
 `;
-
-const StyledButton = styled.button`
-  width: 300px;
-  height: 40px;
-  background-color: #c69090;
-  font-weight: bold;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  margin-bottom: 10px;
-
-  &:hover {
-    background-color: #a67070;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-`;
