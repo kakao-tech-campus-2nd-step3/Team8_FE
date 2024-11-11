@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { useGetSeniorAllGuidelines } from './api';
 import { GuideLineInfo, GuidelineRegisterBox } from './components';
+import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 export type GuideLineDetailParams = {
   seniorId: string; // 시니어 id
@@ -28,44 +28,52 @@ export const GuideLinePage = () => {
   }
 
   return (
-    <Container>
+    <PageLayout>
       <GuidelineRegisterBox
         refetch={refetch}
         seniorId={Number(seniorId)}
         guidelineType={String(guidelineType)}
       />
-      <Flex w='100%' h='100%' flexDir='column' alignItems='center'>
+      <Flex
+        w='100%'
+        h='100%'
+        flexDir='column'
+        alignItems='center'
+        gap='var(--space-sm)'
+      >
         <Box
-          mt={2}
-          w='370px'
+          w='full'
           display='flex'
           flexDir='row'
           justifyContent='space-between'
           alignItems='center'
         >
-          <Text color='var(--color-black)' fontSize='24px' fontWeight='700'>
+          <Text
+            color='var(--color-black)'
+            fontSize='var(--font-size-xxl)'
+            fontWeight='700'
+          >
             등록한 가이드라인
           </Text>
-          <Text color='var(--color-black)' fontSize='20px' fontWeight='700'>
-            총 {guidelineData?.length}개
+          <Text
+            color='var(--color-gray)'
+            fontSize='var(--font-size-xl)'
+            fontWeight='500'
+          >
+            {guidelineData?.length}개
           </Text>
         </Box>
-        {guidelineData?.map((guideline) => (
-          <GuideLineInfo
-            key={guideline.id}
-            refetch={refetch}
-            guideline={guideline}
-            seniorId={Number(seniorId)}
-          />
-        ))}
+        <Flex w='full' flexDir='column' gap='var(--space-sm)'>
+          {guidelineData?.map((guideline) => (
+            <GuideLineInfo
+              key={guideline.id}
+              refetch={refetch}
+              guideline={guideline}
+              seniorId={Number(seniorId)}
+            />
+          ))}
+        </Flex>
       </Flex>
-    </Container>
+    </PageLayout>
   );
 };
-
-const Container = styled(Box)`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

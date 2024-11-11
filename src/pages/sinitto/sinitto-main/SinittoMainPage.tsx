@@ -1,28 +1,18 @@
 import {
   CallBackApply,
-  Header,
   HelloCallApply,
   ServiceHistoryButton,
   SinittoName,
 } from './components';
-import styled from '@emotion/styled';
+import { PageLayout } from '@/shared';
 
 export const SinittoMainPage = () => {
   return (
-    <SinittoMainPageLayout>
-      <Header />
+    <PageLayout>
       <SinittoName />
       <ServiceHistoryButton />
       <CallBackApply />
       <HelloCallApply />
-    </SinittoMainPageLayout>
+    </PageLayout>
   );
 };
-
-const SinittoMainPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-`;

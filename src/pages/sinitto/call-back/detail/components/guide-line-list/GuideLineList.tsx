@@ -1,10 +1,10 @@
 import { GUIDE_LINE_CATEGORIES } from '../../data/guide-line';
 import { GuideLineButton } from './guide-line-button';
-import styled from '@emotion/styled';
+import { Flex } from '@chakra-ui/react';
 
 export const GuideLineList = () => {
   return (
-    <Wrapper>
+    <Flex flexDir='column' width='100%' gap='var(--space-xs)'>
       {GUIDE_LINE_CATEGORIES.map((data) => (
         <GuideLineButton
           key={data.title}
@@ -13,12 +13,6 @@ export const GuideLineList = () => {
           backgroundColor={data.backgroundColor}
         />
       ))}
-    </Wrapper>
+    </Flex>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 50px;
-  margin-bottom: 30px;
-`;

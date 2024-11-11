@@ -1,20 +1,22 @@
 type Props = {
   fill: string;
   type?: 'solid';
+  width?: string;
+  height?: string;
 };
 
-export const IconArrow = ({ fill, type }: Props) => {
+export const IconArrow = ({ fill, type, height }: Props) => {
   return type === 'solid' ? (
-    <IconArrowSolid fill={fill} />
+    <IconArrowSolid fill={fill} height={height} />
   ) : (
     <IconArrowDefault fill={fill} />
   );
 };
 
-export const IconArrowDefault = ({ fill }: Props) => (
+export const IconArrowDefault = ({ fill, width, height }: Props) => (
   <svg
-    width='16'
-    height='20'
+    width={width || '16'}
+    height={height || '20'}
     viewBox='0 0 16 20'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
@@ -26,10 +28,10 @@ export const IconArrowDefault = ({ fill }: Props) => (
   </svg>
 );
 
-export const IconArrowSolid = ({ fill }: Props) => (
+export const IconArrowSolid = ({ fill, width, height }: Props) => (
   <svg
-    width='15'
-    height='15'
+    width={width || height || '15'}
+    height={height || width || '15'}
     viewBox='0 0 15 15'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

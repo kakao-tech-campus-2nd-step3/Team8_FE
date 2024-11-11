@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useGetServiceList } from './api';
 import { CallRequest } from './components';
+import { PageLayout } from '@/shared';
 import { LoadingView } from '@/shared/components';
 import { Flex, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 const HelloCallListPage = () => {
   const [isLastPageReached, setIsLastPageReached] = useState(false);
@@ -50,37 +50,30 @@ const HelloCallListPage = () => {
   if (!data) return null;
 
   return (
-    <HelloCallListLayout>
-      <Flex w='100%' justifyContent='end'>
+    <PageLayout>
+      {/* <Flex w='100%' justifyContent='end'>
         <Text>새로고침</Text>
+      </Flex> */}
+      <Flex w='100%' flexDir='column' gap='var(--space-xs)'>
+        {allContent.map((item, index) => {
+          const isLastElement = index === allContent.length - 1; // 마지막 요소인지 확인
+          return (
+            <CallRequest
+              key={item.helloCallId}
+              seniorName={item.seniorName}
+              days={item.days}
+              onClick={() => handlerNavigate(item.helloCallId)}
+              ref={isLastElement ? lastElementRef : null} // 마지막 요소에 ref 할당
+            />
+          );
+        })}
       </Flex>
-      {allContent.map((item, index) => {
-        const isLastElement = index === allContent.length - 1; // 마지막 요소인지 확인
-        return (
-          <CallRequest
-            key={item.helloCallId}
-            seniorName={item.seniorName}
-            days={item.days}
-            onClick={() => handlerNavigate(item.helloCallId)}
-            ref={isLastElement ? lastElementRef : null} // 마지막 요소에 ref 할당
-          />
-        );
-      })}
       {(!hasNextPage || isLastPageReached) && (
         <Text>더 이상 요청이 없어요 🥲</Text>
       )}
       {isLoading && hasNextPage && !isLastPageReached && <LoadingView />}
-    </HelloCallListLayout>
+    </PageLayout>
   );
 };
 
 export default HelloCallListPage;
-
-const HelloCallListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  gap: 1rem;
-  margin: 3rem 1.5rem;
-`;

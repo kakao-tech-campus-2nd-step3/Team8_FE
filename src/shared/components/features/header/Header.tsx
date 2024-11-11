@@ -50,6 +50,7 @@ const HeaderBox = styled.header`
   justify-content: center;
   align-items: center;
   background-color: var(--color-white);
+  z-index: 1;
 `;
 
 const Icon = styled(Image)`

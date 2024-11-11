@@ -24,7 +24,7 @@ type BtnProps = {
 };
 
 const TypeBtn = styled.button<BtnProps>`
-  width: 45%;
+  width: 100%;
   height: 70px;
   border-radius: 10px;
   background-color: ${(props) =>

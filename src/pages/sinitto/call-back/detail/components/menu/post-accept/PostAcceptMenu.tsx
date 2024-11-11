@@ -1,4 +1,5 @@
 import { BasicButton } from '@/shared/components';
+import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -13,32 +14,22 @@ export const PostAcceptMenu = ({
   phoneNumber,
 }: Props) => {
   return (
-    <Wrapper>
-      <BasicButton onClick={handleComplete}>도움 완료</BasicButton>
-      <Space />
-      <BasicButton onClick={handleCancle} themeType='outline'>
-        도움 포기
-      </BasicButton>
+    <Flex flexDir='column' width='100%' gap='var(--space-md)'>
+      <Flex flexDir='column' width='100%' gap='var(--space-xs)'>
+        <BasicButton onClick={handleComplete}>도움 완료</BasicButton>
+        <BasicButton onClick={handleCancle} themeType='outline'>
+          도움 포기
+        </BasicButton>
+      </Flex>
       <ContectSection>
         <Title>시니어 전화번호</Title>
         <Content>{phoneNumber}</Content>
       </ContectSection>
-    </Wrapper>
+    </Flex>
   );
 };
 
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 30px;
-`;
-
-const Space = styled.div`
-  width: 100%;
-  height: 10px;
-`;
-
 const ContectSection = styled.div`
-  margin-top: 30px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -59,5 +50,5 @@ const Title = styled.div`
 const Content = styled.p`
   font-size: var(--font-size-xxl);
   font-weight: 700;
-  margin-top: 10px;
+  margin-top: var(--space-xs);
 `;

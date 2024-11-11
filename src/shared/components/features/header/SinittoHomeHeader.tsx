@@ -6,22 +6,26 @@ import { HEADER_HEIGHT } from '@/shared';
 import { Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-export const Header = () => {
+const SinittoHomeHeader = () => {
   return (
     <Wrapper>
       <Link to={RouterPath.MYPAGE}>
-        <Image src={IconUser} alt='icon-user' />
+        <Image src={IconUser} alt='icon-user' mr='var(--space-lg)' />
       </Link>
     </Wrapper>
   );
 };
 
+export default SinittoHomeHeader;
+
 const Wrapper = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 100%;
   height: ${HEADER_HEIGHT};
   display: flex;
+  justify-content: end;
   align-items: center;
-  padding: 1.5rem 0;
-  justify-content: flex-end;
   background-color: var(--color-white);
 `;

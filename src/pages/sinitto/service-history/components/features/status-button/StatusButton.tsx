@@ -18,12 +18,11 @@ export const StatusButton = ({ status }: Props) => {
 
 const ButtonWrapper = styled.button<{ backgroundColor: string }>`
   width: 70px;
-  padding: 0 0.5rem;
+  padding: 0 var(--space-xs);
   height: 40px;
   border-radius: 5px;
   font-size: var(--font-size-md);
   font-weight: bold;
-  color: var(--color-black);
-  box-shadow: 0px 2px 2px rgba(124, 124, 124, 0.4);
   background-color: ${(props) => props.backgroundColor};
+  outline: 0;
 `;

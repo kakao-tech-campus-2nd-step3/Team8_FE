@@ -1,10 +1,10 @@
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const HelloServiceHistoryText = () => {
   return (
-    <>
-      <Box w='100%' display='flex' justifyContent='flex-end' mt='1rem'>
+    <Flex w='full' flexDir='column' gap='var(--space-xs)'>
+      <Box w='full' display='flex' justifyContent='flex-end'>
         <Text fontSize={24} fontWeight={700} textAlign='right'>
           안부전화 이용 내역
         </Text>
@@ -16,7 +16,7 @@ const HelloServiceHistoryText = () => {
           있습니다.
         </Text>
       </Box>
-    </>
+    </Flex>
   );
 };
 

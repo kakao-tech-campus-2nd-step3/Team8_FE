@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const MainPage = () => {
+const OnboardPage = () => {
   const [page, setPage] = useState(0);
 
   const handleSlideChange = (swiper: SwiperType) => {
@@ -46,7 +46,7 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default OnboardPage;
 
 type PageProps = {
   page: number;

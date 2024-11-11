@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { usePostCostHelloCall } from '../../api/hooks';
 import { CostHelloCallRequest } from '../../api/types';
 import { TimeSlots, useSortDays } from '@/pages';
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { BasicButton } from '@/shared';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -57,14 +58,9 @@ export const ServiceTotal = ({
         <HighlightText>{totalServiceCount}회</HighlightText>
         <Text as='b'>서비스 이용</Text>
       </Flex>
-      <Button
-        onClick={handleButtonClick}
-        backgroundColor={isButtonDisabled ? '#e2e8e0' : 'var(--color-primary)'}
-        color={isButtonDisabled ? '#a0aec0' : 'var(--color-white)'}
-        isDisabled={isButtonDisabled}
-      >
+      <BasicButton onClick={handleButtonClick} isDisabled={isButtonDisabled}>
         포인트 계산하기
-      </Button>
+      </BasicButton>
     </ContentsBox>
   );
 };
@@ -74,7 +70,6 @@ const ContentsBox = styled(Box)`
   width: 100%;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.2rem;
 `;
 
 const TitleText = styled(Text)`

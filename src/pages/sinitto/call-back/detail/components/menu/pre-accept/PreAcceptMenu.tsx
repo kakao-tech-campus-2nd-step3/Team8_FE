@@ -1,5 +1,5 @@
 import { BasicButton } from '@/shared/components';
-import styled from '@emotion/styled';
+import { Flex } from '@chakra-ui/react';
 
 type Props = {
   handleClick: () => void;
@@ -7,13 +7,8 @@ type Props = {
 
 export const PreAcceptMenu = ({ handleClick }: Props) => {
   return (
-    <Wrapper>
+    <Flex width='100%'>
       <BasicButton onClick={handleClick}>전화걸기 및 수락하기</BasicButton>
-    </Wrapper>
+    </Flex>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 30px;
-`;

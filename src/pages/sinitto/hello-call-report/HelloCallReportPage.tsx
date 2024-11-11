@@ -1,20 +1,16 @@
 import { ReportDetail } from './components';
-import styled from '@emotion/styled';
+import { PageLayout, Notice } from '@/shared';
 
 const HelloCallReportPage = () => {
   return (
-    <HelloCallReportPageLayout>
+    <PageLayout>
+      <Notice
+        noticeType='보고서 작성'
+        contents='실제로 이야기했던 내용을 바탕으로 작성해주세요.'
+      />
       <ReportDetail />
-    </HelloCallReportPageLayout>
+    </PageLayout>
   );
 };
 
 export default HelloCallReportPage;
-
-const HelloCallReportPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 1rem;
-  margin: 1rem 1.5rem;
-`;

@@ -1,15 +1,16 @@
 import { Outlet } from 'react-router-dom';
 
-import { Header } from '@/shared/components';
+import { Header, SinittoHomeHeader } from '@/shared';
 
 type LayoutProps = {
-  title: string;
+  title?: string;
+  SinittoHome?: boolean;
 };
 
-const Layout = ({ title }: LayoutProps) => {
+const Layout = ({ title, SinittoHome }: LayoutProps) => {
   return (
     <>
-      <Header title={title} />
+      {SinittoHome ? <SinittoHomeHeader /> : <Header title={title || ''} />}
       <Outlet />
     </>
   );

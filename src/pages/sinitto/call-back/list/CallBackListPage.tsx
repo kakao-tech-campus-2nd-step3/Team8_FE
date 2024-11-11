@@ -2,8 +2,8 @@ import { useRef, useCallback } from 'react';
 
 import { useGetCallbacks } from './api/hooks';
 import { RequestRow } from './components';
-import { Spinner } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { PageLayout } from '@/shared';
+import { Spinner, Flex, Text } from '@chakra-ui/react';
 
 export const CallBackListPage = () => {
   const { data, isLoading, isError, fetchNextPage, hasNextPage } =
@@ -27,14 +27,18 @@ export const CallBackListPage = () => {
     [isLoading, fetchNextPage, hasNextPage]
   );
 
+  if (isLoading && !data)
+    return (
+      <PageLayout>
+        <Spinner size='xl' />
+      </PageLayout>
+    );
+
   return (
-    <CallBackListLayout>
-      {isLoading && <Spinner size='xl' />}
-      {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
-      {data &&
-        (data.pages.length === 0 ? (
-          <p>콜백 요청이 없습니다.</p>
-        ) : (
+    <PageLayout>
+      <Flex flexDirection='column' width='100%' gap='var(--space-xs)'>
+        {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
+        {data &&
           data?.pages.map((page, pageIndex) =>
             page.content.map((callback, index) => {
               const isLastElement =
@@ -50,18 +54,11 @@ export const CallBackListPage = () => {
                 />
               );
             })
-          )
-        ))}
-    </CallBackListLayout>
+          )}
+      </Flex>
+      {!hasNextPage && <Text>더 이상 요청이 없어요 🥲</Text>}
+    </PageLayout>
   );
 };
 
 export default CallBackListPage;
-
-const CallBackListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 45px;
-`;

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { ReviewRequest, usePostReview } from './api';
 import starIcon from './asset/star-icon.svg';
-import { BasicButton, Notice } from '@/shared/components';
-import { Text, Flex, Box, Textarea, Image } from '@chakra-ui/react';
+import { BasicButton, Notice, PageLayout } from '@/shared';
+import { Text, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoReviewPage = () => {
@@ -40,7 +40,7 @@ export const SinittoReviewPage = () => {
   };
 
   return (
-    <Flex w='100%' flexDir='column' alignItems='center'>
+    <PageLayout>
       <Box display='flex' flexDir='column' w='100%' maxW='18rem' mt={4}>
         <Notice
           title='서비스에 대한 평가를 남겨주세요!'
@@ -86,7 +86,7 @@ export const SinittoReviewPage = () => {
       <BasicButton width='18rem' themeType='default' onClick={handleSubmit}>
         제출하기
       </BasicButton>
-    </Flex>
+    </PageLayout>
   );
 };
 

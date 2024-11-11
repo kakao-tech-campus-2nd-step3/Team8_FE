@@ -45,23 +45,22 @@ export const Tos = ({ userType, register, errors }: Props) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: var(--space-lg);
 `;
 
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 700;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-sm);
 `;
 
 const TosContainer = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   height: 300px;
-  padding: 10px;
+  padding: var(--space-sm);
   overflow-y: scroll;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-sm);
 
   font-size: 16px;
   font-weight: 400;

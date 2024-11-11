@@ -3,62 +3,50 @@ import { useState } from 'react';
 import { GuideLineList } from './components/guideline-list';
 import { Header } from './components/header/Header';
 import { HelloCallApply } from './components/hello-call-apply';
-import { Box, Text } from '@chakra-ui/react';
+import { PageLayout, HEADER_HEIGHT } from '@/shared';
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const GuardMainPage = () => {
   const [currentSenior, setCurrentSenior] = useState<number | null>(null);
 
   return (
-    <GuardMainPageLayout>
-      <Header
-        currentSenior={currentSenior}
-        setCurrentSenior={setCurrentSenior}
-      />
-      <CallbackNumber>
-        <Box
-          w='100%'
-          display='flex'
-          justifyContent='center'
-          padding='0.5rem'
-          fontSize='20px'
-          bg='var(--color-secondary)'
-          color='var(--color-black)'
-          fontWeight='bold'
-          borderRadius='20px'
-          marginBottom='10px'
-        >
-          시니어가 사용할 서비스 번호
-        </Box>
-        <Text fontSize='22px' fontWeight='bold'>
-          006 1 256 521 5847
-        </Text>
-      </CallbackNumber>
-      <GuideLineList seniorId={currentSenior} />
-      <HelloCallApply />
-    </GuardMainPageLayout>
+    <Box pt={HEADER_HEIGHT}>
+      <PageLayout>
+        <Header
+          currentSenior={currentSenior}
+          setCurrentSenior={setCurrentSenior}
+        />
+        <ContectSection>
+          <Title>시니어가 사용할 서비스 번호</Title>
+          <Content>006 1 256 521 5847</Content>
+        </ContectSection>
+        <GuideLineList seniorId={currentSenior} />
+        <HelloCallApply />
+      </PageLayout>
+    </Box>
   );
 };
 
-const GuardMainPageLayout = styled.div`
+const ContectSection = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  padding: 0 2rem;
 `;
 
-const CallbackNumber = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-radius: 20px;
-  max-width: 338px;
-  padding: 0.5rem;
-  background-color: var(--color-primary);
-  color: white;
-  font-weight: bold;
-  margin-top: 1rem;
+const Title = styled.div`
+  padding: 5px var(--space-md);
+  border-radius: 5px;
+  background-color: #f6e4e4;
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: #c69090;
+  text-align: center;
+`;
+
+const Content = styled.p`
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  margin-top: var(--space-xs);
 `;

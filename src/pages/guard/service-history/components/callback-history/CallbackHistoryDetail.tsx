@@ -4,7 +4,8 @@ import {
   useCompleteCallback,
 } from '@/pages/guard';
 import { formatPostTime } from '@/shared/utils/dateUtils';
-import { Box, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
 type CallbackHistoryDetailProps = {
   historyData: CallbackHistory;
@@ -24,23 +25,33 @@ const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
   };
 
   return (
-    <Box
-      display='flex'
-      w='100%'
-      gap={2}
-      justifyContent='space-between'
-      alignItems='center'
-      mb={3}
-    >
-      <Text fontSize='md' fontWeight={600} mr={1}>
+    <ItemListBox>
+      <Text
+        fontWeight='700'
+        color='var(--color-gray)'
+        w='68px'
+        mr='var(--space-xs)'
+      >
         {formatPostTime(historyData.postTime)}
       </Text>
-      <Text fontSize='md' fontWeight={600}>
-        {historyData.seniorName}
-      </Text>
+      <Flex alignItems='end' gap={1} mr='auto'>
+        <Text fontSize='var(--font-size-lg)' fontWeight='700'>
+          {historyData.seniorName}
+        </Text>
+      </Flex>
       <ServiceStatus onClick={handleButtonClick} status={historyData.status} />
-    </Box>
+    </ItemListBox>
   );
 };
 
 export default CallbackHistoryDetail;
+
+const ItemListBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: var(--color-white-gray);
+  padding: var(--space-sm);
+  border-radius: 10px;
+  align-items: center;
+`;

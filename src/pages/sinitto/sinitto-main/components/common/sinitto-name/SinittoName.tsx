@@ -5,14 +5,18 @@ export const SinittoName = () => {
   const { data, isLoading } = useGetSinittoInfo();
 
   return (
-    <Flex w='100%' alignItems='center' mt={10}>
+    <Flex w='100%' alignItems='center' mt='var(--space-md)'>
       {isLoading ? (
         <Flex w='100%' justifyContent='left'>
           <Spinner color='var(--color-primary)' size='md' />
         </Flex>
       ) : (
         <>
-          <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
+          <Text
+            color='var(--color-primary)'
+            fontSize='var(--font-size-xxl)'
+            fontWeight='700'
+          >
             {data?.name}
           </Text>
           <Text fontSize='lg' fontWeight='700'>

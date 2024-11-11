@@ -11,12 +11,17 @@ export const HelloCallApply = () => {
   const { data: helloCallList, isLoading } = useGetServiceList(2);
 
   return (
-    <Wrapper>
+    <Flex flexDirection='column' width='100%' gap='var(--space-sm)'>
       <Flex justifyContent='space-between' alignItems='center'>
         <NoticeTitle>안부전화 요청</NoticeTitle>
         <Link to={RouterPath.HELLO_CALL}>
-          <MoreButton gap={3}>
-            <Text fontWeight='700' color='var(--color-gray)'>
+          <MoreButton>
+            <Text
+              fontWeight='700'
+              color='var(--color-gray)'
+              mr='var(--space-xs)'
+              display='block'
+            >
               요청 더보기
             </Text>
             <IconArrow fill='var(--color-gray)' type='solid' />
@@ -24,8 +29,8 @@ export const HelloCallApply = () => {
         </Link>
       </Flex>
       <Flex w='100%' gap={5}>
-        <Image w={20} h={20} src={HelloCallImg} alt='call-icon' />
-        <Flex flexDirection='column'>
+        <StyledImage height='100px' src={HelloCallImg} alt='call-icon' />
+        <Flex flexDirection='column' justifyContent='center'>
           <NoticeText>어르신들의 말벗이 되어주세요!</NoticeText>
           <NoticeText>
             어르신들이 전하지 못한 진심을 듣고 보호자들에게 대신 전해주세요.
@@ -37,7 +42,7 @@ export const HelloCallApply = () => {
           <Spinner size='lg' color='var(--color-primary)' />
         </Flex>
       ) : (
-        <GridBox mt={5} mb={10}>
+        <GridBox>
           {helloCallList?.pages?.[0]?.content.map((helloCall) => (
             <ResponseBox
               key={helloCall.helloCallId}
@@ -48,18 +53,13 @@ export const HelloCallApply = () => {
           ))}
         </GridBox>
       )}
-    </Wrapper>
+    </Flex>
   );
 };
 
-const Wrapper = styled.section`
-  width: 100%;
-`;
-
 const NoticeTitle = styled(Text)`
-  font-size: 24px;
+  font-size: var(--font-size-xxl);
   font-weight: 700;
-  margin: 0.5rem 0;
   align-items: center;
 `;
 
@@ -68,19 +68,31 @@ const NoticeText = styled(Text)`
 `;
 
 const MoreButton = styled(Flex)`
-  border: solid 1px var(--color-gray);
-  border-radius: 5px;
-  padding: 3px 0.5rem;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  width: fit-content;
   height: 100%;
 `;
 
 const GridBox = styled(Box)`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  column-gap: 20px;
-  row-gap: 20px;
+  gap: var(--space-sm);
+
+  grid-template-columns: repeat(2, 1fr);
+`;
+
+const StyledImage = styled(Image)`
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
 `;

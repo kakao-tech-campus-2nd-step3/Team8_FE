@@ -4,11 +4,13 @@ import { useParams, Outlet, useNavigate } from 'react-router-dom';
 import { CallbackMenu } from './components';
 import { GuideLineList } from './components/guide-line-list';
 import { RouterPath } from '@/app/routes/path';
-import { useGetCallback } from '@/shared/api/hooks';
-import { Notice } from '@/shared/components';
-import { handleCallbackError } from '@/shared/utils';
+import {
+  Notice,
+  PageLayout,
+  useGetCallback,
+  handleCallbackError,
+} from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 export type CallBackDetailParams = {
   callBackId: string;
@@ -35,7 +37,7 @@ export const CallBackDetailPage = () => {
 
   return (
     <>
-      <Wrapper>
+      <PageLayout>
         {isCallBackLoading ? (
           <Spinner size='xl' />
         ) : (
@@ -56,16 +58,8 @@ export const CallBackDetailPage = () => {
             </>
           )
         )}
-      </Wrapper>
+      </PageLayout>
       <Outlet />
     </>
   );
 };
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 45px;
-`;

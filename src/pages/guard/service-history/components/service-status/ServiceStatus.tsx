@@ -16,16 +16,13 @@ const ServiceStatus = ({ status, onClick }: StatusContainerProps) => {
 
 export default ServiceStatus;
 
-const Wrapper = styled.div<StatusContainerProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
+const Wrapper = styled.button<StatusContainerProps>`
+  width: 70px;
+  padding: 0 var(--space-xs);
+  height: 40px;
+  border-radius: 5px;
+  font-size: var(--font-size-md);
   font-weight: bold;
   background-color: ${({ status }) => getStatusStyle(status).backgroundColor};
-  border: 1px solid ${({ status }) => getStatusStyle(status).backgroundColor};
-  border-radius: 10px;
-  cursor: pointer;
+  outline: 0;
 `;

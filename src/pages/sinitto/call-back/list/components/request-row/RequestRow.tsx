@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ArrowImg from '../../assets/arrow.png';
+import { IconArrow } from '@/pages/assets';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -40,7 +40,7 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
         <Content>
           <Title>{name}님의 요청</Title>
           <Time>{getTimeAgo(time)}</Time>
-          <ArrowIcon src={ArrowImg} />
+          <IconArrow fill='var(--color-gray)' type='solid' height='24' />
         </Content>
       </Wrapper>
     );
@@ -51,22 +51,20 @@ RequestRow.displayName = 'RequestRow';
 
 const Wrapper = styled.button`
   width: 100%;
-  height: 60px;
   border-radius: 10px;
   background-color: var(--color-white-gray);
   outline: 0;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 30px;
+  margin: var(--space-sm) var(--space-md);
 `;
 
 const Title = styled.h3`
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: 400;
   margin-top: 2px;
 `;
@@ -76,9 +74,5 @@ const Time = styled.p`
   font-weight: 350;
   color: var(--color-gray);
   margin-left: auto;
-`;
-
-const ArrowIcon = styled.img`
-  margin-left: 20px;
-  height: 20px;
+  margin-right: var(--space-xs);
 `;

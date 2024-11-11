@@ -4,9 +4,13 @@ import { useForm } from 'react-hook-form';
 import { RegisterFields, RegisterType, Tos } from './components';
 import { useRegister } from './store/hooks';
 import { FormValues } from './types';
-import { BasicButton, parsePhoneNumber, useUserEmail } from '@/shared';
+import {
+  BasicButton,
+  parsePhoneNumber,
+  useUserEmail,
+  PageLayout,
+} from '@/shared';
 import { Divider } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 const RegisterPage = () => {
   const [userType, setUserType] = useState('');
@@ -45,9 +49,9 @@ const RegisterPage = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Wrapper>
+      <PageLayout>
         <RegisterType userType={userType} handleClick={handleUserType} />
-        <Divider gap={5} />
+        <Divider />
         {userType != '' && (
           <>
             <RegisterFields register={register} errors={errors} />
@@ -55,17 +59,9 @@ const RegisterPage = () => {
             <BasicButton type='submit'>가입하기</BasicButton>
           </>
         )}
-      </Wrapper>
+      </PageLayout>
     </form>
   );
 };
 
 export default RegisterPage;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 45px;
-`;
