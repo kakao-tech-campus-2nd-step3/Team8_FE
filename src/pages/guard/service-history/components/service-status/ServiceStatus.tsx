@@ -1,4 +1,4 @@
-import { getStatusStyle } from '@/shared/utils/status/statusUtils';
+import { getStatusStyle } from '@/shared/utils/statusUtils';
 import styled from '@emotion/styled';
 
 type StatusContainerProps = {

@@ -30,8 +30,8 @@ export const GuardMainPage = () => {
         >
           시니어가 사용할 서비스 번호
         </Box>
-        <Text fontSize='24px' fontWeight='bold'>
-          010-4163-8098
+        <Text fontSize='22px' fontWeight='bold'>
+          006 1 256 521 5847
         </Text>
       </CallbackNumber>
       <GuideLineList seniorId={currentSenior} />

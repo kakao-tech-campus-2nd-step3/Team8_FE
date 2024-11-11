@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
 import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
-import { formatDate } from '@/shared/utils/date/dateUtils';
+import { formatDate } from '@/shared/utils/dateUtils';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
