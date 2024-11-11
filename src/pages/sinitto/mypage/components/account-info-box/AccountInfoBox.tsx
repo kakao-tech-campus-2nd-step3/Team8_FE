@@ -5,8 +5,7 @@ import {
   useModifySinittoBankInformation,
   useRegisterSinittoBankInformation,
 } from '@/pages';
-import { BasicButton } from '@/shared';
-import { validateAccountNumber } from '@/shared/utils/account-number/validateAccountNumber';
+import { validateAccountNumber, BasicButton } from '@/shared';
 import { Text, Button, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
