@@ -68,6 +68,7 @@ export const HelloCallApplyPage = () => {
         serviceTime={serviceTime}
         price={price}
         selectedSeniorId={selectedSeniorId}
+        requirement={message}
       />
     </PageLayout>
   );
