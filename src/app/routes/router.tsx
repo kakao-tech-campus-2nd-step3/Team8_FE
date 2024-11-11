@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProtectedRoute } from './components';
 import { RouterPath } from './path';
 import {
-  MainPage,
+  OnboardPage,
   RegisterPage,
   RedirectPage,
   SinittoMypage,
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <MainPage />,
+            element: <OnboardPage />,
           },
         ],
       },
