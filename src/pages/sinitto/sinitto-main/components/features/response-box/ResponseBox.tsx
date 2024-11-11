@@ -42,6 +42,11 @@ const Wrapper = styled(Flex)`
   border-radius: 1rem;
   width: 100%;
   cursor: pointer;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 5px 1px var(--color-primary);
+  }
 `;
 
 const StateBox = styled(Flex)`

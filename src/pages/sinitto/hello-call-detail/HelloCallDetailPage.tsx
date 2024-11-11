@@ -4,7 +4,7 @@ import { useGetServiceDetail } from './api';
 import { ServiceDetail } from './components';
 import { SERVICE_DETAIL } from './data';
 import { useFormatPhoneNumber, useServiceDate } from './hooks';
-import { Notice } from '@/shared/components';
+import { Notice, PageLayout, BasicButton } from '@/shared';
 import { Box, Button, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -25,7 +25,7 @@ export const HelloCallDetailPage = () => {
   };
 
   return (
-    <HelloCallDetailPageLayout>
+    <PageLayout>
       <Box display='flex' flexDir='column' alignItems='center'>
         <Box
           display='flex'
@@ -40,6 +40,7 @@ export const HelloCallDetailPage = () => {
           {phoneNumber}
         </Text>
       </Box>
+
       <ServiceDetail
         startDate={startDate}
         endDate={endDate}
@@ -54,33 +55,9 @@ export const HelloCallDetailPage = () => {
           noticeType='안부전화'
         />
       </Box>
-      <AcceptButton onClick={goToReport}>
-        서비스 완료 및 보고서 제출
-      </AcceptButton>
-    </HelloCallDetailPageLayout>
+      <BasicButton onClick={goToReport}>서비스 완료 및 보고서 제출</BasicButton>
+    </PageLayout>
   );
 };
 
 export default HelloCallDetailPage;
-
-const HelloCallDetailPageLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 1rem;
-  margin: 1rem 1.5rem;
-`;
-
-const AcceptButton = styled(Button)`
-  height: 3rem;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  font-weight: 700;
-  border-radius: 0.5rem;
-  text-align: center;
-  margin-bottom: 10px;
-
-  &:hover {
-    background-color: var(--color-primary);
-  }
-`;

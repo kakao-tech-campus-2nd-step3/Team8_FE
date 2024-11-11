@@ -46,7 +46,7 @@ export const CallBackApply = () => {
       <Flex w='100%' gap={5}>
         <Image w='50px' src={IconCall} alt='call-icon' />
         <NoticeText>
-          대기 중인 요청을 잡아 가이드라인을 확인하고 도움을 시작해보세요.
+          대기 중인 요청을 수락해 가이드라인을 확인하고 도움을 시작해보세요.
         </NoticeText>
       </Flex>
       {isLoading ? (

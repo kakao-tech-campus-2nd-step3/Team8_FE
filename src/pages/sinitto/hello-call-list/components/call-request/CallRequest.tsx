@@ -58,4 +58,5 @@ const DayBox = styled(Text)`
   border-radius: 0.25rem;
   background-color: var(--color-secondary);
   font-size: var(--font-size-sm);
+  color: var(--color-primary);
 `;

@@ -51,9 +51,9 @@ const HelloCallListPage = () => {
 
   return (
     <PageLayout>
-      <Flex w='100%' justifyContent='end'>
+      {/* <Flex w='100%' justifyContent='end'>
         <Text>새로고침</Text>
-      </Flex>
+      </Flex> */}
       <Flex w='100%' flexDir='column' gap='var(--space-xs)'>
         {allContent.map((item, index) => {
           const isLastElement = index === allContent.length - 1; // 마지막 요소인지 확인
