@@ -3,3 +3,8 @@ export type GuardInformationResponse = {
   email: string;
   phoneNumber: string;
 };
+
+export type GuardInformationRequest = {
+  name: string;
+  phoneNumber: string;
+};

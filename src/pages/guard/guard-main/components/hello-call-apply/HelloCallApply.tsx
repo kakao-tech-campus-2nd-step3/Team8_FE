@@ -53,8 +53,9 @@ const StyledImage = styled(Image)`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 110px;
-  height: 110px;
+  width: 30%;
+  min-width: 110px;
+  max-width: 200px;
 
   mask-image: linear-gradient(
     to bottom,
