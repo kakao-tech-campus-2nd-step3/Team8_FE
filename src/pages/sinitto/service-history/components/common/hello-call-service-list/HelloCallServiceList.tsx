@@ -128,4 +128,5 @@ const DayButton = styled.button<{ isSelect: boolean }>`
   text-align: center;
   font-weight: ${(props) => (props.isSelect ? '700' : '500')};
   outline: 0;
+  font-size: var(--font-size-sm);
 `;

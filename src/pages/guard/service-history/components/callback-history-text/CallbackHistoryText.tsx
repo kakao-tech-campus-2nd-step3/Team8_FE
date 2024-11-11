@@ -1,10 +1,10 @@
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const CallbackHistoryText = () => {
   return (
-    <>
-      <Box w='100%' display='flex' mt='1rem'>
+    <Flex w='full' flexDir='column' gap='var(--space-xs)'>
+      <Box w='full' display='flex'>
         <Text fontSize={24} fontWeight={700}>
           콜백 서비스 이용 내역
         </Text>
@@ -15,7 +15,7 @@ const CallbackHistoryText = () => {
           봉사자가 서비스를 완료했음을 확인해주세요!
         </Text>
       </Box>
-    </>
+    </Flex>
   );
 };
 

@@ -24,20 +24,22 @@ export const ServiceHistoryPage = () => {
 
   return (
     <PageLayout>
-      <CallbackHistoryText />
-      <ButtonWrapper>
-        {callbackHistory &&
-        callbackHistory.content &&
-        callbackHistory.content.length > 0 ? (
-          callbackHistory.content.map((history) => (
-            <CallbackHistoryDetail
-              key={history.callbackId}
-              historyData={history}
-            />
-          ))
-        ) : (
-          <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
-        )}
+      <Flex flexDir='column' w='full' gap='var(--space-sm)'>
+        <CallbackHistoryText />
+        <ButtonWrapper gap='var(--space-xs)'>
+          {callbackHistory &&
+          callbackHistory.content &&
+          callbackHistory.content.length > 0 ? (
+            callbackHistory.content.map((history) => (
+              <CallbackHistoryDetail
+                key={history.callbackId}
+                historyData={history}
+              />
+            ))
+          ) : (
+            <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
+          )}
+        </ButtonWrapper>
         <Pagination>
           <PaginationButton
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
@@ -55,21 +57,24 @@ export const ServiceHistoryPage = () => {
             다음
           </PaginationButton>
         </Pagination>
-      </ButtonWrapper>
-      <HelloServiceHistoryText />
-      <ButtonWrapper>
-        {helloCallHistory && helloCallHistory.length > 0 ? (
-          helloCallHistory.map((history) => (
-            <HelloServiceHistory
-              key={history.helloCallId}
-              historyData={history}
-              refetch={refetch}
-            />
-          ))
-        ) : (
-          <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
-        )}
-      </ButtonWrapper>
+      </Flex>
+
+      <Flex flexDir='column' w='full' gap='var(--space-sm)'>
+        <HelloServiceHistoryText />
+        <ButtonWrapper gap='var(--space-sm)'>
+          {helloCallHistory && helloCallHistory.length > 0 ? (
+            helloCallHistory.map((history) => (
+              <HelloServiceHistory
+                key={history.helloCallId}
+                historyData={history}
+                refetch={refetch}
+              />
+            ))
+          ) : (
+            <NoServiceMessage>서비스 내역이 없어요! 😥</NoServiceMessage>
+          )}
+        </ButtonWrapper>
+      </Flex>
     </PageLayout>
   );
 };
@@ -77,9 +82,6 @@ export const ServiceHistoryPage = () => {
 const ButtonWrapper = styled(Flex)`
   width: 100%;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 `;
 
 const Pagination = styled(Box)`
@@ -88,17 +90,15 @@ const Pagination = styled(Box)`
   align-items: center;
   width: 100%;
   height: 3rem;
-  border-radius: 10px;
-  margin: 0.5rem 0;
-  color: var(--color-black);
-  font-size: 18px;
-  font-weight: bold;
+  color: var(--color-gray);
+  font-size: var(--font-size-md);
 `;
 
 const PaginationButton = styled.button`
   cursor: pointer;
-  font-weight: bold;
   padding: 0 1rem;
+  font-size: var(--font-size-md);
+  font-weight: bold;
 `;
 const NoServiceMessage = styled.p`
   font-size: 1rem;

@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 import ServiceStatus from '../service-status/ServiceStatus';
 import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
-import { formatDate } from '@/shared/utils/dateUtils';
-import { Text } from '@chakra-ui/react';
+import { formatDate, BasicButton } from '@/shared';
+import { Text, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const DAYS: string[] = ['월', '화', '수', '목', '금', '토', '일'];
@@ -11,10 +11,6 @@ const DAYS: string[] = ['월', '화', '수', '목', '금', '토', '일'];
 type HelloServiceHistoryProps = {
   historyData: HelloCallHistory;
   refetch: () => void;
-};
-
-type DayProps = {
-  isSelected: boolean;
 };
 
 const HelloServiceHistory = ({
@@ -30,37 +26,37 @@ const HelloServiceHistory = ({
   return (
     <HistoryContainer>
       <HistoryInfo>
-        <Text fontSize='16px' fontWeight='700'>
+        <Text fontWeight='700' color='var(--color-gray)'>
           {formatDate(helloCallDetail?.startDate, helloCallDetail?.endDate)}
         </Text>
-        <Text fontSize='16px' fontWeight='700'>
+        <Text fontSize='var(--font-size-lg)' fontWeight='700'>
           {seniorName}
         </Text>
         <ServiceStatus status={status} />
       </HistoryInfo>
+
       {status === 'COMPLETE' ? null : (
-        <DayContainer>
+        <Flex w='full' gap='var(--space-xxs)'>
           {DAYS.map((day) => (
-            <Day
-              key={day}
-              isSelected={isDaySelected(day)}
-              onClick={() => toggleDay(day)}
-            >
+            <DayButton key={day} isSelect={isDaySelected(day)}>
               {day}
-            </Day>
+            </DayButton>
           ))}
-        </DayContainer>
+        </Flex>
       )}
       <InfoEditContainer>
         {status === 'WAITING' ? (
-          <DeleteButton onClick={deleteHelloCall}>삭제하기</DeleteButton>
+          <BasicButton themeType='gray' height='40px' onClick={deleteHelloCall}>
+            삭제하기
+          </BasicButton>
         ) : status === 'PENDING_COMPLETE' ? (
           <>
-            <ReportButton
+            <BasicButton
+              height='40px'
               onClick={() => navigate(`report/${historyData.helloCallId}`)}
             >
               보고서 확인 및 완료처리
-            </ReportButton>
+            </BasicButton>
           </>
         ) : null}
       </InfoEditContainer>
@@ -70,73 +66,42 @@ const HelloServiceHistory = ({
 
 export default HelloServiceHistory;
 
-const HistoryContainer = styled.div`
-  width: 100%;
-  height: auto;
-  padding: 0.5rem;
-  display: flex;
+const HistoryContainer = styled(Flex)`
   flex-direction: column;
-  align-items: center;
+  width: 100%;
   background-color: var(--color-white-gray);
-  border: 1px solid solid var(--color-white-gray);
+  padding: var(--space-sm);
   border-radius: 10px;
+  justify-content: space-between;
+  gap: var(--space-xs);
 `;
 
 const HistoryInfo = styled.div`
   display: flex;
   flex-direction: row;
-  width: 95%;
   justify-content: space-between;
   align-items: center;
 `;
 
-const DayContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+const DayButton = styled.button<{ isSelect: boolean }>`
   width: 100%;
-  padding: 1rem;
-  height: auto;
-`;
-
-const Day = styled.div<DayProps>`
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+  background-color: ${(props) =>
+    props.isSelect ? 'var(--color-secondary)' : '#FAFAFA'};
+  color: ${(props) =>
+    props.isSelect ? 'var(--color-primary)' : 'var(--color-gray)'};
+  padding: 10px;
+  margin: 2px;
+  border: none;
   border-radius: 5px;
-  color: var(--color-white);
-  ${({ isSelected }) =>
-    isSelected
-      ? `background-color: var(--color-primary); font-weight: bold`
-      : `background-color: var(--color-gray);`}
+  text-align: center;
+  font-weight: ${(props) => (props.isSelect ? '700' : '500')};
+  outline: 0;
+  font-size: var(--font-size-sm);
 `;
 
 const InfoEditContainer = styled.div`
-  width: 95%;
   height: auto;
   display: flex;
   justify-content: center;
   gap: 1rem;
-`;
-
-const DeleteButton = styled.button`
-  width: 95%;
-  height: 2rem;
-  background-color: #ff4d68;
-  color: var(--color-white);
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-`;
-
-const ReportButton = styled.button`
-  width: 95%;
-  height: 2rem;
-  background-color: #81b6ff;
-  color: var(--color-white);
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
 `;
