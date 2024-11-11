@@ -3,7 +3,7 @@ import {
   ServiceStatus,
   useCompleteCallback,
 } from '@/pages/guard';
-import { formatPostTime } from '@/shared/utils/date/dateUtils';
+import { formatPostTime } from '@/shared/utils/dateUtils';
 import { Box, Text } from '@chakra-ui/react';
 
 type CallbackHistoryDetailProps = {
