@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 
-import PointLogImg from '../../../../assets/point-log-icon.png';
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
-import { Box, Image, Spinner, Text } from '@chakra-ui/react';
+import { Box, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {

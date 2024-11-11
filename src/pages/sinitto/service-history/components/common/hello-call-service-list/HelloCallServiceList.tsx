@@ -5,7 +5,7 @@ import { usePutCancelHelloCall } from '../../../api';
 import { DAY_SCHEMA } from '../../../data';
 import { StatusButton } from '../../features';
 import { BasicButton } from '@/shared';
-import { Flex, Text, Button } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -38,9 +38,9 @@ export const HelloCallServiceList = ({
     }
   };
 
-  const goToReport = (helloCallId: number) => {
+  const goToDetail = (helloCallId: number) => {
     localStorage.setItem('helloCallId', helloCallId.toString());
-    navigate(`/sinitto/hello-call/report/${helloCallId}`);
+    navigate(`/sinitto/hello-call/${helloCallId}/detail`);
   };
 
   return (
@@ -76,9 +76,9 @@ export const HelloCallServiceList = ({
               </BasicButton>
               <BasicButton
                 height='40px'
-                onClick={() => goToReport(helloCallId)}
+                onClick={() => goToDetail(helloCallId)}
               >
-                보고서 작성
+                상세보기
               </BasicButton>
             </Flex>
           </ExpandedContent>

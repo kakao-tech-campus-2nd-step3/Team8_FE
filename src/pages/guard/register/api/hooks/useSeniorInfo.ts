@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
 import { SeniorRegisterValues as SeniorRegisterRequest } from '../types/senior-register.type';
+import {
+  formatPhoneNumber,
+  parsePhoneNumber,
+  validateName,
+  validatePhoneNumber,
+} from '@/shared';
 import { UseMutationResult } from '@tanstack/react-query';
 
 type SeniorInfoType = {
@@ -9,7 +15,7 @@ type SeniorInfoType = {
   seniorId: number;
 };
 
-type UseSeniorInfoProps = {
+type Props = {
   senior: SeniorInfoType;
   deleteMutation: UseMutationResult<string, Error, number>;
   editMutation: UseMutationResult<
@@ -19,26 +25,15 @@ type UseSeniorInfoProps = {
   >;
 };
 
-type UseSeniorInfoReturn = {
-  isEditing: boolean;
-  seniorName: string;
-  seniorPhoneNumber: string;
-  setIsEditing: (value: boolean) => void;
-  setSeniorName: (value: string) => void;
-  setSeniorPhoneNumber: (value: string) => void;
-  deleteSenior: () => void;
-  editSenior: () => void;
-};
-
 export const useSeniorInfo = ({
   senior,
   deleteMutation,
   editMutation,
-}: UseSeniorInfoProps): UseSeniorInfoReturn => {
+}: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [seniorName, setSeniorName] = useState(senior.seniorName);
   const [seniorPhoneNumber, setSeniorPhoneNumber] = useState(
-    senior.seniorPhoneNumber
+    formatPhoneNumber(senior.seniorPhoneNumber)
   );
 
   const deleteSenior = () => {
@@ -49,11 +44,23 @@ export const useSeniorInfo = ({
   };
 
   const editSenior = () => {
-    editMutation.mutate({
-      seniorId: senior.seniorId,
-      seniorInfo: { seniorName, seniorPhoneNumber },
-    });
-    setIsEditing(false);
+    if (!validateName(seniorName) || !validatePhoneNumber(seniorPhoneNumber)) {
+      alert(
+        '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'
+      );
+      setSeniorName('');
+      setSeniorPhoneNumber('');
+      return;
+    } else {
+      editMutation.mutate({
+        seniorId: senior.seniorId,
+        seniorInfo: {
+          seniorName,
+          seniorPhoneNumber: parsePhoneNumber(seniorPhoneNumber),
+        },
+      });
+      setIsEditing(false);
+    }
   };
 
   return {

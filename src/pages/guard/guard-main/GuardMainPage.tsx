@@ -19,7 +19,7 @@ export const GuardMainPage = () => {
         />
         <ContectSection>
           <Title>시니어가 사용할 서비스 번호</Title>
-          <Content>010-4163-8098</Content>
+          <Content>006 1 256 521 5847</Content>
         </ContectSection>
         <GuideLineList seniorId={currentSenior} />
         <HelloCallApply />

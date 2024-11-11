@@ -4,9 +4,12 @@ import { useModifySinittoInformation } from '@/pages';
 import {
   formatPhoneNumber,
   Logout,
+  parsePhoneNumber,
   useSinittoInfo,
-  BasicButton,
+  validatePhoneNumber,
+  validateName,
 } from '@/shared';
+import { BasicButton } from '@/shared';
 import { Box, Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -16,7 +19,6 @@ const SinittoProfileBox = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const { data: seniorInfo, refetch } = useSinittoInfo();
-
   const modifySinittoInfoMutation = useModifySinittoInformation();
 
   useEffect(() => {
@@ -27,16 +29,25 @@ const SinittoProfileBox = () => {
   }, [isEditing, seniorInfo]);
 
   const handleSaveClick = () => {
-    const modifiedSinittoInfo = {
-      name: name,
-      phoneNumber: phoneNumber,
-    };
-    modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
-      onSuccess: () => {
-        setIsEditing(false);
-        refetch();
-      },
-    });
+    if (!validateName(name) || !validatePhoneNumber(phoneNumber)) {
+      alert(
+        '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'
+      );
+      setName('');
+      setPhoneNumber('');
+      return;
+    } else {
+      const modifiedSinittoInfo = {
+        name: name,
+        phoneNumber: parsePhoneNumber(phoneNumber),
+      };
+      modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
+        onSuccess: () => {
+          setIsEditing(false);
+          refetch();
+        },
+      });
+    }
   };
 
   return (

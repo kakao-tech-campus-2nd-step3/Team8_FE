@@ -11,6 +11,7 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<SeniorRegisterValues>();
   const { mutate: postSeniorInfo } = useAddSeniorInfo(refetch);
 
@@ -20,6 +21,7 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
       seniorPhoneNumber: parsePhoneNumber(data.seniorPhoneNumber),
     };
     postSeniorInfo(requestSeniorData);
+    reset();
   };
 
   return (
@@ -31,6 +33,10 @@ const SeniorRegisterBox = ({ refetch }: { refetch: () => void }) => {
           error={errors.seniorName?.message}
           registerProps={register('seniorName', {
             required: '시니어의 성함을 입력해주세요.',
+            pattern: {
+              value: /^[가-힣a-zA-Z]{1,10}$/,
+              message: '성함은 10자 이하 한/영으로 입력하세요.',
+            },
           })}
         />
       </InputBox>

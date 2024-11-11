@@ -5,8 +5,8 @@ import {
   useModifySinittoBankInformation,
   useRegisterSinittoBankInformation,
 } from '@/pages';
-import { BasicButton } from '@/shared';
-import { Text, Button, Input, Flex } from '@chakra-ui/react';
+import { validateAccountNumber, BasicButton } from '@/shared';
+import { Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const AccountInfoBox = () => {
@@ -28,15 +28,21 @@ const AccountInfoBox = () => {
   }, [isEditingAccount, isRegistering, sinittoBankInfo]);
 
   const handleSaveClick = () => {
-    modifyBankInfoMutation.mutate(
-      { accountNumber, bankName },
-      {
-        onSuccess: () => {
-          setIsEditingAccount(false);
-          refetch();
-        },
-      }
-    );
+    if (validateAccountNumber(accountNumber, bankName)) {
+      modifyBankInfoMutation.mutate(
+        { accountNumber, bankName },
+        {
+          onSuccess: () => {
+            setIsEditingAccount(false);
+            refetch();
+          },
+        }
+      );
+    } else {
+      setAccountNumber('');
+      setBankName('');
+      return;
+    }
   };
 
   const registerBank = () => {
@@ -113,7 +119,7 @@ const AccountInfoBox = () => {
             <BasicButton
               themeType='default'
               width='310px'
-              height='40px'
+              height='36px'
               onClick={() => setIsRegistering(true)}
             >
               계좌번호 등록하기
