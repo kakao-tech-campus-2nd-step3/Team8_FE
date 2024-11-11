@@ -34,7 +34,7 @@ const HelloCallServicePage = () => {
         noticeType='안부전화'
       />
       <BasicButton onClick={handleAcceptService}>
-        서비스 수락하기 ({data?.price.toLocaleString()}P)
+        서비스 수락하기 ({serviceData?.price.toLocaleString()}P)
       </BasicButton>
     </PageLayout>
   );
