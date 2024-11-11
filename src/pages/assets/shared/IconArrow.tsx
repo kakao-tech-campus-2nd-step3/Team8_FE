@@ -5,7 +5,7 @@ type Props = {
   height?: string;
 };
 
-export const IconArrow = ({ fill, type, width, height }: Props) => {
+export const IconArrow = ({ fill, type, height }: Props) => {
   return type === 'solid' ? (
     <IconArrowSolid fill={fill} height={height} />
   ) : (

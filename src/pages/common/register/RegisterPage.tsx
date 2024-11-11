@@ -4,8 +4,12 @@ import { useForm } from 'react-hook-form';
 import { RegisterFields, RegisterType, Tos } from './components';
 import { useRegister } from './store/hooks';
 import { FormValues } from './types';
-import { BasicButton, parsePhoneNumber, useUserEmail } from '@/shared';
-import { PageLayout } from '@/shared';
+import {
+  BasicButton,
+  parsePhoneNumber,
+  useUserEmail,
+  PageLayout,
+} from '@/shared';
 import { Divider } from '@chakra-ui/react';
 
 const RegisterPage = () => {

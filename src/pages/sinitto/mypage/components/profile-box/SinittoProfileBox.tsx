@@ -8,8 +8,8 @@ import {
   useSinittoInfo,
   validatePhoneNumber,
   validateName,
+  BasicButton,
 } from '@/shared';
-import { BasicButton } from '@/shared';
 import { Box, Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

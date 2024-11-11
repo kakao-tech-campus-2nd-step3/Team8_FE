@@ -46,13 +46,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
   return (
     <GuideLineInfoContainer onClick={toggleContent}>
       {isEditing ? (
-        <Box
-          display='flex'
-          flexDir='row'
-          w='100%'
-          maxW='370px'
-          gap='var(--space-xxs)'
-        >
+        <Box display='flex' flexDir='row' w='100%' gap='var(--space-xxs)'>
           <Flex w='full' flexDir='column' gap='var(--space-xs)'>
             <Input
               value={guidelineTitle}
@@ -71,6 +65,7 @@ const GuideLineInfo = ({ guideline, refetch, seniorId }: Props) => {
               borderRadius='10px'
               size='md'
               height='120px'
+              w='full'
             />
           </Flex>
           <Flex flexDir='column' gap='var(--space-xs)'>

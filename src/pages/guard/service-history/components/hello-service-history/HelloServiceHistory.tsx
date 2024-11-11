@@ -18,7 +18,7 @@ const HelloServiceHistory = ({
   refetch,
 }: HelloServiceHistoryProps) => {
   const { seniorName, status } = historyData;
-  const { helloCallDetail, toggleDay, deleteHelloCall, isDaySelected } =
+  const { helloCallDetail, deleteHelloCall, isDaySelected } =
     useHelloServiceHistory({ historyData, refetch });
 
   const navigate = useNavigate();

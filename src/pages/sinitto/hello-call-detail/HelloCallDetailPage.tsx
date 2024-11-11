@@ -5,8 +5,7 @@ import { ServiceDetail } from './components';
 import { SERVICE_DETAIL } from './data';
 import { useFormatPhoneNumber, useServiceDate } from './hooks';
 import { Notice, PageLayout, BasicButton } from '@/shared';
-import { Box, Button, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Text } from '@chakra-ui/react';
 
 export const HelloCallDetailPage = () => {
   const { helloCallId } = useParams();
