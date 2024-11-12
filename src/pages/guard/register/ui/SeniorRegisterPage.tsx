@@ -1,20 +1,12 @@
-import { useGetAllSeniorInfo } from '../mypage';
-import { SeniorInfo } from './components';
-import SeniorRegisterBox from './components/senior-register-box/SeniorRegisterBox';
+import { useGetAllSeniorInfo } from '../../mypage';
+import SeniorInfo from '../components/senior-info/SeniorInfo';
+import SeniorRegisterBox from '../components/senior-register-box/SeniorRegisterBox';
 import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SeniorRegisterPage = () => {
-  const { data: seniors, isLoading, isError, refetch } = useGetAllSeniorInfo();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error</div>;
-  }
+  const { data: seniors, refetch } = useGetAllSeniorInfo();
 
   return (
     <PageLayout>

@@ -1,1 +1,1 @@
-export * from './senior-info-box';
+export * from './SeniorInfo';

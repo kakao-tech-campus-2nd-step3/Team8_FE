@@ -1,5 +1,5 @@
-import { addSeniorInfo } from '../senior-info.api';
-import { SeniorRegisterValues as SeniorRegisterRequest } from '../types/senior-register.type';
+import { addSeniorInfo } from '../api';
+import { SeniorRegisterValues as SeniorRegisterRequest } from '../api/types/senior-register.type';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 // 시니어 추가 훅

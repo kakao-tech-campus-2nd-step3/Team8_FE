@@ -148,7 +148,7 @@ const PaginationButton = styled.button`
   outline: 0;
 `;
 
-const DetailText = styled(Text)`
+const DetailText = styled(Box)`
   font-size: 14px;
   color: var(--color-gray);
 `;
