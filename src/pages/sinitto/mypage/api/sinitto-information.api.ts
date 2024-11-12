@@ -2,7 +2,7 @@ import {
   SinittoBankInfo,
   SinittoInfoRequest,
   SinittoInformation,
-} from './types';
+} from '../types';
 import { fetchInstance } from '@/shared';
 
 const sinittoInformationPath = () => '/api/sinittos';
