@@ -1,8 +1,8 @@
 import {
   getSeniorAllGuidelines,
   getSeniorAllGuidelinesQueryKey,
-  SeniorAllGuideLineResponse,
 } from '../api/view-senior-all-guideline.api';
+import { SeniorAllGuideLineResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetSeniorAllGuidelines = (
