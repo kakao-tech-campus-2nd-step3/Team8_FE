@@ -1,4 +1,4 @@
-import { getSinittoInfo, sinittoInfoPath } from '../sinitto-info.api';
+import { getSinittoInfo, sinittoInfoPath } from '../api';
 import { SinittoInfoResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

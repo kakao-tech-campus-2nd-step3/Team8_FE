@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import HelloCallImg from '@/pages/assets/shared/hello-call.png';
-import { ResponseBox, useGetServiceList } from '@/pages/sinitto';
+import { ResponseBox } from '@/pages/sinitto';
+import { useGetServiceList } from '@/pages/sinitto/hello-call-list/hooks';
 import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

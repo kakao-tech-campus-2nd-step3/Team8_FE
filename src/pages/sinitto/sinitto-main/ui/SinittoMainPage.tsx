@@ -3,7 +3,7 @@ import {
   HelloCallApply,
   ServiceHistoryButton,
   SinittoName,
-} from './components';
+} from '../components';
 import { PageLayout } from '@/shared';
 
 export const SinittoMainPage = () => {

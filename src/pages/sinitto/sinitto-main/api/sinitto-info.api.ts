@@ -1,4 +1,4 @@
-import { SinittoInfoResponse } from './types';
+import { SinittoInfoResponse } from '../types';
 import { fetchInstance } from '@/shared';
 
 export const sinittoInfoPath = () => `/api/sinittos`;
