@@ -1,11 +1,5 @@
+import { ModifyGuidelineRequest } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
-
-export type ModifyGuidelineRequest = {
-  seniorId: number;
-  type: string;
-  title: string;
-  content: string;
-};
 
 export const modifyGuidelinePath = (guidelineId: number) =>
   `/api/guardguidelines/${guidelineId}`;

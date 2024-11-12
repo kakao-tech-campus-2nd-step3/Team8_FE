@@ -5,6 +5,3 @@ export {
   getSinittoInformation,
   registerSinittoBankInformation,
 } from './sinitto-information.api';
-
-export * from './types';
-export * from './hooks';

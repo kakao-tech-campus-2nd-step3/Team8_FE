@@ -1,4 +1,4 @@
-import { HelloCallHistoryListResponse, HelloCallHistory } from '../types';
+import { HelloCallHistory, HelloCallHistoryListResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getHelloCallHistoryPath = () => '/api/hellocalls/guards/lists';

@@ -1,4 +1,4 @@
-import { GuardInformationResponse, GuardInformationRequest } from './types';
+import { GuardInformationResponse, GuardInformationRequest } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const guardInformationPath = () => '/api/guards';

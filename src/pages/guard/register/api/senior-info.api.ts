@@ -1,4 +1,4 @@
-import { SeniorRegisterValues as SeniorRegisterRequest } from './types/senior-register.type';
+import { SeniorRegisterRequest } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const seniorInfoPath = () => '/api/guards/senior';

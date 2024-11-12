@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
+import { useAddGuideline } from '../../hooks';
 import GuidelineFormField, { GuidelineValues } from './GuideFormField';
-import { useAddGuideline } from '@/pages/guard';
 import { BasicButton } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
