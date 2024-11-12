@@ -1,0 +1,1 @@
+export { GuardMyPage } from './GuardMyPage';

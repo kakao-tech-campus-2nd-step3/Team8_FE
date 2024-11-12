@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { SeniorRegisterValues, useAddSeniorInfo } from '../../api';
+import { SeniorRegisterValues } from '../../api';
+import { useAddSeniorInfo } from '../../hooks';
 import SeniorFormField from './SeniorFormField';
 import { parsePhoneNumber, BasicButton } from '@/shared';
 import { Flex } from '@chakra-ui/react';

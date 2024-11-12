@@ -7,4 +7,3 @@ export {
 } from './sinitto-information.api';
 
 export * from './types';
-export * from './hooks';

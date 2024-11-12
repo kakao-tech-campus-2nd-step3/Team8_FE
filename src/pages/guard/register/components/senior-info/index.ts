@@ -1,1 +1,1 @@
-export * from './senior-info-box';
+export { default as SeniorInfo } from './SeniorInfo';

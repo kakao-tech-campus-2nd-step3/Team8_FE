@@ -1,11 +1,13 @@
 import { fetchInstance } from '@/shared/api/instance';
 
-export type SeniorAllGuideLineResponse = {
+export type SeniorAllGuideLineResponse = SeniorGuideLineData[];
+
+export type SeniorGuideLineData = {
   id: number;
   type: string;
   title: string;
   content: string;
-}[];
+};
 
 export type SeniorAllGuideLineRequest = {
   seniorId: number;

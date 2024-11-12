@@ -14,7 +14,7 @@ type CallbackHistoryDetailProps = {
 const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
   const completeCallbackMutation = useCompleteCallback();
 
-  const handleButtonClick = () => {
+  const completeCallback = () => {
     if (historyData.status === 'COMPLETE') {
       alert('이미 완료 확인한 서비스입니다.');
     } else if (historyData.status === 'WAITING') {
@@ -39,7 +39,7 @@ const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
           {historyData.seniorName}
         </Text>
       </Flex>
-      <ServiceStatus onClick={handleButtonClick} status={historyData.status} />
+      <ServiceStatus onClick={completeCallback} status={historyData.status} />
     </ItemListBox>
   );
 };
