@@ -1,11 +1,8 @@
-import { ServiceDetailResponse } from './types/service-detail.response';
+import { ServiceDetailResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
-const getServiceDetailPath = (callId: number) => `/api/hellocalls/${callId}`;
-
-export const ServiceDetailQueryKey = (callId: number) => [
-  getServiceDetailPath(callId),
-];
+export const getServiceDetailPath = (callId: number) =>
+  `/api/hellocalls/${callId}`;
 
 export const getServiceDetail = async (
   callId: number

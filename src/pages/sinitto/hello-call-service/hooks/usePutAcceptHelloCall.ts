@@ -1,11 +1,11 @@
-import { putAcceptHelloCall } from '../accept-hello-call.api';
+import { putAcceptHelloCall } from '../api';
 import { SinittoHelloCallResponse } from '../types';
-import { RouterPath } from '@/app/routes';
 import { queryClient } from '@/shared';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 export const usePutAcceptHelloCall = (
-  callId: number
+  callId: number,
+  PATH: string
 ): UseMutationResult<SinittoHelloCallResponse, Error, void> => {
   return useMutation<SinittoHelloCallResponse, Error, void>({
     mutationFn: () => putAcceptHelloCall(callId),
@@ -13,7 +13,8 @@ export const usePutAcceptHelloCall = (
       queryClient.invalidateQueries({ queryKey: ['helloCallCancel', callId] });
 
       alert(`안부전화 서비스가 수락되었습니다.`);
-      window.location.href = RouterPath.SINITTO;
+
+      window.location.href = PATH;
     },
     onError: (error) => {
       console.error('안부전화 서비스 수락에 실패했습니다.', error);

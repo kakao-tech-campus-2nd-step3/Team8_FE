@@ -1,4 +1,4 @@
-import { SinittoHelloCallResponse } from './types';
+import { SinittoHelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared';
 
 const putAcceptHelloCallPath = (callId: number) =>

@@ -1,6 +1,6 @@
-import { ServiceDetail } from './components';
-import { SERVICE_NOTICE } from './data';
-import { useHelloCallService } from './hooks';
+import { ServiceDetail } from '../components';
+import { SERVICE_NOTICE } from '../data';
+import { useHelloCallService } from '../hooks';
 import TitleImg from '@/pages/assets/shared/hello-call/title-icon.png';
 import { PageLayout, Notice, BasicButton } from '@/shared/components';
 import { Box, Image } from '@chakra-ui/react';

@@ -1,6 +1,10 @@
-import { getServiceDetail, ServiceDetailQueryKey } from '../service-detail.api';
+import { getServiceDetailPath, getServiceDetail } from '../api';
 import { ServiceDetailResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
+
+const ServiceDetailQueryKey = (callId: number) => [
+  getServiceDetailPath(callId),
+];
 
 export const useGetServiceDetail = (callId: number) => {
   return useQuery<ServiceDetailResponse>({
