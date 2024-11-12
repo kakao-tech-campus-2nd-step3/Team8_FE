@@ -4,12 +4,12 @@ import {
   modifySinittoBankInformation,
   modifySinittoInformation,
   registerSinittoBankInformation,
-} from '../sinitto-information.api';
+} from '../api/sinitto-information.api';
 import {
   SinittoBankInfo,
   SinittoInfoRequest,
   SinittoInformation,
-} from '../types';
+} from '../api/types';
 import {
   useMutation,
   UseMutationResult,

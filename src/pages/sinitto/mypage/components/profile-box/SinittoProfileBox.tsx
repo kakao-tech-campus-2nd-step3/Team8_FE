@@ -1,54 +1,14 @@
-import { useEffect, useState } from 'react';
-
-import { useModifySinittoInformation } from '@/pages';
-import {
-  formatPhoneNumber,
-  Logout,
-  parsePhoneNumber,
-  useSinittoInfo,
-  validatePhoneNumber,
-  validateName,
-  BasicButton,
-} from '@/shared';
+import { useSinittoProfile } from '../../hooks';
+import { formatPhoneNumber, Logout, BasicButton } from '@/shared';
 import { Box, Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const SinittoProfileBox = () => {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-
-  const { data: seniorInfo, refetch } = useSinittoInfo();
-  const modifySinittoInfoMutation = useModifySinittoInformation();
-
-  useEffect(() => {
-    if (isEditing) {
-      setName(seniorInfo?.name || '');
-      setPhoneNumber(seniorInfo?.phoneNumber || '');
-    }
-  }, [isEditing, seniorInfo]);
-
-  const handleSaveClick = () => {
-    if (!validateName(name) || !validatePhoneNumber(phoneNumber)) {
-      alert(
-        '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'
-      );
-      setName('');
-      setPhoneNumber('');
-      return;
-    } else {
-      const modifiedSinittoInfo = {
-        name: name,
-        phoneNumber: parsePhoneNumber(phoneNumber),
-      };
-      modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
-        onSuccess: () => {
-          setIsEditing(false);
-          refetch();
-        },
-      });
-    }
-  };
+  const {
+    profileData: { name, phoneNumber, seniorInfo },
+    states: { isEditing },
+    handlers: { setName, setPhoneNumber, setIsEditing, handleSaveClick },
+  } = useSinittoProfile();
 
   return (
     <>

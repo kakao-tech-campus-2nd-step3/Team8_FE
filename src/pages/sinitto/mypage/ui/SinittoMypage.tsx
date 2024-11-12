@@ -1,4 +1,4 @@
-import { SinittoProfileBox, AccountInfoBox } from './components';
+import { AccountInfoBox, SinittoProfileBox } from '../components';
 import {
   PointBox,
   PointLogBox,
@@ -6,7 +6,7 @@ import {
   PageLayout,
 } from '@/shared/components';
 
-const SinittoMypage = () => {
+export const SinittoMypage = () => {
   return (
     <PageLayout>
       <SinittoProfileBox />
@@ -17,5 +17,3 @@ const SinittoMypage = () => {
     </PageLayout>
   );
 };
-
-export default SinittoMypage;
