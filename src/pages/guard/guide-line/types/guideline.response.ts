@@ -1,3 +1,5 @@
+import { SeniorGuideLineData } from './guidelineData';
+
 export type SeniorAllGuideLineResponse = SeniorGuideLineData[];
 
 export type ViewSpecificGuidelineResponse = {
