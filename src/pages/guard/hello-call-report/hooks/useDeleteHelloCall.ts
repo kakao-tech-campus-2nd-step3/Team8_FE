@@ -1,4 +1,4 @@
-import { deleteHelloCall, HelloCallQueryKey } from '../hello-call-api';
+import { deleteHelloCall, HelloCallQueryKey } from '../api';
 import { queryClient } from '@/shared/api/instance';
 import { useMutation } from '@tanstack/react-query';
 

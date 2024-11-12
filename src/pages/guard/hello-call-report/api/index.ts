@@ -1,6 +1,11 @@
-export { getReport } from './report.api';
+export { getReport, getReportPath } from './get-report.api';
 export { getTimeLog } from './time-log.api';
 export {
   completeHelloCallPath,
   putCompleteHelloCall,
 } from './complete-hello-call.api';
+export {
+  HelloCallQueryKey,
+  deleteHelloCall,
+  putHelloCall,
+} from './hello-call-api';
