@@ -1,8 +1,8 @@
-import IconCalendar from '../../../sinitto/hello-call-report/assets/calendar.svg';
-import IconFile from '../../../sinitto/hello-call-report/assets/file.svg';
 import { useGetReport } from '../api';
 import { usePutCompleteHelloCall } from '../api/hooks/usePutCompleteHelloCall';
 import heartIcon from '../asset/heartIcon.svg';
+import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
+import IconFile from '@/pages/assets/shared/hello-call/file.svg';
 import { Box, Text, Image, Divider, Button, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
