@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { usePutCancelHelloCall } from '../../../api';
 import { DAY_SCHEMA } from '../../../data';
+import {
+  useCancelHelloCall,
+  useNavigateToDetail,
+  useToggleExpand,
+} from '../../../hooks';
 import { StatusButton } from '../../features';
 import { BasicButton } from '@/shared';
 import { Flex, Text } from '@chakra-ui/react';
@@ -21,27 +22,9 @@ export const HelloCallServiceList = ({
   helloCallId,
   days,
 }: Props) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const { mutate: cancelHelloCall } = usePutCancelHelloCall();
-
-  const navigate = useNavigate();
-
-  const cancelService = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    cancelHelloCall(helloCallId);
-  };
-
-  const toggleExpand = () => {
-    if (serviceStatus === 'IN_PROGRESS') {
-      setIsExpanded((prev) => !prev);
-    }
-  };
-
-  const goToDetail = (helloCallId: number) => {
-    localStorage.setItem('helloCallId', helloCallId.toString());
-    navigate(`/sinitto/hello-call/${helloCallId}/detail`);
-  };
+  const { isExpanded, toggleExpand } = useToggleExpand(serviceStatus);
+  const { cancelService } = useCancelHelloCall(helloCallId);
+  const { goToDetail } = useNavigateToDetail(helloCallId);
 
   return (
     <Wrapper onClick={toggleExpand}>
@@ -74,10 +57,7 @@ export const HelloCallServiceList = ({
               >
                 취소하기
               </BasicButton>
-              <BasicButton
-                height='40px'
-                onClick={() => goToDetail(helloCallId)}
-              >
+              <BasicButton height='40px' onClick={goToDetail}>
                 상세보기
               </BasicButton>
             </Flex>

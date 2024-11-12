@@ -1,4 +1,4 @@
-import { AcceptedCallBackListResponse } from './types';
+import { AcceptedCallBackListResponse } from '../types';
 import { fetchInstance } from '@/shared';
 
 export const getAcceptedCallBackListPath = '/api/callbacks/sinitto/accepted';

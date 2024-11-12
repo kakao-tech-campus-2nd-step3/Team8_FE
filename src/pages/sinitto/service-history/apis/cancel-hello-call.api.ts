@@ -1,14 +1,14 @@
-import { SinittoHelloCallResponse } from './types';
+import { SinittoHelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
-const getCancelHelloCallPath = (callId: number) =>
+const putCancelHelloCallPath = (callId: number) =>
   `/api/hellocalls/cancel/${callId}`;
 
 export const putCancelHelloCall = async (
   callId: number
 ): Promise<SinittoHelloCallResponse> => {
   const response = await fetchInstance.put<SinittoHelloCallResponse>(
-    getCancelHelloCallPath(callId)
+    putCancelHelloCallPath(callId)
   );
 
   return response.data;

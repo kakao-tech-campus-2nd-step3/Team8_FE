@@ -1,7 +1,5 @@
-import {
-  getAcceptedCallBackList,
-  getAcceptedCallBackListPath,
-} from '../accepted-call-back-list.api';
+import { getAcceptedCallBackList } from '../apis';
+import { getAcceptedCallBackListPath } from '../apis/accepted-call-back-list.api';
 import { AcceptedCallBackListResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

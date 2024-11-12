@@ -1,4 +1,4 @@
-import { putCancelHelloCall } from '../cancel-hello-call.api';
+import { putCancelHelloCall } from '../apis';
 import { ApplyCallListQueryKey } from './useGetApplyHelloCallList';
 import { queryClient } from '@/shared/api/instance';
 import { useMutation } from '@tanstack/react-query';
