@@ -1,43 +1,19 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { ReviewRequest, usePostReview } from './api';
-import starIcon from './asset/star-icon.svg';
+import starIcon from '../asset/star-icon.svg';
+import { usePostReview, useReview } from '../hooks';
 import { BasicButton, Notice, PageLayout } from '@/shared';
 import { Text, Box, Textarea, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const SinittoReviewPage = () => {
-  const navigate = useNavigate();
-  const [ratings, setRatings] = useState<number[]>([0, 0, 0]);
-  const [reviewContent, setReviewContent] = useState<string>('');
-
   const { mutate: postReview } = usePostReview();
-
-  const handleStarClick = (questionIndex: number, starIndex: number) => {
-    const newRatings = [...ratings];
-    newRatings[questionIndex] = starIndex + 1;
-    setRatings(newRatings);
-  };
-
-  const handleSubmit = () => {
-    if (ratings.some((rating) => rating === 0)) {
-      alert('모든 항목에 별점을 남겨주세요.');
-      return;
-    }
-
-    const reviewRequest: ReviewRequest = {
-      starCountForRequest: ratings[0],
-      starCountForService: ratings[1],
-      starCountForSatisfaction: ratings[2],
-      content: reviewContent,
-    };
-    postReview(reviewRequest, {
-      onSuccess: () => {
-        navigate('/guard/mypage');
-      },
-    });
-  };
+  const {
+    ratings,
+    reviewContent,
+    reviewQuestions,
+    setReviewContent,
+    handleStarClick,
+    handleSubmit,
+  } = useReview({ postReview });
 
   return (
     <PageLayout>
@@ -51,11 +27,7 @@ export const SinittoReviewPage = () => {
       <Box display='flex' flexDir='column' w='100%' maxW='18rem'>
         <TitleText>평가하기</TitleText>
         <ReviewBox>
-          {[
-            '요청사항을 잘 수행했나요?',
-            '서비스는 어땠나요?',
-            '만족도는 어떤가요?',
-          ].map((question, questionIndex) => (
+          {reviewQuestions.map((question, questionIndex) => (
             <Box key={questionIndex} display='flex' flexDir='column' mb={4}>
               <TitleText mb={1}>{question}</TitleText>
               <Box display='flex' justifyContent='center'>
