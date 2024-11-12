@@ -1,4 +1,4 @@
-import { getTimeLog, getTimeLogPath } from '../time-log.api';
+import { getTimeLog, getTimeLogPath } from '../api';
 import { TimeLogResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

@@ -1,5 +1,5 @@
 export { getReport, getReportPath } from './get-report.api';
-export { getTimeLog } from './time-log.api';
+export { getTimeLog, getTimeLogPath } from './time-log.api';
 export {
   completeHelloCallPath,
   putCompleteHelloCall,
