@@ -1,4 +1,4 @@
-import { WriteReportRequest } from './types';
+import { WriteReportRequest } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const postWriteReportPath = () => `/api/hellocalls/reports`;

@@ -1,5 +1,5 @@
+import { postWriteReport } from '../apis';
 import { WriteReportRequest } from '../types';
-import { postWriteReport } from '../write-report.api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 export const usePostWriteReport = (): UseMutationResult<
