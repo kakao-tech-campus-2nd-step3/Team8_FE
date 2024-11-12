@@ -1,4 +1,4 @@
-import { GuardProfileBox } from './components';
+import { GuardProfileBox } from '../components';
 import { PointBox, PointLogBox, Withdrawal, PageLayout } from '@/shared';
 
 export const GuardMyPage = () => {

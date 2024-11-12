@@ -1,46 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { useGetGuardInformation, useModifyGuardInformation } from '../../api';
-import { RouterPath } from '@/app/routes';
+import { useGetGuardInformation, useModifyGuardInformation } from '../../hooks';
+import { useGuardProfile } from '../../hooks/useGuardProfile';
 import { IconArrow } from '@/pages/assets';
-import {
-  Logout,
-  formatPhoneNumber,
-  BasicButton,
-  parsePhoneNumber,
-} from '@/shared';
+import { Logout, formatPhoneNumber, BasicButton } from '@/shared';
 import { Box, Text, Flex, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-
   const { data: guardInfo, refetch } = useGetGuardInformation();
   const modifyGuardInfoMutation = useModifyGuardInformation();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isEditing) {
-      setName(guardInfo?.name || '');
-      setPhoneNumber(guardInfo?.phoneNumber || '');
-    }
-  }, [isEditing, guardInfo]);
-
-  const handleSaveClick = () => {
-    const modifiedSinittoInfo = {
-      name: name,
-      phoneNumber: parsePhoneNumber(phoneNumber),
-    };
-    modifyGuardInfoMutation.mutate(modifiedSinittoInfo, {
-      onSuccess: () => {
-        setIsEditing(false);
-        refetch();
-      },
-    });
-  };
+  const {
+    name,
+    phoneNumber,
+    isEditing,
+    setName,
+    setPhoneNumber,
+    setIsEditing,
+    handleSaveClick,
+    handleServiceManualClick,
+    handleSeniorManagementClick,
+    handleServiceHistoryClick,
+  } = useGuardProfile({
+    guardInfo,
+    modifyGuardInfoMutation,
+    refetch,
+  });
 
   return (
     <>
@@ -56,14 +40,14 @@ const GuardProfileBox = () => {
           </Flex>
           <Logout />
         </Flex>
-        <ServiceManualBox onClick={() => navigate(RouterPath.SERVICE_MANUAL)}>
+        <ServiceManualBox onClick={handleServiceManualClick}>
           <Text
             fontSize='var(--font-size-lg)'
             fontWeight={600}
             mr='var(--space-xs)'
           >
             ⓘ
-          </Text>{' '}
+          </Text>
           <Text fontWeight={600} mt='2px' mr='var(--space-sm)'>
             서비스 이용 방법 한번에 이해하기!
           </Text>
@@ -71,7 +55,13 @@ const GuardProfileBox = () => {
         </ServiceManualBox>
       </Flex>
 
-      <GuardProfileBoxLayout>
+      <Flex
+        flexDir='column'
+        w='100%'
+        h='auto'
+        border='2px solid var(--color-white-gray)'
+        borderRadius='5px'
+      >
         <Flex
           w='full'
           flexDir='column'
@@ -133,40 +123,27 @@ const GuardProfileBox = () => {
           )}
         </Flex>
 
-        <BottomContainer>
-          <ButtonBox onClick={() => navigate(RouterPath.SENIOR_REGISTER)}>
+        <Flex
+          alignItems='center'
+          justifyContent='space-between'
+          borderTop='2px solid var(--color-white-gray)'
+          padding='var(--space-sm) var(--space-xs)'
+          gap='var(--space-xs)'
+        >
+          <ButtonBox onClick={handleSeniorManagementClick}>
             내 시니어 관리
           </ButtonBox>
           <DivideLine />
-          <ButtonBox onClick={() => navigate(RouterPath.SERVICE_HISTORY)}>
+          <ButtonBox onClick={handleServiceHistoryClick}>
             서비스 이용 현황
           </ButtonBox>
-        </BottomContainer>
-      </GuardProfileBoxLayout>
+        </Flex>
+      </Flex>
     </>
   );
 };
 
 export default GuardProfileBox;
-
-const GuardProfileBoxLayout = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  border: 2px solid var(--color-white-gray);
-  border-radius: 5px;
-`;
-
-const BottomContainer = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 2px solid var(--color-white-gray);
-  padding: var(--space-sm) var(--space-xs);
-  gap: var(--space-xs);
-`;
 
 const DivideLine = styled.div`
   width: 2px;

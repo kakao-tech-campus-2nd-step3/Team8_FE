@@ -1,5 +1,8 @@
-import { allSeniorInfoPath, getAllSeniorInfo } from '../all-senior-info.api';
-import { AllSeniorInfoResponse } from '../types';
+import { AllSeniorInfoResponse } from '../api';
+import {
+  allSeniorInfoPath,
+  getAllSeniorInfo,
+} from '../api/all-senior-info.api';
 import { useQuery } from '@tanstack/react-query';
 
 export const allSeniorInfoQueryKey = [allSeniorInfoPath()];

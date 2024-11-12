@@ -1,4 +1,4 @@
-export const formatPhoneNumber = (phone: string): string => {
+export const formatPhoneNumber = (phone: string) => {
   if (/[^\d]/.test(phone)) {
     return phone;
   }

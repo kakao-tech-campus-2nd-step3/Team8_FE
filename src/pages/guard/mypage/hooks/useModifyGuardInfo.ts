@@ -1,5 +1,4 @@
-import { modifyGuardInformation } from '../';
-import { GuardInformationRequest } from '../types';
+import { GuardInformationRequest, modifyGuardInformation } from '../';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 // 본인 정보 수정
