@@ -3,3 +3,5 @@ export type ServiceTime = {
   time: string;
   extraTime: string;
 };
+
+export type { WriteReportRequest } from './write-report.request';
