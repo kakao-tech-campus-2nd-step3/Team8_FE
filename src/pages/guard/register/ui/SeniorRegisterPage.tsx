@@ -1,6 +1,7 @@
 import { useGetAllSeniorInfo } from '../../mypage';
 import SeniorInfo from '../components/senior-info/SeniorInfo';
 import SeniorRegisterBox from '../components/senior-register-box/SeniorRegisterBox';
+import { SeniorInfoType } from '../types';
 import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -36,7 +37,7 @@ export const SeniorRegisterPage = () => {
         </Box>
 
         <Flex w='full' flexDir='column' gap='var(--space-sm)'>
-          {seniors?.map((senior) => (
+          {seniors?.map((senior: SeniorInfoType) => (
             <SeniorInfo
               key={senior.seniorId}
               senior={senior}

@@ -1,4 +1,4 @@
-import { AllSeniorInfoResponse } from './types';
+import { AllSeniorInfoResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const allSeniorInfoPath = () => `/api/guards/senior`;

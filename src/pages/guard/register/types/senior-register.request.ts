@@ -1,4 +1,4 @@
-export type SeniorRegisterValues = {
+export type SeniorRegisterRequest = {
   seniorName: string;
   seniorPhoneNumber: string;
 };

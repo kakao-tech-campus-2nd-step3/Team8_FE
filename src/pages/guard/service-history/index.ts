@@ -5,3 +5,4 @@ export * from './data';
 export * from './types';
 export * from './api';
 export * from './hooks';
+export * from './types';

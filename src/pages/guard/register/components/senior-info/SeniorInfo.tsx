@@ -1,3 +1,4 @@
+import { SeniorInfoType } from '../../types';
 import {
   useDeleteSeniorInfo,
   useEditSeniorInfo,
@@ -7,12 +8,6 @@ import { BasicButton, formatPhoneNumber } from '@/shared';
 import { deleteIcon, editIcon } from '@/shared/assets';
 import { Box, Flex, Text, Image, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-
-type SeniorInfoType = {
-  seniorName: string;
-  seniorPhoneNumber: string;
-  seniorId: number;
-};
 
 const SeniorInfo = ({
   senior,
