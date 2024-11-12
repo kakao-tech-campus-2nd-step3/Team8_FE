@@ -2,7 +2,7 @@ import {
   getHelloCallHistory,
   getHelloCallHistoryQueryKey,
   HelloCallHistoryListResponse,
-} from '../get-hello-history.api';
+} from '../api/get-hello-history.api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetHelloHistoryList = () => {

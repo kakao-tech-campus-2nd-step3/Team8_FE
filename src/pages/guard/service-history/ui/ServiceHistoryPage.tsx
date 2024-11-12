@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import { useGetCallbackHistory, useGetHelloHistoryList } from './api';
+import { CallbackHistory, HelloCallHistory } from '../api';
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
   CallbackHistoryDetail,
   HelloServiceHistory,
-} from './components';
+} from '../components';
+import { useGetCallbackHistory, useGetHelloHistoryList } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -30,7 +31,7 @@ export const ServiceHistoryPage = () => {
           {callbackHistory &&
           callbackHistory.content &&
           callbackHistory.content.length > 0 ? (
-            callbackHistory.content.map((history) => (
+            callbackHistory.content.map((history: CallbackHistory) => (
               <CallbackHistoryDetail
                 key={history.callbackId}
                 historyData={history}
@@ -63,7 +64,7 @@ export const ServiceHistoryPage = () => {
         <HelloServiceHistoryText />
         <ButtonWrapper gap='var(--space-sm)'>
           {helloCallHistory && helloCallHistory.length > 0 ? (
-            helloCallHistory.map((history) => (
+            helloCallHistory.map((history: HelloCallHistory) => (
               <HelloServiceHistory
                 key={history.helloCallId}
                 historyData={history}

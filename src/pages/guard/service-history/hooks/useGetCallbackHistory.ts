@@ -3,7 +3,7 @@ import {
   CallbackHistoryResponse,
   getCallbackHistory,
   getCallbackHistoryQueryKey,
-} from '../get-callback-history.api';
+} from '../api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetCallbackHistory = (page: number, size: number) => {
