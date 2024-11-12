@@ -102,13 +102,15 @@ const PointBox = ({ isSinitto }: Props) => {
             )}
           </ButtonContainer>
         )}
-        <Text
-          fontSize='var(--font-size-sm)'
-          color='var(--color-gray)'
-          mt='var(--space-sm)'
-        >
-          포인트 충전 요청 후 꼭 카카오톡 나에게 보내기 메세지를 확인해주세요.
-        </Text>
+        {isSinitto ? null : (
+          <Text
+            fontSize='var(--font-size-sm)'
+            color='var(--color-gray)'
+            mt='var(--space-sm)'
+          >
+            포인트 충전 요청 후 꼭 카카오톡 나에게 보내기 메세지를 확인해주세요.
+          </Text>
+        )}
       </PointBoxLayout>
     </Flex>
   );
