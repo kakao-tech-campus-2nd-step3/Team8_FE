@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { getHelloCallHistoryQueryKey } from '../../service-history/apis';
-import { putCompleteHelloCall } from '../api';
+import { putCompleteHelloCall } from '../apis';
 import { CompleteHellCallResponse } from '../types/complete-hello-call.response';
 import { queryClient } from '@/shared';
 import { useMutation } from '@tanstack/react-query';

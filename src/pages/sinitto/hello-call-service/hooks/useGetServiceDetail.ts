@@ -1,4 +1,4 @@
-import { getServiceDetailPath, getServiceDetail } from '../api';
+import { getServiceDetailPath, getServiceDetail } from '../apis';
 import { ServiceDetailResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

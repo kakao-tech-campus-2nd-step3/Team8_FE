@@ -1,4 +1,4 @@
-import { putAcceptHelloCall } from '../api';
+import { putAcceptHelloCall } from '../apis';
 import { SinittoHelloCallResponse } from '../types';
 import { queryClient } from '@/shared';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';

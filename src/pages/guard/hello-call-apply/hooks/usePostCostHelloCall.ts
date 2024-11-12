@@ -1,4 +1,4 @@
-import { costHelloCallPath, postCostHelloCall } from '../api';
+import { costHelloCallPath, postCostHelloCall } from '../apis';
 import { CostHelloCallRequest } from '../types/cost-hello-call.request';
 import { CostHelloCallResponse } from '../types/cost-hello-call.response';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';

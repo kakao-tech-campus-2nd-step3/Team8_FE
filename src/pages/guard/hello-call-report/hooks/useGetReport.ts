@@ -1,4 +1,4 @@
-import { getReport, getReportPath } from '../api';
+import { getReport, getReportPath } from '../apis';
 import { ReportResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

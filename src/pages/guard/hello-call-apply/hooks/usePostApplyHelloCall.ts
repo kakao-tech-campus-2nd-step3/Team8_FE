@@ -2,7 +2,7 @@ import { ErrorResponse } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
-import { applyHelloCallPath, postApplyHelloCall } from '../api';
+import { applyHelloCallPath, postApplyHelloCall } from '../apis';
 import { ApplyHelloCallRequest, ApplyHelloCallResponse } from '../types';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 

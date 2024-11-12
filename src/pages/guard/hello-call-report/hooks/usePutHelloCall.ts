@@ -1,4 +1,4 @@
-import { HelloCallQueryKey, putHelloCall } from '../api';
+import { HelloCallQueryKey, putHelloCall } from '../apis';
 import { HelloCallRequest } from '../types/hello-call.response';
 import { queryClient } from '@/shared/api/instance';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
