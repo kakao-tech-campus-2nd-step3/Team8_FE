@@ -1,8 +1,4 @@
-export type TimeSlot = {
-  dayName: string;
-  startTime: string;
-  endTime: string;
-};
+import { TimeSlot } from './time-slots';
 
 export type ApplyHelloCallRequest = {
   seniorId: number;

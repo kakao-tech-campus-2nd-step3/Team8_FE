@@ -1,5 +1,5 @@
-import { ApplyHelloCallRequest, usePostApplyHelloCall } from '../../api';
-import { TimeSlots } from '@/pages';
+import { useServiceApply } from '../../hooks';
+import { TimeSlots } from '../../types';
 import { BasicButton } from '@/shared';
 
 type Props = {
@@ -21,25 +21,17 @@ export const ServiceApply = ({
   selectedSeniorId,
   requirement,
 }: Props) => {
-  const { mutate: postCostHelloCall } = usePostApplyHelloCall();
-
-  const handleServiceApply = () => {
-    const requestPayload: ApplyHelloCallRequest = {
-      seniorId: selectedSeniorId ? parseInt(selectedSeniorId, 10) : 0,
-      startDate: startDate?.toISOString() || '',
-      endDate: endDate?.toISOString() || '',
-      timeSlots: timeSlotsArray,
-      price: price || 0,
-      serviceTime,
-      requirement,
-    };
-
-    postCostHelloCall(requestPayload);
-  };
+  const { serviceApply } = useServiceApply({
+    serviceTime,
+    startDate,
+    endDate,
+    timeSlotsArray,
+    price,
+    selectedSeniorId,
+    requirement,
+  });
 
   return (
-    <BasicButton onClick={handleServiceApply}>
-      {price} point로 신청하기
-    </BasicButton>
+    <BasicButton onClick={serviceApply}>{price} point로 신청하기</BasicButton>
   );
 };

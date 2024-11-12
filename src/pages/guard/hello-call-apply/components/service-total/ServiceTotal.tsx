@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
-import { usePostCostHelloCall } from '../../api/hooks';
-import { CostHelloCallRequest } from '../../api/types';
-import { TimeSlots, useSortDays } from '@/pages';
+import { useServiceTotal } from '../../hooks';
+import { TimeSlots } from '../../types';
 import { BasicButton } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -22,29 +19,8 @@ export const ServiceTotal = ({
   timeSlotsArray,
   setPrice,
 }: Props) => {
-  const [totalServiceCount, setTotalServiceCount] = useState<number | null>(0);
-
-  const { mutate: postCostHelloCall } = usePostCostHelloCall();
-
-  const sortedTimeSlotsArray = useSortDays(timeSlotsArray);
-
-  const isButtonDisabled = serviceTime === 0;
-
-  const handleButtonClick = () => {
-    const requestPayload: CostHelloCallRequest = {
-      serviceTime,
-      startDate: startDate?.toISOString() || '',
-      endDate: endDate?.toISOString() || '',
-      timeSlots: sortedTimeSlotsArray,
-    };
-
-    postCostHelloCall(requestPayload, {
-      onSuccess: (data) => {
-        setPrice(data.price);
-        setTotalServiceCount(data.totalServiceCount);
-      },
-    });
-  };
+  const { totalServiceCount, isButtonDisabled, calculatePoint } =
+    useServiceTotal(serviceTime, startDate, endDate, timeSlotsArray, setPrice);
 
   return (
     <ContentsBox>
@@ -58,7 +34,7 @@ export const ServiceTotal = ({
         <HighlightText>{totalServiceCount}회</HighlightText>
         <Text as='b'>서비스 이용</Text>
       </Flex>
-      <BasicButton onClick={handleButtonClick} isDisabled={isButtonDisabled}>
+      <BasicButton onClick={calculatePoint} isDisabled={isButtonDisabled}>
         포인트 계산하기
       </BasicButton>
     </ContentsBox>

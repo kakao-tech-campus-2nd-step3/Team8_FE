@@ -1,20 +1,15 @@
-import { TimeSlot } from './api/types';
 import {
   NoticeArea,
   SelectSenior,
+  ServiceApply,
   ServicePeriod,
   ServiceTotal,
   ServiceUsingTime,
   TellToSinitto,
-} from './components';
-import { ServiceApply } from './components/service-apply/ServiceApply';
-import { useHelloCallState } from './hooks';
+} from '../components';
+import { useHelloCallState, useMessage } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Divider } from '@chakra-ui/react';
-
-export type TimeSlots = {
-  selectedTime?: number | null;
-} & TimeSlot;
 
 export const HelloCallApplyPage = () => {
   const {
@@ -30,9 +25,9 @@ export const HelloCallApplyPage = () => {
     setPrice,
     selectedSeniorId,
     setSelectedSeniorId,
-    message,
-    setMessage,
   } = useHelloCallState();
+
+  const { message } = useMessage('');
 
   return (
     <PageLayout>
@@ -60,7 +55,7 @@ export const HelloCallApplyPage = () => {
       />
       <Divider />
 
-      <TellToSinitto message={message} setMessage={setMessage} />
+      <TellToSinitto initialMessage={message} />
       <ServiceApply
         startDate={startDate}
         endDate={endDate}
