@@ -1,7 +1,4 @@
-import {
-  HelloCallRequest,
-  HelloCallResponse,
-} from './types/hello-call.response';
+import { HelloCallRequest, HelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getHelloCallPath = (callId: number) => `/api/hellocalls/guards/${callId}`;

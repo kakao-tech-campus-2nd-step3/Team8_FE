@@ -1,4 +1,4 @@
-import { ReportResponse } from './types';
+import { ReportResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const getReportPath = (callId: number) =>

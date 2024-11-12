@@ -1,4 +1,4 @@
-import { TimeLogResponse } from './types';
+import { TimeLogResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const getTimeLogPath = (callId: number) =>

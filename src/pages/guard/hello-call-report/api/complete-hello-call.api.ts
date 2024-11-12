@@ -1,10 +1,8 @@
-import { CompleteHellCallResponse } from './types/complete-hello-call.response';
+import { CompleteHellCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const completeHelloCallPath = (callId: number) =>
   `/api/hellocalls/complete/${callId}`;
-
-export const CompleteHelloCallQueryKey = [completeHelloCallPath];
 
 export const putCompleteHelloCall = async (
   callId: number
