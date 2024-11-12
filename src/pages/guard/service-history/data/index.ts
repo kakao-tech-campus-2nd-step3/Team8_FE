@@ -1,2 +1,1 @@
-export * from './callback';
-export * from './hello';
+export { DAY_SCHEMA } from './day-schema';
