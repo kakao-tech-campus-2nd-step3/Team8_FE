@@ -1,24 +1,21 @@
-import { useState } from 'react';
-
-import { useGetCallbackHistory, useGetHelloHistoryList } from './api';
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
   CallbackHistoryDetail,
   HelloServiceHistory,
-} from './components';
+} from '../components';
+import { useHistoryData, usePagination } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data: callbackHistory } = useGetCallbackHistory(
+  const { currentPage, goToPreviousPage, goToNextPage } = usePagination(0, 1);
+  const { callbackHistory, helloCallHistory, refetch } = useHistoryData(
     currentPage,
     pageSize
   );
-  const { data: helloCallHistory, refetch } = useGetHelloHistoryList();
 
   const totalPages = callbackHistory?.totalPages || 1;
 
@@ -42,7 +39,7 @@ export const ServiceHistoryPage = () => {
         </ButtonWrapper>
         <Pagination>
           <PaginationButton
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            onClick={goToPreviousPage}
             disabled={currentPage === 0}
           >
             이전
@@ -51,7 +48,7 @@ export const ServiceHistoryPage = () => {
             페이지 {currentPage + 1} / {totalPages}
           </span>
           <PaginationButton
-            onClick={() => setCurrentPage((prev) => prev + 1)}
+            onClick={goToNextPage}
             disabled={currentPage >= totalPages - 1}
           >
             다음
@@ -100,6 +97,7 @@ const PaginationButton = styled.button`
   font-size: var(--font-size-md);
   font-weight: bold;
 `;
+
 const NoServiceMessage = styled.p`
   font-size: 1rem;
   font-weight: 700;
