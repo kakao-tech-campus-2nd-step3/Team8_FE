@@ -1,20 +1,9 @@
-type Time = {
-  hour: number;
-  minute: number;
-  second: number;
-  nano: number;
-};
-
-export type TimeSlot = {
-  dayName: string;
-  startTime: Time;
-  endTime: Time;
-};
+import { TimeSlots } from '@/shared';
 
 export type ServiceDetailResponse = {
   startDate: string;
   endDate: string;
-  timeSlots: TimeSlot[];
+  timeSlots: TimeSlots[];
   requirement: string;
   seniorName: string;
   seniorPhoneNumber: string;

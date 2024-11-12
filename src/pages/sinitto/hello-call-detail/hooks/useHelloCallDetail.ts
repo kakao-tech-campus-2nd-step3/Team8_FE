@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetServiceDetail } from '../api';
+import { useGetServiceDetail } from './useGetServiceDetail';
 
 export const useHelloCallDetail = () => {
   const { helloCallId } = useParams();

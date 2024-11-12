@@ -3,8 +3,8 @@ import { SERVICE_DETAIL } from '../data';
 import {
   useHelloCallDetail,
   useFormattedServiceDates,
-  useFormattedPhoneNumber,
   useNavigateToReport,
+  useFormattedServicePhoneNumber,
 } from '../hooks';
 import { Notice } from '@/shared/components';
 import { Box, Button, Text } from '@chakra-ui/react';
@@ -18,7 +18,7 @@ export const HelloCallDetailPage = () => {
     data?.endDate
   );
 
-  const phoneNumber = useFormattedPhoneNumber(data?.seniorPhoneNumber);
+  const phoneNumber = useFormattedServicePhoneNumber(data?.seniorPhoneNumber);
 
   const goToReport = useNavigateToReport(helloCallId);
 
