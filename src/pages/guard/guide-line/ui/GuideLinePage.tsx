@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 
-import { SeniorGuideLineData } from '../api/view-senior-all-guideline.api';
 import { GuideLineInfo, GuidelineRegisterBox } from '../components';
 import { useGetSeniorAllGuidelines } from '../hooks';
+import { SeniorGuideLineData } from '../types';
 import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
