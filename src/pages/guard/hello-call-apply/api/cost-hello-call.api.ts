@@ -1,4 +1,4 @@
-import { CostHelloCallRequest, CostHelloCallResponse } from './types';
+import { CostHelloCallRequest, CostHelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const costHelloCallPath = () => `/api/hellocalls/guards/cost`;

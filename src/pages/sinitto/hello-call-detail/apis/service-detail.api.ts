@@ -1,4 +1,4 @@
-import { ServiceDetailResponse } from './types/service-detail.response';
+import { ServiceDetailResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const getServiceDetailPath = (callId: number) =>
