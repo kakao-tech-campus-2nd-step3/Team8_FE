@@ -1,1 +1,1 @@
-export { SinittoServiceHistoryPage } from './SinittoServiceHistory';
+export * from './ui';

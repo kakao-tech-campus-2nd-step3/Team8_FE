@@ -1,5 +1,5 @@
-import IconCalendar from '../../assets/calendar.svg';
 import { CustomDatePicker } from './CustomDatePicker';
+import IconCalendar from '@/pages/assets/shared/hello-call/calendar-white.svg';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -22,7 +22,7 @@ export const ServicePeriod = ({
         <TitleText>서비스 이용 기간</TitleText>
       </Flex>
       <Flex dir='row' w='100%' gap={2} textAlign='center' alignItems='center'>
-        <Text w={20}>시작 날짜</Text>
+        <Text w={20}>시작</Text>
         <Image w={6} src={IconCalendar} alt='calendar' />
         <CustomDatePicker
           selectDate={startDate}
@@ -32,7 +32,7 @@ export const ServicePeriod = ({
         />
       </Flex>
       <Flex dir='row' w='100%' gap={2} textAlign='center' alignItems='center'>
-        <Text w={20}>종료 날짜</Text>
+        <Text w={20}>종료</Text>
         <Image w={6} src={IconCalendar} alt='calendar' />
         <CustomDatePicker
           selectDate={endDate}

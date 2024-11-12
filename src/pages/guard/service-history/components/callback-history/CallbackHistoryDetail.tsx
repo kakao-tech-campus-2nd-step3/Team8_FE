@@ -1,9 +1,7 @@
-import {
-  CallbackHistory,
-  ServiceStatus,
-  useCompleteCallback,
-} from '@/pages/guard';
-import { formatPostTime } from '@/shared/utils/dateUtils';
+import { useFormattedPostTime } from '../../hooks/useFormattedPostTime';
+import { useServiceStatus } from '../../hooks/useServiceStatus';
+import { CallbackHistory } from '../../types';
+import { ServiceStatus } from '../service-status';
 import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -12,17 +10,9 @@ type CallbackHistoryDetailProps = {
 };
 
 const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
-  const completeCallbackMutation = useCompleteCallback();
+  const { serviceStatus } = useServiceStatus(historyData);
 
-  const completeCallback = () => {
-    if (historyData.status === 'COMPLETE') {
-      alert('이미 완료 확인한 서비스입니다.');
-    } else if (historyData.status === 'WAITING') {
-      alert('아직 완료되지 않은 대기중인 서비스입니다.');
-    } else if (historyData.status === 'PENDING_COMPLETE') {
-      completeCallbackMutation.mutate(historyData.callbackId);
-    }
-  };
+  const formattedPostTime = useFormattedPostTime(historyData.postTime);
 
   return (
     <ItemListBox>
@@ -32,14 +22,14 @@ const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
         w='68px'
         mr='var(--space-xs)'
       >
-        {formatPostTime(historyData.postTime)}
+        {formattedPostTime}
       </Text>
       <Flex alignItems='end' gap={1} mr='auto'>
         <Text fontSize='var(--font-size-lg)' fontWeight='700'>
           {historyData.seniorName}
         </Text>
       </Flex>
-      <ServiceStatus onClick={completeCallback} status={historyData.status} />
+      <ServiceStatus onClick={serviceStatus} status={historyData.status} />
     </ItemListBox>
   );
 };

@@ -1,25 +1,21 @@
-import { useState } from 'react';
-
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
   CallbackHistoryDetail,
   HelloServiceHistory,
 } from '../components';
-import { useGetCallbackHistory, useGetHelloHistoryList } from '../hooks';
-import { CallbackHistory, HelloCallHistory } from '../types';
+import { useHistoryData, usePagination } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data: callbackHistory } = useGetCallbackHistory(
+  const { currentPage, goToPreviousPage, goToNextPage } = usePagination(0, 1);
+  const { callbackHistory, helloCallHistory, refetch } = useHistoryData(
     currentPage,
     pageSize
   );
-  const { data: helloCallHistory, refetch } = useGetHelloHistoryList();
 
   const totalPages = callbackHistory?.totalPages || 1;
 
@@ -31,7 +27,7 @@ export const ServiceHistoryPage = () => {
           {callbackHistory &&
           callbackHistory.content &&
           callbackHistory.content.length > 0 ? (
-            callbackHistory.content.map((history: CallbackHistory) => (
+            callbackHistory.content.map((history) => (
               <CallbackHistoryDetail
                 key={history.callbackId}
                 historyData={history}
@@ -43,7 +39,7 @@ export const ServiceHistoryPage = () => {
         </ButtonWrapper>
         <Pagination>
           <PaginationButton
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            onClick={goToPreviousPage}
             disabled={currentPage === 0}
           >
             이전
@@ -52,7 +48,7 @@ export const ServiceHistoryPage = () => {
             페이지 {currentPage + 1} / {totalPages}
           </span>
           <PaginationButton
-            onClick={() => setCurrentPage((prev) => prev + 1)}
+            onClick={goToNextPage}
             disabled={currentPage >= totalPages - 1}
           >
             다음
@@ -64,7 +60,7 @@ export const ServiceHistoryPage = () => {
         <HelloServiceHistoryText />
         <ButtonWrapper gap='var(--space-sm)'>
           {helloCallHistory && helloCallHistory.length > 0 ? (
-            helloCallHistory.map((history: HelloCallHistory) => (
+            helloCallHistory.map((history) => (
               <HelloServiceHistory
                 key={history.helloCallId}
                 historyData={history}
@@ -101,6 +97,7 @@ const PaginationButton = styled.button`
   font-size: var(--font-size-md);
   font-weight: bold;
 `;
+
 const NoServiceMessage = styled.p`
   font-size: 1rem;
   font-weight: 700;

@@ -1,8 +1,7 @@
 import { forwardRef } from 'react';
 
 import { IconArrow } from '@/pages/assets';
-import { Box, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 type Props = {
   onClick?: () => void;
@@ -13,8 +12,7 @@ type Props = {
 const CallRequest = forwardRef<HTMLDivElement, Props>(
   ({ onClick, seniorName, days }, ref) => {
     return (
-      <Box
-        display='flex'
+      <Flex
         flexDir='row'
         alignItems='center'
         textAlign='center'
@@ -38,13 +36,24 @@ const CallRequest = forwardRef<HTMLDivElement, Props>(
             marginRight='var(--space-xs)'
             gap='var(--space-xxs)'
           >
-            {days?.map((day, index) => <DayBox key={index}>{day}</DayBox>)}
+            {days?.map((day, index) => (
+              <Text
+                key={index}
+                padding='0.125rem 0.3rem'
+                borderRadius='0.25rem'
+                backgroundColor='var(--color-secondary)'
+                fontSize='var(--font-size-sm)'
+                color='var(--color-primary)'
+              >
+                {day}
+              </Text>
+            ))}
           </Box>
           <Box>
             <IconArrow fill='var(--color-gray)' type='solid' height='24' />
           </Box>
         </Box>
-      </Box>
+      </Flex>
     );
   }
 );
@@ -52,11 +61,3 @@ const CallRequest = forwardRef<HTMLDivElement, Props>(
 CallRequest.displayName = 'CallRequest';
 
 export default CallRequest;
-
-const DayBox = styled(Text)`
-  padding: 0.125rem 0.3rem;
-  border-radius: 0.25rem;
-  background-color: var(--color-secondary);
-  font-size: var(--font-size-sm);
-  color: var(--color-primary);
-`;

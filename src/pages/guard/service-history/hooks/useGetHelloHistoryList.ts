@@ -1,7 +1,4 @@
-import {
-  getHelloCallHistory,
-  getHelloCallHistoryQueryKey,
-} from '../api/get-hello-history.api';
+import { getHelloCallHistory, getHelloCallHistoryQueryKey } from '../apis';
 import { HelloCallHistoryListResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

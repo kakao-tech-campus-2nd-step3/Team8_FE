@@ -32,7 +32,7 @@ export const TextArea = ({
       </Flex>
       {statuses.map((stat, index) => (
         <Flex w='full' justifyContent={textDirection} key={index}>
-          <Text fontSize='sm' fontWeight='700' color='#6D6D6D'>
+          <Text fontSize='md' fontWeight='700' color='#6D6D6D'>
             <Highlight>{stat}</Highlight> {descriptions[index] || ''}
           </Text>
         </Flex>

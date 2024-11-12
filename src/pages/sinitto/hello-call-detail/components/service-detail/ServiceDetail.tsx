@@ -1,14 +1,14 @@
-import { TimeSlot } from '../../api';
 import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
 import IconClock from '@/pages/assets/shared/hello-call/clock.svg';
 import IconSpeaker from '@/pages/assets/shared/hello-call/speaker.svg';
+import { TimeSlots } from '@/shared';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
   startDate: string;
   endDate: string;
-  timeSlots: TimeSlot[] | undefined;
+  timeSlots: TimeSlots[] | undefined;
   serviceTime: number | undefined;
   requirement: string | undefined;
 };

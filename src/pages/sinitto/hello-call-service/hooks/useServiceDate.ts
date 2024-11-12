@@ -1,4 +1,4 @@
-import { ServiceDetailResponse } from '../api';
+import { ServiceDetailResponse } from '../types';
 
 export const useServiceDate = (
   serviceDate: ServiceDetailResponse['startDate'] | undefined

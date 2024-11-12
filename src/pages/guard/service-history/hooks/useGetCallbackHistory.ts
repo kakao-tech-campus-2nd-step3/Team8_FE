@@ -1,12 +1,9 @@
-import { getCallbackHistory, getCallbackHistoryQueryKey } from '../api';
-import {
-  CallbackHistoryRequestParams,
-  CallbackHistoryResponse,
-} from '../types';
+import { getCallbackHistory, getCallbackHistoryQueryKey } from '../apis';
+import { CallbackHistoryRequest, CallbackHistoryResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetCallbackHistory = (page: number, size: number) => {
-  const params: CallbackHistoryRequestParams = {
+  const params: CallbackHistoryRequest = {
     page,
     size,
   };

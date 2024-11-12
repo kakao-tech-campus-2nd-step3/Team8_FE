@@ -1,6 +1,7 @@
 import { createContext, useContext, ReactNode } from 'react';
 
-import { SinittoInfoResponse, useGetSinittoInfo } from '@/pages';
+import { useGetSinittoInfo } from '@/pages/sinitto/sinitto-main/hooks';
+import { SinittoInfoResponse } from '@/pages/sinitto/sinitto-main/types';
 import { UseQueryResult } from '@tanstack/react-query';
 
 type SinittoInfoType = UseQueryResult<SinittoInfoResponse, Error>;

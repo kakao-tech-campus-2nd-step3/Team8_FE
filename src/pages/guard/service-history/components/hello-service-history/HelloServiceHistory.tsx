@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router-dom';
-
-import ServiceStatus from '../service-status/ServiceStatus';
-import { HelloCallHistory, useHelloServiceHistory } from '@/pages/guard';
-import { formatDate, BasicButton } from '@/shared';
-import { Text, Flex } from '@chakra-ui/react';
+import { useHelloServiceHistory } from '../../hooks';
+import { useFormattedDate } from '../../hooks/useFormattedDate';
+import { useSelectedDays } from '../../hooks/useSelectedDays';
+import { useServiceStatusActions } from '../../hooks/useServiceStatusActions';
+import { HelloCallHistory } from '../../types';
+import { ServiceStatus } from '../service-status';
+import { BasicButton } from '@/shared';
+import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-
-const DAYS: string[] = ['월', '화', '수', '목', '금', '토', '일'];
 
 type HelloServiceHistoryProps = {
   historyData: HelloCallHistory;
@@ -17,17 +17,30 @@ const HelloServiceHistory = ({
   historyData,
   refetch,
 }: HelloServiceHistoryProps) => {
-  const { seniorName, status } = historyData;
+  const { seniorName, status, helloCallId } = historyData;
   const { helloCallDetail, deleteHelloCall, isDaySelected } =
-    useHelloServiceHistory({ historyData, refetch });
+    useHelloServiceHistory({
+      historyData,
+      refetch,
+    });
 
-  const navigate = useNavigate();
+  // Hook을 사용하여 상태와 로직 분리
+  const formattedDate = useFormattedDate(
+    helloCallDetail?.startDate,
+    helloCallDetail?.endDate
+  );
+  const { selectedDays } = useSelectedDays(isDaySelected);
+  const { serviceDelete, goToReport } = useServiceStatusActions(
+    status,
+    helloCallId,
+    deleteHelloCall
+  );
 
   return (
     <HistoryContainer>
       <HistoryInfo>
         <Text fontWeight='700' color='var(--color-gray)'>
-          {formatDate(helloCallDetail?.startDate, helloCallDetail?.endDate)}
+          {formattedDate}
         </Text>
         <Text fontSize='var(--font-size-lg)' fontWeight='700'>
           {seniorName}
@@ -37,27 +50,23 @@ const HelloServiceHistory = ({
 
       {status === 'COMPLETE' ? null : (
         <Flex w='full' gap='var(--space-xxs)'>
-          {DAYS.map((day) => (
-            <DayButton key={day} isSelect={isDaySelected(day)}>
+          {selectedDays.map(({ day, isSelected }) => (
+            <DayButton key={day} isSelect={isSelected}>
               {day}
             </DayButton>
           ))}
         </Flex>
       )}
+
       <InfoEditContainer>
         {status === 'WAITING' ? (
-          <BasicButton themeType='gray' height='40px' onClick={deleteHelloCall}>
+          <BasicButton themeType='gray' height='40px' onClick={serviceDelete}>
             삭제하기
           </BasicButton>
         ) : status === 'PENDING_COMPLETE' ? (
-          <>
-            <BasicButton
-              height='40px'
-              onClick={() => navigate(`report/${historyData.helloCallId}`)}
-            >
-              보고서 확인 및 완료처리
-            </BasicButton>
-          </>
+          <BasicButton height='40px' onClick={goToReport}>
+            보고서 확인 및 완료처리
+          </BasicButton>
         ) : null}
       </InfoEditContainer>
     </HistoryContainer>

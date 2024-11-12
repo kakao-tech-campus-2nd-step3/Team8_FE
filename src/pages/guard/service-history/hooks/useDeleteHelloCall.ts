@@ -1,4 +1,4 @@
-import { deleteHelloCall } from '../api';
+import { deleteHelloCall } from '../apis';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 export const useDeleteHelloCall = (

@@ -1,51 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { usePostWriteReport, WriteReportRequest } from '../../api';
-import IconCalendar from '../../assets/calendar.svg';
-import IconClock from '../../assets/clock.svg';
-import IconFile from '../../assets/file.svg';
-import { useGetServiceDetail, useServiceDate } from '@/pages';
+import {
+  useReportContents,
+  useReportSubmit,
+  useServicePeriod,
+  useServiceTimes,
+} from '../../hooks';
+import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
+import IconClock from '@/pages/assets/shared/hello-call/clock.svg';
+import IconFile from '@/pages/assets/shared/hello-call/file.svg';
+import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/hooks';
 import { BasicButton } from '@/shared';
 import { Box, Divider, Image, Text, Textarea, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const ReportDetail = () => {
-  const [reportContent, setReportContent] = useState('');
-
-  const { mutate: postWriteReport } = usePostWriteReport();
-  const navigate = useNavigate();
-
   const helloCallId = localStorage.getItem('helloCallId');
-
   const { data: getServiceDetail } = useGetServiceDetail(Number(helloCallId));
 
-  console.log(getServiceDetail);
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setReportContent(e.target.value);
-  };
+  const { reportContents, changeContents } = useReportContents();
 
-  const handlerSubmit = (helloCallId: number) => {
-    if (!reportContent.trim()) {
-      alert('안부전화 내용을 간략하게 기록해주세요!');
-      return;
-    }
+  const { handlerSubmit } = useReportSubmit(reportContents);
 
-    const requestPayload: WriteReportRequest = {
-      helloCallId,
-      report: reportContent,
-    };
-    postWriteReport(requestPayload, {
-      onSuccess: () => {
-        localStorage.removeItem('helloCallId');
+  const { formattedStartDate, formattedEndDate } = useServicePeriod(
+    getServiceDetail?.startDate,
+    getServiceDetail?.endDate
+  );
 
-        navigate(`/sinitto/service-history`);
-      },
-    });
-  };
-
-  const startDate = useServiceDate(getServiceDetail?.startDate);
-  const endDate = useServiceDate(getServiceDetail?.endDate);
+  const { timeSlots, serviceTime } = useServiceTimes(
+    getServiceDetail?.timeSlots,
+    getServiceDetail?.serviceTime
+  );
 
   return (
     <>
@@ -67,7 +50,7 @@ const ReportDetail = () => {
           </Flex>
           <Box ml={8}>
             <Text>
-              {startDate} ~ {endDate}
+              {formattedStartDate} ~ {formattedEndDate}
             </Text>
           </Box>
         </InfoBox>
@@ -79,7 +62,7 @@ const ReportDetail = () => {
               서비스 수행 시간대
             </Text>
           </Flex>
-          {getServiceDetail?.timeSlots?.map((time, index) => (
+          {timeSlots?.map((time, index) => (
             <Box
               key={index}
               display='flex'
@@ -97,9 +80,7 @@ const ReportDetail = () => {
                 px={1}
                 borderRadius={5}
               >
-                <Text color='var(--color-white)'>
-                  {getServiceDetail.serviceTime} 분
-                </Text>
+                <Text color='var(--color-white)'>{serviceTime} 분</Text>
               </Box>
             </Box>
           ))}
@@ -116,7 +97,7 @@ const ReportDetail = () => {
             border='none'
             resize='none'
             height='full'
-            onChange={(e) => handleContentChange(e)}
+            onChange={changeContents}
           />
         </InfoBox>
       </Box>

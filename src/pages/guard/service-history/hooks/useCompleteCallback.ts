@@ -1,4 +1,4 @@
-import { completeCallback, getCallbackHistoryQueryKey } from '../api';
+import { completeCallback, getCallbackHistoryQueryKey } from '../apis';
 import { queryClient } from '@/shared';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 

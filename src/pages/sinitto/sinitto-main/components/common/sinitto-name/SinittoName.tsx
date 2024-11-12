@@ -1,4 +1,4 @@
-import { useGetSinittoInfo } from '../../../api';
+import { useGetSinittoInfo } from '../../../hooks';
 import { Flex, Text, Spinner } from '@chakra-ui/react';
 
 export const SinittoName = () => {
