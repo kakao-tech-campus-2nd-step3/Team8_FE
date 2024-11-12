@@ -1,16 +1,12 @@
-import {
-  modifyGuideline,
-  ModifyGuidelineRequest,
-} from '../modify-guideline.api';
+import { deleteGuideline } from '../api';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
-export const useModifyGuideline = (
+export const useDeleteGuideline = (
   refetchCallback: () => void,
   guidelineId: number
-): UseMutationResult<string, Error, ModifyGuidelineRequest> => {
+): UseMutationResult<string, Error, number> => {
   return useMutation({
-    mutationFn: (guideline: ModifyGuidelineRequest) =>
-      modifyGuideline(guidelineId, guideline),
+    mutationFn: () => deleteGuideline(guidelineId),
     onSuccess: (data: string) => {
       alert(data);
       refetchCallback();

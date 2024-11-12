@@ -2,7 +2,7 @@ import {
   getViewSpecificGuideline,
   getViewSpecificGuidelineQueryKey,
   ViewSpecificGuidelineResponse,
-} from '../view-specific-guideline.api';
+} from '../api/view-specific-guideline.api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetViewSpecificGuideline = (guidelineId: number) => {

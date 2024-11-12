@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetSeniorAllGuidelines } from './api';
-import { GuideLineInfo, GuidelineRegisterBox } from './components';
+import { SeniorGuideLineData } from '../api/view-senior-all-guideline.api';
+import { GuideLineInfo, GuidelineRegisterBox } from '../components';
+import { useGetSeniorAllGuidelines } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
@@ -13,19 +14,10 @@ export type GuideLineDetailParams = {
 export const GuideLinePage = () => {
   const { seniorId, guidelineType } = useParams<GuideLineDetailParams>();
 
-  const {
-    data: guidelineData,
-    isLoading,
-    isError,
-    refetch,
-  } = useGetSeniorAllGuidelines(Number(seniorId), String(guidelineType));
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error</div>;
-  }
+  const { data: guidelineData, refetch } = useGetSeniorAllGuidelines(
+    Number(seniorId),
+    String(guidelineType)
+  );
 
   return (
     <PageLayout>
@@ -64,7 +56,7 @@ export const GuideLinePage = () => {
           </Text>
         </Box>
         <Flex w='full' flexDir='column' gap='var(--space-sm)'>
-          {guidelineData?.map((guideline) => (
+          {guidelineData?.map((guideline: SeniorGuideLineData) => (
             <GuideLineInfo
               key={guideline.id}
               refetch={refetch}
