@@ -9,7 +9,7 @@ import {
   SinittoBankInfo,
   SinittoInfoRequest,
   SinittoInformation,
-} from '../api/types';
+} from '../types';
 import {
   useMutation,
   UseMutationResult,

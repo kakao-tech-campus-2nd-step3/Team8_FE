@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { CallbackHistory, HelloCallHistory } from '../api';
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
@@ -8,6 +7,7 @@ import {
   HelloServiceHistory,
 } from '../components';
 import { useGetCallbackHistory, useGetHelloHistoryList } from '../hooks';
+import { CallbackHistory, HelloCallHistory } from '../types';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';

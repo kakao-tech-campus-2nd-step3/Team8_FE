@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ReviewRequest } from '../api';
+import { ReviewRequest } from '../types';
 import { UseMutationResult } from '@tanstack/react-query';
 
 type Props = {

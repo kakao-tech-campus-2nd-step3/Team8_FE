@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ModifyGuidelineRequest } from '../api/modify-guideline.api';
+import { ModifyGuidelineRequest } from '../types';
 import { UseMutationResult } from '@tanstack/react-query';
 
 type GuidelineInfo = {

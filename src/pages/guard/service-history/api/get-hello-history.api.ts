@@ -1,13 +1,5 @@
+import { HelloCallHistory, HelloCallHistoryListResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
-
-export type HelloCallHistory = {
-  helloCallId: number;
-  seniorName: string;
-  days: [string];
-  status: string;
-};
-
-export type HelloCallHistoryListResponse = HelloCallHistory[];
 
 const getHelloCallHistoryPath = () => '/api/hellocalls/guards/lists';
 

@@ -1,18 +1,8 @@
+import {
+  SeniorAllGuideLineRequest,
+  SeniorAllGuideLineResponse,
+} from '../types';
 import { fetchInstance } from '@/shared/api/instance';
-
-export type SeniorAllGuideLineResponse = SeniorGuideLineData[];
-
-export type SeniorGuideLineData = {
-  id: number;
-  type: string;
-  title: string;
-  content: string;
-};
-
-export type SeniorAllGuideLineRequest = {
-  seniorId: number;
-  guidelineType: string;
-};
 
 // 특정 시니어의 특정 가이드라인 타입(TAXI, DELIVERY)의 가이드라인 조회
 const getSeniorAllGuidelinesPath = (

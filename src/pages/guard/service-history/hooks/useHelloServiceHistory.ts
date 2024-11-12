@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import { HelloCallHistory, useDeleteHelloCall } from '@/pages/guard';
+import { HelloCallHistory } from '../types';
+import { useDeleteHelloCall } from '@/pages/guard';
 import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/api';
 
 type Props = {

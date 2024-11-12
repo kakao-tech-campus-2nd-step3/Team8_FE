@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { SeniorRegisterValues as SeniorRegisterRequest } from '../api/types/senior-register.type';
+import { SeniorRegisterRequest } from '../types';
 import {
   formatPhoneNumber,
   parsePhoneNumber,

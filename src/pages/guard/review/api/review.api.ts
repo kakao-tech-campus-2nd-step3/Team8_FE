@@ -1,4 +1,4 @@
-import { ReviewRequest } from './types';
+import { ReviewRequest } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const reviewPath = './api/reviews';

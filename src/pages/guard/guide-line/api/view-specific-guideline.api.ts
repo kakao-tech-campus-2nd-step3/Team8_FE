@@ -1,9 +1,5 @@
+import { ViewSpecificGuidelineResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
-
-export type ViewSpecificGuidelineResponse = {
-  title: string;
-  content: string;
-}[];
 
 const getViewSpecificGuidelinePath = (guidelineId: number) =>
   `/api/guideline/${guidelineId}`;
