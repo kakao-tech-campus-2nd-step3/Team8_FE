@@ -1,7 +1,4 @@
-import {
-  cancelHelloCallPath,
-  putCancelHelloCall,
-} from '../cancel-hello-call.api';
+import { cancelHelloCallPath, putCancelHelloCall } from '../apis';
 import { CancelHelloCallResponse } from '../types';
 import { queryClient } from '@/shared/api/instance';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';

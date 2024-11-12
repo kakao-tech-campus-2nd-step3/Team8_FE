@@ -1,4 +1,4 @@
-import { CancelHelloCallResponse } from './types';
+import { CancelHelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const cancelHelloCallPath = (callId: number) =>

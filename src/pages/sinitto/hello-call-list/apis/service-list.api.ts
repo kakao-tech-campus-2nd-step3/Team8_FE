@@ -1,9 +1,7 @@
-import { ServiceListResponse } from './types';
+import { ServiceListResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
-const getServiceListPath = () => `/api/hellocalls/sinittos/list`;
-
-export const ServiceListQueryKey = [getServiceListPath];
+export const getServiceListPath = `/api/hellocalls/sinittos/list`;
 
 export const getServiceList = async (
   page: number,
@@ -11,7 +9,7 @@ export const getServiceList = async (
   sort: string = 'DESC'
 ): Promise<ServiceListResponse> => {
   const response = await fetchInstance.get<ServiceListResponse>(
-    getServiceListPath(),
+    getServiceListPath,
     {
       params: {
         page,

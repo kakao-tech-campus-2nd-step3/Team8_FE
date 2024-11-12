@@ -7,7 +7,7 @@ import {
 import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
 import IconClock from '@/pages/assets/shared/hello-call/clock.svg';
 import IconFile from '@/pages/assets/shared/hello-call/file.svg';
-import { useGetServiceDetail } from '@/pages/sinitto/hello-call-detail';
+import { useGetServiceDetail } from '@/pages/sinitto/hello-call-service/hooks';
 import { BasicButton } from '@/shared';
 import { Box, Divider, Image, Text, Textarea, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
