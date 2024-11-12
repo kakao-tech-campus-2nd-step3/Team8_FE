@@ -1,5 +1,4 @@
-import { ApplyHelloCallRequest } from './types/apply-hello-call.reqeust';
-import { ApplyHelloCallResponse } from './types/apply-hello-call.response';
+import { ApplyHelloCallRequest, ApplyHelloCallResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 export const applyHelloCallPath = () => `/api/hellocalls/guards`;
