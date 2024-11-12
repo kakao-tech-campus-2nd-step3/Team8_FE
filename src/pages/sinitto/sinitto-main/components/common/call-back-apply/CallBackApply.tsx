@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 
+import { ResponseBox } from '../../features';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
-import { ResponseBox, useGetCallbacks } from '@/pages/sinitto';
+import { useGetCallbacks } from '@/pages/sinitto';
 import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
