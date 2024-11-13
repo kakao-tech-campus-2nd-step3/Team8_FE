@@ -1,9 +1,9 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 
-import { RouterPath } from '@/app/routes';
+import { useSeniorSelection, useUserNavigation } from '../../hooks';
 import IconUser from '@/pages/assets/shared/user.svg';
-import { HEADER_HEIGHT, useAllSeniorInfo } from '@/shared';
+import { HEADER_HEIGHT } from '@/shared';
 import { Flex, Image, Select } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -13,11 +13,11 @@ type HeaderProps = {
 };
 
 export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
-  const { data: seniors } = useAllSeniorInfo();
-  const handleSeniorChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    setCurrentSenior(selectedValue ? Number(selectedValue) : null);
-  };
+  const { seniors, handleSeniorChange } = useSeniorSelection({
+    currentSenior,
+    setCurrentSenior,
+  });
+  const { navigateToMyPage } = useUserNavigation();
 
   return (
     <Wrapper>
@@ -36,7 +36,7 @@ export const Header = ({ currentSenior, setCurrentSenior }: HeaderProps) => {
             </option>
           ))}
         </StyledSelect>
-        <Link to={RouterPath.MYPAGE}>
+        <Link to={navigateToMyPage()}>
           <Image height='37px' src={IconUser} alt='icon-user' />
         </Link>
       </Flex>
