@@ -1,1 +1,1 @@
-export { GuardMainPage } from './GuardMainPage';
+export { GuardMainPage } from './ui/GuardMainPage';

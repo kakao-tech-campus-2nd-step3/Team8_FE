@@ -8,5 +8,4 @@ export { useHelloServiceHistory } from './useHelloServiceHistory';
 export { useServiceStatus } from './useServiceStatus';
 export { useServiceStatusActions } from './useServiceStatusActions';
 export { useSelectedDays } from './useSelectedDays';
-export { usePagination } from './usePagination';
 export { useHistoryData } from './useHistoryData';
