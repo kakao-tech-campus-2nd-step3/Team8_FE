@@ -1,33 +1,55 @@
+import { useCallback, useMemo, useState } from 'react';
+
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
   CallbackHistoryDetail,
   HelloServiceHistory,
 } from '../components';
-import { useHistoryData, usePagination } from '../hooks';
+import { useHistoryData } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { currentPage, goToPreviousPage, goToNextPage } = usePagination(0, 1);
+  const serverPageSize = 20;
+  const serverPage = Math.floor((currentPage * pageSize) / serverPageSize);
+  // 서버에서 가져올 때는 20개
   const { callbackHistory, helloCallHistory, refetch } = useHistoryData(
-    currentPage,
-    pageSize
+    serverPage,
+    serverPageSize
+  );
+  // 현재 페이지에 해당하는 콜백 내역만 return
+  const currentPageData = useMemo(() => {
+    if (!callbackHistory?.content) return [];
+    const startIndex = (currentPage * pageSize) % serverPageSize; // currentPage = 0, 1 일 때 startIndex = 0, 5
+    return callbackHistory.content.slice(startIndex, startIndex + pageSize); // 가져온 20개 콜백 내역 배열을 필터링
+  }, [callbackHistory?.content, currentPage, pageSize]);
+
+  const totalPages = Math.ceil(
+    (callbackHistory?.totalElements || 0) / pageSize
   );
 
-  const totalPages = callbackHistory?.totalPages || 1;
+  const pageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      const newServerPage = Math.floor((page * pageSize) / serverPageSize);
+      if (newServerPage !== serverPage) {
+        refetch();
+      }
+    },
+    [refetch, serverPage]
+  );
 
   return (
     <PageLayout>
       <Flex flexDir='column' w='full' gap='var(--space-sm)'>
         <CallbackHistoryText />
         <ButtonWrapper gap='var(--space-xs)'>
-          {callbackHistory &&
-          callbackHistory.content &&
-          callbackHistory.content.length > 0 ? (
-            callbackHistory.content.map((history) => (
+          {currentPageData.length > 0 ? (
+            currentPageData.map((history) => (
               <CallbackHistoryDetail
                 key={history.callbackId}
                 historyData={history}
@@ -39,7 +61,7 @@ export const ServiceHistoryPage = () => {
         </ButtonWrapper>
         <Pagination>
           <PaginationButton
-            onClick={goToPreviousPage}
+            onClick={() => pageChange(Math.max(currentPage - 1, 0))}
             disabled={currentPage === 0}
           >
             이전
@@ -48,7 +70,7 @@ export const ServiceHistoryPage = () => {
             페이지 {currentPage + 1} / {totalPages}
           </span>
           <PaginationButton
-            onClick={goToNextPage}
+            onClick={() => pageChange(currentPage + 1)}
             disabled={currentPage >= totalPages - 1}
           >
             다음

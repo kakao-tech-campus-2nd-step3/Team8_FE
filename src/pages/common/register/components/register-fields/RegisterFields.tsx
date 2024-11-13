@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import type { FormValues } from '../../types';
-import { FormField } from './form-fields';
+import { FormField } from './FormField';
 import { Flex } from '@chakra-ui/react';
 
 type Props = {

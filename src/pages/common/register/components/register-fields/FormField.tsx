@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import type { FormValues } from '../../../types';
+import type { FormValues } from '../../types';
 import { Input, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

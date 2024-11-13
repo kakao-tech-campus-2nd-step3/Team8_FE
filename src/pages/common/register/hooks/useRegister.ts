@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
-import { registerUser, SignupApiResponse } from '../api';
+import { registerUser } from '../api';
+import { SignupApiResponse } from '../types';
 import { RouterPath } from '@/app/routes/path';
 import { authStorage } from '@/shared/utils/storage';
 import { useMutation } from '@tanstack/react-query';

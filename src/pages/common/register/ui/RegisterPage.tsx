@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { RegisterFields, RegisterType, Tos } from './components';
-import { useRegister } from './store/hooks';
-import { FormValues } from './types';
+import { RegisterFields, RegisterType, Tos } from '../components';
+import { useRegister } from '../hooks';
+import { FormValues } from '../types';
 import {
   BasicButton,
   parsePhoneNumber,
@@ -23,7 +23,6 @@ const RegisterPage = () => {
 
   // 회원가입 처리
   const mutation = useRegister();
-
   const { email } = useUserEmail();
 
   const handleUserType = (id: string) => {
