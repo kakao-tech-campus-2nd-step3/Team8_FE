@@ -25,14 +25,14 @@ export const TextArea = ({
       textAlign={textDirection}
       gap='var(--space-xs)'
     >
-      <Flex w='full' justifyContent={textDirection}>
+      <Flex w='full' mt={1} justifyContent={textDirection}>
         <Text fontSize='xl' fontWeight='700'>
           {title}
         </Text>
       </Flex>
       {statuses.map((stat, index) => (
-        <Flex w='full' justifyContent={textDirection} key={index}>
-          <Text fontSize='md' fontWeight='700' color='#6D6D6D'>
+        <Flex w='full' mb={1} justifyContent={textDirection} key={index}>
+          <Text fontSize='md' as='b' color='#6D6D6D'>
             <Highlight>{stat}</Highlight> {descriptions[index] || ''}
           </Text>
         </Flex>

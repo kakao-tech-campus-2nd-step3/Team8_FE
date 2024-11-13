@@ -1,1 +1,1 @@
-export { default as SinittoServiceHistoryPage } from './SinittoServiceHistory';
+export { SinittoServiceHistoryPage } from './SinittoServiceHistory';

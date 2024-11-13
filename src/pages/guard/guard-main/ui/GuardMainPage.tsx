@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { GuideLineList } from '../components/guideline-list';
-import { Header } from '../components/header/Header';
-import { HelloCallApply } from '../components/hello-call-apply';
+import { GuideLineList, Header, HelloCallApply } from '../components';
 import { PageLayout, HEADER_HEIGHT } from '@/shared';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
