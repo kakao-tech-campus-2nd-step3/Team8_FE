@@ -50,14 +50,14 @@ const ServiceManualPage = () => {
         >
           <SwiperSlide>
             <ManualDetail
-              title='보호자 홈페이지의 기능을 보여드릴게요.'
+              title='보호자 홈페이지의 기능을 보여드릴게요'
               description='기능을 사용하기 위해서는 마이페이지의 내 시니어 관리를 통해 시니어를 등록해야해요!'
               imageSrc='/image/service-manual1.png'
             />
           </SwiperSlide>
           <SwiperSlide>
             <ManualDetail
-              title='가이드라인 만들기'
+              title='가이드라인을 만들어보세요'
               description='시니어를 등록했다면 시니어마다 가이드라인을 등록해보세요! 시니또들이 빠르게 도움을 줄 수 있습니다. '
               imageSrc='/image/service-manual2.png'
             />
@@ -79,7 +79,7 @@ const ServiceManualPage = () => {
           <SwiperSlide>
             <ManualDetail
               title='시니어의 서비스를 확인하세요'
-              description='서비스 확인하고 완료 처리해주세요. 안부전화의 경우 시니또가 작성한 보고서를 볼 수 있습니다!'
+              description='서비스를 확인하고 완료 처리해주세요. 안부전화의 경우 시니또가 작성한 보고서를 볼 수 있습니다!'
               imageSrc='/image/service-manual5.png'
             />
           </SwiperSlide>
