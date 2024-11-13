@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import type { Swiper as SwiperType } from 'swiper';
 
-import ManualDetail from './components/ManualDetail';
+import ManualDetail from '../components/ManualDetail';
+import { HEADER_HEIGHT } from '@/shared';
 import { Button, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import 'swiper/css';
@@ -118,7 +119,7 @@ const ManualPageLayout = styled.div<{ page: number }>`
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  padding: 1rem 0;
+  padding-top: ${HEADER_HEIGHT};
   background-color: var(--color-secondary);
   .swiper-pagination-bullet-active {
     background-color: ${(props) =>
@@ -133,6 +134,11 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 390px;
   margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: 400px) {
+    max-width: 100%;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -191,8 +197,8 @@ const PaginationWrapper = styled.div`
   margin-bottom: 1rem;
 
   .custom-bullet {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     margin: 0 5px;
     border-radius: 50%;
     background-color: white;
