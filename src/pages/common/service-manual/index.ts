@@ -1,1 +1,1 @@
-export { default as ServiceManualPage } from './ServiceManualPage';
+export { default as ServiceManualPage } from './ui/ServiceManualPage';

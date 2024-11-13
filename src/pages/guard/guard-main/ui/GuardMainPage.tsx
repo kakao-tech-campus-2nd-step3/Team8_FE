@@ -12,7 +12,7 @@ export const GuardMainPage = () => {
   const [currentSenior, setCurrentSenior] = useState<number | null>(null);
   const navigate = useNavigate();
   return (
-    <Box pt={HEADER_HEIGHT}>
+    <Box pt={HEADER_HEIGHT} position='relative'>
       <PageLayout>
         <Header
           currentSenior={currentSenior}
@@ -56,7 +56,7 @@ const Content = styled.p`
 `;
 
 const Banner = styled.div`
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 20%;
   transform: translateY(-50%);
