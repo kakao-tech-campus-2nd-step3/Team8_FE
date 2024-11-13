@@ -2,7 +2,7 @@ import {
   SignupApiResponse,
   SignupErrorResponse,
   SignupReguestParams,
-} from '../../types';
+} from '../types';
 import { fetchInstance } from '@/shared';
 
 export const registerUser = async ({
