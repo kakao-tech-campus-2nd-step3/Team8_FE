@@ -1,11 +1,14 @@
+import { AxiosError } from 'axios';
+
 import { addSeniorInfo } from '../api';
 import { SeniorRegisterRequest } from '../types';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-// 시니어 추가 훅
-export const useAddSeniorInfo = (
-  refetchCallback: () => void
-): UseMutationResult<string, Error, SeniorRegisterRequest> => {
+type ErrorResponse = {
+  detail: string;
+};
+
+export const useAddSeniorInfo = (refetchCallback: () => void) => {
   return useMutation({
     mutationFn: (seniorInfo: SeniorRegisterRequest) =>
       addSeniorInfo(seniorInfo),
@@ -13,8 +16,10 @@ export const useAddSeniorInfo = (
       alert(data);
       refetchCallback();
     },
-    onError: (error: Error) => {
+    onError: (error) => {
+      const axiosError = error as AxiosError<ErrorResponse>;
       console.error(error);
+      alert(axiosError?.response?.data?.detail);
     },
   });
 };
