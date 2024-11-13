@@ -22,13 +22,13 @@ const GUIDE_LINE_CATEGORIES = [
     backgroundColor: '#b28bff',
   },
   {
-    title: '서류 제출 도와주기',
-    id: null,
+    title: '병원 접수 및 예약 대행',
+    id: 'HOSPITAL',
     backgroundColor: '#ffa7b5',
   },
   {
-    title: '대중교통 이동 도와주기',
-    id: null,
+    title: '여행 및 문화 생활 예약 대행',
+    id: 'CULTURE_LIFE',
     backgroundColor: '#ff4d68',
   },
 ] as const;
