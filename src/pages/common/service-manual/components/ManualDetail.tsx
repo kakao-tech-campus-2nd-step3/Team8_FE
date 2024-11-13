@@ -14,6 +14,7 @@ const ManualDetail = ({ imageSrc, title, description }: Props) => {
         <Image
           w='350px'
           h='500px'
+          border='2px solid var(--color-primary)'
           borderRadius={10}
           src={imageSrc}
           alt={title}
