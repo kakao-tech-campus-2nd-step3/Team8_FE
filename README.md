@@ -89,7 +89,6 @@ pnpm run dev
 ### Frontend
 <img width="697" alt="image" src="https://github.com/user-attachments/assets/6387235c-1ddf-4ebf-8eca-d3e838559d4a">
 
-
 ### Backend
 <img width="705" alt="image" src="https://github.com/user-attachments/assets/c1f11983-4563-4322-9a29-e512e14927d5">
 
@@ -98,6 +97,296 @@ pnpm run dev
 
 ## ERD
 ![image](https://github.com/user-attachments/assets/d638bf78-4adc-4a43-96f2-e30cd04ea7b3)
+
+## 📁 폴더 구조
+> [!NOTE]
+> 
+> 해당 폴더 구조를 참고하였습니다.
+> 
+> [프론트엔드 개발자 관점으로 바라보는 관심사의 분리와 좋은 폴더 구조 (feat. FSD)](https://velog.io/@teo/separation-of-concerns-of-frontend)
+```
+.
+├── README.md
+├── __mocks__
+│   ├── fileMock.d.ts
+│   ├── fileMock.js
+│   └── styleMock.js
+├── babel.config.js
+├── index.html
+├── jest.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── public
+│   ├── favicon.ico
+│   ├── icons
+│   └── image
+├── src
+│   ├── App.tsx
+│   ├── app
+│   │   ├── index.ts
+│   │   └── routes
+│   │       ├── components
+│   │       │   ├── index.ts
+│   │       │   └── protected-route
+│   │       ├── index.ts
+│   │       ├── path.ts
+│   │       └── router.tsx
+│   ├── declaration.d.ts
+│   ├── main.tsx
+│   ├── pages
+│   │   ├── assets
+│   │   │   ├── index.ts
+│   │   │   ├── main
+│   │   │   ├── shared
+│   │   │   └── sinitto-main
+│   │   ├── common
+│   │   │   ├── dummy-redirect
+│   │   │   ├── index.ts
+│   │   │   ├── onboard
+│   │   │   │   ├── components
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── redirect
+│   │   │   │   ├── api
+│   │   │   │   ├── components
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── register
+│   │   │   │   ├── api
+│   │   │   │   ├── components
+│   │   │   │   ├── data
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   └── service-manual
+│   │   │       ├── components
+│   │   │       ├── index.ts
+│   │   │       └── ui
+│   │   ├── guard
+│   │   │   ├── guard-main
+│   │   │   │   ├── components
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   └── ui
+│   │   │   ├── guide-line
+│   │   │   │   ├── api
+│   │   │   │   ├── components
+│   │   │   │   ├── data
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── hello-call-apply
+│   │   │   │   ├── apis
+│   │   │   │   ├── components
+│   │   │   │   ├── data
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── hello-call-report
+│   │   │   │   ├── apis
+│   │   │   │   ├── components
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── index.ts
+│   │   │   ├── mypage
+│   │   │   │   ├── api
+│   │   │   │   ├── components
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── register
+│   │   │   │   ├── api
+│   │   │   │   ├── components
+│   │   │   │   ├── data
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   ├── review
+│   │   │   │   ├── api
+│   │   │   │   ├── asset
+│   │   │   │   ├── hooks
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types
+│   │   │   │   └── ui
+│   │   │   └── service-history
+│   │   │       ├── apis
+│   │   │       ├── components
+│   │   │       ├── data
+│   │   │       ├── hooks
+│   │   │       ├── index.ts
+│   │   │       ├── types
+│   │   │       └── ui
+│   │   ├── index.ts
+│   │   └── sinitto
+│   │       ├── call-back
+│   │       │   ├── detail
+│   │       │   │   ├── api
+│   │       │   │   ├── assets
+│   │       │   │   ├── components
+│   │       │   │   ├── data
+│   │       │   │   ├── hooks
+│   │       │   │   ├── types
+│   │       │   │   ├── ui
+│   │       │   ├── index.ts
+│   │       │   └── list
+│   │       │   │   ├── api
+│   │       │   │   ├── assets
+│   │       │   │   ├── components
+│   │       │   │   ├── data
+│   │       │   │   ├── hooks
+│   │       │   │   ├── index.ts
+│   │       │   │   ├── types
+│   │       │   │   └── ui
+│   │       ├── guide-line
+│   │       │   │   ├── api
+│   │       │   │   ├── assets
+│   │       │   │   ├── components
+│   │       │   │   ├── data
+│   │       │   │   ├── hooks
+│   │       │   │   ├── index.ts
+│   │       │   │   ├── types
+│   │       │   │   └── ui
+│   │       ├── hello-call-detail
+│   │       │   │   ├── api
+│   │       │   │   ├── assets
+│   │       │   │   ├── components
+│   │       │   │   ├── data
+│   │       │   │   ├── hooks
+│   │       │   │   ├── index.ts
+│   │       │   │   ├── types
+│   │       │   │   └── ui
+│   │       ├── hello-call-list
+│   │       │   ├── apis
+│   │       │   ├── components
+│   │       │   ├── hooks
+│   │       │   ├── index.ts
+│   │       │   ├── types
+│   │       │   └── ui
+│   │       ├── hello-call-report
+│   │       │   ├── apis
+│   │       │   ├── components
+│   │       │   ├── hooks
+│   │       │   ├── index.ts
+│   │       │   ├── types
+│   │       │   └── ui
+│   │       ├── hello-call-service
+│   │       │   ├── __test__
+│   │       │   ├── apis
+│   │       │   ├── components
+│   │       │   ├── data
+│   │       │   ├── hooks
+│   │       │   ├── index.ts
+│   │       │   ├── types
+│   │       │   └── ui
+│   │       ├── index.ts
+│   │       ├── mypage
+│   │       │   ├── api
+│   │       │   ├── components
+│   │       │   ├── data
+│   │       │   ├── hooks
+│   │       │   ├── index.ts
+│   │       │   ├── types
+│   │       │   └── ui
+│   │       ├── point
+│   │       ├── review
+│   │       │   └── components
+│   │       ├── service-history
+│   │       │   ├── apis
+│   │       │   ├── components
+│   │       │   ├── data
+│   │       │   ├── hooks
+│   │       │   ├── index.ts
+│   │       │   ├── types
+│   │       │   └── ui
+│   │       └── sinitto-main
+│   │           ├── apis
+│   │           ├── components
+│   │           ├── hooks
+│   │           ├── index.ts
+│   │           ├── types
+│   │           └── ui
+│   ├── setupTests.ts
+│   ├── shared
+│   │   ├── api
+│   │   │   ├── hooks
+│   │   │   ├── index.ts
+│   │   │   ├── instance
+│   │   │   ├── logout.api.ts
+│   │   │   ├── point
+│   │   │   └── withdrawal.api.ts
+│   │   ├── assets
+│   │   ├── components
+│   │   │   ├── common
+│   │   │   │   ├── button
+│   │   │   │   ├── guide-line-button
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── layout
+│   │   │   │   ├── modal
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── page-layout
+│   │   │   │   └── view
+│   │   │   ├── features
+│   │   │   │   ├── header
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── mypage
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   ├── logout-button
+│   │   │   │   │   ├── point-box
+│   │   │   │   │   ├── point-log-box
+│   │   │   │   │   └── withdrawal-button
+│   │   │   │   └── notice
+│   │   │   └── index.ts
+│   │   ├── constants
+│   │   │   ├── error-status
+│   │   │   └── index.ts
+│   │   ├── hooks
+│   │   │   ├── hello-call
+│   │   │   ├── index.ts
+│   │   │   └── point
+│   │   ├── index.ts
+│   │   ├── provider
+│   │   ├── styles
+│   │   │   ├── index.ts
+│   │   │   ├── reset.css
+│   │   │   └── variants
+│   │   │       └── index.ts
+│   │   ├── theme
+│   │   │   ├── global
+│   │   │   └── index.ts
+│   │   ├── types
+│   │   └── utils
+│   │       ├── dateUtils.ts
+│   │       ├── formatPhoneNumber.ts
+│   │       ├── handle-callback-error.ts
+│   │       ├── index.ts
+│   │       ├── statusUtils.ts
+│   │       ├── storage
+│   │       │   ├── authStorage.ts
+│   │       │   └── index.ts
+│   │       ├── test
+│   │       │   ├── dateUtils.test.ts
+│   │       │   ├── formatPhoneNumber.test.ts
+│   │       │   ├── statusUtils.test.ts
+│   │       │   └── validateInformation.test.ts
+│   │       ├── validateAccountNumber.ts
+│   │       ├── validateName.ts
+│   │       └── validatePhoneNumber.ts
+│   └── vite-env.d.ts
+├── sw.js
+├── tsconfig.json
+├── tsconfig.node.json
+├── tsconfig.test.json
+└── vite.config.ts
+```
 
 ## 🤔 시니또가 무엇인가요?
 
