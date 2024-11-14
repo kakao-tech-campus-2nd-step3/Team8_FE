@@ -1,39 +1,19 @@
-import { useEffect } from 'react';
-import { useParams, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { CallbackMenu } from './components';
 import { GuideLineList } from './components/guide-line-list';
-import { RouterPath } from '@/app/routes/path';
-import {
-  Notice,
-  PageLayout,
-  useGetCallback,
-  handleCallbackError,
-} from '@/shared';
+import { useCallbackDetailParams } from './hooks/useCallbackDetailParams';
+import { useCallbackMenuData } from './hooks/useCallbackMenuData';
+import { useFetchCallback } from './hooks/useFetchCallback';
+import { Notice, PageLayout } from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
 
-export type CallBackDetailParams = {
-  callBackId: string;
-};
-
 export const CallBackDetailPage = () => {
-  const { callBackId = '' } = useParams<CallBackDetailParams>();
-  const navigate = useNavigate();
+  const { callBackId } = useCallbackDetailParams();
 
-  const {
-    data: callbackData,
-    isLoading: isCallBackLoading,
-    isError: isCallBackError,
-    error: callBackError,
-  } = useGetCallback(callBackId);
+  const { callbackData, isCallBackLoading } = useFetchCallback(callBackId);
 
-  useEffect(() => {
-    if (isCallBackError) {
-      const errorMessage = handleCallbackError(callBackError);
-      alert(errorMessage);
-      navigate(RouterPath.CALL_BACK_LIST);
-    }
-  }, [isCallBackError, callBackError, navigate]);
+  const callbackMenuData = useCallbackMenuData(callbackData, callBackId);
 
   return (
     <>
@@ -50,11 +30,7 @@ export const CallBackDetailPage = () => {
               />
               <GuideLineList />
               <Divider />
-              <CallbackMenu
-                callBackId={Number(callBackId)}
-                accept={callbackData.isAssignedToSelf}
-                phoneNumber={callbackData.seniorPhoneNumber}
-              />
+              {callbackMenuData && <CallbackMenu {...callbackMenuData} />}
             </>
           )
         )}

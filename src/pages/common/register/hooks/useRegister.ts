@@ -15,7 +15,6 @@ const useRegister = () => {
     if ('status' in data && data.status === 207) {
       alert(data.detail);
     } else {
-      console.log(data);
       if ('accessToken' in data) {
         authStorage.accessToken.set(data.accessToken);
         authStorage.refreshToken.set(data.refreshToken);

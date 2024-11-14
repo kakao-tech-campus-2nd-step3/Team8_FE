@@ -6,6 +6,7 @@ import type {
 import axios from 'axios';
 
 import { authStorage } from '../../utils/storage/authStorage';
+import { ERROR_STATUS } from '@/shared';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -59,7 +60,10 @@ fetchInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.status === 461 && !originalRequest._retry) {
+    if (
+      error.response?.status === ERROR_STATUS.ACCESS_TOKEN_EXPIRATION &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
 
       const refreshToken = localStorage.getItem('refreshToken');
@@ -81,11 +85,14 @@ fetchInstance.interceptors.response.use(
 
         const data = await resp.json();
 
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
+        authStorage.accessToken.set(data.accessToken);
+        authStorage.refreshToken.set(data.refreshToken);
 
         return fetchInstance(originalRequest);
-      } else if (resp.status === 460 || resp.status === 462) {
+      } else if (
+        resp.status === ERROR_STATUS.REFRESH_TOKEN_EXPIRATION ||
+        resp.status === ERROR_STATUS.INVALID_REFRESH_TOKEN
+      ) {
         console.log('토큰 재발급 실패');
 
         localStorage.removeItem('accessToken');

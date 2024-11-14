@@ -1,5 +1,5 @@
 import { CustomDatePicker } from './CustomDatePicker';
-import IconCalendar from '@/pages/assets/shared/hello-call/calendar-white.svg';
+import IconCalendar from '@/pages/assets/hello-call/calendar-white.svg';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

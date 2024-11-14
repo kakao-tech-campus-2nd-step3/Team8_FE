@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import ArrowImg from '../../assets/arrow-outline.png';
+import ArrowImg from '@/pages/assets/hello-call/arrow-outline.png';
 import { Button, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

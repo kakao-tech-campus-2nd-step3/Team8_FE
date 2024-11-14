@@ -1,4 +1,4 @@
-import { CancelCallback } from '../cancel-call-back.api';
+import { CancelCallback } from '../apis';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCancelCallback = () => {
