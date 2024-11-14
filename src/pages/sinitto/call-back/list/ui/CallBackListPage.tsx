@@ -1,6 +1,5 @@
-import { RequestRow } from './components';
-import { useCallbacks } from './hooks/useCallbacks';
-import { useInfiniteScroll } from './hooks/useInfiniteScroll';
+import { RequestRow } from '../components';
+import { useCallbacks, useInfiniteScroll } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
