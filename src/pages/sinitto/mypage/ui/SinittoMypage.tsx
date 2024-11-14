@@ -6,7 +6,7 @@ import {
   PageLayout,
 } from '@/shared/components';
 
-export const SinittoMypage = () => {
+export const SinittoMyPage = () => {
   return (
     <PageLayout>
       <SinittoProfileBox />
