@@ -41,7 +41,7 @@ const RegisterPage = () => {
       isSinitto,
     };
 
-    authStorage.isSinitto.set(requestData.isSinitto);
+    authStorage.isSinitto.set(requestData.isSinitto.toString());
 
     mutation.mutate(requestData);
   };
