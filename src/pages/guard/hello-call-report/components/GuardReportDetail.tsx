@@ -1,8 +1,8 @@
 import { useCompleteHelloCall } from '../hooks/useCompleteHelloCall';
 import { useReport } from '../hooks/useReport';
-import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
-import IconFile from '@/pages/assets/shared/hello-call/file.svg';
-import heartIcon from '@/pages/assets/shared/hello-call/heart.svg';
+import IconCalendar from '@/pages/assets/hello-call/calendar.svg';
+import IconFile from '@/pages/assets/hello-call/file.svg';
+import heartIcon from '@/pages/assets/hello-call/heart.svg';
 import { Box, Text, Image, Divider, Button, Flex } from '@chakra-ui/react';
 
 type Props = {
