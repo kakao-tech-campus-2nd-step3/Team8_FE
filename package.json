@@ -26,6 +26,7 @@
     "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
+    "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^6.26.1",
     "swiper": "^11.1.14"
   },
@@ -34,7 +35,6 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "7.24.7",
-    "@locator/babel-jsx": "^0.4.3",
     "@testing-library/jest-dom": "6.4.8",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "29.5.12",
