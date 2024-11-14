@@ -14,6 +14,43 @@
   - [3. 콜백 서비스](#3-콜백-서비스)
   - [4. 안부 전화 서비스](#4-안부-전화-서비스)
 
+## 🚀 배포 주소
+### Client
+[https://sinitto.life/](https://sinitto.life/)
+
+### Dummy Data Login
+[https://sinitto.site/dummy](https://sinitto.site/dummy)
+
+**비밀번호** `1234`
+
+### Server
+[https://sinitto.site/](https://sinitto.site/)
+
+## 👥 팀원
+
+|Frontend|Frontend|Frontend|
+|:------:|:------:|:------:|
+|[<img src="https://github.com/Dobbymin.png" width="100px">](https://github.com/Dobbymin)|[<img src="https://github.com/Diwoni.png" width="100px">](https://github.com/Diwoni)|[<img src="https://github.com/JYN523.png" width="100px">](https://github.com/JYN523)|
+|[김강민](https://github.com/Dobbymin)|[정지원](https://github.com/Diwoni)|[제유나](https://github.com/JYN523)|
+
+|Backend|Backend|Backend|Backend|
+|:------:|:------:|:------:|:------:|
+|[<img src="https://github.com/zzoe2346.png" width="100px">](https://github.com/zzoe2346)|[<img src="https://github.com/GitJIHO.png" width="100px">](https://github.com/GitJIHO)|[<img src="https://github.com/2iedo.png" width="100px">](https://github.com/2iedo)|[<img src="https://github.com/eunsoni.png" width="100px">](https://github.com/eunsoni)|
+|[정성훈](https://github.com/zzoe2346)|[이지호](https://github.com/GitJIHO)|[이도훈](https://github.com/2iedo)|[김은선](https://github.com/eunsoni)|
+
+## ⚒️ 기술 스텍
+
+### Frontend
+<img width="697" alt="image" src="https://github.com/user-attachments/assets/6387235c-1ddf-4ebf-8eca-d3e838559d4a">
+
+
+### Backend
+<img width="705" alt="image" src="https://github.com/user-attachments/assets/c1f11983-4563-4322-9a29-e512e14927d5">
+
+## 서비스 아키텍처
+
+![Service Architecture](https://github.com/user-attachments/assets/d54fa701-2065-4492-8c47-2511f5137c14)
+
 ## 🤔 시니또가 무엇인가요?
 
 ‘시니또’는 어르신을 뜻하는 ‘시니어’와 비밀 친구를 뜻하는 ‘마니또’를 합친 단어로,
