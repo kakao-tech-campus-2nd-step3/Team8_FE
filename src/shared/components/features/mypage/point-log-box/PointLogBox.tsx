@@ -94,7 +94,7 @@ const PointLogBox = () => {
           이전
         </PaginationButton>
         <span>
-          페이지 {currentPage + 1} / {totalPages}
+          페이지 {currentPage + 1} / {totalPages || 1}
         </span>
         <PaginationButton
           onClick={() => pageChange(currentPage + 1)}
