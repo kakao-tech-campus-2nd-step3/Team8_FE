@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
+import { useRequestNavigation, useTimeAgo } from '../../hooks';
 import { IconArrow } from '@/pages/assets';
 import styled from '@emotion/styled';
 
@@ -12,34 +12,14 @@ type Props = {
 
 export const RequestRow = forwardRef<HTMLButtonElement, Props>(
   ({ name, time, id }, ref) => {
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-      navigate(`${id}`);
-    };
-
-    const getTimeAgo = (postTime: string) => {
-      const postDate = new Date(postTime);
-      const now = new Date();
-      const differenceInMinutes = Math.floor(
-        (now.getTime() - postDate.getTime()) / 60000
-      );
-
-      if (differenceInMinutes < 60) {
-        return differenceInMinutes > 0
-          ? differenceInMinutes + '분 전'
-          : '방금 전';
-      } else {
-        const differenceInHours = Math.floor(differenceInMinutes / 60);
-        return differenceInHours + '시간 전';
-      }
-    };
+    const handleClick = useRequestNavigation(id);
+    const timeAgo = useTimeAgo(time);
 
     return (
       <Wrapper ref={ref} onClick={handleClick}>
         <Content>
           <Title>{name}님의 요청</Title>
-          <Time>{getTimeAgo(time)}</Time>
+          <Time>{timeAgo}</Time>
           <IconArrow fill='var(--color-gray)' type='solid' height='24' />
         </Content>
       </Wrapper>

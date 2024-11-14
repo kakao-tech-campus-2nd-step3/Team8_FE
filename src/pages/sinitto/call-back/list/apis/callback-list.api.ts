@@ -1,4 +1,4 @@
-import { CallbackListResponse } from './types';
+import { CallbackListResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getCallbackListPath = '/api/callbacks';
