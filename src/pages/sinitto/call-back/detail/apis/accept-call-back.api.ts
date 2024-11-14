@@ -1,4 +1,4 @@
-import { fetchInstance } from '@/shared/api/instance';
+import { fetchInstance } from '@/shared';
 
 const getacceptCallbackPath = (callbackId: number) =>
   `/api/callbacks/accept/${callbackId}`;

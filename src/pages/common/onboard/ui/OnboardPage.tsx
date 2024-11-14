@@ -2,15 +2,15 @@ import { useState } from 'react';
 
 import type { Swiper as SwiperType } from 'swiper';
 
-import { LoginButton } from './components';
-import { FirstPage, SecondPage, ThirdPage } from './components/swipe-page';
+import { LoginButton } from '../components';
+import { FirstPage, SecondPage, ThirdPage } from '../components/swipe-page';
 import styled from '@emotion/styled';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const OnboardPage = () => {
+export const OnboardPage = () => {
   const [page, setPage] = useState(0);
 
   const handleSlideChange = (swiper: SwiperType) => {
@@ -45,8 +45,6 @@ const OnboardPage = () => {
     </MainPageLayout>
   );
 };
-
-export default OnboardPage;
 
 type PageProps = {
   page: number;

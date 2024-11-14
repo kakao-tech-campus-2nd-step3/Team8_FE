@@ -1,4 +1,4 @@
-import { CallbackResponse } from '@/shared/types';
+import { CallbackResponse } from '@/shared';
 
 export type CallbackListResponse = {
   totalElements: number;

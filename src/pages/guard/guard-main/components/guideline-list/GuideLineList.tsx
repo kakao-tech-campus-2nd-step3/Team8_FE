@@ -17,7 +17,7 @@ export const GuideLineList = ({ seniorId }: Props) => {
         </Flex>
       </Flex>
       <Flex>
-        <GuideLineButton seniorId={seniorId} />
+        <GuideLineButton seniorId={seniorId} userType='guard' />
       </Flex>
     </Flex>
   );
