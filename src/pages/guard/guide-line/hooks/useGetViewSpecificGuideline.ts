@@ -1,7 +1,7 @@
 import {
   getViewSpecificGuideline,
   getViewSpecificGuidelineQueryKey,
-} from '../api/view-specific-guideline.api';
+} from '../apis';
 import { ViewSpecificGuidelineResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

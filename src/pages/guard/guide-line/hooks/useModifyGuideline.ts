@@ -1,4 +1,4 @@
-import { modifyGuideline } from '../api/modify-guideline.api';
+import { modifyGuideline } from '../apis';
 import { ModifyGuidelineRequest } from '../types';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
