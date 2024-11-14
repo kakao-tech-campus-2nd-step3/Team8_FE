@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes';
+import { authStorage } from '@/shared';
 import { Box, Text, Spinner, Heading } from '@chakra-ui/react';
 
 export const DummyRedirectPage = () => {
@@ -20,9 +21,9 @@ export const DummyRedirectPage = () => {
 
     if (accessToken && refreshToken && isSinitto) {
       // 로컬 스토리지에 토큰 저장
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('isSinitto', isSinitto);
+      authStorage.accessToken.set(accessToken);
+      authStorage.refreshToken.set(refreshToken);
+      authStorage.isSinitto.set(isSinitto === 'true');
 
       // isSinitto 상태에 따른 메시지 설정
       setStatusMessage(
