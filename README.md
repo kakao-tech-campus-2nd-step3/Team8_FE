@@ -23,7 +23,7 @@
 
 ## 🚀 배포 주소
 ### ✔️ Client
-[https://sinitto.life/](https://sinitto.life/)
+[https://sinitto.life](https://sinitto.life)
 
 ### ✔️ Dummy Data Login
 [https://sinitto.site/dummy](https://sinitto.site/dummy)
@@ -31,10 +31,13 @@
 **비밀번호** `1234`
 
 ### ✔️ Server
-[https://sinitto.site/](https://sinitto.site/)
+[https://sinitto.site](https://sinitto.site)
 
 ### ✔️ API 명세서 (Swagger)
 [https://sinitto.site/swagger-ui/index.html](https://sinitto.site/swagger-ui/index.html)
+
+### ✔️ Slack
+[https://join.slack.com/t/sinitto/shared_invite](https://join.slack.com/t/sinitto/shared_invite/zt-2uqws45gg-bsPq8cuH2iQV6Jk1Y3Zglw)
 
 ## ✨ Local 환경 실행 방법
 > project를 local 환경에 clone 합니다.
@@ -91,8 +94,7 @@ pnpm run dev
 <img width="705" alt="image" src="https://github.com/user-attachments/assets/c1f11983-4563-4322-9a29-e512e14927d5">
 
 ## 서비스 아키텍처
-
-![Service Architecture](https://github.com/user-attachments/assets/d54fa701-2065-4492-8c47-2511f5137c14)
+![Service Architecture](https://github.com/user-attachments/assets/d4b827a4-1462-4585-a341-88442a0eabee)
 
 ## ERD
 ![image](https://github.com/user-attachments/assets/d638bf78-4adc-4a43-96f2-e30cd04ea7b3)
