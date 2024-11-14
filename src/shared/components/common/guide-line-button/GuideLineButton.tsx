@@ -9,7 +9,7 @@ type Props = {
   userType: string;
 };
 
-const GUIDE_LINE_CATEGORIES = [
+export const GUIDE_LINE_CATEGORIES = [
   {
     title: '택시 호출하기',
     id: 'TAXI',

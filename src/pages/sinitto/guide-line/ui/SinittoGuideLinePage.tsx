@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 
-import { GuideLineContainer } from './components';
-import { useGuideLine } from './hooks';
-import { GuideLineResponse } from './types';
+import { GuideLineContainer } from '../components';
+import { useGuideLine } from '../hooks';
+import { GuideLineResponse } from '../types';
 import { PageLayout, GUIDE_LINE_CATEGORIES } from '@/shared';
 import type { GuideLineCategoryProps } from '@/shared';
 import { Spinner, Flex } from '@chakra-ui/react';

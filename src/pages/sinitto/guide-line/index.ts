@@ -1,5 +1,4 @@
-export { SinittoGuideLinePage } from './SinittoGuideLinePage';
+export { SinittoGuideLinePage } from './ui';
 
-export * from './data';
-export * from './components';
 export * from './types';
+export * from './components';
