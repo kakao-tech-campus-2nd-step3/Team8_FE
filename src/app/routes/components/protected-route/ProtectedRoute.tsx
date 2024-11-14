@@ -11,7 +11,7 @@ type Props = {
 
 const ProtectedRoute = ({ requiresAuth, sinittoOnly, guardOnly }: Props) => {
   const accessToken = authStorage.accessToken.get();
-  const isSinitto = authStorage.isSinitto.get() === true;
+  const isSinitto = authStorage.isSinitto.get() === 'true';
 
   if (requiresAuth && !accessToken) {
     return <Navigate to={RouterPath.ROOT} />;

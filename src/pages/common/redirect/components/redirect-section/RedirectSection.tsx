@@ -25,7 +25,7 @@ const RedirectSection = ({ code }: Props) => {
 
       authStorage.accessToken.set(accessToken);
       authStorage.refreshToken.set(refreshToken);
-      authStorage.isSinitto.set(isSinitto);
+      authStorage.isSinitto.set(isSinitto.toString());
 
       setEmail(data.email);
 
