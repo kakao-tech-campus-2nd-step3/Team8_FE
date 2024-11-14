@@ -4,10 +4,10 @@ import { Box, Flex, Spinner, Text, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  isSinitto: boolean;
+  isSinitto?: boolean;
 };
 
-const PointBox = ({ isSinitto }: Props) => {
+const PointBox = ({ isSinitto = false }: Props) => {
   const {
     pointData: { data: pointData, isLoading },
     states: { actionType, amount },

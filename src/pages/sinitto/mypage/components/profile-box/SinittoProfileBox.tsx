@@ -7,7 +7,7 @@ const SinittoProfileBox = () => {
   const {
     profileData: { name, phoneNumber, seniorInfo },
     states: { isEditing },
-    handlers: { setName, setPhoneNumber, setIsEditing, handleSaveClick },
+    handlers: { setName, setPhoneNumber, setIsEditing, saveModifiedInfo },
   } = useSinittoProfile();
 
   return (
@@ -66,7 +66,7 @@ const SinittoProfileBox = () => {
             >
               수정 취소
             </BasicButton>
-            <BasicButton height='40px' onClick={handleSaveClick}>
+            <BasicButton height='40px' onClick={saveModifiedInfo}>
               수정 완료
             </BasicButton>
           </Box>

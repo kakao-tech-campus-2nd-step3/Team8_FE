@@ -6,6 +6,7 @@ import {
   useSinittoInfo,
   validatePhoneNumber,
   validateName,
+  formatPhoneNumber,
 } from '@/shared';
 
 export const useSinittoProfile = () => {
@@ -19,11 +20,11 @@ export const useSinittoProfile = () => {
   useEffect(() => {
     if (isEditing) {
       setName(seniorInfo?.name || '');
-      setPhoneNumber(seniorInfo?.phoneNumber || '');
+      setPhoneNumber(formatPhoneNumber(String(seniorInfo?.phoneNumber)) || '');
     }
   }, [isEditing, seniorInfo]);
 
-  const handleSaveClick = () => {
+  const saveModifiedInfo = () => {
     if (!validateName(name) || !validatePhoneNumber(phoneNumber)) {
       alert(
         '유효하지 않은 형식입니다.\n예) 이름 : 홍길동\n전화번호 : 010-1234-5678'
@@ -58,7 +59,7 @@ export const useSinittoProfile = () => {
       setName,
       setPhoneNumber,
       setIsEditing,
-      handleSaveClick,
+      saveModifiedInfo,
     },
   };
 };
