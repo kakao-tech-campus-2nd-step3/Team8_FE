@@ -16,10 +16,10 @@ const GuardProfileBox = () => {
     setName,
     setPhoneNumber,
     setIsEditing,
-    handleSaveClick,
-    handleServiceManualClick,
-    handleSeniorManagementClick,
-    handleServiceHistoryClick,
+    saveModifiedInfo,
+    goToSeniorManagementPage,
+    goToServiceManualPage,
+    goToServiceHistoryPage,
   } = useGuardProfile({
     guardInfo,
     modifyGuardInfoMutation,
@@ -40,7 +40,7 @@ const GuardProfileBox = () => {
           </Flex>
           <Logout />
         </Flex>
-        <ServiceManualBox onClick={handleServiceManualClick}>
+        <ServiceManualBox onClick={goToServiceManualPage}>
           <Text
             fontSize='var(--font-size-lg)'
             fontWeight={600}
@@ -108,7 +108,7 @@ const GuardProfileBox = () => {
               >
                 수정 취소
               </BasicButton>
-              <BasicButton height='40px' onClick={handleSaveClick}>
+              <BasicButton height='40px' onClick={saveModifiedInfo}>
                 수정 완료
               </BasicButton>
             </Box>
@@ -130,11 +130,11 @@ const GuardProfileBox = () => {
           padding='var(--space-sm) var(--space-xs)'
           gap='var(--space-xs)'
         >
-          <ButtonBox onClick={handleSeniorManagementClick}>
+          <ButtonBox onClick={goToSeniorManagementPage}>
             내 시니어 관리
           </ButtonBox>
           <DivideLine />
-          <ButtonBox onClick={handleServiceHistoryClick}>
+          <ButtonBox onClick={goToServiceHistoryPage}>
             서비스 이용 현황
           </ButtonBox>
         </Flex>

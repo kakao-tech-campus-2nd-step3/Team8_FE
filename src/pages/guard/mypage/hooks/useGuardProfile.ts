@@ -47,7 +47,7 @@ export const useGuardProfile = ({
     }
   }, [isEditing, guardInfo]);
 
-  const handleSaveClick = () => {
+  const saveModifiedInfo = () => {
     const modifiedGuardInfo = {
       name: name,
       phoneNumber: parsePhoneNumber(phoneNumber),
@@ -70,15 +70,15 @@ export const useGuardProfile = ({
     }
   };
 
-  const handleServiceManualClick = () => {
+  const goToServiceManualPage = () => {
     navigate(RouterPath.SERVICE_MANUAL);
   };
 
-  const handleSeniorManagementClick = () => {
+  const goToSeniorManagementPage = () => {
     navigate(RouterPath.SENIOR_REGISTER);
   };
 
-  const handleServiceHistoryClick = () => {
+  const goToServiceHistoryPage = () => {
     navigate(RouterPath.SERVICE_HISTORY);
   };
 
@@ -89,9 +89,9 @@ export const useGuardProfile = ({
     setName,
     setPhoneNumber,
     setIsEditing,
-    handleSaveClick,
-    handleServiceManualClick,
-    handleSeniorManagementClick,
-    handleServiceHistoryClick,
+    saveModifiedInfo,
+    goToServiceManualPage,
+    goToSeniorManagementPage,
+    goToServiceHistoryPage,
   };
 };
