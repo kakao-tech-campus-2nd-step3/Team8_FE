@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useGetTimeAgo } from '../../hooks';
 import { IconArrow } from '@/pages/assets';
 import styled from '@emotion/styled';
 
@@ -18,28 +19,11 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
       navigate(`${id}`);
     };
 
-    const getTimeAgo = (postTime: string) => {
-      const postDate = new Date(postTime);
-      const now = new Date();
-      const differenceInMinutes = Math.floor(
-        (now.getTime() - postDate.getTime()) / 60000
-      );
-
-      if (differenceInMinutes < 60) {
-        return differenceInMinutes > 0
-          ? differenceInMinutes + '분 전'
-          : '방금 전';
-      } else {
-        const differenceInHours = Math.floor(differenceInMinutes / 60);
-        return differenceInHours + '시간 전';
-      }
-    };
-
     return (
       <Wrapper ref={ref} onClick={goToCallbackDetail}>
         <Content>
           <Title>{name}님의 요청</Title>
-          <Time>{getTimeAgo(time)}</Time>
+          <Time>{useGetTimeAgo(time)}</Time>
           <IconArrow fill='var(--color-gray)' type='solid' height='24' />
         </Content>
       </Wrapper>
