@@ -1,7 +1,4 @@
-import {
-  allSeniorInfoPath,
-  getAllSeniorInfo,
-} from '../api/all-senior-info.api';
+import { allSeniorInfoPath, getAllSeniorInfo } from '../apis';
 import { AllSeniorInfoResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 

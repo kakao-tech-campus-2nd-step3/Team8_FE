@@ -1,7 +1,5 @@
-import { useForm } from 'react-hook-form';
-
-import { useAddGuideline } from '../../hooks';
-import GuidelineFormField, { GuidelineValues } from './GuideFormField';
+import { useGuidelineForm, useGuidelinePlaceholder } from '../../hooks';
+import GuidelineFormField from './GuideFormField';
 import { BasicButton } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
@@ -13,28 +11,15 @@ type Props = {
 };
 
 const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<GuidelineValues>();
-
-  const { mutate: postGuideline } = useAddGuideline(refetch);
-
-  const onSubmit = (data: GuidelineValues) => {
-    const requestGuidelineData = {
-      seniorId: seniorId,
-      type: guidelineType,
-      title: data.title,
-      content: data.content,
-    };
-    postGuideline(requestGuidelineData);
-    reset();
-  };
+  const { register, handleSubmit, errors } = useGuidelineForm(
+    refetch,
+    seniorId,
+    guidelineType
+  );
+  const placeholder = useGuidelinePlaceholder(guidelineType);
 
   return (
-    <RegisterBox as='form' onSubmit={handleSubmit(onSubmit)}>
+    <RegisterBox as='form' onSubmit={handleSubmit}>
       <InputBox>
         <GuidelineFormField
           label='가이드라인 제목'
@@ -57,11 +42,7 @@ const GuidelineRegisterBox = ({ refetch, seniorId, guidelineType }: Props) => {
       <InputBox>
         <GuidelineFormField
           label='가이드라인 내용'
-          placeholder={
-            guidelineType === 'TAXI'
-              ? '내용은 구체적으로 명시해주세요. (예: 목적지, 출발지 등)'
-              : '내용은 구체적으로 명시해주세요. (예: 음식 맵기 정도, 양, 가격 등)'
-          }
+          placeholder={placeholder}
           type='textarea'
           error={errors.content?.message}
           registerProps={register('content', {

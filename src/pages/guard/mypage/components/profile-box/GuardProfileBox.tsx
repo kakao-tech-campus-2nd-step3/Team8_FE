@@ -1,3 +1,5 @@
+import Skeleton from 'react-loading-skeleton';
+
 import { useGetGuardInformation, useModifyGuardInformation } from '../../hooks';
 import { useGuardProfile } from '../../hooks/useGuardProfile';
 import { IconArrow } from '@/pages/assets';
@@ -6,7 +8,7 @@ import { Box, Text, Flex, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const GuardProfileBox = () => {
-  const { data: guardInfo, refetch } = useGetGuardInformation();
+  const { data: guardInfo, refetch, isLoading } = useGetGuardInformation();
   const modifyGuardInfoMutation = useModifyGuardInformation();
 
   const {
@@ -16,10 +18,10 @@ const GuardProfileBox = () => {
     setName,
     setPhoneNumber,
     setIsEditing,
-    handleSaveClick,
-    handleServiceManualClick,
-    handleSeniorManagementClick,
-    handleServiceHistoryClick,
+    saveModifiedInfo,
+    goToSeniorManagementPage,
+    goToServiceManualPage,
+    goToServiceHistoryPage,
   } = useGuardProfile({
     guardInfo,
     modifyGuardInfoMutation,
@@ -31,16 +33,24 @@ const GuardProfileBox = () => {
       <Flex w='full' flexDir='column' gap='var(--space-xs)'>
         <Flex w='full'>
           <Flex marginRight='auto' alignItems='center'>
-            <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
-              {guardInfo?.name}
-            </Text>
+            {isLoading ? (
+              <Skeleton width={100} height={24} />
+            ) : (
+              <Text
+                color='var(--color-primary)'
+                fontSize='24px'
+                fontWeight='700'
+              >
+                {guardInfo?.name}
+              </Text>
+            )}
             <Text fontSize='lg' fontWeight='700'>
               님 환영합니다!
             </Text>
           </Flex>
           <Logout />
         </Flex>
-        <ServiceManualBox onClick={handleServiceManualClick}>
+        <ServiceManualBox onClick={goToServiceManualPage}>
           <Text
             fontSize='var(--font-size-lg)'
             fontWeight={600}
@@ -76,6 +86,8 @@ const GuardProfileBox = () => {
                 onChange={(e) => setName(e.target.value)}
                 width='5rem'
               />
+            ) : isLoading ? (
+              <Skeleton width={80} height={20} />
             ) : (
               <Content>{guardInfo?.name}</Content>
             )}
@@ -88,6 +100,8 @@ const GuardProfileBox = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 width='9rem'
               />
+            ) : isLoading ? (
+              <Skeleton width={100} height={20} />
             ) : (
               <Content>
                 {formatPhoneNumber(String(guardInfo?.phoneNumber))}
@@ -108,7 +122,7 @@ const GuardProfileBox = () => {
               >
                 수정 취소
               </BasicButton>
-              <BasicButton height='40px' onClick={handleSaveClick}>
+              <BasicButton height='40px' onClick={saveModifiedInfo}>
                 수정 완료
               </BasicButton>
             </Box>
@@ -130,13 +144,19 @@ const GuardProfileBox = () => {
           padding='var(--space-sm) var(--space-xs)'
           gap='var(--space-xs)'
         >
-          <ButtonBox onClick={handleSeniorManagementClick}>
-            내 시니어 관리
-          </ButtonBox>
-          <DivideLine />
-          <ButtonBox onClick={handleServiceHistoryClick}>
-            서비스 이용 현황
-          </ButtonBox>
+          {isLoading ? (
+            <Skeleton width='100%' height={40} />
+          ) : (
+            <>
+              <ButtonBox onClick={goToSeniorManagementPage}>
+                내 시니어 관리
+              </ButtonBox>
+              <DivideLine />
+              <ButtonBox onClick={goToServiceHistoryPage}>
+                서비스 이용 현황
+              </ButtonBox>
+            </>
+          )}
         </Flex>
       </Flex>
     </>
@@ -145,6 +165,7 @@ const GuardProfileBox = () => {
 
 export default GuardProfileBox;
 
+// Styled Components
 const DivideLine = styled.div`
   width: 2px;
   height: 50px;

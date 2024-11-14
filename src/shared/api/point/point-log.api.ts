@@ -1,4 +1,5 @@
 import { fetchInstance } from '../instance';
+import { POINTS_QUERY_KEYS } from '@/shared/constants/point/pointQueryKey';
 
 export type PointLogRequestParams = {
   page: number;
@@ -27,7 +28,10 @@ export type PointLogData = {
 const getPointLogPath = () => '/api/points/logs';
 
 // 쿼리 키
-export const getPointLogQueryKey = (page: number) => ['pointLogs', page];
+export const getPointLogQueryKey = (page: number) => [
+  ...POINTS_QUERY_KEYS.LOGS,
+  page,
+];
 
 // 포인트 로그 조회 API
 export const getPointLogs = async (

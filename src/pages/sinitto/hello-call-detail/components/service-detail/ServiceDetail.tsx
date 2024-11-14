@@ -1,6 +1,6 @@
-import IconCalendar from '@/pages/assets/shared/hello-call/calendar.svg';
-import IconClock from '@/pages/assets/shared/hello-call/clock.svg';
-import IconSpeaker from '@/pages/assets/shared/hello-call/speaker.svg';
+import IconCalendar from '@/pages/assets/hello-call/calendar.svg';
+import IconClock from '@/pages/assets/hello-call/clock.svg';
+import IconSpeaker from '@/pages/assets/hello-call/speaker.svg';
 import { TimeSlots } from '@/shared';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';

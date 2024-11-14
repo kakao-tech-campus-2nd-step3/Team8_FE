@@ -1,33 +1,32 @@
+import { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { ProtectedRoute } from './components';
-import { RouterPath } from './path';
 import {
-  OnboardPage,
+  ProtectedRoute,
+  GuardMainPage,
   RegisterPage,
-  RedirectPage,
-  SinittoMypage,
   GuardMyPage,
-  GuideLinePage,
   ServiceHistoryPage,
+  GuardReportPage,
+  SinittoReviewPage,
+  ServiceManualPage,
+  SeniorRegisterPage,
+  GuideLinePage,
+  HelloCallApplyPage,
+  SinittoMainPage,
+  SinittoMyPage,
   HelloCallListPage,
   HelloCallServicePage,
   HelloCallReportPage,
-  SeniorRegisterPage,
   CallBackListPage,
   CallBackDetailPage,
   SinittoGuideLinePage,
-  SinittoReviewPage,
-  HelloCallApplyPage,
-  GuardMainPage,
-  SinittoMainPage,
-  DummyRedirectPage,
   SinittoServiceHistoryPage,
   HelloCallDetailPage,
-  GuardReportPage,
-  ServiceManualPage,
-} from '@/pages';
-import { Layout } from '@/shared/components';
+} from './components';
+import { RouterPath } from './path';
+import { OnboardPage, RedirectPage, DummyRedirectPage } from '@/pages';
+import { Layout, LoadingView } from '@/shared/components';
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +48,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <RegisterPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <RegisterPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -73,7 +76,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <GuardMainPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <GuardMainPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -87,20 +94,32 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <GuardMyPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <GuardMyPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
               {
                 path: RouterPath.SERVICE_MANUAL,
-                element: <ServiceManualPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <ServiceManualPage />
+                  </Suspense>
+                ),
               },
               {
                 element: <Layout title='내 시니어 관리' />,
                 children: [
                   {
                     path: RouterPath.SENIOR_REGISTER,
-                    element: <SeniorRegisterPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <SeniorRegisterPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -116,7 +135,11 @@ export const router = createBrowserRouter([
                     children: [
                       {
                         index: true,
-                        element: <ServiceHistoryPage />,
+                        element: (
+                          <Suspense fallback={<LoadingView />}>
+                            <ServiceHistoryPage />
+                          </Suspense>
+                        ),
                       },
                     ],
                   },
@@ -128,11 +151,19 @@ export const router = createBrowserRouter([
                         children: [
                           {
                             index: true,
-                            element: <GuardReportPage />,
+                            element: (
+                              <Suspense fallback={<LoadingView />}>
+                                <GuardReportPage />
+                              </Suspense>
+                            ),
                           },
                           {
                             path: RouterPath.SINITTO_REVIEW,
-                            element: <SinittoReviewPage />,
+                            element: (
+                              <Suspense fallback={<LoadingView />}>
+                                <SinittoReviewPage />
+                              </Suspense>
+                            ),
                           },
                         ],
                       },
@@ -149,28 +180,25 @@ export const router = createBrowserRouter([
         children: [
           {
             path: RouterPath.GUARD_GUIDELINE,
-            element: <GuideLinePage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <GuideLinePage />
+              </Suspense>
+            ),
           },
         ],
       },
-      // {
-      //   // TODO: 이 페이지도 수정이 필요함.
-      //   path: RouterPath.CALL_BACK_GUID_LINE,
-      //   element: <Layout title='가이드라인' />,
-      //   children: [
-      //     {
-      //       index: true,
-      //       element: <SinittoGuideLinePage />,
-      //     },
-      //   ],
-      // },
       {
         path: RouterPath.HELLO_CALL_GUARD_APPLY,
         element: <Layout title='안부전화 서비스 신청' />,
         children: [
           {
             index: true,
-            element: <HelloCallApplyPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallApplyPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -185,7 +213,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <SinittoMainPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <SinittoMainPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -195,7 +227,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <SinittoMypage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <SinittoMyPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -208,7 +244,11 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <SinittoServiceHistoryPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <SinittoServiceHistoryPage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -223,7 +263,11 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <CallBackListPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <CallBackListPage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -236,7 +280,11 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <CallBackDetailPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <CallBackDetailPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -246,7 +294,11 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <SinittoGuideLinePage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <SinittoGuideLinePage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -261,19 +313,35 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <HelloCallListPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallListPage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_SERVICE,
-            element: <HelloCallServicePage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallServicePage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_REPORT,
-            element: <HelloCallReportPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallReportPage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_DETAIL,
-            element: <HelloCallDetailPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallDetailPage />
+              </Suspense>
+            ),
           },
         ],
       },

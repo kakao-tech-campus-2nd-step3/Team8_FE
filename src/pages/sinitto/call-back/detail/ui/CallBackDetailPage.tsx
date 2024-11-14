@@ -1,17 +1,18 @@
-import { useParams, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { CallbackMenu } from '../components';
-import { useCallbackDetail } from '../hooks';
+import { useCallbackDetailParams } from '../hooks/useCallbackDetailParams';
+import { useCallbackMenuData } from '../hooks/useCallbackMenuData';
+import { useFetchCallback } from '../hooks/useFetchCallback';
 import { Notice, PageLayout, GuideLineButton } from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
 
-export type CallBackDetailParams = {
-  callBackId: string;
-};
-
 export const CallBackDetailPage = () => {
-  const { callBackId = '' } = useParams<CallBackDetailParams>();
-  const { callbackData, isCallBackLoading } = useCallbackDetail(callBackId);
+  const { callBackId } = useCallbackDetailParams();
+
+  const { callbackData, isCallBackLoading } = useFetchCallback(callBackId);
+
+  const callbackMenuData = useCallbackMenuData(callbackData, callBackId);
 
   return (
     <>
@@ -28,11 +29,7 @@ export const CallBackDetailPage = () => {
               />
               <GuideLineButton userType='sinitto' />
               <Divider />
-              <CallbackMenu
-                callBackId={Number(callBackId)}
-                accept={callbackData.isAssignedToSelf}
-                phoneNumber={callbackData.seniorPhoneNumber}
-              />
+              {callbackMenuData && <CallbackMenu {...callbackMenuData} />}
             </>
           )
         )}

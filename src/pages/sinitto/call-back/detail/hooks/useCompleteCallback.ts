@@ -1,4 +1,4 @@
-import { CompleteCallback } from '../api';
+import { CompleteCallback } from '../apis';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCompleteCallback = () => {

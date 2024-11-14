@@ -1,7 +1,6 @@
 import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { useGetTimeAgo } from '../../hooks';
+import { useRequestNavigation, useTimeAgo } from '../../hooks';
 import { IconArrow } from '@/pages/assets';
 import styled from '@emotion/styled';
 
@@ -13,17 +12,14 @@ type Props = {
 
 export const RequestRow = forwardRef<HTMLButtonElement, Props>(
   ({ name, time, id }, ref) => {
-    const navigate = useNavigate();
-
-    const goToCallbackDetail = () => {
-      navigate(`${id}`);
-    };
+    const handleClick = useRequestNavigation(id);
+    const timeAgo = useTimeAgo(time);
 
     return (
-      <Wrapper ref={ref} onClick={goToCallbackDetail}>
+      <Wrapper ref={ref} onClick={handleClick}>
         <Content>
           <Title>{name}님의 요청</Title>
-          <Time>{useGetTimeAgo(time)}</Time>
+          <Time>{timeAgo}</Time>
           <IconArrow fill='var(--color-gray)' type='solid' height='24' />
         </Content>
       </Wrapper>

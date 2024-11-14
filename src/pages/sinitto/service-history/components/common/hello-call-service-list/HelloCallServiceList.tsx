@@ -28,7 +28,7 @@ export const HelloCallServiceList = ({
 
   return (
     <Wrapper onClick={toggleExpand}>
-      <ItemListBox>
+      <ItemBox>
         <Flex w='full' justifyContent='space-between'>
           <Flex alignItems='center' gap={1}>
             <Text fontSize='var(--font-size-xl)' fontWeight='700'>
@@ -63,7 +63,7 @@ export const HelloCallServiceList = ({
             </Flex>
           </ExpandedContent>
         )}
-      </ItemListBox>
+      </ItemBox>
     </Wrapper>
   );
 };
@@ -76,7 +76,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const ItemListBox = styled.div`
+const ItemBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

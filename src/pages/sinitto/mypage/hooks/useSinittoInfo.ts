@@ -4,7 +4,7 @@ import {
   modifySinittoBankInformation,
   modifySinittoInformation,
   registerSinittoBankInformation,
-} from '../api/sinitto-information.api';
+} from '../apis';
 import {
   SinittoBankInfo,
   SinittoInfoRequest,

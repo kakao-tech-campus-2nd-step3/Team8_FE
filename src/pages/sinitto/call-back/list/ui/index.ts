@@ -1,1 +1,1 @@
-export { CallBackListPage } from './CallBackListPage';
+export { default as CallBackListPage } from './CallBackListPage';

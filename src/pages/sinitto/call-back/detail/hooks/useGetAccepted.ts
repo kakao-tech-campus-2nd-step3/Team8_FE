@@ -1,4 +1,4 @@
-import { getAccepted } from '../api';
+import { getAccepted } from '../apis';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetAccepted = () => {

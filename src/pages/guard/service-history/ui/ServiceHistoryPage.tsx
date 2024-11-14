@@ -1,33 +1,63 @@
+import { useCallback, useMemo, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import {
   CallbackHistoryText,
   HelloServiceHistoryText,
   CallbackHistoryDetail,
   HelloServiceHistory,
 } from '../components';
-import { useHistoryData, usePagination } from '../hooks';
+import { useHistoryData } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const ServiceHistoryPage = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { currentPage, goToPreviousPage, goToNextPage } = usePagination(0, 1);
-  const { callbackHistory, helloCallHistory, refetch } = useHistoryData(
-    currentPage,
-    pageSize
+  const serverPageSize = 20;
+  const serverPage = Math.floor((currentPage * pageSize) / serverPageSize);
+
+  const { callbackHistory, helloCallHistory, refetch, isLoading } =
+    useHistoryData(serverPage, serverPageSize);
+
+  const currentPageData = useMemo(() => {
+    if (!callbackHistory?.content) return [];
+    const startIndex = (currentPage * pageSize) % serverPageSize;
+    return callbackHistory.content.slice(startIndex, startIndex + pageSize);
+  }, [callbackHistory?.content, currentPage, pageSize]);
+
+  const totalPages = Math.ceil(
+    (callbackHistory?.totalElements || 0) / pageSize
   );
 
-  const totalPages = callbackHistory?.totalPages || 1;
+  const pageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      const newServerPage = Math.floor((page * pageSize) / serverPageSize);
+      if (newServerPage !== serverPage) {
+        refetch();
+      }
+    },
+    [refetch, serverPage]
+  );
 
   return (
     <PageLayout>
       <Flex flexDir='column' w='full' gap='var(--space-sm)'>
         <CallbackHistoryText />
         <ButtonWrapper gap='var(--space-xs)'>
-          {callbackHistory &&
-          callbackHistory.content &&
-          callbackHistory.content.length > 0 ? (
-            callbackHistory.content.map((history) => (
+          {isLoading ? (
+            Array.from({ length: pageSize }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={78}
+                style={{ marginBottom: '8px' }}
+              />
+            ))
+          ) : currentPageData.length > 0 ? (
+            currentPageData.map((history) => (
               <CallbackHistoryDetail
                 key={history.callbackId}
                 historyData={history}
@@ -39,7 +69,7 @@ export const ServiceHistoryPage = () => {
         </ButtonWrapper>
         <Pagination>
           <PaginationButton
-            onClick={goToPreviousPage}
+            onClick={() => pageChange(Math.max(currentPage - 1, 0))}
             disabled={currentPage === 0}
           >
             이전
@@ -48,7 +78,7 @@ export const ServiceHistoryPage = () => {
             페이지 {currentPage + 1} / {totalPages}
           </span>
           <PaginationButton
-            onClick={goToNextPage}
+            onClick={() => pageChange(currentPage + 1)}
             disabled={currentPage >= totalPages - 1}
           >
             다음
@@ -59,7 +89,15 @@ export const ServiceHistoryPage = () => {
       <Flex flexDir='column' w='full' gap='var(--space-sm)'>
         <HelloServiceHistoryText />
         <ButtonWrapper gap='var(--space-sm)'>
-          {helloCallHistory && helloCallHistory.length > 0 ? (
+          {isLoading ? (
+            Array.from({ length: pageSize }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={78}
+                style={{ marginBottom: '8px' }}
+              />
+            ))
+          ) : helloCallHistory && helloCallHistory.length > 0 ? (
             helloCallHistory.map((history) => (
               <HelloServiceHistory
                 key={history.helloCallId}

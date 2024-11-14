@@ -5,7 +5,7 @@ export const GuardMyPage = () => {
   return (
     <PageLayout>
       <GuardProfileBox />
-      <PointBox isSinitto={false} />
+      <PointBox />
       <PointLogBox />
       <Withdrawal />
     </PageLayout>

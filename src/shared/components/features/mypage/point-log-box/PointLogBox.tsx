@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
 import { Box, Spinner, Text } from '@chakra-ui/react';
@@ -7,15 +7,33 @@ import styled from '@emotion/styled';
 const PointLogBox = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const { data, isLoading, refetch } = useGetPointLogs(currentPage, pageSize);
-  const totalPages = data?.totalPages || 1;
+  const serverPageSize = 50;
+  const serverPage = Math.floor((currentPage * pageSize) / serverPageSize);
 
-  const handlePageChange = useCallback(
+  const {
+    data: pointLog,
+    isLoading,
+    refetch,
+  } = useGetPointLogs(serverPage, serverPageSize);
+
+  const currentPageData = useMemo(() => {
+    if (!pointLog?.content) return [];
+
+    const startIndex = (currentPage * pageSize) % serverPageSize;
+    return pointLog.content.slice(startIndex, startIndex + pageSize);
+  }, [pointLog?.content, currentPage, pageSize]);
+
+  const totalPages = Math.ceil((pointLog?.totalElements || 0) / pageSize);
+
+  const pageChange = useCallback(
     (page: number) => {
       setCurrentPage(page);
-      refetch();
+      const newServerPage = Math.floor((page * pageSize) / serverPageSize);
+      if (newServerPage !== serverPage) {
+        refetch();
+      }
     },
-    [refetch]
+    [refetch, serverPage]
   );
 
   if (isLoading) {
@@ -30,7 +48,7 @@ const PointLogBox = () => {
     <UseDetailBoxLayout>
       <TextBox>포인트 내역</TextBox>
       <DetailBox>
-        {data?.content.map((item, index) => (
+        {currentPageData.map((item, index) => (
           <DetailFactor key={index}>
             <TextLayout>
               <DetailText>
@@ -70,16 +88,16 @@ const PointLogBox = () => {
       </DetailBox>
       <Pagination>
         <PaginationButton
-          onClick={() => handlePageChange(Math.max(currentPage - 1, 0))}
+          onClick={() => pageChange(Math.max(currentPage - 1, 0))}
           disabled={currentPage === 0}
         >
           이전
         </PaginationButton>
         <span>
-          페이지 {currentPage + 1} / {data?.totalPages ? data.totalPages : 1}
+          페이지 {currentPage + 1} / {totalPages || 1}
         </span>
         <PaginationButton
-          onClick={() => handlePageChange(currentPage + 1)}
+          onClick={() => pageChange(currentPage + 1)}
           disabled={currentPage >= totalPages - 1}
         >
           다음

@@ -1,4 +1,4 @@
-import { acceptCallback } from '../api';
+import { acceptCallback } from '../apis';
 import { useMutation } from '@tanstack/react-query';
 
 export const useAcceptCallback = () => {

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes/path';
 import { useGetKakaoCallback } from '@/pages';
-import { useUserEmail } from '@/shared';
+import { authStorage, useUserEmail } from '@/shared';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 type Props = {
@@ -23,9 +23,9 @@ const RedirectSection = ({ code }: Props) => {
       const refreshToken = data.refreshToken;
       const isSinitto = data.isSinitto;
 
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('isSinitto', isSinitto.toString());
+      authStorage.accessToken.set(accessToken);
+      authStorage.refreshToken.set(refreshToken);
+      authStorage.isSinitto.set(isSinitto);
 
       setEmail(data.email);
 

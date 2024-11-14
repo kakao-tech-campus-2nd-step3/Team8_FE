@@ -1,10 +1,13 @@
 import { useParams } from 'react-router-dom';
 
 import { GuideLineContainer } from '../components';
-import { useGuideLine } from '../hooks';
+import {
+  useGuideLineData,
+  useGuideLineErrorHandling,
+  useCategoryName,
+} from '../hooks';
 import { GuideLineResponse } from '../types';
-import { PageLayout, GUIDE_LINE_CATEGORIES } from '@/shared';
-import type { GuideLineCategoryProps } from '@/shared';
+import { PageLayout } from '@/shared';
 import { Spinner, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -15,15 +18,14 @@ type GuideLineParams = {
 
 export const SinittoGuideLinePage = () => {
   const { callBackId = '', guideLineId = '' } = useParams<GuideLineParams>();
-  const guideLineInfo =
-    GUIDE_LINE_CATEGORIES.find(
-      (item: GuideLineCategoryProps) => item.id === guideLineId
-    )?.title || null;
 
-  const { isGuideLineLoading, guideLine } = useGuideLine(
+  const guideLineInfo = useCategoryName(guideLineId);
+  const { guideLine, isGuideLineLoading, isGuideLineError } = useGuideLineData(
     callBackId,
     guideLineId
   );
+
+  useGuideLineErrorHandling(isGuideLineError);
 
   return (
     <PageLayout>
@@ -36,7 +38,7 @@ export const SinittoGuideLinePage = () => {
           </Title>
           <Flex flexDir='column' width='100%' gap='var(--space-sm)'>
             {guideLine &&
-              (guideLine.length == 0 ? (
+              (guideLine.length === 0 ? (
                 <p>등록된 가이드라인이 없습니다.</p>
               ) : (
                 guideLine.map((data: GuideLineResponse) => (

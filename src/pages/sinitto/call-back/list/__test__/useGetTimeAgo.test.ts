@@ -1,6 +1,6 @@
-import { useGetTimeAgo } from '../hooks';
+import { useTimeAgo } from '../hooks';
 
-describe('> useGetTimeAgo', () => {
+describe('> useTimeAgo', () => {
   describe("날짜 형식을 'YYYY-MM-DDTHH:mm:ss' 형식에서 '방금 전', 'n분 전', 'n시간 전' 형식으로 변환한다.", () => {
     it.each([
       {
@@ -24,7 +24,7 @@ describe('> useGetTimeAgo', () => {
         expected: '30시간 전',
       },
     ])('time: $time => $expected', ({ time, expected }) => {
-      expect(useGetTimeAgo(time)).toBe(expected);
+      expect(useTimeAgo(time)).toBe(expected);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { getCallbackList } from '../api';
+import { getCallbackList } from '../apis';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const useGetCallbackList = (size: number) => {
