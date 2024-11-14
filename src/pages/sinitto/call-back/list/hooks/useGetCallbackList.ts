@@ -1,10 +1,10 @@
-import { getCallbacks } from '../get-call-backs.api';
+import { getCallbackList } from '../api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-export const useGetCallbacks = (size: number) => {
+export const useGetCallbackList = (size: number) => {
   return useInfiniteQuery({
     queryKey: ['callbacks', size],
-    queryFn: ({ pageParam = 0 }) => getCallbacks(pageParam, size),
+    queryFn: ({ pageParam = 0 }) => getCallbackList(pageParam, size),
     getNextPageParam: (lastPage) => {
       if (!lastPage.last) {
         return lastPage.number + 1;

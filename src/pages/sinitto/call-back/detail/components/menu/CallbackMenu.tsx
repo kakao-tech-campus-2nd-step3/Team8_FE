@@ -22,11 +22,11 @@ export const CallbackMenu = ({
     <Spinner size='xl' marginTop='30px' />
   ) : accept ? (
     <PostAcceptMenu
-      handleComplete={() => completeCallback(callBackId)}
-      handleCancle={() => cancelCallback(callBackId)}
+      completeCallback={() => completeCallback(callBackId)}
+      cancelCallback={() => cancelCallback(callBackId)}
       phoneNumber={formatPhoneNumber(phoneNumber)}
     />
   ) : (
-    <PreAcceptMenu handleClick={() => acceptCallback(callBackId)} />
+    <PreAcceptMenu acceptCallback={() => acceptCallback(callBackId)} />
   );
 };

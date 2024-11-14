@@ -6,12 +6,12 @@ import { ResponseBox } from '../../features';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
-import { useGetCallbacks } from '@/pages/sinitto';
+import { useGetCallbackList } from '@/pages/sinitto';
 import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export const CallBackApply = () => {
-  const { data: callBackList, isLoading } = useGetCallbacks(4);
+  const { data: callBackList, isLoading } = useGetCallbackList(4);
 
   const timeSince = (postTime: string) => {
     const now = dayjs();

@@ -14,7 +14,7 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
   ({ name, time, id }, ref) => {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const goToCallbackDetail = () => {
       navigate(`${id}`);
     };
 
@@ -36,7 +36,7 @@ export const RequestRow = forwardRef<HTMLButtonElement, Props>(
     };
 
     return (
-      <Wrapper ref={ref} onClick={handleClick}>
+      <Wrapper ref={ref} onClick={goToCallbackDetail}>
         <Content>
           <Title>{name}님의 요청</Title>
           <Time>{getTimeAgo(time)}</Time>

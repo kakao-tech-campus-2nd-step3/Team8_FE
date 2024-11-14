@@ -1,3 +1,1 @@
-export { getCallbacks } from './get-call-backs.api';
-
-export * from './hooks';
+export { getCallbackList } from './get-call-back-list.api';

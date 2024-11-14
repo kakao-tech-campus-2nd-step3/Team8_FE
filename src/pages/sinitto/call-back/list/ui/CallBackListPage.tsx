@@ -1,38 +1,11 @@
-import { useRef, useCallback } from 'react';
-
-import { useGetCallbacks } from './api/hooks';
-import { RequestRow } from './components';
+import { RequestRow } from '../components';
+import { useCallbackList } from '../hooks';
 import { PageLayout } from '@/shared';
 import { Spinner, Flex, Text } from '@chakra-ui/react';
 
 export const CallBackListPage = () => {
-  const { data, isLoading, isError, fetchNextPage, hasNextPage } =
-    useGetCallbacks(10);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  const lastElementRef = useCallback(
-    (node: HTMLButtonElement | null) => {
-      if (isLoading) return <Spinner size='xl' />;
-
-      if (observerRef.current) observerRef.current.disconnect();
-
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      });
-
-      if (node) observerRef.current.observe(node);
-    },
-    [isLoading, fetchNextPage, hasNextPage]
-  );
-
-  if (isLoading && !data)
-    return (
-      <PageLayout>
-        <Spinner size='xl' />
-      </PageLayout>
-    );
+  const { data, isLoading, isError, lastElementRef, hasNextPage } =
+    useCallbackList();
 
   return (
     <PageLayout>
@@ -56,7 +29,11 @@ export const CallBackListPage = () => {
             })
           )}
       </Flex>
-      {!hasNextPage && <Text>더 이상 요청이 없어요 🥲</Text>}
+      {isLoading ? (
+        <Spinner size='xl' />
+      ) : (
+        !isError && !hasNextPage && <Text>더 이상 요청이 없어요 🥲</Text>
+      )}
     </PageLayout>
   );
 };

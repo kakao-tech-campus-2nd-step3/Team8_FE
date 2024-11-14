@@ -3,21 +3,21 @@ import { Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  handleComplete: () => void;
-  handleCancle: () => void;
+  completeCallback: () => void;
+  cancelCallback: () => void;
   phoneNumber: string;
 };
 
 export const PostAcceptMenu = ({
-  handleComplete,
-  handleCancle,
+  completeCallback,
+  cancelCallback,
   phoneNumber,
 }: Props) => {
   return (
     <Flex flexDir='column' width='100%' gap='var(--space-md)'>
       <Flex flexDir='column' width='100%' gap='var(--space-xs)'>
-        <BasicButton onClick={handleComplete}>도움 완료</BasicButton>
-        <BasicButton onClick={handleCancle} themeType='outline'>
+        <BasicButton onClick={completeCallback}>도움 완료</BasicButton>
+        <BasicButton onClick={cancelCallback} themeType='outline'>
           도움 포기
         </BasicButton>
       </Flex>
