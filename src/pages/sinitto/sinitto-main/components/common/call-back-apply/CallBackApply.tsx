@@ -6,7 +6,7 @@ import { ResponseBox } from '../../features';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
-import { useGetCallbacks } from '@/pages/sinitto';
+import { useGetCallbacks } from '@/pages/sinitto/call-back/list/hooks';
 import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

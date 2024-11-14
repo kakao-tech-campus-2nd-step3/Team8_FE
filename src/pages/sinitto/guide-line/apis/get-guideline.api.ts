@@ -1,4 +1,4 @@
-import type { GuidelineResponse } from './types';
+import type { GuidelineResponse } from '../types';
 import { fetchInstance } from '@/shared/api/instance';
 
 const getGuidelinesPath = (callbackId: number, type: string) =>

@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 
-import { CallbackMenu } from './components';
-import { GuideLineList } from './components/guide-line-list';
-import { useCallbackDetailParams } from './hooks/useCallbackDetailParams';
-import { useCallbackMenuData } from './hooks/useCallbackMenuData';
-import { useFetchCallback } from './hooks/useFetchCallback';
+import { CallbackMenu } from '../components';
+import { GuideLineList } from '../components/guide-line-list';
+import { useCallbackDetailParams } from '../hooks/useCallbackDetailParams';
+import { useCallbackMenuData } from '../hooks/useCallbackMenuData';
+import { useFetchCallback } from '../hooks/useFetchCallback';
 import { Notice, PageLayout } from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
 

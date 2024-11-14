@@ -1,30 +1,16 @@
-import { useRef, useCallback } from 'react';
-
-import { useGetCallbacks } from './api/hooks';
-import { RequestRow } from './components';
+import { RequestRow } from '../components';
+import { useCallbacks, useInfiniteScroll } from '../hooks';
 import { PageLayout } from '@/shared';
-import { Spinner, Flex, Text } from '@chakra-ui/react';
+import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 export const CallBackListPage = () => {
   const { data, isLoading, isError, fetchNextPage, hasNextPage } =
-    useGetCallbacks(10);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+    useCallbacks(10);
 
-  const lastElementRef = useCallback(
-    (node: HTMLButtonElement | null) => {
-      if (isLoading) return <Spinner size='xl' />;
-
-      if (observerRef.current) observerRef.current.disconnect();
-
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      });
-
-      if (node) observerRef.current.observe(node);
-    },
-    [isLoading, fetchNextPage, hasNextPage]
+  const lastElementRef = useInfiniteScroll(
+    hasNextPage,
+    fetchNextPage,
+    isLoading
   );
 
   if (isLoading && !data)
@@ -39,7 +25,7 @@ export const CallBackListPage = () => {
       <Flex flexDirection='column' width='100%' gap='var(--space-xs)'>
         {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
         {data &&
-          data?.pages.map((page, pageIndex) =>
+          data.pages.map((page, pageIndex) =>
             page.content.map((callback, index) => {
               const isLastElement =
                 pageIndex === data.pages.length - 1 &&

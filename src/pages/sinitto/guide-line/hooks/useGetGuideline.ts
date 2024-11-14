@@ -1,4 +1,4 @@
-import { getGuidelines } from '../get-guideline.api';
+import { getGuidelines } from '../apis';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetGuideline = (callbackId: number, type: string) => {
