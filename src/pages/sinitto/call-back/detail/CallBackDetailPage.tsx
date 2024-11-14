@@ -1,15 +1,8 @@
-import { useEffect } from 'react';
-import { useParams, Outlet, useNavigate } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 
 import { CallbackMenu } from './components';
-import { RouterPath } from '@/app/routes/path';
-import { GuideLineButton } from '@/shared';
-import {
-  Notice,
-  PageLayout,
-  useGetCallback,
-  handleCallbackError,
-} from '@/shared';
+import { useCallbackDetail } from './hooks';
+import { Notice, PageLayout, GuideLineButton } from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
 
 export type CallBackDetailParams = {
@@ -18,22 +11,7 @@ export type CallBackDetailParams = {
 
 export const CallBackDetailPage = () => {
   const { callBackId = '' } = useParams<CallBackDetailParams>();
-  const navigate = useNavigate();
-
-  const {
-    data: callbackData,
-    isLoading: isCallBackLoading,
-    isError: isCallBackError,
-    error: callBackError,
-  } = useGetCallback(callBackId);
-
-  useEffect(() => {
-    if (isCallBackError) {
-      const errorMessage = handleCallbackError(callBackError);
-      alert(errorMessage);
-      navigate(RouterPath.CALL_BACK_LIST);
-    }
-  }, [isCallBackError, callBackError, navigate]);
+  const { callbackData, isCallBackLoading } = useCallbackDetail(callBackId);
 
   return (
     <>
