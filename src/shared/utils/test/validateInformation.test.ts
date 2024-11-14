@@ -2,6 +2,8 @@ import { validateAccountNumber } from '../validateAccountNumber';
 import { validateName } from '../validateName';
 import { validatePhoneNumber } from '../validatePhoneNumber';
 
+window.alert = jest.fn();
+
 describe('> validateAccountNumber', () => {
   describe('계좌번호와 은행명의 유효성을 검사한다', () => {
     it.each([
