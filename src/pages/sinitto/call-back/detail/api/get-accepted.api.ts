@@ -1,5 +1,5 @@
-import { fetchInstance } from '@/shared/api/instance';
-import type { CallbackResponse } from '@/shared/types';
+import { fetchInstance } from '@/shared';
+import type { CallbackResponse } from '@/shared';
 
 const getAcceptedPath = () => `/api/callbacks/sinitto/accepted`;
 

@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
+import { PostAcceptMenu } from '../../components/menu/post-accept';
+import { PreAcceptMenu } from '../../components/menu/pre-accept';
 import {
   useAcceptCallback,
   useCancelCallback,
   useCompleteCallback,
-} from '../../api/hooks';
-import { PostAcceptMenu } from '../../components/menu/post-accept';
-import { PreAcceptMenu } from '../../components/menu/pre-accept';
+} from '../../hooks';
 import { RouterPath } from '@/app/routes/path';
 import { formatPhoneNumber } from '@/shared';
 import { Spinner } from '@chakra-ui/react';

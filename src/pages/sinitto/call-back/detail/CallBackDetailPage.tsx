@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useParams, Outlet, useNavigate } from 'react-router-dom';
 
 import { CallbackMenu } from './components';
-import { GuideLineList } from './components/guide-line-list';
 import { RouterPath } from '@/app/routes/path';
+import { GuideLineButton } from '@/shared';
 import {
   Notice,
   PageLayout,
@@ -48,7 +48,7 @@ export const CallBackDetailPage = () => {
                 title='가이드라인을 잘 확인하고 수락해주세요!'
                 contents='시니어의 요청이 가이드라인에서 벗어난 요청일 경우 요청을 거부할 수 있습니다!'
               />
-              <GuideLineList />
+              <GuideLineButton userType='sinitto' />
               <Divider />
               <CallbackMenu
                 callBackId={Number(callBackId)}
