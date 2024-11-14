@@ -1,6 +1,13 @@
 # 나만의 작은 시니또
+<div align='center'>
+  
+  <img src='https://github.com/user-attachments/assets/555957c8-b2aa-4797-8660-8e404962da01'>
 
-![Sinitto main banner](https://github.com/user-attachments/assets/555957c8-b2aa-4797-8660-8e404962da01)
+  ### "디지털시대?! 나도 이제 두렵지 않아!"
+  👦🏻 세대와 👨🏻‍🦳세대를 이어주는 따뜻한 전화 📞
+
+  <b>나만의 작은 시니또</b>
+</div>
 
 ## 목차
 - [🤔 시니또가 무엇인가요?](#시니또가-무엇인가요)
@@ -15,16 +22,51 @@
   - [4. 안부 전화 서비스](#4-안부-전화-서비스)
 
 ## 🚀 배포 주소
-### Client
+### ✔️ Client
 [https://sinitto.life/](https://sinitto.life/)
 
-### Dummy Data Login
+### ✔️ Dummy Data Login
 [https://sinitto.site/dummy](https://sinitto.site/dummy)
 
 **비밀번호** `1234`
 
-### Server
+### ✔️ Server
 [https://sinitto.site/](https://sinitto.site/)
+
+### ✔️ API 명세서 (Swagger)
+[https://sinitto.site/swagger-ui/index.html](https://sinitto.site/swagger-ui/index.html)
+
+## ✨ Local 환경 실행 방법
+> project를 local 환경에 clone 합니다.
+
+```bash
+git clone https://github.com/kakao-tech-campus-2nd-step3/Team8_FE
+```
+
+> node 를 설치하고, version을 확인합니다.
+> 
+> [Node.js 설치](https://nodejs.org/en)
+
+```bash
+node --version
+```
+-> `v22.10.0`
+
+> package-manager인 `Pnpm`을 설치한다.
+```bash
+npm install -g pnpm
+```
+
+> 프로젝트에 설치되어있는 라이브러리를 local 환경에 설치합니다.
+```bash
+pnpm install
+```
+
+> local 환경으로 프로젝트를 실행합니다.
+```bash
+pnpm run dev
+```
+-> [https://localhost:5173/](https://localhost:5173/)
 
 ## 👥 팀원
 
