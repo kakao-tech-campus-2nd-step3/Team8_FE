@@ -1,1 +1,0 @@
-export { DummyRedirectPage } from './DummyRedirectPage';

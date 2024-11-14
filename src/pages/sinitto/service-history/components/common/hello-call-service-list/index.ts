@@ -1,1 +1,0 @@
-export { HelloCallServiceList } from './HelloCallServiceList';
