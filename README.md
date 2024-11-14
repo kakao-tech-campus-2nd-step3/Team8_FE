@@ -39,6 +39,9 @@
 ### ✔️ Slack
 [https://join.slack.com/t/sinitto/shared_invite](https://join.slack.com/t/sinitto/shared_invite/zt-2uqws45gg-bsPq8cuH2iQV6Jk1Y3Zglw)
 
+### ✔️ Backend Repository
+[https://github.com/kakao-tech-campus-2nd-step3/Team8_BE](https://github.com/kakao-tech-campus-2nd-step3/Team8_BE)
+
 ## ✨ Local 환경 실행 방법
 > project를 local 환경에 clone 합니다.
 
