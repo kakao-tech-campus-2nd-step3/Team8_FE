@@ -44,6 +44,7 @@ git clone https://github.com/kakao-tech-campus-2nd-step3/Team8_FE
 ```
 
 > node 를 설치하고, version을 확인합니다.
+> (v20 이상을 권장합니다.)
 > 
 > [Node.js 설치](https://nodejs.org/en)
 
