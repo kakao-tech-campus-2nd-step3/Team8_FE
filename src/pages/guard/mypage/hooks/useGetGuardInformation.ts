@@ -1,5 +1,4 @@
-import { getGuardInformation } from '../api';
-import { guardInformationPath } from '../api/guard-information.api';
+import { getGuardInformation, guardInformationPath } from '../apis';
 import { GuardInformationResponse } from '../types';
 import { useQuery } from '@tanstack/react-query';
 
