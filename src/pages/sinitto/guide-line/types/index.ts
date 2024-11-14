@@ -1,9 +1,2 @@
-export type MockData = {
-  title: string;
-  content: string;
-};
-
-export type Category = {
-  id: string;
-  name: string;
-};
+export type { GuidelineResponse } from './guideline.response';
+export type { Category } from './category';

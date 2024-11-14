@@ -1,13 +1,13 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { useGetGuideline } from './api/hooks';
-import { GuidelineResponse } from './api/types';
-import { GuideLineContainer } from './components';
-import { CATEGORIES } from './data';
-import { Category } from './types';
-import { RouterPath } from '@/app/routes/path';
+import { GuideLineContainer } from '../components';
+import {
+  useGuideLineData,
+  useGuideLineErrorHandling,
+  useCategoryName,
+} from '../hooks';
+import { GuidelineResponse } from '../types';
 import { PageLayout } from '@/shared';
-import { handleCallbackError } from '@/shared/utils';
 import { Spinner, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -18,21 +18,13 @@ type GuideLineParams = {
 
 export const SinittoGuideLinePage = () => {
   const { callBackId = '', guideLineId = '' } = useParams<GuideLineParams>();
-  const navigate = useNavigate();
-  const guideLineInfo =
-    CATEGORIES.find((item: Category) => item.id === guideLineId)?.name || null;
+  const guideLineInfo = useCategoryName(guideLineId);
+  const { guideLine, isGuideLineLoading, isGuideLineError } = useGuideLineData(
+    callBackId,
+    guideLineId
+  );
 
-  const {
-    data: guideLine,
-    isLoading: isGuideLineLoading,
-    isError: isGuideLineError,
-  } = useGetGuideline(Number(callBackId), guideLineId);
-
-  if (isGuideLineError) {
-    const errorMessage = handleCallbackError(isGuideLineError);
-    alert(errorMessage);
-    navigate(RouterPath.CALL_BACK_LIST);
-  }
+  useGuideLineErrorHandling(isGuideLineError);
 
   return (
     <PageLayout>
@@ -48,7 +40,7 @@ export const SinittoGuideLinePage = () => {
               <p>데이터를 불러오는 중에 오류가 발생했습니다.</p>
             )}
             {guideLine &&
-              (guideLine.length == 0 ? (
+              (guideLine.length === 0 ? (
                 <p>등록된 가이드라인이 없습니다.</p>
               ) : (
                 guideLine.map((data: GuidelineResponse) => (
