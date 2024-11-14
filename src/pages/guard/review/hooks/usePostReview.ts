@@ -1,4 +1,4 @@
-import { postReview } from '../api';
+import { postReview } from '../apis';
 import { ReviewRequest } from '../types';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 

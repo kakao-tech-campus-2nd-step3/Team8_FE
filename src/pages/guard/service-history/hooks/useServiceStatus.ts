@@ -1,8 +1,9 @@
-import { useCompleteCallback } from '../hooks';
+import { useCompleteCallback, useHistoryData } from '../hooks';
 import { CallbackHistory } from '../types';
 
 export const useServiceStatus = (historyData: CallbackHistory) => {
-  const completeCallbackMutation = useCompleteCallback();
+  const { refetchCallback } = useHistoryData(0, 20);
+  const completeCallbackMutation = useCompleteCallback(refetchCallback);
 
   const serviceStatus = () => {
     if (historyData.status === 'COMPLETE') {

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 
-import { registerUser } from '../api';
+import { registerUser } from '../apis';
 import { SignupApiResponse } from '../types';
 import { RouterPath } from '@/app/routes/path';
 import { authStorage } from '@/shared/utils/storage';
