@@ -1,4 +1,4 @@
-import { BasicButton } from '@/shared/components';
+import { BasicButton } from '@/shared';
 import { Flex } from '@chakra-ui/react';
 
 type Props = {

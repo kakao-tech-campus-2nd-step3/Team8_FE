@@ -1,7 +1,7 @@
 import { useParams, Outlet } from 'react-router-dom';
 
-import { CallbackMenu } from './components';
-import { useCallbackDetail } from './hooks';
+import { CallbackMenu } from '../components';
+import { useCallbackDetail } from '../hooks';
 import { Notice, PageLayout, GuideLineButton } from '@/shared';
 import { Divider, Spinner } from '@chakra-ui/react';
 

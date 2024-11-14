@@ -1,5 +1,5 @@
 import type { CallbackResponse } from '@/shared';
-import { fetchInstance } from '@/shared/api/instance';
+import { fetchInstance } from '@/shared';
 
 const getCallbackPath = (callbackId: string) => `/api/callbacks/${callbackId}`;
 

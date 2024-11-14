@@ -1,0 +1,1 @@
+export { CallBackDetailPage } from './CallBackDetailPage';

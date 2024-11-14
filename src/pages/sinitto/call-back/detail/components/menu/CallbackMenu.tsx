@@ -1,13 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-
-import { PostAcceptMenu } from '../../components/menu/post-accept';
-import { PreAcceptMenu } from '../../components/menu/pre-accept';
-import {
-  useAcceptCallback,
-  useCancelCallback,
-  useCompleteCallback,
-} from '../../hooks';
-import { RouterPath } from '@/app/routes/path';
+import { useHandleCallback } from '../../hooks';
+import { PostAcceptMenu } from './post-accept';
+import { PreAcceptMenu } from './pre-accept';
 import { formatPhoneNumber } from '@/shared';
 import { Spinner } from '@chakra-ui/react';
 
@@ -22,36 +15,8 @@ export const CallbackMenu = ({
   accept,
   phoneNumber,
 }: MenuProps) => {
-  const navigate = useNavigate();
-
-  const {
-    mutate: acceptCallback,
-    isPending: isAcceptLoading,
-    isSuccess: isAcceptSuccess,
-  } = useAcceptCallback();
-  if (isAcceptSuccess) {
-    window.location.reload();
-  }
-
-  const {
-    mutate: completeCallback,
-    isPending: isCompleteLoading,
-    isSuccess: isCompleteSuccess,
-  } = useCompleteCallback();
-  if (isCompleteSuccess) {
-    navigate(RouterPath.SINITTO);
-  }
-
-  const {
-    mutate: cancelCallback,
-    isPending: isCancelLoading,
-    isSuccess: isCancelSuccess,
-  } = useCancelCallback();
-  if (isCancelSuccess) {
-    navigate(RouterPath.SINITTO);
-  }
-
-  const isLoading = isAcceptLoading || isCancelLoading || isCompleteLoading;
+  const { isLoading, completeCallback, cancelCallback, acceptCallback } =
+    useHandleCallback();
 
   return isLoading ? (
     <Spinner size='xl' marginTop='30px' />

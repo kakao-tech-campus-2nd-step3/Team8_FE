@@ -4,3 +4,4 @@ export { useCompleteCallback } from './useCompleteCallback';
 export { useGetAccepted } from './useGetAccepted';
 export { useGetCallback } from './useGetCallback';
 export { useCallbackDetail } from './useCallbackDetail';
+export { useHandleCallback } from './useHandleCallback';
