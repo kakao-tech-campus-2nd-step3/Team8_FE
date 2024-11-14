@@ -1,0 +1,15 @@
+export const TIME_SLOTS = [
+  { value: '1', label: '09:00 ~ 11:00' },
+  { value: '2', label: '10:00 ~ 12:00' },
+  { value: '3', label: '11:00 ~ 13:00' },
+  { value: '4', label: '12:00 ~ 14:00' },
+  { value: '5', label: '13:00 ~ 15:00' },
+  { value: '6', label: '14:00 ~ 16:00' },
+  { value: '7', label: '15:00 ~ 17:00' },
+  { value: '8', label: '16:00 ~ 18:00' },
+  { value: '9', label: '17:00 ~ 19:00' },
+  { value: '10', label: '18:00 ~ 20:00' },
+  { value: '11', label: '19:00 ~ 21:00' },
+  { value: '12', label: '20:00 ~ 22:00' },
+  { value: '13', label: '21:00 ~ 23:00' },
+];

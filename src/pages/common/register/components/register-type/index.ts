@@ -1,0 +1,1 @@
+export { RegisterType } from './RegisterType';
