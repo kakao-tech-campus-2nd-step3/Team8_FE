@@ -1,7 +1,7 @@
 type StorageKey = {
   accessToken?: string;
   refreshToken?: string;
-  isSinitto?: boolean;
+  isSinitto?: string;
 };
 
 const initStorage = <T extends keyof StorageKey>(
