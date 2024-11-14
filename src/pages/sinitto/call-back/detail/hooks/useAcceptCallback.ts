@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-import { acceptCallback } from '../accept-call-back.api';
+import { acceptCallback } from '../apis';
 import { useMutation } from '@tanstack/react-query';
 
 type ErrorResponse = {
