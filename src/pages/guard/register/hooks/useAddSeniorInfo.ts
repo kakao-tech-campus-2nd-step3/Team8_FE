@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-import { addSeniorInfo } from '../api';
+import { addSeniorInfo } from '../apis';
 import { SeniorRegisterRequest } from '../types';
 import { useMutation } from '@tanstack/react-query';
 

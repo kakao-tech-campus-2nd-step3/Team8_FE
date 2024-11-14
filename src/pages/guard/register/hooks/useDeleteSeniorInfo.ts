@@ -1,4 +1,4 @@
-import { deleteSeniorInfo } from '../api';
+import { deleteSeniorInfo } from '../apis';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 // 시니어 삭제 훅

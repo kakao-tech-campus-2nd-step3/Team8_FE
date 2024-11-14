@@ -1,4 +1,4 @@
-import { editSeniorInfo } from '../api';
+import { editSeniorInfo } from '../apis';
 import { SeniorRegisterRequest } from '../types';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
