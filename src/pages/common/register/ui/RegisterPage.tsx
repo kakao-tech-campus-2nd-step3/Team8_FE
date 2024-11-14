@@ -9,6 +9,7 @@ import {
   parsePhoneNumber,
   useUserEmail,
   PageLayout,
+  authStorage,
 } from '@/shared';
 import { Divider } from '@chakra-ui/react';
 
@@ -39,9 +40,8 @@ const RegisterPage = () => {
       email: email || '',
       isSinitto,
     };
-    console.log(requestData);
 
-    localStorage.setItem('isSinitto', requestData.isSinitto.toString());
+    authStorage.isSinitto.set(requestData.isSinitto);
 
     mutation.mutate(requestData);
   };
