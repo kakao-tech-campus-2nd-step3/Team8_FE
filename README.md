@@ -93,6 +93,9 @@ pnpm run dev
 
 ![Service Architecture](https://github.com/user-attachments/assets/d54fa701-2065-4492-8c47-2511f5137c14)
 
+## ERD
+![image](https://github.com/user-attachments/assets/d638bf78-4adc-4a43-96f2-e30cd04ea7b3)
+
 ## 🤔 시니또가 무엇인가요?
 
 ‘시니또’는 어르신을 뜻하는 ‘시니어’와 비밀 친구를 뜻하는 ‘마니또’를 합친 단어로,
