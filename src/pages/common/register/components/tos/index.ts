@@ -1,1 +1,0 @@
-export { Tos } from './Tos';

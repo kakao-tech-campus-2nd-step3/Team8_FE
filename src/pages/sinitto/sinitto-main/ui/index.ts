@@ -1,1 +1,0 @@
-export { SinittoMainPage } from './SinittoMainPage';

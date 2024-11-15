@@ -1,1 +1,0 @@
-export { ServiceTotal } from './ServiceTotal';
