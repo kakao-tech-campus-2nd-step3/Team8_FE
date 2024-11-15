@@ -26,7 +26,7 @@ export const ServiceTotal = ({
     <ContentsBox>
       <TitleText>서비스 총 이용 횟수</TitleText>
       <Flex alignItems='center' justifyContent='center' gap={2} mb={3}>
-        <Text as='b'>매주</Text>
+        <Text as='b'>매 회차</Text>
         <HighlightText>{serviceTime}분</HighlightText>
         <Text as='b' mx='0.5'>
           씩
