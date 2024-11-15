@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
-import { useGetCallbacks } from '@/pages/sinitto/call-back/list/hooks';
+import { useGetCallbackList } from '@/pages/sinitto/call-back';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
