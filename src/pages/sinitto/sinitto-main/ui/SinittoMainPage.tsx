@@ -1,10 +1,17 @@
+import { lazy } from 'react';
+
 import {
   CallBackApply,
   HelloCallApply,
   ServiceHistoryButton,
-  SinittoName,
 } from '../components';
 import { PageLayout } from '@/shared';
+
+const SinittoName = lazy(() =>
+  import('../components/common/sinitto-name/SinittoName').then((module) => ({
+    default: module.SinittoName,
+  }))
+);
 
 export const SinittoMainPage = () => {
   return (
