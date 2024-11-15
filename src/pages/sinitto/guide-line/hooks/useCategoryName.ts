@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
 
-import { CATEGORIES } from '../data';
-import { Category } from '../types';
+import { GUIDE_LINE_CATEGORIES } from '@/shared';
+import type { GuideLineCategoryProps } from '@/shared';
 
 export const useCategoryName = (guideLineId: string) => {
   return useMemo(
     () =>
-      CATEGORIES.find((item: Category) => item.id === guideLineId)?.name ||
-      null,
+      GUIDE_LINE_CATEGORIES.find(
+        (item: GuideLineCategoryProps) => item.id === guideLineId
+      )?.title || null,
     [guideLineId]
   );
 };

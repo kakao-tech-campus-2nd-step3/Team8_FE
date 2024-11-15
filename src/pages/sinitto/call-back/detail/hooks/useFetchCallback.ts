@@ -1,25 +1,26 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RouterPath } from '@/app/routes/path';
-import { useGetCallback, handleCallbackError } from '@/shared';
+import { useGetCallback } from '../hooks';
+import { handleCallbackError } from '@/shared';
 
 export const useFetchCallback = (callBackId: string) => {
   const navigate = useNavigate();
+
   const {
     data: callbackData,
     isLoading: isCallBackLoading,
-    isError: isCallBackError,
-    error: callBackError,
+    isError,
+    error,
   } = useGetCallback(callBackId);
 
   useEffect(() => {
-    if (isCallBackError) {
-      const errorMessage: string = handleCallbackError(callBackError);
+    if (isError) {
+      const errorMessage = handleCallbackError(error);
       alert(errorMessage);
-      navigate(RouterPath.CALL_BACK_LIST);
+      navigate('/sinitto/call-back');
     }
-  }, [isCallBackError, callBackError, navigate]);
+  }, [isError, error, navigate]);
 
   return { callbackData, isCallBackLoading };
 };

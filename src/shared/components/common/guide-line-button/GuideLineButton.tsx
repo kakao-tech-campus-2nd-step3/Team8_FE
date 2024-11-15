@@ -1,16 +1,15 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { IconArrow } from '@/pages/assets';
-import { Box, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  marginTop?: number;
-  marginBottom?: number;
   seniorId?: number | null;
+  userType: string;
 };
 
-const GUIDE_LINE_CATEGORIES = [
+export const GUIDE_LINE_CATEGORIES = [
   {
     title: '택시 호출하기',
     id: 'TAXI',
@@ -22,7 +21,7 @@ const GUIDE_LINE_CATEGORIES = [
     backgroundColor: '#b28bff',
   },
   {
-    title: '병원 접수 및 예약 대행',
+    title: '병원 예약 대행',
     id: 'HOSPITAL',
     backgroundColor: '#ffa7b5',
   },
@@ -35,20 +34,11 @@ const GUIDE_LINE_CATEGORIES = [
 
 type GuideLineCategory = (typeof GUIDE_LINE_CATEGORIES)[number];
 
-export const GuideLineButton = ({
-  marginTop,
-  marginBottom,
-  seniorId,
-}: Props) => {
+export const GuideLineButton = ({ seniorId, userType }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const goToSinitto = (id: string | null) => {
-    if (id === null) {
-      alert('개발 예정입니다.');
-      return;
-    }
-
+  const goToGuardGuideLine = (id: string | null) => {
     if (seniorId === null) {
       // seniorId가 null인 경우 (시니어가 선택되지 않은 경우)
       alert('시니어를 선택한 후 다시 선택해주세요');
@@ -64,13 +54,21 @@ export const GuideLineButton = ({
     }
   };
 
+  const goToSinittoGuideLine = (id: string | null) => {
+    navigate(`${location.pathname}/${id}`);
+  };
+
   return (
-    <Box w='full' mt={marginTop} mb={marginBottom}>
+    <Flex w='full' flexDir='column' gap='var(--space-xs)'>
       {GUIDE_LINE_CATEGORIES.map((data: GuideLineCategory) => (
         <ButtonWrapper
           key={data.title}
           backgroundColor={data.backgroundColor}
-          onClick={() => goToSinitto(data.id)}
+          onClick={() =>
+            userType === 'guard'
+              ? goToGuardGuideLine(data.id)
+              : goToSinittoGuideLine(data.id)
+          }
         >
           <Content>
             <Title>{data.title}</Title>
@@ -78,7 +76,7 @@ export const GuideLineButton = ({
           </Content>
         </ButtonWrapper>
       ))}
-    </Box>
+    </Flex>
   );
 };
 
@@ -90,7 +88,6 @@ const ButtonWrapper = styled.div<{ backgroundColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
   cursor: pointer;
 `;
 

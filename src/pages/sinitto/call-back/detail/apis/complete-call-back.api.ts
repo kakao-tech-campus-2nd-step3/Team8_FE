@@ -1,4 +1,4 @@
-import { fetchInstance } from '@/shared/api/instance';
+import { fetchInstance } from '@/shared';
 
 const getCompleteCallbackPath = (callbackId: number) =>
   `/api/callbacks/pendingComplete/${callbackId}`;

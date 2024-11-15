@@ -18,7 +18,7 @@ const ResponseBox = lazy(() =>
 );
 
 export const CallBackApply = () => {
-  const { data: callBackList, isLoading } = useGetCallbacks(4);
+  const { data: callBackList, isLoading } = useGetCallbackList(4);
 
   const timeSince = (postTime: string) => {
     const now = dayjs();
