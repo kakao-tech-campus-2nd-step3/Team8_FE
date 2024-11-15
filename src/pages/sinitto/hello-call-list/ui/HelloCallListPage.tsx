@@ -34,9 +34,6 @@ const HelloCallListPage = () => {
 
   return (
     <HelloCallListLayout>
-      <Flex w='100%' justifyContent='end'>
-        <Text>새로고침</Text>
-      </Flex>
       {allContent.map((item, index) => {
         const isLastElement = index === allContent.length - 1;
         return (
