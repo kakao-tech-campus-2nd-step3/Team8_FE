@@ -3,7 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ProtectedRoute } from './components';
 import { RouterPath } from './path';
-import { OnboardPage, RedirectPage, DummyRedirectPage } from '@/pages';
+import {
+  OnboardPage,
+  RedirectPage,
+  DummyRedirectPage,
+  RootPage,
+} from '@/pages';
 import { Layout, LoadingView } from '@/shared/components';
 
 export const RegisterPage = lazy(
@@ -128,6 +133,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
+        children: [
+          {
+            index: true,
+            element: <RootPage />,
+          },
+        ],
+      },
+      {
+        path: RouterPath.ONBOARD,
         children: [
           {
             index: true,
