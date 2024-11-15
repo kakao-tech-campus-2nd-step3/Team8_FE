@@ -14,7 +14,7 @@ export const useSinittoProfile = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
-  const { data: seniorInfo, refetch } = useSinittoInfo();
+  const { data: seniorInfo, isLoading, refetch } = useSinittoInfo();
   const modifySinittoInfoMutation = useModifySinittoInformation();
 
   useEffect(() => {
@@ -51,6 +51,7 @@ export const useSinittoProfile = () => {
       name,
       phoneNumber,
       seniorInfo,
+      isLoading,
     },
     states: {
       isEditing,

@@ -1,3 +1,5 @@
+import Skeleton from 'react-loading-skeleton';
+
 import { useAccountInfo } from '../../hooks';
 import { BasicButton } from '@/shared';
 import { Text, Input, Flex } from '@chakra-ui/react';
@@ -5,7 +7,7 @@ import styled from '@emotion/styled';
 
 const AccountInfoBox = () => {
   const {
-    accountData: { accountNumber, bankName, sinittoBankInfo },
+    accountData: { accountNumber, bankName, sinittoBankInfo, isLoading },
     states: { isEditingAccount, isRegistering },
     handlers: {
       setAccountNumber,
@@ -16,6 +18,28 @@ const AccountInfoBox = () => {
       registerBank,
     },
   } = useAccountInfo();
+
+  const renderSkeletonContent = () => (
+    <AccountBoxLayout>
+      <Row>
+        <Title>계좌번호</Title>
+        <Skeleton width={180} height={24} />
+      </Row>
+      <Row>
+        <Title>은행 이름</Title>
+        <Skeleton width={120} height={24} />
+      </Row>
+      <Row>
+        <Title>계좌 등록 여부</Title>
+        <Skeleton width={80} height={24} />
+      </Row>
+      <Skeleton width='100%' height={40} borderRadius={5} />
+    </AccountBoxLayout>
+  );
+
+  if (isLoading) {
+    return renderSkeletonContent();
+  }
 
   return (
     <AccountBoxLayout>

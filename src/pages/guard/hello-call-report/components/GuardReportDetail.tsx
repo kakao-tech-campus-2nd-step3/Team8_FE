@@ -17,7 +17,6 @@ import {
 type Props = {
   helloCallId: number;
 };
-
 const GuardReportDetail = ({ helloCallId }: Props) => {
   const { reportData, isLoading, isError } = useReport(helloCallId);
   const { completeHelloCall } = useCompleteHelloCall(helloCallId);
@@ -94,9 +93,13 @@ const GuardReportDetail = ({ helloCallId }: Props) => {
             </Text>
           </Flex>
           <Box ml={8}>
-            <Text>
-              {reportData?.startDate}~{reportData?.endDate}
-            </Text>
+            {isLoading ? (
+              <Skeleton height={20} width={100} />
+            ) : (
+              <Text>
+                {reportData?.startDate}~{reportData?.endDate}
+              </Text>
+            )}
           </Box>
         </Flex>
         <Flex
@@ -114,7 +117,11 @@ const GuardReportDetail = ({ helloCallId }: Props) => {
             </Text>
           </Flex>
           <Flex ml={8} textAlign='center' alignItems='center'>
-            {reportData?.sinittoName}
+            {isLoading ? (
+              <Skeleton height={20} width={80} />
+            ) : (
+              reportData?.sinittoName
+            )}
           </Flex>
         </Flex>
         <Flex
@@ -133,7 +140,11 @@ const GuardReportDetail = ({ helloCallId }: Props) => {
             </Text>
           </Flex>
           <Flex ml={8} border='none' height='full'>
-            {reportData?.report}
+            {isLoading ? (
+              <Skeleton height={60} width='100%' />
+            ) : (
+              reportData?.report
+            )}
           </Flex>
         </Flex>
       </Flex>
