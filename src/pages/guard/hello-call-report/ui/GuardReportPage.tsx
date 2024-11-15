@@ -1,6 +1,9 @@
-import { GuardReportDetail } from '../components';
+import { lazy } from 'react';
+
 import { useHelloCallId } from '../hooks';
 import { Flex } from '@chakra-ui/react';
+
+const GuardReportDetail = lazy(() => import('../components/GuardReportDetail'));
 
 const GuardReportPage = () => {
   const helloCallId = useHelloCallId();
