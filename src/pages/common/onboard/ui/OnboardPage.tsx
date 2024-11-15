@@ -17,8 +17,6 @@ export const OnboardPage = () => {
     setPage(swiper.activeIndex);
   };
 
-  if (window.location.pathname !== '/') return null;
-
   return (
     <MainPageLayout page={page}>
       <Wrapper>
