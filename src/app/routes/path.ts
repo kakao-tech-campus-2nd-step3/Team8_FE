@@ -1,5 +1,6 @@
 export const RouterPath = {
   ROOT: '/',
+  ONBOARD: 'onboard',
   LOGIN: 'login',
   SIGNUP: 'signup',
   REGISTER: 'register',
