@@ -2,6 +2,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+import PuppeteerRenderer from '@prerenderer/renderer-puppeteer';
+import prerender from '@prerenderer/rollup-plugin';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react-swc';
 
@@ -13,6 +15,39 @@ export default defineConfig({
   plugins: [
     react(),
     basicSsl(),
+    prerender({
+      routes: [
+        '/',
+        '/login',
+        '/signup',
+        '/register',
+        '/redirection',
+        '/service-manual',
+        '/guard',
+        '/mypage',
+        '/sinitto',
+        '/service-history',
+        '/hello-call',
+        '/apply',
+        '/call-back',
+        '/senior-register',
+        '/review',
+        '/service-history',
+        '/dummy',
+      ],
+      renderer: new PuppeteerRenderer({
+        maxConcurrentRoutes: 1,
+        renderAfterTime: 300,
+      }),
+      postProcess(route) {
+        route.html = route.html
+          .replace(/http:/g, 'https:')
+          .replace(
+            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/g,
+            'https://sinitto.life/'
+          );
+      },
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
