@@ -1,33 +1,125 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ProtectedRoute } from './components';
 import { RouterPath } from './path';
-import {
-  OnboardPage,
-  RegisterPage,
-  RedirectPage,
-  SinittoMypage,
-  GuardMyPage,
-  GuideLinePage,
-  ServiceHistoryPage,
-  HelloCallListPage,
-  HelloCallServicePage,
-  HelloCallReportPage,
-  SeniorRegisterPage,
-  CallBackListPage,
-  CallBackDetailPage,
-  SinittoGuideLinePage,
-  SinittoReviewPage,
-  HelloCallApplyPage,
-  GuardMainPage,
-  SinittoMainPage,
-  DummyRedirectPage,
-  SinittoServiceHistoryPage,
-  HelloCallDetailPage,
-  GuardReportPage,
-  ServiceManualPage,
-} from '@/pages';
-import { Layout } from '@/shared/components';
+import { OnboardPage, RedirectPage, DummyRedirectPage } from '@/pages';
+import { Layout, LoadingView } from '@/shared/components';
+
+export const RegisterPage = lazy(
+  () => import('@/pages/common/register/ui/RegisterPage')
+);
+export const GuardMainPage = lazy(() =>
+  import('@/pages/guard/guard-main/ui/GuardMainPage').then((module) => ({
+    default: module.GuardMainPage,
+  }))
+);
+
+export const ServiceHistoryPage = lazy(() =>
+  import('@/pages/guard/service-history/ui/ServiceHistoryPage').then(
+    (module) => ({
+      default: module.ServiceHistoryPage,
+    })
+  )
+);
+
+export const GuardMyPage = lazy(() =>
+  import('@/pages/guard/mypage/ui/GuardMyPage').then((module) => ({
+    default: module.GuardMyPage,
+  }))
+);
+
+export const GuardReportPage = lazy(
+  () => import('@/pages/guard/hello-call-report/ui/GuardReportPage')
+);
+
+export const SinittoReviewPage = lazy(() =>
+  import('@/pages/guard/review/ui/SinittoReviewPage').then((module) => ({
+    default: module.SinittoReviewPage,
+  }))
+);
+
+export const ServiceManualPage = lazy(
+  () => import('@/pages/common/service-manual/ui/ServiceManualPage')
+);
+
+export const SeniorRegisterPage = lazy(
+  () => import('@/pages/guard/register/ui/SeniorRegisterPage')
+);
+
+export const GuideLinePage = lazy(() =>
+  import('@/pages/guard/guide-line/ui/GuideLinePage').then((module) => ({
+    default: module.GuideLinePage,
+  }))
+);
+
+export const HelloCallApplyPage = lazy(() =>
+  import('@/pages/guard/hello-call-apply/ui/HelloCallApplyPage').then(
+    (module) => ({
+      default: module.HelloCallApplyPage,
+    })
+  )
+);
+
+export const SinittoMainPage = lazy(() =>
+  import('@/pages/sinitto/sinitto-main/ui/SinittoMainPage').then((module) => ({
+    default: module.SinittoMainPage,
+  }))
+);
+
+export const SinittoMyPage = lazy(() =>
+  import('@/pages/sinitto/mypage/ui/SinittoMyPage').then((module) => ({
+    default: module.SinittoMyPage,
+  }))
+);
+
+export const HelloCallListPage = lazy(
+  () => import('@/pages/sinitto/hello-call-list/ui/HelloCallListPage')
+);
+
+export const HelloCallServicePage = lazy(
+  () => import('@/pages/sinitto/hello-call-service/ui/HelloCallServicePage')
+);
+
+export const HelloCallReportPage = lazy(
+  () => import('@/pages/sinitto/hello-call-report/ui/HelloCallReportPage')
+);
+
+export const CallBackListPage = lazy(
+  () => import('@/pages/sinitto/call-back/list/ui/CallBackListPage')
+);
+
+export const CallBackDetailPage = lazy(() =>
+  import('@/pages/sinitto/call-back/detail/ui/CallBackDetailPage').then(
+    (module) => ({
+      default: module.CallBackDetailPage,
+    })
+  )
+);
+
+export const SinittoGuideLinePage = lazy(() =>
+  import('@/pages/sinitto/guide-line/ui/SinittoGuideLinePage').then(
+    (module) => ({
+      default: module.SinittoGuideLinePage,
+    })
+  )
+);
+
+export const SinittoServiceHistoryPage = lazy(() =>
+  import('@/pages/sinitto/service-history/ui/SinittoServiceHistoryPage').then(
+    (module) => ({
+      default: module.SinittoServiceHistoryPage,
+    })
+  )
+);
+
+export const HelloCallDetailPage = lazy(() =>
+  import('@/pages/sinitto/hello-call-detail/ui/HelloCallDetailPage').then(
+    (module) => ({
+      default: module.HelloCallDetailPage,
+    })
+  )
+);
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +141,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <RegisterPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <RegisterPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -73,7 +169,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <GuardMainPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <GuardMainPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -87,20 +187,32 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <GuardMyPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <GuardMyPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
               {
                 path: RouterPath.SERVICE_MANUAL,
-                element: <ServiceManualPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <ServiceManualPage />
+                  </Suspense>
+                ),
               },
               {
                 element: <Layout title='내 시니어 관리' />,
                 children: [
                   {
                     path: RouterPath.SENIOR_REGISTER,
-                    element: <SeniorRegisterPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <SeniorRegisterPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -116,7 +228,11 @@ export const router = createBrowserRouter([
                     children: [
                       {
                         index: true,
-                        element: <ServiceHistoryPage />,
+                        element: (
+                          <Suspense fallback={<LoadingView />}>
+                            <ServiceHistoryPage />
+                          </Suspense>
+                        ),
                       },
                     ],
                   },
@@ -128,11 +244,19 @@ export const router = createBrowserRouter([
                         children: [
                           {
                             index: true,
-                            element: <GuardReportPage />,
+                            element: (
+                              <Suspense fallback={<LoadingView />}>
+                                <GuardReportPage />
+                              </Suspense>
+                            ),
                           },
                           {
                             path: RouterPath.SINITTO_REVIEW,
-                            element: <SinittoReviewPage />,
+                            element: (
+                              <Suspense fallback={<LoadingView />}>
+                                <SinittoReviewPage />
+                              </Suspense>
+                            ),
                           },
                         ],
                       },
@@ -149,28 +273,25 @@ export const router = createBrowserRouter([
         children: [
           {
             path: RouterPath.GUARD_GUIDELINE,
-            element: <GuideLinePage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <GuideLinePage />
+              </Suspense>
+            ),
           },
         ],
       },
-      // {
-      //   // TODO: 이 페이지도 수정이 필요함.
-      //   path: RouterPath.CALL_BACK_GUID_LINE,
-      //   element: <Layout title='가이드라인' />,
-      //   children: [
-      //     {
-      //       index: true,
-      //       element: <SinittoGuideLinePage />,
-      //     },
-      //   ],
-      // },
       {
         path: RouterPath.HELLO_CALL_GUARD_APPLY,
         element: <Layout title='안부전화 서비스 신청' />,
         children: [
           {
             index: true,
-            element: <HelloCallApplyPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallApplyPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -185,7 +306,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <SinittoMainPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <SinittoMainPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -195,7 +320,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <SinittoMypage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <SinittoMyPage />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -208,7 +337,11 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <SinittoServiceHistoryPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <SinittoServiceHistoryPage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -223,7 +356,11 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <CallBackListPage />,
+                element: (
+                  <Suspense fallback={<LoadingView />}>
+                    <CallBackListPage />
+                  </Suspense>
+                ),
               },
             ],
           },
@@ -236,7 +373,11 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <CallBackDetailPage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <CallBackDetailPage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -246,7 +387,11 @@ export const router = createBrowserRouter([
                 children: [
                   {
                     index: true,
-                    element: <SinittoGuideLinePage />,
+                    element: (
+                      <Suspense fallback={<LoadingView />}>
+                        <SinittoGuideLinePage />
+                      </Suspense>
+                    ),
                   },
                 ],
               },
@@ -261,19 +406,35 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <HelloCallListPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallListPage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_SERVICE,
-            element: <HelloCallServicePage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallServicePage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_REPORT,
-            element: <HelloCallReportPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallReportPage />
+              </Suspense>
+            ),
           },
           {
             path: RouterPath.HELLO_CALL_DETAIL,
-            element: <HelloCallDetailPage />,
+            element: (
+              <Suspense fallback={<LoadingView />}>
+                <HelloCallDetailPage />
+              </Suspense>
+            ),
           },
         ],
       },

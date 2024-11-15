@@ -1,5 +1,5 @@
-import CallIllust from '../../../assets/call-illust.svg';
 import { Intro } from '../../intro';
+import CallIllust from '@/pages/assets/onboard/call-illust.svg';
 import { Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 

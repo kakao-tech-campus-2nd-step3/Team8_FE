@@ -39,6 +39,9 @@
 ### ✔️ Slack
 [https://join.slack.com/t/sinitto/shared_invite](https://join.slack.com/t/sinitto/shared_invite/zt-2uqws45gg-bsPq8cuH2iQV6Jk1Y3Zglw)
 
+### ✔️ Backend Repository
+[https://github.com/kakao-tech-campus-2nd-step3/Team8_BE](https://github.com/kakao-tech-campus-2nd-step3/Team8_BE)
+
 ## ✨ Local 환경 실행 방법
 > project를 local 환경에 clone 합니다.
 
@@ -439,7 +442,7 @@ pnpm run dev
 
 > **로그인**
 
-<img width="194" alt="image-1" src="https://github.com/user-attachments/assets/a1c1c560-8ad4-4d1b-88a8-50a4dcedfc87">
+<img width="194" alt="image-1" src="https://github.com/user-attachments/assets/fb221f00-c4e2-41be-a004-9297e45b1503">
 
 ’카카오톡 로그인’ 버튼을 눌러 로그인을 진행합니다. 이전에 로그인을 한 적이 있을
 경우 바로 로그인이 완료되며, 처음 이용할 경우 회원가입 창으로 이동하게 됩니다.

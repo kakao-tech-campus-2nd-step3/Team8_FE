@@ -1,1 +1,1 @@
-export { SinittoMypage } from './SinittoMypage';
+export { SinittoMyPage } from './SinittoMyPage';

@@ -1,4 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import {
   CallbackHistoryText,
@@ -16,16 +18,14 @@ export const ServiceHistoryPage = () => {
   const pageSize = 5;
   const serverPageSize = 20;
   const serverPage = Math.floor((currentPage * pageSize) / serverPageSize);
-  // 서버에서 가져올 때는 20개
-  const { callbackHistory, helloCallHistory, refetch } = useHistoryData(
-    serverPage,
-    serverPageSize
-  );
-  // 현재 페이지에 해당하는 콜백 내역만 return
+
+  const { callbackHistory, helloCallHistory, refetch, isLoading } =
+    useHistoryData(serverPage, serverPageSize);
+
   const currentPageData = useMemo(() => {
     if (!callbackHistory?.content) return [];
-    const startIndex = (currentPage * pageSize) % serverPageSize; // currentPage = 0, 1 일 때 startIndex = 0, 5
-    return callbackHistory.content.slice(startIndex, startIndex + pageSize); // 가져온 20개 콜백 내역 배열을 필터링
+    const startIndex = (currentPage * pageSize) % serverPageSize;
+    return callbackHistory.content.slice(startIndex, startIndex + pageSize);
   }, [callbackHistory?.content, currentPage, pageSize]);
 
   const totalPages = Math.ceil(
@@ -48,7 +48,15 @@ export const ServiceHistoryPage = () => {
       <Flex flexDir='column' w='full' gap='var(--space-sm)'>
         <CallbackHistoryText />
         <ButtonWrapper gap='var(--space-xs)'>
-          {currentPageData.length > 0 ? (
+          {isLoading ? (
+            Array.from({ length: pageSize }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={78}
+                style={{ marginBottom: '8px' }}
+              />
+            ))
+          ) : currentPageData.length > 0 ? (
             currentPageData.map((history) => (
               <CallbackHistoryDetail
                 key={history.callbackId}
@@ -81,7 +89,15 @@ export const ServiceHistoryPage = () => {
       <Flex flexDir='column' w='full' gap='var(--space-sm)'>
         <HelloServiceHistoryText />
         <ButtonWrapper gap='var(--space-sm)'>
-          {helloCallHistory && helloCallHistory.length > 0 ? (
+          {isLoading ? (
+            Array.from({ length: pageSize }).map((_, index) => (
+              <Skeleton
+                key={index}
+                height={78}
+                style={{ marginBottom: '8px' }}
+              />
+            ))
+          ) : helloCallHistory && helloCallHistory.length > 0 ? (
             helloCallHistory.map((history) => (
               <HelloServiceHistory
                 key={history.helloCallId}
