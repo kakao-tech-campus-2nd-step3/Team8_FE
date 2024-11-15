@@ -6,6 +6,7 @@ import type {
 import axios from 'axios';
 
 import { authStorage } from '../../utils/storage/authStorage';
+import { ERROR_STATUS } from '@/shared';
 import { QueryClient } from '@tanstack/react-query';
 
 const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
@@ -24,7 +25,7 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-export const BASE_URI = `http://sinitto.site:8080`;
+export const BASE_URI = `https://sinitto.site`;
 
 export const fetchInstance = initInstance({
   baseURL: BASE_URI,
@@ -59,7 +60,10 @@ fetchInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (
+      error.response?.status === ERROR_STATUS.ACCESS_TOKEN_EXPIRATION &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
 
       const refreshToken = localStorage.getItem('refreshToken');
@@ -74,17 +78,21 @@ fetchInstance.interceptors.response.use(
           'Cross-Control-Allow-Origin': '*',
           Authorization: `Bearer ${refreshToken}`,
         },
+        body: JSON.stringify({ refreshToken }),
       });
       if (resp.ok) {
         console.log('토큰 재발급 성공');
 
         const data = await resp.json();
 
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
+        authStorage.accessToken.set(data.accessToken);
+        authStorage.refreshToken.set(data.refreshToken);
 
         return fetchInstance(originalRequest);
-      } else {
+      } else if (
+        resp.status === ERROR_STATUS.REFRESH_TOKEN_EXPIRATION ||
+        resp.status === ERROR_STATUS.INVALID_REFRESH_TOKEN
+      ) {
         console.log('토큰 재발급 실패');
 
         localStorage.removeItem('accessToken');

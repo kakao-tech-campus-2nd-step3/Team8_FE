@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import ArrowImg from '../../assets/arrow.png';
+import { useRequestNavigation, useTimeAgo } from '../../hooks';
+import { IconArrow } from '@/pages/assets';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -12,35 +12,15 @@ type Props = {
 
 export const RequestRow = forwardRef<HTMLButtonElement, Props>(
   ({ name, time, id }, ref) => {
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-      navigate(`${id}`);
-    };
-
-    const getTimeAgo = (postTime: string) => {
-      const postDate = new Date(postTime);
-      const now = new Date();
-      const differenceInMinutes = Math.floor(
-        (now.getTime() - postDate.getTime()) / 60000
-      );
-
-      if (differenceInMinutes < 60) {
-        return differenceInMinutes > 0
-          ? differenceInMinutes + '분 전'
-          : '방금 전';
-      } else {
-        const differenceInHours = Math.floor(differenceInMinutes / 60);
-        return differenceInHours + '시간 전';
-      }
-    };
+    const handleClick = useRequestNavigation(id);
+    const timeAgo = useTimeAgo(time);
 
     return (
       <Wrapper ref={ref} onClick={handleClick}>
         <Content>
           <Title>{name}님의 요청</Title>
-          <Time>{getTimeAgo(time)}</Time>
-          <ArrowIcon src={ArrowImg} />
+          <Time>{timeAgo}</Time>
+          <IconArrow fill='var(--color-gray)' type='solid' height='24' />
         </Content>
       </Wrapper>
     );
@@ -51,22 +31,20 @@ RequestRow.displayName = 'RequestRow';
 
 const Wrapper = styled.button`
   width: 100%;
-  height: 60px;
   border-radius: 10px;
   background-color: var(--color-white-gray);
   outline: 0;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 30px;
+  margin: var(--space-sm) var(--space-md);
 `;
 
 const Title = styled.h3`
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: 400;
   margin-top: 2px;
 `;
@@ -76,9 +54,5 @@ const Time = styled.p`
   font-weight: 350;
   color: var(--color-gray);
   margin-left: auto;
-`;
-
-const ArrowIcon = styled.img`
-  margin-left: 20px;
-  height: 20px;
+  margin-right: var(--space-xs);
 `;

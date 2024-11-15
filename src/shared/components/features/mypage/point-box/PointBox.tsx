@@ -1,38 +1,23 @@
-import { useState } from 'react';
-
-import {
-  useChargePoint,
-  useGetPointInfo,
-  useWithdrawPoint,
-} from '@/shared/hooks';
-import { Box, Spinner, Button, Input } from '@chakra-ui/react';
+import { BasicButton } from '@/shared/components';
+import { usePoint } from '@/shared/hooks/point/usePoint';
+import { Box, Flex, Spinner, Text, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const PointBox = () => {
-  const { data: pointData, isLoading, refetch } = useGetPointInfo();
-  const chargePointMutation = useChargePoint();
-  const withdrawPointMutation = useWithdrawPoint();
-  const [actionType, setActionType] = useState('');
-  const [amount, setAmount] = useState('');
+type Props = {
+  isSinitto?: boolean;
+};
 
-  const handleChargeButtonClick = () => {
-    const parsedAmount = Number(amount);
-    if (parsedAmount > 0) {
-      chargePointMutation.mutate(parsedAmount);
-      setAmount('');
-      setActionType('');
-    }
-  };
-
-  const handleWithdrawButtonClick = () => {
-    const parsedAmount = Number(amount);
-    if (parsedAmount > 0) {
-      withdrawPointMutation.mutate(parsedAmount);
-      setAmount('');
-      setActionType('');
-      refetch();
-    }
-  };
+const PointBox = ({ isSinitto = false }: Props) => {
+  const {
+    pointData: { data: pointData, isLoading },
+    states: { actionType, amount },
+    handlers: {
+      setActionType,
+      setAmount,
+      handleChargeButtonClick,
+      handleWithdrawButtonClick,
+    },
+  } = usePoint();
 
   if (isLoading) {
     return (
@@ -43,81 +28,91 @@ const PointBox = () => {
   }
 
   return (
-    <PointBoxLayout>
-      <Box
-        w='100%'
-        display='flex'
-        justifyContent='flex-start'
-        pl={3}
-        mt={2}
-        fontSize='20px'
-        fontWeight={700}
-      >
-        내 포인트
-      </Box>
-      <Box
-        w='100%'
-        display='flex'
-        justifyContent='flex-start'
-        pl={3}
-        mt={1}
-        fontSize='18px'
-        fontWeight={700}
-      >
-        {pointData?.price.toLocaleString()} 포인트
-      </Box>
-      {actionType ? (
-        <Box display='flex' flexDir='column' alignItems='center'>
-          <Input
-            m={1}
-            w='100%'
-            h='40px'
-            placeholder={
-              actionType === 'charge' ? '충전할 포인트' : '출금할 포인트'
-            }
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            type='number'
-            min='1'
-          />
-          <ButtonContainer>
-            <Button
-              w='100px'
+    <Flex w='full' flexDir='column' gap='var(--space-sm)'>
+      <PointBoxLayout>
+        <Flex w='full' justifyContent='space-between' mb='var(--space-sm)'>
+          <Text fontSize='20px' fontWeight={700}>
+            내 포인트
+          </Text>
+          <Text fontSize='20px' fontWeight={700}>
+            {pointData?.price.toLocaleString()} 포인트
+          </Text>
+        </Flex>
+        {actionType ? (
+          <Flex
+            w='full'
+            flexDir='column'
+            alignItems='center'
+            gap='var(--space-xs)'
+          >
+            <Input
+              w='100%'
               h='40px'
+              bg='var(--color-white)'
               fontSize='16px'
-              onClick={
-                actionType === 'charge'
-                  ? handleChargeButtonClick
-                  : handleWithdrawButtonClick
+              placeholder={
+                actionType === 'charge' ? '충전할 포인트' : '출금할 포인트'
               }
-              colorScheme='teal'
-            >
-              {actionType === 'charge' ? '충전' : '출금'}
-            </Button>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              onClick={() => {
-                setActionType('');
-              }}
-              colorScheme='red'
-            >
-              취소
-            </Button>
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              type='number'
+              min='1'
+            />
+            <ButtonContainer>
+              <BasicButton
+                themeType='gray'
+                height='40px'
+                onClick={() => {
+                  setActionType('');
+                }}
+              >
+                {actionType === 'charge' ? '충전 취소' : '출금 취소'}
+              </BasicButton>
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={
+                  actionType === 'charge'
+                    ? handleChargeButtonClick
+                    : handleWithdrawButtonClick
+                }
+              >
+                {actionType === 'charge' ? '충전 신청' : '출금 신청'}
+              </BasicButton>
+            </ButtonContainer>
+          </Flex>
+        ) : (
+          <ButtonContainer>
+            {isSinitto ? (
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={() => setActionType('withdraw')}
+              >
+                출금하기
+              </BasicButton>
+            ) : (
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={() => setActionType('charge')}
+              >
+                충전하기
+              </BasicButton>
+            )}
           </ButtonContainer>
-        </Box>
-      ) : (
-        <ButtonContainer mt={2}>
-          <ButtonBox onClick={() => setActionType('charge')}>
-            충전하기
-          </ButtonBox>
-          <ButtonBox onClick={() => setActionType('withdraw')}>
-            출금하기
-          </ButtonBox>
-        </ButtonContainer>
-      )}
-    </PointBoxLayout>
+        )}
+        {isSinitto ? null : (
+          <Text
+            fontSize='var(--font-size-sm)'
+            color='var(--color-gray)'
+            mt='var(--space-sm)'
+          >
+            포인트 충전 요청 후 꼭 카카오톡 나에게 보내기 메세지를 확인해주세요.
+          </Text>
+        )}
+      </PointBoxLayout>
+    </Flex>
   );
 };
 
@@ -125,42 +120,19 @@ export default PointBox;
 
 const PointBoxLayout = styled(Box)`
   width: 100%;
-  max-width: 338px;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f6e4e4;
-  border: 1px solid #f6e4e4;
-  border-radius: 10px;
-  margin-top: 0.5rem;
+  background-color: var(--color-secondary);
+  border-radius: 5px;
+  padding: var(--space-md);
 `;
 
 const ButtonContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
   width: 100%;
-  max-width: 338px;
-  height: 30%;
-  max-height: 40px;
-  margin-bottom: 10px;
-`;
-
-const ButtonBox = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 145px;
-  height: 100%;
-  max-height: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  background-color: #fff;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  cursor: pointer;
+  gap: var(--space-xs);
 `;

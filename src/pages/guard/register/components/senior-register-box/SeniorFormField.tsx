@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import { SeniorRegisterValues } from '../../api';
+import { SeniorRegisterRequest as SeniorRegisterValues } from '../../types';
 import { Box, Input, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -20,7 +20,14 @@ const SeniorFormField = ({
   return (
     <FieldContainer>
       <Label>{label}</Label>
-      <StyledInput placeholder={placeholder} {...registerProps} />
+      <Input
+        w='full'
+        bg='var(--color-white)'
+        size='md'
+        borderRadius='10px'
+        placeholder={placeholder}
+        {...registerProps}
+      />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </FieldContainer>
   );
@@ -32,19 +39,12 @@ const FieldContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: var(--space-xxs);
 `;
 
 const Label = styled(Text)`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const StyledInput = styled(Input)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
 `;
 
 const ErrorMessage = styled(Text)`

@@ -1,3 +1,2 @@
-export { useIntersectionObserver } from './useIntersectionObserver';
-export type { UseIntersectionObserverProps } from './useIntersectionObserver';
+export * from './hello-call';
 export * from './point';

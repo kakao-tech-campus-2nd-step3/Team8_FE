@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TimeSlots } from '@/pages';
+import { TimeSlots } from '../types';
 
 export const useHelloCallState = () => {
   const [timeSlotsArray, setTimeSlotsArray] = useState<TimeSlots[]>([]);
@@ -9,7 +9,6 @@ export const useHelloCallState = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [price, setPrice] = useState<number | null>(null);
   const [selectedSeniorId, setSelectedSeniorId] = useState<string | null>(null);
-  const [message, setMessage] = useState('');
 
   return {
     timeSlotsArray,
@@ -24,7 +23,5 @@ export const useHelloCallState = () => {
     setPrice,
     selectedSeniorId,
     setSelectedSeniorId,
-    message,
-    setMessage,
   };
 };

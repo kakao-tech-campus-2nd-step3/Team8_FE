@@ -27,9 +27,24 @@ const GuidelineFormField = ({
     <FieldContainer>
       <Label>{label}</Label>
       {type === 'input' ? (
-        <StyledInput placeholder={placeholder} {...registerProps} />
+        <Input
+          w='full'
+          bg='var(--color-white)'
+          size='md'
+          borderRadius='10px'
+          placeholder={placeholder}
+          {...registerProps}
+        />
       ) : (
-        <StyledTextarea placeholder={placeholder} {...registerProps} />
+        <Textarea
+          w='full'
+          bg='var(--color-white)'
+          size='md'
+          borderRadius='10px'
+          height='150px'
+          placeholder={placeholder}
+          {...registerProps}
+        />
       )}
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </FieldContainer>
@@ -42,31 +57,13 @@ const FieldContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
+  gap: var(--space-xxs);
 `;
 
 const Label = styled(Text)`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
 `;
-
-const StyledInput = styled(Input)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 0.8rem;
-  margin-bottom: 0.2rem;
-`;
-
-const StyledTextarea = styled(Textarea)`
-  background-color: var(--color-white);
-  border: none;
-  font-size: 0.8rem;
-  margin-bottom: 0.2rem;
-  min-height: 100px;
-  resize: vertical;
-`;
-
 const ErrorMessage = styled(Text)`
   color: red;
   font-size: 14px;

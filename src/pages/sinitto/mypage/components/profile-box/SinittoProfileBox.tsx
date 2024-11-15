@@ -1,135 +1,86 @@
-import { useEffect, useState } from 'react';
-
-import { useModifySinittoInformation } from '@/pages';
-import { Logout, useSinittoInfo } from '@/shared';
-import { Box, Text, Button, Input } from '@chakra-ui/react';
+import { useSinittoProfile } from '../../hooks';
+import { formatPhoneNumber, Logout, BasicButton } from '@/shared';
+import { Box, Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-type Props = {
-  isEditing: boolean;
-  setIsEditing: (value: boolean) => void;
-};
-
-const SinittoProfileBox = ({ isEditing, setIsEditing }: Props) => {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-
-  const { data, refetch } = useSinittoInfo();
-
-  const modifySinittoInfoMutation = useModifySinittoInformation();
-
-  useEffect(() => {
-    if (isEditing) {
-      setName(data?.name || '');
-      setPhoneNumber(data?.phoneNumber || '');
-    }
-  }, [isEditing, data]);
-
-  const handleSaveClick = () => {
-    const modifiedSinittoInfo = {
-      name: name,
-      phoneNumber: phoneNumber,
-      email: String(data?.email),
-      accountNumber: String(data?.accountNumber),
-      bankName: String(data?.bankName),
-    };
-    modifySinittoInfoMutation.mutate(modifiedSinittoInfo, {
-      onSuccess: () => {
-        setIsEditing(false);
-        refetch();
-      },
-    });
-  };
+const SinittoProfileBox = () => {
+  const {
+    profileData: { name, phoneNumber, seniorInfo },
+    states: { isEditing },
+    handlers: { setName, setPhoneNumber, setIsEditing, saveModifiedInfo },
+  } = useSinittoProfile();
 
   return (
-    <SinittoProfileBoxLayout mb={2}>
-      <Box
-        display='flex'
-        w='100%'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <Text ml='1rem' fontSize='18px' fontWeight={700}>
-          {data?.name} 님 환영합니다.
-        </Text>
+    <>
+      <Flex w='full'>
+        <Flex marginRight='auto' alignItems='center'>
+          <Text color='var(--color-primary)' fontSize='24px' fontWeight='700'>
+            {seniorInfo?.name}
+          </Text>
+          <Text fontSize='lg' fontWeight='700'>
+            님 환영합니다!
+          </Text>
+        </Flex>
         <Logout />
-      </Box>
-      <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
-        <Text
-          ml='1rem'
-          fontSize='16px'
-          fontWeight={600}
-          color='var(--color-gray)'
-        >
-          이름
-        </Text>
+      </Flex>
+
+      <SinittoProfileBoxLayout>
+        <Row>
+          <Title>이름</Title>
+          {isEditing ? (
+            <StyledInput
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              width='5rem'
+            />
+          ) : (
+            <Content>{seniorInfo?.name}</Content>
+          )}
+        </Row>
+        <Row>
+          <Title>전화번호</Title>
+          {isEditing ? (
+            <StyledInput
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              width='9rem'
+            />
+          ) : (
+            <Content>
+              {formatPhoneNumber(String(seniorInfo?.phoneNumber))}
+            </Content>
+          )}
+        </Row>
+
         {isEditing ? (
-          <Input
-            ml='1rem'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder='이름 입력'
-            size='sm'
-            width='40%'
-            bg='var(--color-white)'
-          />
-        ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {data?.name}
-          </Text>
-        )}
-      </Box>
-      <Box display='flex' w='100%' justifyContent='space-between' mt={2}>
-        <Text
-          ml='1rem'
-          fontSize='16px'
-          fontWeight={600}
-          color='var(--color-gray)'
-        >
-          전화번호
-        </Text>
-        {isEditing ? (
-          <Input
-            ml='1rem'
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder='전화번호 입력'
-            size='sm'
-            width='60%'
-            bg='var(--color-white)'
-          />
-        ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {data?.phoneNumber}
-          </Text>
-        )}
-      </Box>
-      <Box display='flex' justifyContent='flex-end' mt={2}>
-        {isEditing ? (
-          <>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              colorScheme='teal'
-              onClick={handleSaveClick}
-              mr={2}
-            >
-              수정 완료
-            </Button>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              colorScheme='red'
+          <Box
+            display='flex'
+            w='100%'
+            justifyContent='center'
+            gap='var(--space-xs)'
+          >
+            <BasicButton
+              themeType='gray'
+              height='40px'
               onClick={() => setIsEditing(false)}
             >
-              취소
-            </Button>
-          </>
-        ) : null}
-      </Box>
-    </SinittoProfileBoxLayout>
+              수정 취소
+            </BasicButton>
+            <BasicButton height='40px' onClick={saveModifiedInfo}>
+              수정 완료
+            </BasicButton>
+          </Box>
+        ) : (
+          <BasicButton
+            themeType='default'
+            height='40px'
+            onClick={() => setIsEditing(true)}
+          >
+            내 정보 수정하기
+          </BasicButton>
+        )}
+      </SinittoProfileBoxLayout>
+    </>
   );
 };
 
@@ -138,12 +89,42 @@ export default SinittoProfileBox;
 const SinittoProfileBoxLayout = styled(Box)`
   display: flex;
   flex-direction: column;
-  background-color: #f2f2f2;
   width: 100%;
-  max-width: 338px;
   height: auto;
-  border: 1px solid #909090;
+  border: 2px solid var(--color-white-gray);
   border-radius: 5px;
-  margin-top: 0.5rem;
-  padding: 1rem;
+  padding: var(--space-md);
+  gap: var(--space-sm);
+`;
+
+const StyledInput = styled(Input)`
+  font-size: 16px;
+  height: 100%;
+  background-color: var(--color-white);
+  text-align: right;
+  padding: 0 var(--space-xs);
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-primary);
+  }
+`;
+
+const Row = styled(Flex)`
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Title = styled(Text)`
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-gray);
+`;
+
+const Content = styled(Text)`
+  text-align: right;
+  font-size: 16px;
+  font-weight: 600;
 `;

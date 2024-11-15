@@ -1,8 +1,7 @@
 import { forwardRef } from 'react';
 
-import ArrowIcon from '../../assets/arrow.svg';
-import { Box, Image, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { IconArrow } from '@/pages/assets';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 type Props = {
   onClick?: () => void;
@@ -13,33 +12,48 @@ type Props = {
 const CallRequest = forwardRef<HTMLDivElement, Props>(
   ({ onClick, seniorName, days }, ref) => {
     return (
-      <Box
-        display='flex'
+      <Flex
         flexDir='row'
         alignItems='center'
         textAlign='center'
         justifyContent='space-between'
-        px={5}
-        gap={5}
+        px='var(--space-md)'
+        py='var(--space-sm)'
         backgroundColor='var(--color-white-gray)'
         width='100%'
-        borderRadius='0.5rem'
-        h='3.5rem'
+        borderRadius='10px'
         ref={ref}
         onClick={onClick}
       >
         <Box>
           <Text>{seniorName}님의 요청</Text>
         </Box>
-        <Box display='flex' gap={5} alignItems='center'>
-          <Box display='flex' flexDir='row' gap={1} alignItems='center'>
-            {days?.map((day, index) => <DayBox key={index}>{day}</DayBox>)}
+        <Box display='flex' alignItems='center'>
+          <Box
+            display='flex'
+            flexDir='row'
+            alignItems='center'
+            marginRight='var(--space-xs)'
+            gap='var(--space-xxs)'
+          >
+            {days?.map((day, index) => (
+              <Text
+                key={index}
+                padding='0.125rem 0.3rem'
+                borderRadius='0.25rem'
+                backgroundColor='var(--color-secondary)'
+                fontSize='var(--font-size-sm)'
+                color='var(--color-primary)'
+              >
+                {day}
+              </Text>
+            ))}
           </Box>
           <Box>
-            <Image src={ArrowIcon} alt='arrow-icon' />
+            <IconArrow fill='var(--color-gray)' type='solid' height='24' />
           </Box>
         </Box>
-      </Box>
+      </Flex>
     );
   }
 );
@@ -47,10 +61,3 @@ const CallRequest = forwardRef<HTMLDivElement, Props>(
 CallRequest.displayName = 'CallRequest';
 
 export default CallRequest;
-
-const DayBox = styled(Text)`
-  padding: 0.125rem 0.3rem;
-  border-radius: 0.25rem;
-  background-color: var(--color-secondary);
-  font-size: var(--font-size-sm);
-`;

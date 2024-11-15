@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import { DAY_DATA, TIME_SLOTS, USE_TIME_DATA } from '../../data';
-import { TimeSlots, useSlots } from '@/pages';
+import { useServiceTime, useSlotsManagement } from '../../hooks';
+import { TimeSlots } from '../../types';
 import { Box, Button, Flex, Select, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -14,58 +13,17 @@ export const ServiceUsingTime = ({
   setServiceTime,
   setTimeSlotsArray,
 }: Props) => {
-  const [selectedTime, setSelectedTime] = useState<number | null>(null);
-  const [startTime, setStartTime] = useState<string>('');
-  const [endTime, setEndTime] = useState<string>('');
-  const [days, setDays] = useState<string[]>([]);
-
-  const { slots: addSlots, addSlot, removeSlot } = useSlots();
-
-  useEffect(() => {
-    const updatedSlots: TimeSlots[] = addSlots.map((_, index) => ({
-      dayName: days[index] || '월',
-      startTime,
-      endTime,
-      selectedTime,
-    }));
-
-    setTimeSlotsArray(updatedSlots);
-  }, [addSlots, selectedTime, startTime, endTime, setTimeSlotsArray, days]);
-
-  const handleDaySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
-
-    const selectedSlot = TIME_SLOTS.find(
-      (slot) => slot.value === selectedValue
-    );
-
-    if (selectedSlot) {
-      const [start, end] = selectedSlot.label.split(' ~ ');
-
-      setStartTime(start);
-      setEndTime(end);
-    }
-  };
-
-  const handleDayChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    index: number
-  ) => {
-    const selectedDay = e.target.value;
-    setDays((prevDays) => {
-      const newDays = [...prevDays];
-      newDays[index] = selectedDay;
-      return newDays;
-    });
-  };
-
-  const handleTimeSelect = (time: number) => {
-    setSelectedTime(time);
-    setServiceTime(time);
-  };
-
-  const isAddDisabled = addSlots.length >= 7;
-  const isRemoveDisabled = addSlots.length <= 1;
+  const { selectedTime, handleTimeSelect } = useServiceTime(setServiceTime);
+  const {
+    days,
+    addSlots,
+    addSlot,
+    removeSlot,
+    handleDayChange,
+    handleDaySelect,
+    isAddDisabled,
+    isRemoveDisabled,
+  } = useSlotsManagement(setTimeSlotsArray);
 
   return (
     <ContentsBox>

@@ -1,1 +1,0 @@
-export { useGetGuideline } from './useGetGuideline';

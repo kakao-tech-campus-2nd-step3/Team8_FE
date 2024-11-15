@@ -1,31 +1,24 @@
-import { NOTICE_DATA } from '@/pages';
+import { NOTICE_DATA } from '../../data';
 import { Notice } from '@/shared';
-import { Box } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Flex } from '@chakra-ui/react';
 
 export const NoticeArea = () => {
   return (
-    <>
-      <NoticeBox>
+    <Flex w='full' flexDir='column' gap='var(--space-sm)'>
+      <Flex flexDir='column'>
         <Notice
           noticeType={NOTICE_DATA.noticeType}
           title={NOTICE_DATA.title_price}
           contents={NOTICE_DATA.contents_price}
         />
-      </NoticeBox>
-      <NoticeBox>
+      </Flex>
+      <Flex flexDir='column'>
         <Notice
           noticeType={NOTICE_DATA.noticeType}
           title={NOTICE_DATA.title_info}
           contents={NOTICE_DATA.contents_info}
         />
-      </NoticeBox>
-    </>
+      </Flex>
+    </Flex>
   );
 };
-
-const NoticeBox = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem 0;
-`;

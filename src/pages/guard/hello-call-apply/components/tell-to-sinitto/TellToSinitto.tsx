@@ -1,38 +1,26 @@
+import { useMessage } from '../../hooks';
 import { Flex, Text, Textarea } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 type Props = {
-  message: string;
-  setMessage: (value: string) => void;
+  initialMessage: string;
 };
 
-export const TellToSinitto = ({ message, setMessage }: Props) => {
-  const handleTextareaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setMessage(event.target.value);
-  };
+export const TellToSinitto = ({ initialMessage }: Props) => {
+  const { message, setMessage } = useMessage(initialMessage);
 
   return (
-    <Wrapper flexDir='column'>
-      <TitleText>시니또에게 전할 내용</TitleText>
-      <Wrapper my={3}>
+    <Flex direction='column' width='100%'>
+      <Text fontSize='xl' fontWeight='900'>
+        시니또에게 전할 내용
+      </Text>
+      <Flex mt={3}>
         <Textarea
-          h='10rem'
+          height='10rem'
           placeholder='어르신에 대한 내용을 입력해주세요'
           value={message}
-          onChange={handleTextareaChange}
+          onChange={setMessage}
         />
-      </Wrapper>
-    </Wrapper>
+      </Flex>
+    </Flex>
   );
 };
-
-const Wrapper = styled(Flex)`
-  width: 100%;
-`;
-
-const TitleText = styled(Text)`
-  font-size: var(--font-size-xl);
-  font-weight: 900;
-`;

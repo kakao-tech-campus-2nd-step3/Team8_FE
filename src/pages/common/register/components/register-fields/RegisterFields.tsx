@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import type { FormValues } from '../../types';
-import { FormField } from './form-fields';
-import styled from '@emotion/styled';
+import { FormField } from './FormField';
+import { Flex } from '@chakra-ui/react';
 
 type Props = {
   register: UseFormRegister<FormValues>;
@@ -11,7 +11,7 @@ type Props = {
 
 export const RegisterFields = ({ register, errors }: Props) => {
   return (
-    <Wrapper>
+    <Flex flexDirection='column' width='100%' gap='var(--space-md)'>
       <FormField
         label='이름'
         placeholder='예시: 홍길동'
@@ -30,10 +30,6 @@ export const RegisterFields = ({ register, errors }: Props) => {
           },
         })}
       />
-    </Wrapper>
+    </Flex>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-`;

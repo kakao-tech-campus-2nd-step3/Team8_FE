@@ -1,19 +1,14 @@
-import { BasicButton } from '@/shared/components';
-import styled from '@emotion/styled';
+import { BasicButton } from '@/shared';
+import { Flex } from '@chakra-ui/react';
 
 type Props = {
-  handleClick: () => void;
+  acceptCallback: () => void;
 };
 
-export const PreAcceptMenu = ({ handleClick }: Props) => {
+export const PreAcceptMenu = ({ acceptCallback }: Props) => {
   return (
-    <Wrapper>
-      <BasicButton onClick={handleClick}>전화걸기 및 수락하기</BasicButton>
-    </Wrapper>
+    <Flex width='100%'>
+      <BasicButton onClick={acceptCallback}>전화걸기 및 수락하기</BasicButton>
+    </Flex>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 30px;
-`;
