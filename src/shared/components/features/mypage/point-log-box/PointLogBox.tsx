@@ -1,7 +1,9 @@
 import { useState, useCallback, useMemo } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { getPointStatusLabel, useGetPointLogs } from '@/shared/hooks';
-import { Box, Spinner, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const PointLogBox = () => {
@@ -36,69 +38,93 @@ const PointLogBox = () => {
     [refetch, serverPage]
   );
 
-  if (isLoading) {
-    return (
-      <UseDetailBoxLayout>
-        <Spinner size='sm' />
-      </UseDetailBoxLayout>
-    );
-  }
+  const renderSkeletons = () => {
+    return Array(5)
+      .fill(0)
+      .map((_, index) => (
+        <DetailFactor key={`skeleton-${index}`}>
+          <TextLayout>
+            <DetailText>
+              <Skeleton width={100} />
+            </DetailText>
+            <DetailText display='flex' justifyContent='flex-end' mr={2}>
+              <Skeleton width={60} />
+            </DetailText>
+          </TextLayout>
+
+          <TextLayout>
+            <ContentText>
+              <Skeleton width={200} />
+            </ContentText>
+            <DetailText display='flex' justifyContent='flex-end' mr={2}>
+              <Skeleton width={80} />
+            </DetailText>
+          </TextLayout>
+        </DetailFactor>
+      ));
+  };
 
   return (
     <UseDetailBoxLayout>
       <TextBox>포인트 내역</TextBox>
       <DetailBox>
-        {currentPageData.map((item, index) => (
-          <DetailFactor key={index}>
-            <TextLayout>
-              <DetailText>
-                {new Date(item.postTime).toLocaleDateString()}
-              </DetailText>
-              <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                {getPointStatusLabel(item.status)}
-              </DetailText>
-            </TextLayout>
+        {isLoading
+          ? renderSkeletons()
+          : currentPageData.map((item, index) => (
+              <DetailFactor key={index}>
+                <TextLayout>
+                  <DetailText>
+                    {new Date(item.postTime).toLocaleDateString()}
+                  </DetailText>
+                  <DetailText display='flex' justifyContent='flex-end' mr={2}>
+                    {getPointStatusLabel(item.status)}
+                  </DetailText>
+                </TextLayout>
 
-            <TextLayout>
-              <ContentText>{item.content}</ContentText>
-              <DetailText display='flex' justifyContent='flex-end' mr={2}>
-                <PriceText
-                  color={
-                    item.status === 'SPEND_COMPLETE' ||
-                    item.status === 'WITHDRAW_COMPLETE'
-                      ? 'blue'
-                      : item.status === 'EARN' ||
-                          item.status === 'CHARGE_COMPLETE'
-                        ? 'red'
-                        : 'black'
-                  }
-                >
-                  {(item.status === 'SPEND_COMPLETE' ||
-                  item.status === 'WITHDRAW_COMPLETE'
-                    ? '-'
-                    : item.status === 'EARN' ||
-                        item.status === 'CHARGE_COMPLETE'
-                      ? '+'
-                      : '') + item.price.toLocaleString()}
-                </PriceText>
-              </DetailText>
-            </TextLayout>
-          </DetailFactor>
-        ))}
+                <TextLayout>
+                  <ContentText>{item.content}</ContentText>
+                  <DetailText display='flex' justifyContent='flex-end' mr={2}>
+                    <PriceText
+                      color={
+                        item.status === 'SPEND_COMPLETE' ||
+                        item.status === 'WITHDRAW_COMPLETE'
+                          ? 'blue'
+                          : item.status === 'EARN' ||
+                              item.status === 'CHARGE_COMPLETE'
+                            ? 'red'
+                            : 'black'
+                      }
+                    >
+                      {(item.status === 'SPEND_COMPLETE' ||
+                      item.status === 'WITHDRAW_COMPLETE'
+                        ? '-'
+                        : item.status === 'EARN' ||
+                            item.status === 'CHARGE_COMPLETE'
+                          ? '+'
+                          : '') + item.price.toLocaleString()}
+                    </PriceText>
+                  </DetailText>
+                </TextLayout>
+              </DetailFactor>
+            ))}
       </DetailBox>
       <Pagination>
         <PaginationButton
           onClick={() => pageChange(Math.max(currentPage - 1, 0))}
-          disabled={currentPage === 0}
+          disabled={currentPage === 0 || isLoading}
         >
           이전
         </PaginationButton>
         <span>
-          페이지 {currentPage + 1} / {totalPages || 1}
+          {isLoading ? (
+            <Skeleton width={100} />
+          ) : (
+            `페이지 ${currentPage + 1} / ${totalPages || 1}`
+          )}
         </span>
         <PaginationButton
           onClick={() => pageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages - 1}
+          disabled={currentPage >= totalPages - 1 || isLoading}
         >
           다음
         </PaginationButton>
@@ -164,6 +190,11 @@ const PaginationButton = styled.button`
   font-weight: bold;
   padding: 0 var(--space-xs);
   outline: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 const DetailText = styled(Box)`
