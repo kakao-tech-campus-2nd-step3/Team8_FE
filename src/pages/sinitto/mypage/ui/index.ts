@@ -1,0 +1,1 @@
+export { SinittoMypage } from './SinittoMypage';

@@ -1,0 +1,1 @@
+export { NoticeArea } from './NoticeArea';
