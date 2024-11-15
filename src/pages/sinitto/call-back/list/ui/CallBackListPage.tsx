@@ -1,8 +1,15 @@
-import { RequestRow } from '../components';
+import { lazy } from 'react';
+
 import { useInfiniteScroll, useCallbackList } from '../hooks';
 import { PageLayout } from '@/shared';
 import type { CallbackResponse } from '@/shared';
-import { Flex, Spinner, Text } from '@chakra-ui/react';
+import { Flex, Text, Skeleton } from '@chakra-ui/react';
+
+const RequestRow = lazy(() =>
+  import('../components/request-row/RequestRow').then((module) => ({
+    default: module.RequestRow,
+  }))
+);
 
 export const CallBackListPage = () => {
   const { data, isLoading, isError, fetchNextPage, hasNextPage } =
@@ -14,10 +21,23 @@ export const CallBackListPage = () => {
     isLoading
   );
 
+  if (isLoading && !data) {
+    return (
+      <PageLayout>
+        <Flex w='full' flexDir='column' gap='var(--space-xs)'>
+          <Skeleton height='60px' width='100%' />
+          <Skeleton height='60px' width='100%' />
+          <Skeleton height='60px' width='100%' />
+          <Skeleton height='60px' width='100%' />
+        </Flex>
+      </PageLayout>
+    );
+  }
+
   return (
     <PageLayout>
+      {isError && <Text>데이터를 불러오는데 오류가 발생했습니다</Text>}
       <Flex flexDirection='column' width='100%' gap='var(--space-xs)'>
-        {isError && <p>데이터를 불러오는데 오류가 발생했습니다</p>}
         {data &&
           data.pages.map((page, pageIndex) =>
             page.content.map((callback: CallbackResponse, index: number) => {
@@ -36,11 +56,7 @@ export const CallBackListPage = () => {
             })
           )}
       </Flex>
-      {isLoading ? (
-        <Spinner size='xl' />
-      ) : (
-        !isError && !hasNextPage && <Text>더 이상 요청이 없어요 🥲</Text>
-      )}
+      {!isError && !hasNextPage && <Text>더 이상 요청이 없어요 🥲</Text>}
     </PageLayout>
   );
 };

@@ -1,6 +1,6 @@
+import { lazy } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { GuideLineContainer } from '../components';
 import {
   useGuideLineData,
   useGuideLineErrorHandling,
@@ -8,8 +8,14 @@ import {
 } from '../hooks';
 import { GuideLineResponse } from '../types';
 import { PageLayout } from '@/shared';
-import { Spinner, Flex } from '@chakra-ui/react';
+import { Flex, Skeleton } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
+const GuideLineContainer = lazy(() =>
+  import('../components/container/Container').then((module) => ({
+    default: module.GuideLineContainer,
+  }))
+);
 
 type GuideLineParams = {
   callBackId: string;
@@ -29,28 +35,30 @@ export const SinittoGuideLinePage = () => {
 
   return (
     <PageLayout>
+      <Title>
+        <EmphasisSpan>{guideLineInfo}</EmphasisSpan> 가이드라인
+      </Title>
       {isGuideLineLoading ? (
-        <Spinner size='xl' />
+        <Flex flexDir='column' width='100%' gap='var(--space-sm)'>
+          <Skeleton height='80px' width='100%' />
+          <Skeleton height='80px' width='100%' />
+          <Skeleton height='80px' width='100%' />
+        </Flex>
       ) : (
-        <>
-          <Title>
-            <EmphasisSpan>{guideLineInfo}</EmphasisSpan> 가이드라인
-          </Title>
-          <Flex flexDir='column' width='100%' gap='var(--space-sm)'>
-            {guideLine &&
-              (guideLine.length === 0 ? (
-                <p>등록된 가이드라인이 없습니다.</p>
-              ) : (
-                guideLine.map((data: GuideLineResponse) => (
-                  <GuideLineContainer
-                    key={data.id}
-                    title={data.title}
-                    content={data.content}
-                  />
-                ))
-              ))}
-          </Flex>
-        </>
+        <Flex flexDir='column' width='100%' gap='var(--space-sm)'>
+          {guideLine &&
+            (guideLine.length === 0 ? (
+              <p>등록된 가이드라인이 없습니다.</p>
+            ) : (
+              guideLine.map((data: GuideLineResponse) => (
+                <GuideLineContainer
+                  key={data.id}
+                  title={data.title}
+                  content={data.content}
+                />
+              ))
+            ))}
+        </Flex>
       )}
     </PageLayout>
   );
