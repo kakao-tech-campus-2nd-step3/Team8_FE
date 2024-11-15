@@ -1,0 +1,1 @@
+export { SeniorRegisterPage } from './SeniorRegisterPage';
