@@ -26,7 +26,7 @@ export const HelloCallApply = () => {
             <IconArrow fill='black' />
           </ServiceApplyButton>
         </Link>
-        <StyledImage src={HelloCallImg} alt='hello-call' />
+        <StyledImage src={HelloCallImg} alt='hello-call' fetchpriority='high' />
       </ContentWrapper>
     </Flex>
   );

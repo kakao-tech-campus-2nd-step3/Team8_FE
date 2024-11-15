@@ -3,7 +3,16 @@ import { useReport } from '../hooks/useReport';
 import IconCalendar from '@/pages/assets/hello-call/calendar.svg';
 import IconFile from '@/pages/assets/hello-call/file.svg';
 import heartIcon from '@/pages/assets/hello-call/heart.svg';
-import { Box, Text, Image, Divider, Button, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  Image,
+  Divider,
+  Button,
+  Flex,
+  Skeleton,
+  SkeletonText,
+} from '@chakra-ui/react';
 
 type Props = {
   helloCallId: number;
@@ -13,8 +22,40 @@ const GuardReportDetail = ({ helloCallId }: Props) => {
   const { reportData, isLoading, isError } = useReport(helloCallId);
   const { completeHelloCall } = useCompleteHelloCall(helloCallId);
 
-  if (isLoading) return <Text>Loading...</Text>;
-  if (isError) return <Text>Error loading report data</Text>;
+  if (isLoading) {
+    return (
+      <>
+        <Flex
+          justifyContent='center'
+          alignItems='center'
+          backgroundColor='var(--color-secondary)'
+          borderRadius='5px'
+          padding='0.5rem'
+        >
+          <SkeletonText noOfLines={2} spacing='4' width='80%' />
+        </Flex>
+        <Flex
+          direction='column'
+          width='full'
+          padding={4}
+          borderRadius='0.5rem'
+          gap='1rem'
+          backgroundColor='#e4e4e4'
+          border='1px solid var(--color-gray)'
+        >
+          <Skeleton height='50px' width='100%' />
+          <Skeleton height='50px' width='100%' />
+          <Skeleton height='50px' width='100%' />
+        </Flex>
+        <Divider />
+        <Skeleton height='40px' width='200px' marginBottom='10px' />
+      </>
+    );
+  }
+
+  if (isError) {
+    return <Text>보고서를 불러올 수 없습니다!</Text>;
+  }
 
   return (
     <>
