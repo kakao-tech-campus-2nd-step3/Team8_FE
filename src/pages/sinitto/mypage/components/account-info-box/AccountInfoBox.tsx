@@ -1,212 +1,106 @@
-import { useEffect, useState } from 'react';
-
-import {
-  useGetSinittoBankInfo,
-  useModifySinittoBankInformation,
-  useRegisterSinittoBankInformation,
-} from '@/pages';
+import { useAccountInfo } from '../../hooks';
 import { BasicButton } from '@/shared';
-import { Text, Button, Input, Flex } from '@chakra-ui/react';
+import { Text, Input, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const AccountInfoBox = () => {
-  const { data: sinittoBankInfo, refetch } = useGetSinittoBankInfo();
-  const [isEditingAccount, setIsEditingAccount] = useState(false);
-  const [isRegistering, setIsRegistering] = useState(false);
-  const modifyBankInfoMutation = useModifySinittoBankInformation();
-  const [accountNumber, setAccountNumber] = useState(
-    sinittoBankInfo?.accountNumber || ''
-  );
-  const [bankName, setBankName] = useState(sinittoBankInfo?.bankName || '');
-  const registerBankInfoMutation = useRegisterSinittoBankInformation();
-
-  useEffect(() => {
-    if (isEditingAccount || isRegistering) {
-      setAccountNumber(sinittoBankInfo?.accountNumber || '');
-      setBankName(sinittoBankInfo?.bankName || '');
-    }
-  }, [isEditingAccount, isRegistering, sinittoBankInfo]);
-
-  const handleSaveClick = () => {
-    modifyBankInfoMutation.mutate(
-      { accountNumber, bankName },
-      {
-        onSuccess: () => {
-          setIsEditingAccount(false);
-          refetch();
-        },
-      }
-    );
-  };
-
-  const registerBank = () => {
-    if (!accountNumber || !bankName) {
-      alert('은행 정보와 계좌번호를 기입해주세요.');
-      return;
-    }
-    registerBankInfoMutation.mutate(
-      { accountNumber, bankName },
-      {
-        onSuccess: () => {
-          setIsRegistering(false);
-          refetch();
-        },
-      }
-    );
-  };
+  const {
+    accountData: { accountNumber, bankName, sinittoBankInfo },
+    states: { isEditingAccount, isRegistering },
+    handlers: {
+      setAccountNumber,
+      setBankName,
+      setIsEditingAccount,
+      setIsRegistering,
+      handleSaveClick,
+      registerBank,
+    },
+  } = useAccountInfo();
 
   return (
-    <AccountBoxLayout mb={2}>
-      <Flex
-        w='100%'
-        h='1.5rem'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <Text
-          ml='1rem'
-          fontSize='16px'
-          fontWeight={600}
-          color='var(--color-gray)'
-        >
-          계좌번호
-        </Text>
+    <AccountBoxLayout>
+      <Row>
+        <Title>계좌번호</Title>
         {isEditingAccount || isRegistering ? (
-          <Input
-            ml='1rem'
+          <StyledInput
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
-            fontSize='16px'
-            fontWeight='bold'
             width='60%'
-            h='1.5rem'
-            bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {sinittoBankInfo?.accountNumber}
-          </Text>
+          <Content>{sinittoBankInfo?.accountNumber}</Content>
         )}
-      </Flex>
-      <Flex
-        w='100%'
-        h='1.5rem'
-        justifyContent='space-between'
-        mt={2}
-        alignItems='center'
-      >
-        <Text
-          ml='1rem'
-          fontSize='16px'
-          fontWeight={600}
-          color='var(--color-gray)'
-        >
-          은행 이름
-        </Text>
+      </Row>
+
+      <Row>
+        <Title>은행 이름</Title>
         {isEditingAccount || isRegistering ? (
-          <Input
-            ml='1rem'
+          <StyledInput
             value={bankName}
             onChange={(e) => setBankName(e.target.value)}
-            fontSize='16px'
-            fontWeight='bold'
             width='40%'
-            h='1.5rem'
-            bg='var(--color-white)'
           />
         ) : (
-          <Text mr='1rem' fontSize='16px' fontWeight={600}>
-            {sinittoBankInfo?.bankName}
-          </Text>
+          <Content>{sinittoBankInfo?.bankName}</Content>
         )}
-      </Flex>
-      <Flex
-        w='100%'
-        h='1.5rem'
-        justifyContent='space-between'
-        mt={2}
-        mb={1}
-        alignItems='center'
-      >
-        <Text
-          ml='1rem'
-          fontSize='16px'
-          fontWeight={600}
-          color='var(--color-gray)'
-        >
-          계좌 인증 여부
-        </Text>
-        <Text mr='1rem' fontSize='16px' fontWeight={600}>
-          {sinittoBankInfo?.accountNumber ? '인증 완료' : '인증 미완료'}
-        </Text>
-      </Flex>
-      <Flex justifyContent='flex-end' mt={2}>
+      </Row>
+
+      <Row>
+        <Title>계좌 등록 여부</Title>
+        <Content>
+          {sinittoBankInfo?.accountNumber ? '등록 완료' : '등록 미완료'}
+        </Content>
+      </Row>
+
+      <Flex w='100%' justifyContent='center' gap='var(--space-xs)'>
         {sinittoBankInfo?.accountNumber === null ? (
           isRegistering ? (
-            <Flex gap={2}>
-              <Button
-                w='100px'
-                h='40px'
-                fontSize='16px'
-                bg='var(--color-primary)'
-                color='var(--color-white)'
-                fontWeight='bold'
-                onClick={registerBank}
-              >
-                등록 완료
-              </Button>
-              <Button
-                w='100px'
-                h='40px'
-                fontSize='16px'
-                bg='var(--color-gray)'
-                color='var(--color-white)'
-                fontWeight='bold'
+            <>
+              <BasicButton
+                themeType='gray'
+                height='40px'
                 onClick={() => setIsRegistering(false)}
               >
                 등록 취소
-              </Button>
-            </Flex>
+              </BasicButton>
+              <BasicButton
+                themeType='default'
+                height='40px'
+                onClick={registerBank}
+              >
+                등록 완료
+              </BasicButton>
+            </>
           ) : (
             <BasicButton
               themeType='default'
               width='310px'
-              height='40px'
+              height='36px'
               onClick={() => setIsRegistering(true)}
             >
               계좌번호 등록하기
             </BasicButton>
           )
         ) : isEditingAccount ? (
-          <Flex gap={2}>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              bg='var(--color-primary)'
-              color='var(--color-white)'
-              fontWeight='bold'
-              mr={2}
-              onClick={handleSaveClick}
-            >
-              수정 완료
-            </Button>
-            <Button
-              w='100px'
-              h='40px'
-              fontSize='16px'
-              bg='var(--color-gray)'
-              color='var(--color-white)'
-              fontWeight='bold'
+          <>
+            <BasicButton
+              themeType='gray'
+              height='40px'
               onClick={() => setIsEditingAccount(false)}
             >
               수정 취소
-            </Button>
-          </Flex>
+            </BasicButton>
+            <BasicButton
+              themeType='default'
+              height='40px'
+              onClick={handleSaveClick}
+            >
+              수정 완료
+            </BasicButton>
+          </>
         ) : (
           <BasicButton
             themeType='default'
-            width='310px'
             height='40px'
             onClick={() => setIsEditingAccount(true)}
           >
@@ -221,15 +115,44 @@ const AccountInfoBox = () => {
 export default AccountInfoBox;
 
 const AccountBoxLayout = styled(Flex)`
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #f2f2f2;
   width: 100%;
-  max-width: 338px;
   height: auto;
-  border: 1px solid #909090;
+  border: 2px solid var(--color-white-gray);
   border-radius: 5px;
-  margin-top: 0.5rem;
-  padding: 1rem;
+  padding: var(--space-md);
+  gap: var(--space-sm);
+`;
+
+const StyledInput = styled(Input)`
+  font-size: 16px;
+  height: 100%;
+  background-color: var(--color-white);
+  text-align: right;
+  padding: 0 var(--space-xs);
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--color-primary);
+  }
+`;
+
+const Row = styled(Flex)`
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Title = styled(Text)`
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-gray);
+`;
+
+const Content = styled(Text)`
+  text-align: right;
+  font-size: 16px;
+  font-weight: 600;
 `;

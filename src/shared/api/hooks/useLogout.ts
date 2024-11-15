@@ -16,5 +16,10 @@ export const useLogout = () => {
       alert('로그아웃 되었습니다.');
       navigate(RouterPath.ROOT);
     },
+    onError: () => {
+      authStorage.accessToken.set(undefined);
+      authStorage.refreshToken.set(undefined);
+      navigate(RouterPath.ROOT);
+    },
   });
 };

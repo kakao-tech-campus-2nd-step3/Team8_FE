@@ -1,4 +1,5 @@
 import { TypeButton } from './type-button';
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 export const RegisterType = ({ userType, handleClick }: Props) => {
   return (
-    <Wrapper>
+    <Box width='100%'>
       <Title>가입 유형</Title>
       <TypeWrapper>
         <TypeButton
@@ -24,14 +25,9 @@ export const RegisterType = ({ userType, handleClick }: Props) => {
           handleClick={handleClick}
         />
       </TypeWrapper>
-    </Wrapper>
+    </Box>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 15px 0 50px;
-`;
 
 const Title = styled.h1`
   font-size: 24px;
@@ -42,6 +38,6 @@ const TypeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 13px;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
 `;

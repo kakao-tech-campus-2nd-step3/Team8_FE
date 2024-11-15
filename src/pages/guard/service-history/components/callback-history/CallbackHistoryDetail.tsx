@@ -1,46 +1,47 @@
-import {
-  CallbackHistory,
-  ServiceStatus,
-  useCompleteCallback,
-} from '@/pages/guard';
-import { formatPostTime } from '@/shared/utils/date/dateUtils';
-import { Box, Text } from '@chakra-ui/react';
+import { useFormattedPostTime } from '../../hooks/useFormattedPostTime';
+import { useServiceStatus } from '../../hooks/useServiceStatus';
+import { CallbackHistory } from '../../types';
+import { ServiceStatus } from '../service-status';
+import { Flex, Text } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
 type CallbackHistoryDetailProps = {
   historyData: CallbackHistory;
 };
 
 const CallbackHistoryDetail = ({ historyData }: CallbackHistoryDetailProps) => {
-  const completeCallbackMutation = useCompleteCallback();
+  const { serviceStatus } = useServiceStatus(historyData);
 
-  const handleButtonClick = () => {
-    if (historyData.status === 'COMPLETE') {
-      alert('이미 완료 확인한 서비스입니다.');
-    } else if (historyData.status === 'WAITING') {
-      alert('아직 완료되지 않은 대기중인 서비스입니다.');
-    } else if (historyData.status === 'PENDING_COMPLETE') {
-      completeCallbackMutation.mutate(historyData.callbackId);
-    }
-  };
+  const formattedPostTime = useFormattedPostTime(historyData.postTime);
 
   return (
-    <Box
-      display='flex'
-      w='100%'
-      gap={2}
-      justifyContent='space-between'
-      alignItems='center'
-      mb={3}
-    >
-      <Text fontSize='md' fontWeight={600} mr={1}>
-        {formatPostTime(historyData.postTime)}
+    <ItemListBox>
+      <Text
+        fontWeight='700'
+        color='var(--color-gray)'
+        w='68px'
+        mr='var(--space-xs)'
+      >
+        {formattedPostTime}
       </Text>
-      <Text fontSize='md' fontWeight={600}>
-        {historyData.seniorName}
-      </Text>
-      <ServiceStatus onClick={handleButtonClick} status={historyData.status} />
-    </Box>
+      <Flex alignItems='end' gap={1} mr='auto'>
+        <Text fontSize='var(--font-size-lg)' fontWeight='700'>
+          {historyData.seniorName}
+        </Text>
+      </Flex>
+      <ServiceStatus onClick={serviceStatus} status={historyData.status} />
+    </ItemListBox>
   );
 };
 
 export default CallbackHistoryDetail;
+
+const ItemListBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: var(--color-white-gray);
+  padding: var(--space-sm);
+  border-radius: 10px;
+  align-items: center;
+`;

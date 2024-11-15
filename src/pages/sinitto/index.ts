@@ -3,6 +3,7 @@ export * from './guide-line';
 export * from './hello-call-list';
 export * from './hello-call-report';
 export * from './hello-call-service';
+export * from './hello-call-detail';
 export * from './mypage';
 export * from './sinitto-main';
 export * from './service-history';

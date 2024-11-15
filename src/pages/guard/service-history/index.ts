@@ -1,6 +1,1 @@
-export { ServiceHistoryPage } from './ServiceHistoryPage';
-
-export * from './components';
-export * from './data';
-export * from './types';
-export * from './api';
+export * from './ui';

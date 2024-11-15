@@ -1,3 +1,4 @@
+import { BasicButton } from '@/shared';
 import { useWithdrawal } from '@/shared/api/hooks/useWithdrawal';
 import styled from '@emotion/styled';
 
@@ -18,14 +19,8 @@ const Withdrawal = () => {
 
 export default Withdrawal;
 
-const WithdrawalButton = styled.button`
-  cursor: pointer;
-  width: 100%;
-  max-width: 338px;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  height: 40px;
+const WithdrawalButton = styled(BasicButton)`
+  color: var(--color-white);
   background-color: #ff4d68;
-  border-radius: 10px;
+  box-shadow: none;
 `;

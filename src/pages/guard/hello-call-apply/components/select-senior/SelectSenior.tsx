@@ -1,5 +1,5 @@
-import { useAllSeniorInfo } from '@/shared';
-import { Select, Box, Text } from '@chakra-ui/react';
+import { useSelectSenior } from '../../hooks';
+import { Select, Box, Text, Spinner } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -7,18 +7,27 @@ type Props = {
 };
 
 export const SelectSenior = ({ setSelectedSeniorId }: Props) => {
-  const { data: seniors, isLoading, error } = useAllSeniorInfo();
+  const { seniors, isLoading, error } = useSelectSenior();
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedSeniorId(event.target.value);
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        height='100px'
+      >
+        <Spinner />
+      </Box>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <Text color='red.500'>Error: {error.message}</Text>;
   }
 
   return (
@@ -27,7 +36,7 @@ export const SelectSenior = ({ setSelectedSeniorId }: Props) => {
       <Select
         variant='filled'
         placeholder='시니어를 선택해주세요'
-        onChange={handleSelectChange}
+        onChange={selectChange}
       >
         {seniors?.map((senior) => (
           <option key={senior.seniorId} value={senior.seniorId}>
@@ -43,8 +52,7 @@ const ContentsBox = styled(Box)`
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
+  gap: var(--space-xs);
 `;
 
 const TitleText = styled(Text)`

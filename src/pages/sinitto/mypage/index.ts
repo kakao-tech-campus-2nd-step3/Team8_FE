@@ -1,5 +1,5 @@
-export { default as SinittoMypage } from './SinittoMypage';
-
 export * from './components';
-export * from './api';
+export * from './apis';
 export * from './data';
+export * from './hooks';
+export * from './ui';

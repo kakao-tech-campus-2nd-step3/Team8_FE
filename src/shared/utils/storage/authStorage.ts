@@ -1,6 +1,7 @@
 type StorageKey = {
   accessToken?: string;
   refreshToken?: string;
+  isSinitto?: string;
 };
 
 const initStorage = <T extends keyof StorageKey>(
@@ -27,4 +28,5 @@ const initStorage = <T extends keyof StorageKey>(
 export const authStorage = {
   accessToken: initStorage('accessToken', localStorage),
   refreshToken: initStorage('refreshToken', localStorage),
+  isSinitto: initStorage('isSinitto', localStorage),
 };

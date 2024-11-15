@@ -1,6 +1,6 @@
-import { ApplyHelloCallRequest, usePostApplyHelloCall } from '../../api';
-import { TimeSlots } from '@/pages';
-import { Button } from '@chakra-ui/react';
+import { useServiceApply } from '../../hooks';
+import { TimeSlots } from '../../types';
+import { BasicButton } from '@/shared';
 
 type Props = {
   serviceTime: number;
@@ -9,6 +9,7 @@ type Props = {
   timeSlotsArray: TimeSlots[];
   price: number | null;
   selectedSeniorId: string | null;
+  requirement: string;
 };
 
 export const ServiceApply = ({
@@ -18,32 +19,19 @@ export const ServiceApply = ({
   timeSlotsArray,
   price,
   selectedSeniorId,
+  requirement,
 }: Props) => {
-  const { mutate: postCostHelloCall } = usePostApplyHelloCall();
-
-  const handleServiceApply = () => {
-    const requestPayload: ApplyHelloCallRequest = {
-      seniorId: selectedSeniorId ? parseInt(selectedSeniorId, 10) : 0,
-      startDate: startDate?.toISOString() || '',
-      endDate: endDate?.toISOString() || '',
-      timeSlots: timeSlotsArray,
-      price: price || 0,
-      serviceTime,
-      requirement: '테스트',
-    };
-
-    postCostHelloCall(requestPayload);
-  };
+  const { serviceApply } = useServiceApply({
+    serviceTime,
+    startDate,
+    endDate,
+    timeSlotsArray,
+    price,
+    selectedSeniorId,
+    requirement,
+  });
 
   return (
-    <Button
-      w='90%'
-      mt={5}
-      backgroundColor='var(--color-primary)'
-      color='var(--color-white)'
-      onClick={handleServiceApply}
-    >
-      {price} point로 신청하기
-    </Button>
+    <BasicButton onClick={serviceApply}>{price} point로 신청하기</BasicButton>
   );
 };

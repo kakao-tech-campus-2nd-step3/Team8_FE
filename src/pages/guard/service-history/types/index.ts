@@ -1,6 +1,9 @@
-// 데이터 타입 : 서비스 이용 내역 (보호자용 페이지 내부)
-export type HistoryItem = {
-  date: string;
-  name: string;
-  status: string;
-};
+export type {
+  CallbackHistoryResponse,
+  CallbackHistory,
+} from './get-callback-history.response';
+export type { CallbackHistoryRequest } from './get-callback-history.request';
+export type {
+  HelloCallHistoryListResponse,
+  HelloCallHistory,
+} from './get-hello-history.response';

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes';
+import { authStorage } from '@/shared';
 import { Box, Text, Spinner, Heading } from '@chakra-ui/react';
 
 export const DummyRedirectPage = () => {
@@ -18,26 +19,28 @@ export const DummyRedirectPage = () => {
     const refreshToken = params.get('refreshToken');
     const isSinitto = params.get('isSinitto');
 
-    if (accessToken && refreshToken && isSinitto) {
+    if (accessToken && refreshToken && isSinitto !== null) {
       // 로컬 스토리지에 토큰 저장
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('isSinitto', isSinitto);
+      authStorage.accessToken.set(accessToken);
+      authStorage.refreshToken.set(refreshToken);
+      authStorage.isSinitto.set(isSinitto);
 
       // isSinitto 상태에 따른 메시지 설정
       setStatusMessage(
-        isSinitto === 'true'
+        isSinitto
           ? '시니또 더미데이터로 로그인 중입니다. 페이지 이동 중...'
           : '보호자 더미데이터로 로그인 중입니다. 페이지 이동 중...'
       );
 
       setTimeout(() => {
         setIsLoading(false); // 로딩 완료
-        navigate(isSinitto === 'true' ? RouterPath.SINITTO : RouterPath.GUARD);
+        navigate(isSinitto ? RouterPath.SINITTO : RouterPath.GUARD);
       }, 2000);
     } else {
-      console.error('Access or Refresh token not found in query parameters.');
-      setStatusMessage('[ERROR] 토큰이 존재하지 않습니다.');
+      console.error(
+        'Access or Refresh token not found in query parameters or isSinitto is invalid.'
+      );
+      setStatusMessage('[ERROR] 유효하지 않은 토큰 또는 파라미터입니다.');
 
       setIsLoading(false);
     }

@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 
-import { Button, Flex } from '@chakra-ui/react';
+import { BasicButton } from '@/shared';
+import { Flex } from '@chakra-ui/react';
 
 export const ServiceHistoryButton = () => {
   return (
-    <Flex w='full' my={3} justifyContent='end'>
+    <Flex w='full' justifyContent='end'>
       <Link to={`/sinitto/service-history`}>
-        <Button border='none' backgroundColor='var(--color-secondary)'>
+        <BasicButton width='150px' themeType='outline'>
           신청한 서비스 보기
-        </Button>
+        </BasicButton>
       </Link>
     </Flex>
   );
