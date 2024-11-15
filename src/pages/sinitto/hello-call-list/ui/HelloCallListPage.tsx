@@ -1,4 +1,5 @@
-import { CallRequest } from '../components';
+import { lazy } from 'react';
+
 import {
   useInfiniteScroll,
   useErrorHandling,
@@ -8,6 +9,10 @@ import {
 import { LoadingView } from '@/shared/components';
 import { Flex, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
+const CallRequest = lazy(
+  () => import('../components/call-request/CallRequest')
+);
 
 const HelloCallListPage = () => {
   const { data, isError, isLoading, hasNextPage, fetchNextPage, error } =

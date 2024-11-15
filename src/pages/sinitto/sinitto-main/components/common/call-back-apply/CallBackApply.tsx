@@ -1,14 +1,21 @@
+import { lazy } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 
-import { ResponseBox } from '../../features';
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
 import IconCall from '@/pages/assets/sinitto-main/call.svg';
 import { useGetCallbacks } from '@/pages/sinitto/call-back/list/hooks';
-import { Box, Flex, Image, Spinner, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
+const ResponseBox = lazy(() =>
+  import('../../features/response-box/ResponseBox').then((module) => ({
+    default: module.ResponseBox,
+  }))
+);
 
 export const CallBackApply = () => {
   const { data: callBackList, isLoading } = useGetCallbacks(4);
@@ -29,31 +36,62 @@ export const CallBackApply = () => {
   return (
     <Flex flexDirection='column' width='100%' gap='var(--space-sm)'>
       <Flex justifyContent='space-between' alignItems='center'>
-        <NoticeTitle>콜백 요청</NoticeTitle>
+        <NoticeTitle>
+          {isLoading ? <Skeleton width={100} /> : '콜백 요청'}
+        </NoticeTitle>
         <Link to={RouterPath.CALL_BACK_LIST}>
-          <MoreButton>
-            <Text
-              fontWeight='700'
-              color='var(--color-gray)'
-              mr='var(--space-xs)'
-              display='block'
-            >
-              요청 더보기
-            </Text>
-            <IconArrow fill='var(--color-gray)' type='solid' />
-          </MoreButton>
+          <Flex h='full' alignItems='center'>
+            {isLoading ? (
+              <Skeleton width={80} />
+            ) : (
+              <>
+                <Text
+                  fontWeight='700'
+                  color='var(--color-gray)'
+                  mr='var(--space-xs)'
+                  display='block'
+                >
+                  요청 더보기
+                </Text>
+                <IconArrow fill='var(--color-gray)' type='solid' />
+              </>
+            )}
+          </Flex>
         </Link>
       </Flex>
       <Flex w='100%' gap={5}>
-        <Image w='50px' src={IconCall} alt='call-icon' />
-        <NoticeText>
-          대기 중인 요청을 수락해 가이드라인을 확인하고 도움을 시작해보세요.
-        </NoticeText>
+        {isLoading ? (
+          <Skeleton circle width={50} height={50} />
+        ) : (
+          <Image w='50px' src={IconCall} alt='call-icon' />
+        )}
+        <Text color='var(--color-gray)' alignItems='center'>
+          {isLoading ? (
+            <Skeleton width='80%' />
+          ) : (
+            '대기 중인 요청을 수락해 가이드라인을 확인하고 도움을 시작해보세요.'
+          )}
+        </Text>
       </Flex>
       {isLoading ? (
-        <Flex justifyContent='center'>
-          <Spinner size='lg' color='var(--color-primary)' />
-        </Flex>
+        <GridBox>
+          {[...Array(4)].map((_, index) => (
+            <Box
+              p='var(--space-md)'
+              borderRadius='md'
+              boxShadow='md'
+              backgroundColor='var(--color-light-gray)'
+              key={index}
+            >
+              <Skeleton
+                height={20}
+                width='60%'
+                style={{ marginBottom: '0.5rem' }}
+              />
+              <Skeleton count={2} />
+            </Box>
+          ))}
+        </GridBox>
       ) : (
         <GridBox>
           {callBackList?.pages?.[0]?.content.map((callback) => (
@@ -77,23 +115,9 @@ const NoticeTitle = styled(Text)`
   align-items: center;
 `;
 
-const NoticeText = styled(Text)`
-  color: var(--color-gray);
-  display: flex;
-  align-items: center;
-`;
-
-const MoreButton = styled(Flex)`
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
-`;
-
 const GridBox = styled(Box)`
   display: grid;
   width: 100%;
   gap: var(--space-sm);
-
   grid-template-columns: repeat(2, 1fr);
 `;
