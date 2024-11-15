@@ -1,4 +1,4 @@
-export type GuidelineResponse = {
+export type GuideLineResponse = {
   type: string;
   title: string;
   content: string;

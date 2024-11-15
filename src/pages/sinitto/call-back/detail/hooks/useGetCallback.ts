@@ -1,4 +1,4 @@
-import { getCallback } from '../get-call-back.api';
+import { getCallback } from '../apis';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetCallback = (callbackId: string) => {

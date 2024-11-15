@@ -1,9 +1,13 @@
+import logo_icon from '@/pages/assets/main/logo-icon.png';
+import logo_typo from '@/pages/assets/main/logo-typo.png';
+import { Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const FirstPage = () => {
   return (
     <Wrapper>
-      <Title>나만의 작은 시니또</Title>
+      <Image src={logo_icon} w='3rem' mb='var(--space-xs)' />
+      <Image src={logo_typo} w='50%' minW='120px' mb='var(--space-md)' />
       <Content>
         <p>시니어가 편리한 일상을</p>
         <p>누릴 수 있도록 돕는</p>
@@ -24,14 +28,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const Title = styled.h1`
-  font-size: var(--font-size-xxl);
-  font-weight: 700;
-  color: var(--color-white);
-`;
-
 const Content = styled.div`
-  margin-top: 1rem;
   font-size: var(--font-size-md);
   color: var(--color-secondary);
   display: flex;

@@ -1,4 +1,4 @@
-import { fetchInstance } from '@/shared/api/instance';
+import { fetchInstance } from '@/shared';
 
 const getCancelCallbackPath = (callbackId: number) =>
   `/api/callbacks/cancel/${callbackId}`;
