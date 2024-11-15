@@ -1,4 +1,5 @@
-import { CallRequest } from '../components';
+import { lazy } from 'react';
+
 import {
   useInfiniteScroll,
   useErrorHandling,
@@ -6,8 +7,12 @@ import {
   useGetServiceList,
 } from '../hooks';
 import { LoadingView } from '@/shared/components';
-import { Flex, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
+const CallRequest = lazy(
+  () => import('../components/call-request/CallRequest')
+);
 
 const HelloCallListPage = () => {
   const { data, isError, isLoading, hasNextPage, fetchNextPage, error } =
@@ -29,9 +34,6 @@ const HelloCallListPage = () => {
 
   return (
     <HelloCallListLayout>
-      <Flex w='100%' justifyContent='end'>
-        <Text>새로고침</Text>
-      </Flex>
       {allContent.map((item, index) => {
         const isLastElement = index === allContent.length - 1;
         return (

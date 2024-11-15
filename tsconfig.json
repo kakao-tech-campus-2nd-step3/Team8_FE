@@ -28,6 +28,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "sw.js", "__mocks__", "babel.config.js"],
+  "include": ["src", "sw.js", "__mocks__", "babel.config.js", "global.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

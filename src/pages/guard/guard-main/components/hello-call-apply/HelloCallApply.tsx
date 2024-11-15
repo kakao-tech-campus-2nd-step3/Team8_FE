@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { RouterPath } from '@/app/routes';
 import { IconArrow } from '@/pages/assets';
-import HelloCallImg from '@/pages/assets/shared/hello-call.png';
+import HelloCallImg from '@/pages/assets/shared/hello-call.webp';
 import { Button, Flex, Image, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
