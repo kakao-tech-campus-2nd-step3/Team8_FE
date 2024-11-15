@@ -6,7 +6,12 @@ import styled from '@emotion/styled';
 const FirstPage = () => {
   return (
     <Wrapper>
-      <Image src={logo_icon} w='3rem' mb='var(--space-xs)' />
+      <Image
+        src={logo_icon}
+        w='3rem'
+        mb='var(--space-xs)'
+        fetchPriority='high'
+      />
       <Image src={logo_typo} w='50%' minW='120px' mb='var(--space-md)' />
       <Content>
         <p>시니어가 편리한 일상을</p>

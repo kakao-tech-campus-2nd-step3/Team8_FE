@@ -6,7 +6,13 @@ import styled from '@emotion/styled';
 const SecondPage = () => {
   return (
     <Wrapper>
-      <Image marginTop='auto' src={CallIllust} height='90%' width='90%' />
+      <Image
+        marginTop='auto'
+        src={CallIllust}
+        height='90%'
+        width='90%'
+        fetchPriority='high'
+      />
       <Intro
         title='도움이 필요한 순간, 쉽고 빠르게'
         content={[
