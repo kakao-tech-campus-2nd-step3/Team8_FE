@@ -165,7 +165,6 @@ const GuardProfileBox = () => {
 
 export default GuardProfileBox;
 
-// Styled Components
 const DivideLine = styled.div`
   width: 2px;
   height: 50px;
