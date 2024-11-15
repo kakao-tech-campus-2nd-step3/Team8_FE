@@ -1,8 +1,20 @@
+import { lazy } from 'react';
+
 import { useHandleCallback } from '../../hooks';
-import { PostAcceptMenu } from './post-accept';
-import { PreAcceptMenu } from './pre-accept';
 import { formatPhoneNumber } from '@/shared';
-import { Spinner } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
+
+const PreAcceptMenu = lazy(() =>
+  import('./pre-accept/PreAcceptMenu').then((module) => ({
+    default: module.PreAcceptMenu,
+  }))
+);
+
+const PostAcceptMenu = lazy(() =>
+  import('./post-accept/PostAcceptMenu').then((module) => ({
+    default: module.PostAcceptMenu,
+  }))
+);
 
 type MenuProps = {
   callBackId: number;
@@ -19,7 +31,7 @@ export const CallbackMenu = ({
     useHandleCallback();
 
   return isLoading ? (
-    <Spinner size='xl' marginTop='30px' />
+    <Skeleton height='50px' width='100%' />
   ) : accept ? (
     <PostAcceptMenu
       completeCallback={() => completeCallback(callBackId)}

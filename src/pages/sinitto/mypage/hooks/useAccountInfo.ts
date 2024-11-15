@@ -8,7 +8,7 @@ import {
 import { validateAccountNumber } from '@/shared';
 
 export const useAccountInfo = () => {
-  const { data: sinittoBankInfo, refetch } = useGetSinittoBankInfo();
+  const { data: sinittoBankInfo, isLoading, refetch } = useGetSinittoBankInfo();
   const [isEditingAccount, setIsEditingAccount] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [accountNumber, setAccountNumber] = useState(
@@ -65,6 +65,7 @@ export const useAccountInfo = () => {
       accountNumber,
       bankName,
       sinittoBankInfo,
+      isLoading,
     },
     states: {
       isEditingAccount,

@@ -1,3 +1,6 @@
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import { useSinittoProfile } from '../../hooks';
 import { formatPhoneNumber, Logout, BasicButton } from '@/shared';
 import { Box, Text, Input, Flex } from '@chakra-ui/react';
@@ -5,10 +8,38 @@ import styled from '@emotion/styled';
 
 const SinittoProfileBox = () => {
   const {
-    profileData: { name, phoneNumber, seniorInfo },
+    profileData: { name, phoneNumber, seniorInfo, isLoading },
     states: { isEditing },
     handlers: { setName, setPhoneNumber, setIsEditing, saveModifiedInfo },
   } = useSinittoProfile();
+
+  const renderSkeletonContent = () => (
+    <>
+      <Flex w='full'>
+        <Flex marginRight='auto' alignItems='center' gap={2}>
+          <Skeleton width={100} height={32} />
+          <Skeleton width={120} height={28} />
+        </Flex>
+        <Skeleton width={60} height={28} />
+      </Flex>
+
+      <SinittoProfileBoxLayout>
+        <Row>
+          <Title>이름</Title>
+          <Skeleton width={80} height={24} />
+        </Row>
+        <Row>
+          <Title>전화번호</Title>
+          <Skeleton width={120} height={24} />
+        </Row>
+        <Skeleton width='100%' height={40} borderRadius={5} />
+      </SinittoProfileBoxLayout>
+    </>
+  );
+
+  if (isLoading) {
+    return renderSkeletonContent();
+  }
 
   return (
     <>
