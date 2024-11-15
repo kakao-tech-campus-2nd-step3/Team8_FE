@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { RouterPath } from '../../path';
@@ -10,8 +11,17 @@ type Props = {
 };
 
 const ProtectedRoute = ({ requiresAuth, sinittoOnly, guardOnly }: Props) => {
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const accessToken = authStorage.accessToken.get();
   const isSinitto = authStorage.isSinitto.get() === 'true';
+
+  useEffect(() => {
+    setIsAuthLoading(false);
+  }, [accessToken, isSinitto]);
+
+  if (isAuthLoading) {
+    return <></>;
+  }
 
   if (requiresAuth && !accessToken) {
     return <Navigate to={RouterPath.ROOT} />;
