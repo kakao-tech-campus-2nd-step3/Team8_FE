@@ -1,1 +1,0 @@
-export { SinittoName } from './SinittoName';

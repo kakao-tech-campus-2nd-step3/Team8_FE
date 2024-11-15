@@ -1,1 +1,0 @@
-export { TypeButton } from './TypeButton';

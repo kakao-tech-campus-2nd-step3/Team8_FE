@@ -1,1 +1,0 @@
-export { HelloCallDetailPage } from './HelloCallDetailPage';

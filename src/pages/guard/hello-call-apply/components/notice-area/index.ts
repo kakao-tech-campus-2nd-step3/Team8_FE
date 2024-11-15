@@ -1,1 +1,0 @@
-export { NoticeArea } from './NoticeArea';
